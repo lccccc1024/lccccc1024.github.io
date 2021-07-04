@@ -1,0 +1,28 @@
+h1{
+    color: whitesmoke;
+    text-align: center;
+  
+    }
+  h2{
+    color: white;
+    text-align: center;
+  }
+  h3{
+    margin-left: 60%;
+    color: whitesmoke;
+  }
+  p{
+    color: white;
+    text-align: center;
+    }
+  a{
+    color: cadetblue;
+  }
+  body{
+    background-image: url(./img/3.jpeg);
+    }
+  img{
+    position: absolute;
+    left: 50%;
+    margin-left: -128px;
+  }
