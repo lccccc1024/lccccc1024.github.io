@@ -5,7 +5,7 @@ entries:
       - title: github repo
         url: https://github.com/lccccc1024/lccccc1024.github.io
       
-   - title: 随便写点
+   
       post_list:
       limit: 5
       show_more: true
