@@ -1,12 +1,12 @@
-title: 闲话 # name of the site
-author: lccccc1024 # name of site's author
-email: asa.lu@outlook.com # email of site's author
-url: https://asalu.xyz/ # root address of the site
+title: no style, please! # name of the site
+author: Riccardo Graziosi # name of site's author
+email: riccardo.graziosi97@gmail.com # email of site's author
+url: https://riggraz.dev # root address of the site
 baseurl: "/no-style-please" # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
-description: 试一下好不好使 # description of the site (multiple lines allowed)
-  
+description: > # description of the site (multiple lines allowed)
+  A (nearly) no-CSS, fast, minimalist Jekyll theme.
 
-permalink: 
+permalink: /:slug.html
 
 favicon: "logo.png" # name+extension of favicon (which must be put on the root folder)
 # goat_counter: "yoursitename" # put your GoatCounter name if you want to use GoatCounter analytics
