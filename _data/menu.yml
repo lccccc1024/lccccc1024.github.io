@@ -5,7 +5,8 @@ entries:
       - title: github repo
         url: https://github.com/lccccc1024/lccccc1024.github.io
       
-   
+entries:
+  - title：post_list
       post_list:
       limit: 5
       show_more: true
