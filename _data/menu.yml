@@ -4,7 +4,7 @@
 entries:
   - title: info
     entries:
-      - title: a (nearly) no-CSS, fast, minimalist Jekyll theme.
+      - title: 随便写点东西先
       - title: github repo
         url: https://github.com/lccccc1024/lccccc1024.github.io
       
@@ -19,14 +19,7 @@ entries:
  
 
 
-  
-  - title: another list
-    entries:
-      - title: with subitems
-        entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
+
 
     entries:
       - title: to edit this menu, edit _data/menu.yml file
