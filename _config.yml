@@ -3,8 +3,8 @@ author: lccccc1024 # name of site's author
 email: asa.lu@outlook.com # email of site's author
 url: https://asalu.xyz/ # root address of the site
 baseurl: "/no-style-please" # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
-description: > # description of the site (multiple lines allowed)
-  试一下好不好使。
+description: 试一下好不好使 # description of the site (multiple lines allowed)
+  
 
 permalink: 
 
