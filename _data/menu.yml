@@ -1,17 +1,37 @@
-# For documentation on this file, see:
-# https://github.com/riggraz/no-style-please#customize-the-menu
-
 entries:
   - title: info
     entries:
-      - title: a (nearly) no-CSS, fast, minimalist Jekyll theme.
-      - title: github repo
-        url: https://github.com/riggraz/no-style-please
-      - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
-
+      - title: 无聊时候的自我消遣
+      - title: 我的github
+        url: https://github.com/lccccc1024/lccccc1024.github.io
+      - title: 千钟粟，黄金屋，颜如玉
+        url: https://lccccc1024.github.io/2021/08/01/%E5%8D%83%E9%92%9F%E7%B2%9F-%E9%BB%84%E9%87%91%E5%B1%8B-%E9%A2%9C%E5%A6%82%E7%8E%89.html
+      - title: 光影
+        url: https://lccccc1024.github.io/2021/08/01/%E5%85%89%E5%BD%B1.html
+      
   - title: all posts
     post_list:
       limit: 5
       show_more: true
       show_more_text: See archive...
       show_more_url: archive.html
+
+  #- title: posts by category
+      #post_list:
+      #category: example2
+      #show_more: true
+      #show_more_text: See more posts...
+      #show_more_url: example2-archive.html
+
+
+  
+  #- title: another list
+    #entries:
+      #- title: with subitems
+        #entries:
+          #- title: with subsubitems
+          #- title: example page
+            #url: about
+  #- title: PRO TIP
+    #entries:
+      #- title: to edit this menu, edit _data/menu.yml file
