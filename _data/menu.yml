@@ -8,7 +8,9 @@ entries:
         url: https://lccccc1024.github.io/2021/08/01/%E5%8D%83%E9%92%9F%E7%B2%9F-%E9%BB%84%E9%87%91%E5%B1%8B-%E9%A2%9C%E5%A6%82%E7%8E%89.html
       - title: 光影
         url: https://lccccc1024.github.io/2021/08/01/%E5%85%89%E5%BD%B1.html
-      
+      - title: 训练计划
+        url: 
+        
   - title: all posts
     post_list:
       limit: 5
