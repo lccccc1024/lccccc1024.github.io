@@ -1,8 +1,137 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <h1>test</h1>
-        <p>1</p>
-        <p>2</p>
-    </body>
+<head>
+    <title>电影清单</title>
+    <style>
+        /* 使用 CSS 样式来居中显示标题和副标题 */
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* 使用 CSS 样式来交替设置表格行的背景颜色 */
+        table {
+            border-collapse: collapse; /* 合并边框 */
+            width: 70%;
+            margin: auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* 偶数行背景颜色 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="title">
+    电影清单
+</div>
+
+<div class="subtitle">
+    至少还有电影，幸好还有电影。
+</div>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>片名</th>
+        <th>类型</th>
+        <th>导演</th>
+        <th>上映年份</th>
+        <th>观看时间</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>旺角卡门</td>
+        <td>剧情/爱情/犯罪</td>
+        <td>王家卫</td>
+        <td>1988</td>
+        <td>2021-8-4</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>鬼灭之刃 无限列车篇</td>
+        <td>动画/奇幻</td>
+        <td>外崎春雄</td>
+        <td>2021</td>
+        <td>2021-8-18</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>霍元甲</td>
+        <td>剧情/动作/传记</td>
+        <td>于仁泰</td>
+        <td>2006</td>
+        <td>2021-8-29</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>三个老枪手</td>
+        <td>喜剧/犯罪</td>
+        <td>扎克·布拉夫</td>
+        <td>2017</td>
+        <td>2021-9-4</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>猎杀T34</td>
+        <td>动作/历史/战争</td>
+        <td>阿列克赛·西多洛夫</td>
+        <td>2019</td>
+        <td>2021-9-5</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>敦刻尔克</td>
+        <td>剧情/历史/战争</td>
+        <td>克里斯托弗·诺兰</td>
+        <td>2017</td>
+        <td>2021-9-17</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>信条</td>
+        <td>剧情/动作/科幻</td>
+        <td>克里斯托弗·诺兰</td>
+        <td>2020</td>
+        <td>2021-9-19</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>遗愿清单</td>
+        <td>剧情/喜剧/冒险</td>
+        <td>罗伯·莱纳</td>
+        <td>2007</td>
+        <td>2021-9-21</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>国王的演讲</td>
+        <td>剧情/传记/历史</td>
+        <td>汤姆·霍伯</td>
+        <td>2010</td>
+        <td>2021-10-17</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>至暗时刻</td>
+        <td>剧情/传记/历史/战争</td>
+        <td>乔·赖特</td>
+        <td>2017</td>
+        <td>N/A</td>
+    </tr>
+</table>
+
+</body>
 </html>
