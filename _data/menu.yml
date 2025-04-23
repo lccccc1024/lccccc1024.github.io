@@ -22,7 +22,7 @@ entries:
       limit: 6
       show_more: true
       show_more_text: 查看更多技术文章...
-      show_more_url: /tech-archive.html
+      show_more_url: /tech-archive/  # 修改为带斜杠的永久链接
 
   #- title: posts by category
       #post_list:
