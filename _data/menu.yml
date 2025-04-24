@@ -15,14 +15,6 @@ entries:
       show_more: true
       show_more_text: See archive...
       show_more_url: archive.html
-  
-  - title: 技术文章
-    post_list:
-      category: tech  # 需要确保文章有对应的tech分类
-      limit: 6
-      show_more: true
-      show_more_text: 查看更多技术文章...
-      show_more_url: /tech-archive/  # 修改为带斜杠的永久链接
 
   #- title: posts by category
       #post_list:
