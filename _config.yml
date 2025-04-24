@@ -25,3 +25,8 @@ sass:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# 添加以下配置声明要覆盖主题文件
+override_theme:
+  - assets/css/main.scss
+  - assets/js/mouse_coords.js
