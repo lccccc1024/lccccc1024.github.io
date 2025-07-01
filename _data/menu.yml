@@ -4,13 +4,16 @@ entries:
       - title: 无聊时候的自我消遣
       - title: 我的github
         url: https://github.com/lccccc1024/lccccc1024.github.io
+        target: _blank
       - title: 读书清单
         url: https://lccccc1024.github.io/2021/08/01/%E5%8D%83%E9%92%9F%E7%B2%9F-%E9%BB%84%E9%87%91%E5%B1%8B-%E9%A2%9C%E5%A6%82%E7%8E%89.html
+        target: _blank
       - title: 电影清单
         url: https://lccccc1024.github.io/2023/08/10/%E5%85%89%E5%BD%B1.html
+        target: _blank
       - title: 想要的东西
         url: https://blog.950922.xyz/2025/07/01/%E6%83%B3%E8%A6%81%E7%9A%84%E4%B8%9C%E8%A5%BF.html
-
+        target: _blank
 
   - title: 杂记
     post_list:
