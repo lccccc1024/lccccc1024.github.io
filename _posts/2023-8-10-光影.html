@@ -36,45 +36,6 @@
 
 <h1 class="title">电影清单</h1>
 
-<div style="width:70%;margin:20px auto 30px auto;padding:20px;background:#f9f9f9;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-    <form id="addMovieForm" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;">
-        <input type="text" id="title" placeholder="片名" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
-        <input type="text" id="genre" placeholder="类型" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
-        <input type="text" id="director" placeholder="导演" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
-        <input type="number" id="year" placeholder="上映年份" required style="width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
-        <input type="date" id="watched" placeholder="观看时间" style="width:140px;padding:6px;border-radius:5px;border:1px solid #ccc;">
-        <button type="submit" style="padding:8px 18px;background:#4f8cff;color:#fff;border:none;border-radius:5px;cursor:pointer;transition:background 0.2s;">添加</button>
-    </form>
-</div>
-
-<script>
-document.getElementById('addMovieForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const title = document.getElementById('title').value.trim();
-    const genre = document.getElementById('genre').value.trim();
-    const director = document.getElementById('director').value.trim();
-    const year = document.getElementById('year').value.trim();
-    const watched = document.getElementById('watched').value.trim() || 'N/A';
-
-    if (!title || !genre || !director || !year) return;
-
-    const tbody = document.querySelector('table tbody');
-    const rows = tbody.querySelectorAll('tr');
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td>${rows.length + 1}</td>
-        <td>${title}</td>
-        <td>${genre}</td>
-        <td>${director}</td>
-        <td>${year}</td>
-        <td>${watched}</td>
-    `;
-    tbody.appendChild(newRow);
-
-    // 清空表单
-    this.reset();
-});
-</script>
 
 <h2 class="subtitle">至少还有电影，幸好还有电影。</h2>
 
@@ -519,3 +480,111 @@ document.getElementById('addMovieForm').addEventListener('submit', function(e) {
 </table>
 </body>
 </html>
+<!-- 引入 Google Fonts 和简单的响应式设计 -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+    body {
+        font-family: 'Noto Sans SC', 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    .title {
+        font-size: 2.5rem;
+        color: #2d3a4b;
+        letter-spacing: 2px;
+        margin-top: 40px;
+        margin-bottom: 8px;
+        font-weight: 700;
+        text-shadow: 0 2px 8px #e0e7ef;
+    }
+    .subtitle {
+        font-size: 1.2rem;
+        color: #6b7280;
+        margin-bottom: 32px;
+        font-style: italic;
+    }
+    table {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(60, 72, 88, 0.08);
+        overflow: hidden;
+        margin-top: 24px;
+        margin-bottom: 48px;
+    }
+    caption {
+        caption-side: top;
+        font-size: 1.3rem;
+        color: #374151;
+        font-weight: 600;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+    }
+    th {
+        background: #3b82f6;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #2563eb;
+    }
+    th, td {
+        padding: 12px 10px;
+        border: none;
+    }
+    tr:nth-child(even) {
+        background-color: #f3f6fa;
+    }
+    tr:hover {
+        background: #e0e7ef;
+        transition: background 0.2s;
+    }
+    td {
+        color: #374151;
+        font-size: 0.98rem;
+    }
+    @media (max-width: 900px) {
+        table {
+            width: 95%;
+        }
+        .title {
+            font-size: 2rem;
+        }
+    }
+    @media (max-width: 600px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        thead tr {
+            display: none;
+        }
+        tr {
+            margin-bottom: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(60, 72, 88, 0.06);
+            background: #fff;
+        }
+        td {
+            position: relative;
+            padding-left: 50%;
+            min-height: 36px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        td:before {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 45%;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        td:nth-of-type(1):before { content: "#"; }
+        td:nth-of-type(2):before { content: "片名"; }
+        td:nth-of-type(3):before { content: "类型"; }
+        td:nth-of-type(4):before { content: "导演"; }
+        td:nth-of-type(5):before { content: "上映年份"; }
+        td:nth-of-type(6):before { content: "观看时间"; }
+    }
+</style>
