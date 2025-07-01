@@ -5,256 +5,276 @@
     <title>我的购物清单</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: "Segoe UI", "PingFang SC", Arial, sans-serif;
             margin: 0;
-            background: #f4f8fb;
-            color: #222;
+            background: #f7f8fa;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 540px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 28px 24px 28px;
         }
         h1 {
             text-align: center;
-            margin-top: 2em;
-            color: #2d8cf0;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 28px;
             letter-spacing: 2px;
         }
         form {
-            background: #fff;
-            max-width: 600px;
-            margin: 2em auto 1.5em auto;
-            padding: 2em 2em 1em 2em;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(45,140,240,0.07);
             display: flex;
             flex-wrap: wrap;
-            gap: 1em;
+            gap: 12px 10px;
             align-items: flex-end;
+            margin-bottom: 24px;
+            background: #f1f3f6;
+            padding: 18px 14px 10px 14px;
+            border-radius: 8px;
         }
         label {
-            flex: 1 1 180px;
-            display: flex;
-            flex-direction: column;
+            flex: 1 1 120px;
             font-size: 1em;
-            color: #555;
+            color: #444;
         }
         input[type="text"], input[type="number"], input[type="url"] {
-            margin-top: 0.5em;
-            padding: 0.5em 0.8em;
-            border: 1px solid #d0e2f2;
-            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
             font-size: 1em;
-            background: #f8fbff;
+            margin-top: 4px;
+            background: #fff;
             transition: border 0.2s;
         }
         input:focus {
-            border-color: #2d8cf0;
+            border-color: #3182ce;
             outline: none;
         }
         button[type="submit"] {
-            background: linear-gradient(90deg, #2d8cf0 60%, #57c6e1 100%);
+            background: #3182ce;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 0.7em 2em;
-            font-size: 1.1em;
+            border-radius: 5px;
+            padding: 8px 22px;
+            font-size: 1em;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(45,140,240,0.08);
-            transition: background 0.2s, box-shadow 0.2s;
+            transition: background 0.2s;
+            margin-left: 8px;
         }
         button[type="submit"]:hover {
-            background: linear-gradient(90deg, #57c6e1 0%, #2d8cf0 100%);
-            box-shadow: 0 4px 16px rgba(45,140,240,0.13);
+            background: #2563eb;
         }
         ul {
             list-style: none;
             padding: 0;
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 0 0 18px 0;
         }
         li {
-            margin-bottom: 1.2em;
-            padding: 1.2em 1.2em 1em 1.2em;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(45,140,240,0.07);
             display: flex;
-            flex-direction: column;
-            gap: 0.5em;
-            transition: box-shadow 0.2s;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border-radius: 7px;
+            margin-bottom: 10px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: background 0.2s;
         }
         li.bought {
-            background: #f0f4f8;
-            opacity: 0.85;
+            background: #e2e8f0;
         }
-        .bought del {
-            color: #aaa;
+        .item-info {
+            flex: 1 1 auto;
+            min-width: 0;
         }
-        .actions {
-            margin-top: 0.5em;
-            display: flex;
-            gap: 0.8em;
+        .item-info del, .item-info del a {
+            color: #a0aec0;
         }
-        .actions button {
-            background: #f6faff;
-            color: #2d8cf0;
-            border: 1px solid #d0e2f2;
-            border-radius: 5px;
-            padding: 0.4em 1.2em;
-            font-size: 0.98em;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s, border 0.2s;
-        }
-        .actions button:hover {
-            background: #2d8cf0;
-            color: #fff;
-            border-color: #2d8cf0;
-        }
-        .link {
-            color: #2d8cf0;
+        .item-info a {
+            color: #3182ce;
             text-decoration: underline;
+            margin-left: 4px;
             word-break: break-all;
         }
         .date {
-            font-size: 0.93em;
             color: #888;
-            margin-left: 0.5em;
+            font-size: 0.93em;
+            margin-left: 8px;
+        }
+        .item-actions {
+            flex-shrink: 0;
+            margin-left: 16px;
+            display: flex;
+            gap: 6px;
+        }
+        .item-actions button {
+            background: #edf2f7;
+            color: #444;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 12px;
+            font-size: 0.98em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .item-actions button:hover {
+            background: #cbd5e1;
+        }
+        .item-actions button:last-child {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .item-actions button:last-child:hover {
+            background: #fecaca;
         }
         .totals {
-            max-width: 600px;
-            margin: 2em auto 2em auto;
-            font-size: 1.15em;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(45,140,240,0.07);
-            padding: 1.2em 2em;
-            color: #2d8cf0;
+            margin-top: 30px;
+            font-size: 1.13em;
+            color: #2d3748;
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 16px 12px;
+            line-height: 2;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
-        @media (max-width: 700px) {
-            form, ul, .totals {
-                max-width: 98vw;
-                padding-left: 1vw;
-                padding-right: 1vw;
-            }
-            form {
-                flex-direction: column;
-                gap: 0.7em;
-            }
+        @media (max-width: 600px) {
+            .container { padding: 12px 2vw 18px 2vw; }
+            form { flex-direction: column; gap: 10px 0; }
+            .item-actions { flex-direction: column; gap: 4px; margin-left: 8px; }
+            li { flex-direction: column; align-items: flex-start; gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <h1>我的购物清单</h1>
-    <form id="addForm">
-        <label>
-            商品名称
-            <input type="text" id="name" required>
-        </label>
-        <label>
-            价格
-            <input type="number" id="price" min="0" step="0.01" required>
-        </label>
-        <label>
-            链接
-            <input type="url" id="link" placeholder="https://">
-        </label>
-        <button type="submit">添加</button>
-    </form>
+    <div class="container">
+        <h1>我的购物清单</h1>
+        <form id="addForm">
+            <label>
+                商品名称
+                <input type="text" id="name" required>
+            </label>
+            <label>
+                商品价格
+                <input type="number" id="price" min="0" step="0.01" required>
+            </label>
+            <label>
+                商品链接
+                <input type="url" id="link" placeholder="https://">
+            </label>
+            <button type="submit">添加商品</button>
+        </form>
 
-    <ul id="itemList"></ul>
+        <ul id="itemList"></ul>
 
-    <div class="totals">
-        ✅ 已购买商品总价：<span id="boughtTotal">0</span> 元<br>
-        🛒 未购买商品总价：<span id="notBoughtTotal">0</span> 元
+        <div class="totals">
+            ✅ 已购买商品总价：<span id="boughtTotal">0.00</span> 元<br>
+            🛒 未购买商品总价：<span id="unboughtTotal">0.00</span> 元
+        </div>
     </div>
-
     <script>
-        // 本地存储键
-        const STORAGE_KEY = 'shoppingList';
+        const addForm = document.getElementById('addForm');
+        const itemList = document.getElementById('itemList');
+        const boughtTotal = document.getElementById('boughtTotal');
+        const unboughtTotal = document.getElementById('unboughtTotal');
 
-        // 读取本地存储
+        let items = [];
+
+        function saveItems() {
+            localStorage.setItem('shoppingList', JSON.stringify(items));
+        }
+
         function loadItems() {
-            const data = localStorage.getItem(STORAGE_KEY);
-            return data ? JSON.parse(data) : [];
+            const data = localStorage.getItem('shoppingList');
+            if (data) items = JSON.parse(data);
         }
 
-        // 保存到本地存储
-        function saveItems(items) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
         }
 
-        // 格式化日期
-        function formatDate(ts) {
-            const d = new Date(ts);
-            return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0') +
-                ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-        }
-
-        // 渲染列表
         function render() {
-            const list = document.getElementById('itemList');
-            list.innerHTML = '';
-            let boughtTotal = 0, notBoughtTotal = 0;
+            itemList.innerHTML = '';
+            let boughtSum = 0, unboughtSum = 0;
             items.forEach((item, idx) => {
                 const li = document.createElement('li');
-                li.className = item.bought ? 'bought' : 'not-bought';
-                let content = '';
+                li.className = item.bought ? 'bought' : '';
+                let info = '';
                 if (item.bought) {
-                    content += `<del>${item.name}</del> - <del>${item.price} 元</del>`;
-                    if (item.link) content += ` - <del><a class="link" href="${item.link}" target="_blank">商品链接</a></del>`;
-                    content += `<span class="date">购买时间：${formatDate(item.buyDate)}</span>`;
-                    boughtTotal += Number(item.price);
+                    info += `<del>${item.name}</del> `;
+                    info += `<del>${item.price.toFixed(2)} 元</del> `;
+                    if (item.link) info += `<del><a href="${item.link}" target="_blank">商品链接</a></del> `;
+                    info += `<span class="date">购买时间：${formatDate(item.date)}</span>`;
+                    boughtSum += item.price;
                 } else {
-                    content += `${item.name} - ${item.price} 元`;
-                    if (item.link) content += ` - <a class="link" href="${item.link}" target="_blank">商品链接</a>`;
-                    notBoughtTotal += Number(item.price);
+                    info += `${item.name} `;
+                    info += `${item.price.toFixed(2)} 元 `;
+                    if (item.link) info += `<a href="${item.link}" target="_blank">商品链接</a> `;
+                    unboughtSum += item.price;
                 }
-                content += `<span class="actions">
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'item-info';
+                infoDiv.innerHTML = info;
+
+                const actions = document.createElement('span');
+                actions.className = 'item-actions';
+                actions.innerHTML = `
                     <button onclick="toggleBought(${idx})">${item.bought ? '标为未购买' : '标为已购买'}</button>
                     <button onclick="removeItem(${idx})">删除</button>
-                </span>`;
-                li.innerHTML = content;
-                list.appendChild(li);
+                `;
+
+                li.appendChild(infoDiv);
+                li.appendChild(actions);
+                itemList.appendChild(li);
             });
-            document.getElementById('boughtTotal').textContent = boughtTotal.toFixed(2);
-            document.getElementById('notBoughtTotal').textContent = notBoughtTotal.toFixed(2);
+            boughtTotal.textContent = boughtSum.toFixed(2);
+            unboughtTotal.textContent = unboughtSum.toFixed(2);
         }
 
-        // 添加商品
-        document.getElementById('addForm').onsubmit = function(e) {
+        window.toggleBought = function(idx) {
+            const item = items[idx];
+            if (!item.bought) {
+                item.bought = true;
+                item.date = new Date().toISOString();
+            } else {
+                item.bought = false;
+                item.date = '';
+            }
+            saveItems();
+            render();
+        };
+
+        window.removeItem = function(idx) {
+            items.splice(idx, 1);
+            saveItems();
+            render();
+        };
+
+        addForm.onsubmit = function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
             const price = parseFloat(document.getElementById('price').value);
             const link = document.getElementById('link').value.trim();
             if (!name || isNaN(price)) return;
-            items.push({ name, price, link, bought: false });
-            saveItems(items);
+            items.push({
+                name,
+                price,
+                link,
+                bought: false,
+                date: ''
+            });
+            saveItems();
             render();
-            this.reset();
+            addForm.reset();
         };
 
-        // 切换已购买状态
-        window.toggleBought = function(idx) {
-            const item = items[idx];
-            if (!item.bought) {
-                item.bought = true;
-                item.buyDate = Date.now();
-            } else {
-                item.bought = false;
-                delete item.buyDate;
-            }
-            saveItems(items);
-            render();
-        };
-
-        // 删除商品
-        window.removeItem = function(idx) {
-            if (confirm('确定要删除该商品吗？')) {
-                items.splice(idx, 1);
-                saveItems(items);
-                render();
-            }
-        };
-
-        // 初始化
-        let items = loadItems();
+        loadItems();
         render();
     </script>
 </body>
