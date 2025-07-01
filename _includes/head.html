@@ -2,8 +2,9 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="{{ '/lccccc1024.png' | relative_url }}" type="image/png">
 
+  <!-- 网站标签页图标 -->
+  <link rel="icon" href="{{ '/lccccc1024.png' | relative_url }}" type="image/png">
 
   <title>
     {%- if page.title -%}
@@ -13,9 +14,11 @@
     {%- endif -%}
   </title>
 
-  {%-seo title=false-%}
-  {%-feed_meta-%}
+  {%- seo title=false -%}
+  {%- feed_meta -%}
 
-  <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
+  <!-- 删除或注释掉旧的 favicon 配置 -->
+  {# <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" /> #}
+
   <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
 </head>
