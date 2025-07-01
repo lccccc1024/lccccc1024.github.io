@@ -36,6 +36,46 @@
 
 <h1 class="title">电影清单</h1>
 
+<div style="width:70%;margin:20px auto 30px auto;padding:20px;background:#f9f9f9;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <form id="addMovieForm" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;">
+        <input type="text" id="title" placeholder="片名" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
+        <input type="text" id="genre" placeholder="类型" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
+        <input type="text" id="director" placeholder="导演" required style="flex:1;min-width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
+        <input type="number" id="year" placeholder="上映年份" required style="width:100px;padding:6px;border-radius:5px;border:1px solid #ccc;">
+        <input type="date" id="watched" placeholder="观看时间" style="width:140px;padding:6px;border-radius:5px;border:1px solid #ccc;">
+        <button type="submit" style="padding:8px 18px;background:#4f8cff;color:#fff;border:none;border-radius:5px;cursor:pointer;transition:background 0.2s;">添加</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('addMovieForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const title = document.getElementById('title').value.trim();
+    const genre = document.getElementById('genre').value.trim();
+    const director = document.getElementById('director').value.trim();
+    const year = document.getElementById('year').value.trim();
+    const watched = document.getElementById('watched').value.trim() || 'N/A';
+
+    if (!title || !genre || !director || !year) return;
+
+    const tbody = document.querySelector('table tbody');
+    const rows = tbody.querySelectorAll('tr');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${rows.length + 1}</td>
+        <td>${title}</td>
+        <td>${genre}</td>
+        <td>${director}</td>
+        <td>${year}</td>
+        <td>${watched}</td>
+    `;
+    tbody.appendChild(newRow);
+
+    // 清空表单
+    this.reset();
+});
+</script>
+
 <h2 class="subtitle">至少还有电影，幸好还有电影。</h2>
 
 <table>
