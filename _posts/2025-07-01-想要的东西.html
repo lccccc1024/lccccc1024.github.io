@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物清单</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: #f4f8fb;
+            color: #222;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 2em;
+            color: #2d8cf0;
+            letter-spacing: 2px;
+        }
+        form {
+            background: #fff;
+            max-width: 600px;
+            margin: 2em auto 1.5em auto;
+            padding: 2em 2em 1em 2em;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(45,140,240,0.07);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            align-items: flex-end;
+        }
+        label {
+            flex: 1 1 180px;
+            display: flex;
+            flex-direction: column;
+            font-size: 1em;
+            color: #555;
+        }
+        input[type="text"], input[type="number"], input[type="url"] {
+            margin-top: 0.5em;
+            padding: 0.5em 0.8em;
+            border: 1px solid #d0e2f2;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f8fbff;
+            transition: border 0.2s;
+        }
+        input:focus {
+            border-color: #2d8cf0;
+            outline: none;
+        }
+        button[type="submit"] {
+            background: linear-gradient(90deg, #2d8cf0 60%, #57c6e1 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7em 2em;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(45,140,240,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #57c6e1 0%, #2d8cf0 100%);
+            box-shadow: 0 4px 16px rgba(45,140,240,0.13);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        li {
+            margin-bottom: 1.2em;
+            padding: 1.2em 1.2em 1em 1.2em;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(45,140,240,0.07);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            transition: box-shadow 0.2s;
+        }
+        li.bought {
+            background: #f0f4f8;
+            opacity: 0.85;
+        }
+        .bought del {
+            color: #aaa;
+        }
+        .actions {
+            margin-top: 0.5em;
+            display: flex;
+            gap: 0.8em;
+        }
+        .actions button {
+            background: #f6faff;
+            color: #2d8cf0;
+            border: 1px solid #d0e2f2;
+            border-radius: 5px;
+            padding: 0.4em 1.2em;
+            font-size: 0.98em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .actions button:hover {
+            background: #2d8cf0;
+            color: #fff;
+            border-color: #2d8cf0;
+        }
+        .link {
+            color: #2d8cf0;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .date {
+            font-size: 0.93em;
+            color: #888;
+            margin-left: 0.5em;
+        }
+        .totals {
+            max-width: 600px;
+            margin: 2em auto 2em auto;
+            font-size: 1.15em;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(45,140,240,0.07);
+            padding: 1.2em 2em;
+            color: #2d8cf0;
+        }
+        @media (max-width: 700px) {
+            form, ul, .totals {
+                max-width: 98vw;
+                padding-left: 1vw;
+                padding-right: 1vw;
+            }
+            form {
+                flex-direction: column;
+                gap: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>我的购物清单</h1>
+    <form id="addForm">
+        <label>
+            商品名称
+            <input type="text" id="name" required>
+        </label>
+        <label>
+            价格
+            <input type="number" id="price" min="0" step="0.01" required>
+        </label>
+        <label>
+            链接
+            <input type="url" id="link" placeholder="https://">
+        </label>
+        <button type="submit">添加</button>
+    </form>
+
+    <ul id="itemList"></ul>
+
+    <div class="totals">
+        ✅ 已购买商品总价：<span id="boughtTotal">0</span> 元<br>
+        🛒 未购买商品总价：<span id="notBoughtTotal">0</span> 元
+    </div>
+
+    <script>
+        // 本地存储键
+        const STORAGE_KEY = 'shoppingList';
+
+        // 读取本地存储
+        function loadItems() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        // 保存到本地存储
+        function saveItems(items) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        }
+
+        // 格式化日期
+        function formatDate(ts) {
+            const d = new Date(ts);
+            return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0') +
+                ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+        }
+
+        // 渲染列表
+        function render() {
+            const list = document.getElementById('itemList');
+            list.innerHTML = '';
+            let boughtTotal = 0, notBoughtTotal = 0;
+            items.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.className = item.bought ? 'bought' : 'not-bought';
+                let content = '';
+                if (item.bought) {
+                    content += `<del>${item.name}</del> - <del>${item.price} 元</del>`;
+                    if (item.link) content += ` - <del><a class="link" href="${item.link}" target="_blank">商品链接</a></del>`;
+                    content += `<span class="date">购买时间：${formatDate(item.buyDate)}</span>`;
+                    boughtTotal += Number(item.price);
+                } else {
+                    content += `${item.name} - ${item.price} 元`;
+                    if (item.link) content += ` - <a class="link" href="${item.link}" target="_blank">商品链接</a>`;
+                    notBoughtTotal += Number(item.price);
+                }
+                content += `<span class="actions">
+                    <button onclick="toggleBought(${idx})">${item.bought ? '标为未购买' : '标为已购买'}</button>
+                    <button onclick="removeItem(${idx})">删除</button>
+                </span>`;
+                li.innerHTML = content;
+                list.appendChild(li);
+            });
+            document.getElementById('boughtTotal').textContent = boughtTotal.toFixed(2);
+            document.getElementById('notBoughtTotal').textContent = notBoughtTotal.toFixed(2);
+        }
+
+        // 添加商品
+        document.getElementById('addForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const price = parseFloat(document.getElementById('price').value);
+            const link = document.getElementById('link').value.trim();
+            if (!name || isNaN(price)) return;
+            items.push({ name, price, link, bought: false });
+            saveItems(items);
+            render();
+            this.reset();
+        };
+
+        // 切换已购买状态
+        window.toggleBought = function(idx) {
+            const item = items[idx];
+            if (!item.bought) {
+                item.bought = true;
+                item.buyDate = Date.now();
+            } else {
+                item.bought = false;
+                delete item.buyDate;
+            }
+            saveItems(items);
+            render();
+        };
+
+        // 删除商品
+        window.removeItem = function(idx) {
+            if (confirm('确定要删除该商品吗？')) {
+                items.splice(idx, 1);
+                saveItems(items);
+                render();
+            }
+        };
+
+        // 初始化
+        let items = loadItems();
+        render();
+    </script>
+</body>
+</html>
