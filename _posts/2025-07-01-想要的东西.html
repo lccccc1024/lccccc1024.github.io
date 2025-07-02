@@ -1,131 +1,161 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>我的购物清单（Worker 安全版）</title>
-  <style>
-    body {
-      font-family: "Segoe UI", "PingFang SC", Arial, sans-serif;
-      background: #f7f8fa;
-      padding: 2rem;
-      max-width: 700px;
-      margin: auto;
-    }
-    h1 { text-align: center; margin-bottom: 1rem; }
-    form { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; background: #f1f3f6; padding: 1rem; border-radius: 8px; }
-    label { flex: 1 1 45%; }
-    input, button { width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
-    button { background: #3182ce; color: white; border: none; cursor: pointer; }
-    ul { list-style: none; padding: 0; }
-    li { background: #fff; margin-bottom: 0.75rem; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-    li.bought { background: #e2e8f0; }
-    .item-info del { color: #888; }
-    .item-actions button { margin-left: 0.5rem; background: #edf2f7; color: #444; }
-    .item-actions button:last-child { background: #fee2e2; color: #b91c1c; }
-    .totals { margin-top: 2rem; padding: 1rem; background: #f0f4f8; border-radius: 8px; text-align: center; }
-    .warn { color: #c53030; text-align: center; margin-bottom: 1rem; font-weight: bold; }
-  </style>
+    <title>想要的东西</title>
+    <link rel="icon" type="image/png" href="/lccccc1024.png">
+    <style>
+        /* 标题样式 */
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        /* 表格样式 */
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(60, 72, 88, 0.08);
+            overflow: hidden;
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+        caption {
+            caption-side: top;
+            font-size: 1.3rem;
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        /* 首行表头 */
+        th {
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #2563eb;
+            padding: 12px 10px;
+            border: none;
+            text-align: left;
+        }
+        /* 让首行第一列居中 */
+        thead th:first-child {
+            text-align: center;
+        }
+        /* 单元格 */
+        th, td {
+            padding: 12px 10px;
+            border: none;
+            color: #374151;
+            font-size: 0.98rem;
+        }
+        /* 首列单元格居中加粗 */
+        tbody td:first-child {
+            text-align: center;
+            font-weight: 600;
+        }
+        /* 偶数行背景 */
+        tr:nth-child(even) {
+            background-color: #f3f6fa;
+        }
+        /* 行悬浮效果 */
+        tr:hover {
+            background: #e0e7ef;
+            transition: background 0.2s;
+        }
+        /* 划线行 */
+        .strike-row td,
+        .strike-row td * {
+            text-decoration: line-through !important;
+            color: #888 !important;
+        }
+        /* 响应式 */
+        @media (max-width: 900px) {
+            table {
+                width: 95%;
+            }
+            .title {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tr {
+                margin-bottom: 18px;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(60, 72, 88, 0.06);
+                background: #fff;
+            }
+            td {
+                position: relative;
+                padding-left: 50%;
+                min-height: 36px;
+                border-bottom: 1px solid #e5e7eb;
+                text-align: left;
+            }
+            /* 小屏幕首列改左对齐 */
+            tbody td:first-child {
+                text-align: left;
+                font-weight: 600;
+            }
+            td:before {
+                position: absolute;
+                left: 12px;
+                top: 12px;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #3b82f6;
+            }
+            td:nth-of-type(1):before { content: "#"; }
+            td:nth-of-type(2):before { content: "商品名"; }
+            td:nth-of-type(3):before { content: "价格"; }
+            td:nth-of-type(4):before { content: "链接"; }
+        }
+    </style>
 </head>
 <body>
-  <div class="warn"></div>
-  <h1>🛒 我的购物清单</h1>
-  <form id="addForm">
-    <label>商品名称<input type="text" id="name" required></label>
-    <label>商品价格<input type="number" id="price" min="0" step="0.01" required></label>
-    <label style="flex: 1 1 100%;">商品链接<input type="url" id="link" placeholder="https://"></label>
-    <button type="submit">添加商品</button>
-  </form>
 
-  <ul id="itemList"></ul>
+<h1 class="title">想要的东西</h1>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>商品名</th>
+            <th>价格</th>
+            <th>链接</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>房子</td>
+            <td>1200000</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Dji neo</td>
+            <td>1299</td>
+            <td><a href="https://item.jd.com/100134198972.html#switch-sku" target="_blank" rel="noopener noreferrer">京东</a></td>
+        </tr>
+        <tr class="strike-row">
+            <td>3</td>
+            <td>公路自行车</td>
+            <td>2899</td>
+            <td>N/A</td>
+        </tr>
+    </tbody>
+</table>
 
-  <div class="totals">
-    ✅ 已购买总价：<span id="boughtTotal">0.00</span> 元<br>
-    🛒 未购买总价：<span id="unboughtTotal">0.00</span> 元
-  </div>
-
-  <script>
-    const apiUrl = 'https://workertest.lcandfq.workers.dev/'; // 👈 替换成你的 Worker URL
-    let items = [];
-
-    async function loadItems() {
-      try {
-        const res = await fetch(apiUrl);
-        items = await res.json();
-        render();
-      } catch (e) {
-        console.error('加载失败', e);
-        items = [];
-        render();
-      }
-    }
-
-    async function saveItems() {
-      try {
-        await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(items)
-        });
-      } catch (e) {
-        console.error('保存失败', e);
-      }
-    }
-
-    function render() {
-      const list = document.getElementById('itemList');
-      list.innerHTML = '';
-      let boughtSum = 0, unboughtSum = 0;
-      items.forEach((item, i) => {
-        const li = document.createElement('li');
-        li.className = item.bought ? 'bought' : '';
-        const info = document.createElement('div');
-        info.className = 'item-info';
-        info.innerHTML = item.bought
-          ? `<del>${item.name}</del> <del>${item.price.toFixed(2)}元</del> ${item.link ? `<del><a href="${item.link}" target="_blank">链接</a></del>` : ''}`
-          : `${item.name} ${item.price.toFixed(2)}元 ${item.link ? `<a href="${item.link}" target="_blank">链接</a>` : ''}`;
-
-        if (item.bought) boughtSum += item.price;
-        else unboughtSum += item.price;
-
-        const actions = document.createElement('div');
-        actions.className = 'item-actions';
-        actions.innerHTML = `
-          <button onclick="toggle(${i})">${item.bought ? '未购买' : '已购买'}</button>
-          <button onclick="del(${i})">删除</button>
-        `;
-        li.appendChild(info);
-        li.appendChild(actions);
-        list.appendChild(li);
-      });
-      document.getElementById('boughtTotal').textContent = boughtSum.toFixed(2);
-      document.getElementById('unboughtTotal').textContent = unboughtSum.toFixed(2);
-    }
-
-    window.toggle = async function(i) {
-      items[i].bought = !items[i].bought;
-      await saveItems();
-      render();
-    };
-
-    window.del = async function(i) {
-      items.splice(i, 1);
-      await saveItems();
-      render();
-    };
-
-    document.getElementById('addForm').onsubmit = async function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const price = parseFloat(document.getElementById('price').value);
-      const link = document.getElementById('link').value.trim();
-      if (!name || isNaN(price)) return;
-      items.push({ name, price, link, bought: false });
-      await saveItems();
-      render();
-      this.reset();
-    };
-
-    loadItems();
-  </script>
 </body>
 </html>
