@@ -1,282 +1,131 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>我的购物清单</title>
-    <link rel="icon" type="image/png" href="/lccccc1024.png">
-    <style>
-        body {
-            font-family: "Segoe UI", "PingFang SC", Arial, sans-serif;
-            margin: 0;
-            background: #f7f8fa;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 540px;
-            margin: 40px auto 0 auto;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            padding: 32px 28px 24px 28px;
-        }
-        h1 {
-            text-align: center;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 28px;
-            letter-spacing: 2px;
-        }
-        form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 10px;
-            align-items: flex-end;
-            margin-bottom: 24px;
-            background: #f1f3f6;
-            padding: 18px 14px 10px 14px;
-            border-radius: 8px;
-        }
-        label {
-            flex: 1 1 120px;
-            font-size: 1em;
-            color: #444;
-        }
-        input[type="text"], input[type="number"], input[type="url"] {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 7px 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 5px;
-            font-size: 1em;
-            margin-top: 4px;
-            background: #fff;
-            transition: border 0.2s;
-        }
-        input:focus {
-            border-color: #3182ce;
-            outline: none;
-        }
-        button[type="submit"] {
-            background: #3182ce;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 22px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-left: 8px;
-        }
-        button[type="submit"]:hover {
-            background: #2563eb;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 18px 0;
-        }
-        li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f9fafb;
-            border-radius: 7px;
-            margin-bottom: 10px;
-            padding: 12px 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-            transition: background 0.2s;
-        }
-        li.bought {
-            background: #e2e8f0;
-        }
-        .item-info {
-            flex: 1 1 auto;
-            min-width: 0;
-        }
-        .item-info del, .item-info del a {
-            color: #a0aec0;
-        }
-        .item-info a {
-            color: #3182ce;
-            text-decoration: underline;
-            margin-left: 4px;
-            word-break: break-all;
-        }
-        .date {
-            color: #888;
-            font-size: 0.93em;
-            margin-left: 8px;
-        }
-        .item-actions {
-            flex-shrink: 0;
-            margin-left: 16px;
-            display: flex;
-            gap: 6px;
-        }
-        .item-actions button {
-            background: #edf2f7;
-            color: #444;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 12px;
-            font-size: 0.98em;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .item-actions button:hover {
-            background: #cbd5e1;
-        }
-        .item-actions button:last-child {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-        .item-actions button:last-child:hover {
-            background: #fecaca;
-        }
-        .totals {
-            margin-top: 30px;
-            font-size: 1.13em;
-            color: #2d3748;
-            background: #f1f5f9;
-            border-radius: 8px;
-            padding: 16px 12px;
-            line-height: 2;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        }
-        @media (max-width: 600px) {
-            .container { padding: 12px 2vw 18px 2vw; }
-            form { flex-direction: column; gap: 10px 0; }
-            .item-actions { flex-direction: column; gap: 4px; margin-left: 8px; }
-            li { flex-direction: column; align-items: flex-start; gap: 6px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>我的购物清单（Worker 安全版）</title>
+  <style>
+    body {
+      font-family: "Segoe UI", "PingFang SC", Arial, sans-serif;
+      background: #f7f8fa;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 { text-align: center; margin-bottom: 1rem; }
+    form { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; background: #f1f3f6; padding: 1rem; border-radius: 8px; }
+    label { flex: 1 1 45%; }
+    input, button { width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+    button { background: #3182ce; color: white; border: none; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; margin-bottom: 0.75rem; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+    li.bought { background: #e2e8f0; }
+    .item-info del { color: #888; }
+    .item-actions button { margin-left: 0.5rem; background: #edf2f7; color: #444; }
+    .item-actions button:last-child { background: #fee2e2; color: #b91c1c; }
+    .totals { margin-top: 2rem; padding: 1rem; background: #f0f4f8; border-radius: 8px; text-align: center; }
+    .warn { color: #c53030; text-align: center; margin-bottom: 1rem; font-weight: bold; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>我的购物清单</h1>
-        <form id="addForm">
-            <label>
-                商品名称
-                <input type="text" id="name" required>
-            </label>
-            <label>
-                商品价格
-                <input type="number" id="price" min="0" step="0.01" required>
-            </label>
-            <label>
-                商品链接
-                <input type="url" id="link" placeholder="https://">
-            </label>
-            <button type="submit">添加商品</button>
-        </form>
+  <div class="warn"></div>
+  <h1>🛒 我的购物清单</h1>
+  <form id="addForm">
+    <label>商品名称<input type="text" id="name" required></label>
+    <label>商品价格<input type="number" id="price" min="0" step="0.01" required></label>
+    <label style="flex: 1 1 100%;">商品链接<input type="url" id="link" placeholder="https://"></label>
+    <button type="submit">添加商品</button>
+  </form>
 
-        <ul id="itemList"></ul>
+  <ul id="itemList"></ul>
 
-        <div class="totals">
-            ✅ 已购买商品总价：<span id="boughtTotal">0.00</span> 元<br>
-            🛒 未购买商品总价：<span id="unboughtTotal">0.00</span> 元
-        </div>
-    </div>
-    <script>
-        const addForm = document.getElementById('addForm');
-        const itemList = document.getElementById('itemList');
-        const boughtTotal = document.getElementById('boughtTotal');
-        const unboughtTotal = document.getElementById('unboughtTotal');
+  <div class="totals">
+    ✅ 已购买总价：<span id="boughtTotal">0.00</span> 元<br>
+    🛒 未购买总价：<span id="unboughtTotal">0.00</span> 元
+  </div>
 
-        let items = [];
+  <script>
+    const apiUrl = 'https://workertest.lcandfq.workers.dev'; // 👈 替换成你的 Worker URL
+    let items = [];
 
-        function saveItems() {
-            localStorage.setItem('shoppingList', JSON.stringify(items));
-        }
-
-        function loadItems() {
-            const data = localStorage.getItem('shoppingList');
-            if (data) items = JSON.parse(data);
-        }
-
-        function formatDate(dateStr) {
-            const d = new Date(dateStr);
-            return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-        }
-
-        function render() {
-            itemList.innerHTML = '';
-            let boughtSum = 0, unboughtSum = 0;
-            items.forEach((item, idx) => {
-                const li = document.createElement('li');
-                li.className = item.bought ? 'bought' : '';
-                let info = '';
-                if (item.bought) {
-                    info += `<del>${item.name}</del> `;
-                    info += `<del>${item.price.toFixed(2)} 元</del> `;
-                    if (item.link) info += `<del><a href="${item.link}" target="_blank">商品链接</a></del> `;
-                    info += `<span class="date">购买时间：${formatDate(item.date)}</span>`;
-                    boughtSum += item.price;
-                } else {
-                    info += `${item.name} `;
-                    info += `${item.price.toFixed(2)} 元 `;
-                    if (item.link) info += `<a href="${item.link}" target="_blank">商品链接</a> `;
-                    unboughtSum += item.price;
-                }
-                const infoDiv = document.createElement('div');
-                infoDiv.className = 'item-info';
-                infoDiv.innerHTML = info;
-
-                const actions = document.createElement('span');
-                actions.className = 'item-actions';
-                actions.innerHTML = `
-                    <button onclick="toggleBought(${idx})">${item.bought ? '标为未购买' : '标为已购买'}</button>
-                    <button onclick="removeItem(${idx})">删除</button>
-                `;
-
-                li.appendChild(infoDiv);
-                li.appendChild(actions);
-                itemList.appendChild(li);
-            });
-            boughtTotal.textContent = boughtSum.toFixed(2);
-            unboughtTotal.textContent = unboughtSum.toFixed(2);
-        }
-
-        window.toggleBought = function(idx) {
-            const item = items[idx];
-            if (!item.bought) {
-                item.bought = true;
-                item.date = new Date().toISOString();
-            } else {
-                item.bought = false;
-                item.date = '';
-            }
-            saveItems();
-            render();
-        };
-
-        window.removeItem = function(idx) {
-            items.splice(idx, 1);
-            saveItems();
-            render();
-        };
-
-        addForm.onsubmit = function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const price = parseFloat(document.getElementById('price').value);
-            const link = document.getElementById('link').value.trim();
-            if (!name || isNaN(price)) return;
-            items.push({
-                name,
-                price,
-                link,
-                bought: false,
-                date: ''
-            });
-            saveItems();
-            render();
-            addForm.reset();
-        };
-
-        loadItems();
+    async function loadItems() {
+      try {
+        const res = await fetch(apiUrl);
+        items = await res.json();
         render();
-    </script>
+      } catch (e) {
+        console.error('加载失败', e);
+        items = [];
+        render();
+      }
+    }
+
+    async function saveItems() {
+      try {
+        await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(items)
+        });
+      } catch (e) {
+        console.error('保存失败', e);
+      }
+    }
+
+    function render() {
+      const list = document.getElementById('itemList');
+      list.innerHTML = '';
+      let boughtSum = 0, unboughtSum = 0;
+      items.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.className = item.bought ? 'bought' : '';
+        const info = document.createElement('div');
+        info.className = 'item-info';
+        info.innerHTML = item.bought
+          ? `<del>${item.name}</del> <del>${item.price.toFixed(2)}元</del> ${item.link ? `<del><a href="${item.link}" target="_blank">链接</a></del>` : ''}`
+          : `${item.name} ${item.price.toFixed(2)}元 ${item.link ? `<a href="${item.link}" target="_blank">链接</a>` : ''}`;
+
+        if (item.bought) boughtSum += item.price;
+        else unboughtSum += item.price;
+
+        const actions = document.createElement('div');
+        actions.className = 'item-actions';
+        actions.innerHTML = `
+          <button onclick="toggle(${i})">${item.bought ? '未购买' : '已购买'}</button>
+          <button onclick="del(${i})">删除</button>
+        `;
+        li.appendChild(info);
+        li.appendChild(actions);
+        list.appendChild(li);
+      });
+      document.getElementById('boughtTotal').textContent = boughtSum.toFixed(2);
+      document.getElementById('unboughtTotal').textContent = unboughtSum.toFixed(2);
+    }
+
+    window.toggle = async function(i) {
+      items[i].bought = !items[i].bought;
+      await saveItems();
+      render();
+    };
+
+    window.del = async function(i) {
+      items.splice(i, 1);
+      await saveItems();
+      render();
+    };
+
+    document.getElementById('addForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const price = parseFloat(document.getElementById('price').value);
+      const link = document.getElementById('link').value.trim();
+      if (!name || isNaN(price)) return;
+      items.push({ name, price, link, bought: false });
+      await saveItems();
+      render();
+      this.reset();
+    };
+
+    loadItems();
+  </script>
 </body>
 </html>
