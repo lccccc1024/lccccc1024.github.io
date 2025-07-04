@@ -1,161 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>想要的东西</title>
-    <link rel="icon" type="image/png" href="/lccccc1024.png">
-    <style>
-        /* 标题样式 */
-        .title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        /* 表格样式 */
-        table {
-            border-collapse: collapse;
-            width: 70%;
-            margin: auto;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(60, 72, 88, 0.08);
-            overflow: hidden;
-            margin-top: 24px;
-            margin-bottom: 48px;
-        }
-        caption {
-            caption-side: top;
-            font-size: 1.3rem;
-            color: #374151;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-        /* 首行表头 */
-        th {
-            background: #3b82f6;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #2563eb;
-            padding: 12px 10px;
-            border: none;
-            text-align: left;
-        }
-        /* 让首行第一列居中 */
-        thead th:first-child {
-            text-align: center;
-        }
-        /* 单元格 */
-        th, td {
-            padding: 12px 10px;
-            border: none;
-            color: #374151;
-            font-size: 0.98rem;
-        }
-        /* 首列单元格居中加粗 */
-        tbody td:first-child {
-            text-align: center;
-            font-weight: 600;
-        }
-        /* 偶数行背景 */
-        tr:nth-child(even) {
-            background-color: #f3f6fa;
-        }
-        /* 行悬浮效果 */
-        tr:hover {
-            background: #e0e7ef;
-            transition: background 0.2s;
-        }
-        /* 划线行 */
-        .strike-row td,
-        .strike-row td * {
-            text-decoration: line-through !important;
-            color: #888 !important;
-        }
-        /* 响应式 */
-        @media (max-width: 900px) {
-            table {
-                width: 95%;
-            }
-            .title {
-                font-size: 2rem;
-            }
-        }
-        @media (max-width: 600px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-            thead tr {
-                display: none;
-            }
-            tr {
-                margin-bottom: 18px;
-                border-radius: 10px;
-                box-shadow: 0 2px 8px rgba(60, 72, 88, 0.06);
-                background: #fff;
-            }
-            td {
-                position: relative;
-                padding-left: 50%;
-                min-height: 36px;
-                border-bottom: 1px solid #e5e7eb;
-                text-align: left;
-            }
-            /* 小屏幕首列改左对齐 */
-            tbody td:first-child {
-                text-align: left;
-                font-weight: 600;
-            }
-            td:before {
-                position: absolute;
-                left: 12px;
-                top: 12px;
-                width: 45%;
-                white-space: nowrap;
-                font-weight: bold;
-                color: #3b82f6;
-            }
-            td:nth-of-type(1):before { content: "#"; }
-            td:nth-of-type(2):before { content: "商品名"; }
-            td:nth-of-type(3):before { content: "价格"; }
-            td:nth-of-type(4):before { content: "链接"; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>想要的东西</title>
+  <link rel="icon" type="image/png" href="/lccccc1024.png">
+  <style>
+    .title {
+      text-align: center;
+      font-size: 24px;
+      margin: 20px 0 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 85%;
+      margin: auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(60, 72, 88, 0.08);
+      margin-bottom: 20px;
+    }
+    th {
+      background: #3b82f6;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 10px;
+      text-align: left;
+    }
+    th:first-child, td:first-child {
+      text-align: center;
+    }
+    td {
+      padding: 12px 10px;
+      color: #374151;
+      font-size: 0.98rem;
+      border: none;
+    }
+    tr:nth-child(even) {
+      background-color: #f3f6fa;
+    }
+    tr:hover {
+      background: #e0e7ef;
+      transition: background 0.2s;
+    }
+    .strike td,
+    .strike td * {
+      text-decoration: line-through;
+      color: #888;
+    }
+    .totals {
+      width: 85%;
+      margin: auto;
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      color: #2d3748;
+      line-height: 2;
+    }
+  </style>
 </head>
 <body>
 
 <h1 class="title">想要的东西</h1>
-<table>
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>商品名</th>
-            <th>价格</th>
-            <th>链接</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>房子</td>
-            <td>1200000</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Dji neo</td>
-            <td>1299</td>
-            <td><a href="https://item.jd.com/100134198972.html#switch-sku" target="_blank" rel="noopener noreferrer">京东</a></td>
-        </tr>
-        <tr class="strike-row">
-            <td>3</td>
-            <td>公路自行车</td>
-            <td>2899</td>
-            <td>N/A</td>
-        </tr>
-    </tbody>
+
+<table id="wishlist">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>商品名</th>
+      <th>价格</th>
+      <th>链接</th>
+      <th>购买时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>房子</td>
+      <td>1200000</td>
+      <td>N/A</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Dji neo</td>
+      <td>1299</td>
+      <td><a href="https://item.jd.com/100134198972.html" target="_blank">京东</a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>喜德盛ad300公路自行车</td>
+      <td>2899</td>
+      <td>N/A</td>
+      <td>2025-05</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>ikf v11 pro电竞耳机</td>
+      <td>168.31</td>
+      <td><a href="https://item.jd.com/100137893545.html" target="_blank">京东</a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>米家方框偏光太阳镜</td>
+      <td>99</td>
+      <td>N/A</td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
+
+<div class="totals">
+  ✅ 已购总价：<span id="bought-total">0.00</span> 元<br>
+  🛒 未购总价：<span id="unbought-total">0.00</span> 元
+</div>
+
+<script>
+  const tbody = document.querySelector("#wishlist tbody");
+  const boughtEl = document.getElementById("bought-total");
+  const unboughtEl = document.getElementById("unbought-total");
+
+  function updateTotalsAndStyle() {
+    let bought = 0, unbought = 0;
+
+    tbody.querySelectorAll("tr").forEach(tr => {
+      const price = parseFloat(tr.children[2].textContent.trim()) || 0;
+      const time = tr.children[4].textContent.trim();
+      if (time) {
+        tr.classList.add("strike");
+        bought += price;
+      } else {
+        tr.classList.remove("strike");
+        unbought += price;
+      }
+    });
+
+    boughtEl.textContent = bought.toFixed(2);
+    unboughtEl.textContent = unbought.toFixed(2);
+  }
+
+  updateTotalsAndStyle();
+</script>
 
 </body>
 </html>
