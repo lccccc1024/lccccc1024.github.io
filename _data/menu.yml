@@ -2,9 +2,9 @@ entries:
   - title: 首页
     url: /
   - title: 归档
-    url: /archive.html
+    url: /archive.md
   - title: 关于我
-    url: /about.html
+    url: /about.md
   - title: 想要的东西
     url: /want.html
   - title: 光影
