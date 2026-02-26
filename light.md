@@ -1,3 +1,8 @@
+---
+layout: default
+title: 光影
+permalink: /light/
+---
 <!DOCTYPE html>
 <html>
 <head>
