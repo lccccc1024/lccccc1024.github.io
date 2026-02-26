@@ -5,6 +5,8 @@ url: https://lccccc1024.github.io # root address of the site
 baseurl:  # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
 description: > # description of the site (multiple lines allowed)
   正经人也写日记...
+lang: zh-CN
+permalink: /:year/:month/:day/:title/ # customize permalink structure, e.g. "/:year/:month/:day/:title/" (default is "/:categories/:year/:month/:day/:title/")
 
 # permalink: 
 
@@ -22,6 +24,37 @@ theme_config:
 sass:
   style: :compressed
 
+jekyll-minifier:
+  remove_comments: true
+  collapse_whitespace: true
+  minify_css: true
+  minify_javascript: true
+  minify_html: true
+
+# 社交SEO配置（新增）
+twitter:
+  card: summary
+og_image: /lccccc1024.png
+
+# 插件配置（新增/修改）
 plugins:
+  - jekyll-minifier
+  - jekyll-sitemap
   - jekyll-feed
-  - jekyll-seo-tag
+  - no-style-please
+
+# 压缩插件配置（新增）
+jekyll-minifier:
+  remove_comments: true
+  collapse_whitespace: true
+  minify_css: true
+  minify_javascript: true
+  minify_html: true
+
+# 代码高亮配置（新增，为后续做准备）
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
