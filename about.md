@@ -8,4 +8,4 @@ title: 关于我
 
 ### 联系方式
 - GitHub：[lccccc1024](https://github.com/lccccc1024)
-- 博客地址：https://lccccc1024.github.io
+- 博客地址：https://lccccc1024.github.io https://blog.950922.xyz/
