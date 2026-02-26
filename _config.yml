@@ -1,61 +1,58 @@
-title: 闲话 # name of the site
-author: lccccc1024 # name of site's author
-email: asa.lu@outlook.com # email of site's author
-url: https://lccccc1024.github.io # root address of the site
-baseurl:  # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
-description: > # description of the site (multiple lines allowed)
-  正经人也写日记...
+# 基础信息
+title: 闲话
+description: 分享日常杂记、技术笔记的极简博客
+author: Lcc
 lang: zh-CN
-permalink: /:year/:month/:day/:title/ # customize permalink structure, e.g. "/:year/:month/:day/:title/" (default is "/:categories/:year/:month/:day/:title/")
+permalink: /:year/:month/:day/:title/ # SEO友好的链接格式
+timezone: Asia/Shanghai
 
-# permalink: 
-
-favicon: "lccccc1024.png" # name+extension of favicon (which must be put on the root folder)
-# goat_counter: "yoursitename" # put your GoatCounter name if you want to use GoatCounter analytics
-
-remote_theme: riggraz/no-style-please
-
-theme_config:
-  appearance: "auto" # can be "light", "dark" or "auto"
-  back_home_text: ".." # customize text for homepage link in post layout
-  date_format: "%Y-%m-%d" # customize how date is formatted
-  show_description: false # show blog description in home page
-
-sass:
-  style: :compressed
-
-jekyll-minifier:
-  remove_comments: true
-  collapse_whitespace: true
-  minify_css: true
-  minify_javascript: true
-  minify_html: true
-
-# 社交SEO配置（新增）
-twitter:
-  card: summary
-og_image: /lccccc1024.png
-
-# 插件配置（新增/修改）
+# 主题配置（no-style-please 极简主题）
+remote_theme: riggraz/no-style-please@v1.0.1 # 固定版本，避免兼容问题
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-toc # 这个是支持的，放心加
-  - jekyll-redirect-from
-  # 删掉不认识的、非官方列表里的插件（比如小众的自定义插件）
+  - jekyll-feed # GitHub Pages 原生支持
+  - jekyll-seo-tag # SEO优化（原生支持）
+  - jekyll-sitemap # 站点地图（原生支持）
 
-# 压缩插件配置（新增）
-jekyll-minifier:
-  remove_comments: true
-  collapse_whitespace: true
-  minify_css: true
-  minify_javascript: true
-  minify_html: true
+# 主题自定义
+no_style_please:
+  # 首页文章数量
+  home_posts_limit: 6
+  # 首页显示「查看更多」
+  home_posts_show_more: true
+  home_posts_show_more_text: 查看全部文章
+  home_posts_show_more_url: /archive.html
+  # 导航配置（替代menu.yml，无冲突）
+  navigation:
+    - name: 关于我
+      links:
+        - name: 个人主页
+          url: /about.html
+        - name: GitHub
+          url: https://github.com/lccccc1024
+    - name: 分类
+      links:
+        - name: 杂记
+          url: /archive.html#杂记
+        - name: 技术笔记
+          url: /archive.html#技术笔记
 
-# 代码高亮配置（新增，为后续做准备）
+# 代码高亮（原生支持，无插件）
 markdown: kramdown
 highlighter: rouge
 kramdown:
   syntax_highlighter_opts:
     block:
-      line_numbers: false
+      line_numbers: false # 极简风格，关闭行号
+
+# SEO 增强
+twitter:
+  card: summary
+og_image: /assets/avatar.png # 后续上传头像用
+
+# 压缩配置（GitHub Pages 原生压缩，无需额外插件）
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  ignore:
+    envs: [development]

@@ -1,8 +1,11 @@
 ---
 layout: page
-title: About
+title: 关于我
 ---
 
-This is an example page!
+### 自我介绍
+一个喜欢记录生活的牛马～
 
-It's very similar to a `post` layout, with the only difference that the publish date is not shown!
+### 联系方式
+- GitHub：[lccccc1024](https://github.com/lccccc1024)
+- 博客地址：https://lccccc1024.github.io
