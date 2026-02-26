@@ -3,56 +3,71 @@ title: 闲话
 description: 分享日常杂记、技术笔记的极简博客
 author: Lcc
 lang: zh-CN
-permalink: /:year/:month/:day/:title/ # SEO友好的链接格式
+permalink: /:year/:month/:day/:title/     # SEO友好的链接格式
 timezone: Asia/Shanghai
 
-# 主题配置（no-style-please 极简主题）
-remote_theme: riggraz/no-style-please # 固定版本，避免兼容问题
-plugins:
-  - jekyll-feed # GitHub Pages 原生支持
-  - jekyll-seo-tag # SEO优化（原生支持）
-  - jekyll-sitemap # 站点地图（原生支持）
+# 主题设置（GitHub Pages 推荐使用 gem-based theme）
+theme: no-style-please
+# 如果你想固定拉取最新版远程主题，可临时改成下面这行（不推荐长期用）：
+# remote_theme: riggraz/no-style-please
 
-# 主题自定义
+plugins:
+  - jekyll-feed       # RSS feed
+  - jekyll-seo-tag    # SEO 元标签
+  - jekyll-sitemap    # 生成 sitemap.xml
+
+# no-style-please 主题自定义选项
 no_style_please:
-  # 首页文章数量
-  home_posts_limit: 6
-  # 首页显示「查看更多」
+  # 首页显示站点描述（你的 description）
+  show_description: true
+  
+  # 首页最新文章数量（默认显示全部，如果你文章不多可以去掉或调大）
+  home_posts_limit: 8
+  
+  # 首页显示“查看更多”链接
   home_posts_show_more: true
   home_posts_show_more_text: 查看全部文章
-  home_posts_show_more_url: /archive.html
-  # 导航配置（替代menu.yml，无冲突）
-  navigation:
-    - name: 关于我
-      links:
-        - name: 个人主页
-          url: /about.html
-        - name: GitHub
-          url: https://github.com/lccccc1024
-    - name: 分类
-      links:
-        - name: 杂记
-          url: /archive.html#杂记
-        - name: 技术笔记
-          url: /archive.html#技术笔记
+  home_posts_show_more_url: /archive.html   # 或 /archive/ 如果你改 permalink
+  
+  # 日期格式（中文友好）
+  date_format: "%Y年%m月%d日"
+  
+  # 外观模式：light / dark / auto（跟随系统）
+  appearance: auto
+  
+  # 返回顶部链接（长文章友好）
+  back_to_top: true
+  
+  # 可选：自定义 favicon / logo（上传到 /assets/ 后取消注释）
+  # favicon: /assets/favicon.ico
+  # logo: /assets/logo.png
+  
+  # 可选：Google Analytics（有 ID 再加）
+  # google_analytics: G-XXXXXXXXXX
 
-# 代码高亮（原生支持，无插件）
+# Markdown & 代码高亮（极简风格，关闭行号）
 markdown: kramdown
 highlighter: rouge
 kramdown:
   syntax_highlighter_opts:
     block:
-      line_numbers: false # 极简风格，关闭行号
+      line_numbers: false
 
 # SEO 增强
 twitter:
   card: summary
-og_image: /assets/avatar.png # 后续上传头像用
 
-# 压缩配置（GitHub Pages 原生压缩，无需额外插件）
+# Open Graph 图片（社交分享时用，上传头像后取消注释）
+og_image: /assets/avatar.png
+
+# HTML 压缩（GitHub Pages 原生支持，保持开启）
 compress_html:
   clippings: all
   comments: all
   endings: all
   ignore:
     envs: [development]
+
+# 可选：分页（如果以后文章很多想分页，可加）
+# paginate: 10
+# paginate_path: "/page:num/"

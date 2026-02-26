@@ -1,0 +1,9 @@
+entries:
+  - title: 首页
+    url: /
+  - title: 归档
+    url: /archive.html
+  - title: 关于我
+    url: /about.html
+  - title: GitHub
+    url: https://github.com/lccccc1024
