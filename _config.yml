@@ -38,10 +38,11 @@ og_image: /lccccc1024.png
 
 # 插件配置（新增/修改）
 plugins:
-  - jekyll-minifier
-  - jekyll-sitemap
   - jekyll-feed
-  - no-style-please
+  - jekyll-seo-tag
+  - jekyll-toc # 这个是支持的，放心加
+  - jekyll-redirect-from
+  # 删掉不认识的、非官方列表里的插件（比如小众的自定义插件）
 
 # 压缩插件配置（新增）
 jekyll-minifier:
