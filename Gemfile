@@ -1,22 +1,4 @@
-# frozen_string_literal: true
+# 强制使用 GitHub Pages 官方的 gem 版本，避免依赖冲突
 source "https://rubygems.org"
-
-# 核心Jekyll依赖
-gem "jekyll", "~> 4.0"
-
-# 新增：压缩HTML/CSS/JS
-gem "jekyll-minifier"
-# 新增：生成站点地图（SEO）
-gem "jekyll-sitemap"
-
-# 原有必备插件（保留）
-gem "jekyll-feed", "~> 0.12"
-
-# 主题依赖
-gem "no-style-please", "~> 0.3"
-
-# 开发环境依赖
-group :development do
-  gem "jekyll-seo-tag", "~> 2.0"
-  gem "wdm", ">= 0.1.0" if Gem.win_platform?
-end
+gem "github-pages", group: :jekyll_plugins
+# 不要手动加 gem "jekyll", "4.3.2" 这类指定版本的代码！
