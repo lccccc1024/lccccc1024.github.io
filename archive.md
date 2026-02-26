@@ -1,6 +1,15 @@
 ---
-layout: archive
+layout: default
 title: 文章归档
 ---
 
-<!-- 归档页由主题自动生成按时间分类的文章列表 -->
+## 文章归档
+
+<ul>
+  {% for post in site.posts %}
+    <li>
+      {{ post.date | date: "%Y-%m-%d" }} 
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
