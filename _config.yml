@@ -7,7 +7,7 @@ permalink: /:year/:month/:day/:title/ # SEO友好的链接格式
 timezone: Asia/Shanghai
 
 # 主题配置（no-style-please 极简主题）
-remote_theme: riggraz/no-style-please@v1.0.1 # 固定版本，避免兼容问题
+remote_theme: riggraz/no-style-please # 固定版本，避免兼容问题
 plugins:
   - jekyll-feed # GitHub Pages 原生支持
   - jekyll-seo-tag # SEO优化（原生支持）
