@@ -1,11 +1,11 @@
 entries:
   - title: 首页
     url: /
-  - title: 归档
+  - # title: 归档
     url: /archive.html
-  - title: 关于我
+  - # title: 关于我
     url: /about.html
   - title: 想要的东西
-    url: /want.md
+    url: /want.html
   - title: 光影
     url: /light.md
