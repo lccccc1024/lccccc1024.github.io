@@ -5,9 +5,7 @@ entries:
     url: /archive.html
   - title: 关于我
     url: /about.html
-  - title: GitHub
-    url: https://github.com/lccccc1024
   - title: 想要的东西
-    url: /want/
+    url: /want.html
   - title: 光影
-    url: /light/
+    url: /light.html
