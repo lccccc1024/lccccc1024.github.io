@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 想要的东西
-permalink: /want/   # 或 /2025/07/01/想要的东西/，自定义路径
+permalink: /want.md   # 或 /2025/07/01/想要的东西/，自定义路径
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">

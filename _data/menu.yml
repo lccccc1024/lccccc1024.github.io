@@ -6,6 +6,6 @@ entries:
   - title: 关于我
     url: /about.html
   - title: 想要的东西
-    url: /want.html
+    url: /want.md
   - title: 光影
-    url: /light.html
+    url: /light.md

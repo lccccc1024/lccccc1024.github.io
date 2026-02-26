@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 光影
-permalink: /light/
+permalink: /light.md
 ---
 <!DOCTYPE html>
 <html>
