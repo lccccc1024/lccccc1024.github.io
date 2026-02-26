@@ -7,9 +7,9 @@ permalink: /:year/:month/:day/:title/     # SEO友好的链接格式
 timezone: Asia/Shanghai
 
 # 主题设置（GitHub Pages 推荐使用 gem-based theme）
-theme: no-style-please
+# theme: no-style-please
 # 如果你想固定拉取最新版远程主题，可临时改成下面这行（不推荐长期用）：
-# remote_theme: riggraz/no-style-please
+remote_theme: riggraz/no-style-please
 
 plugins:
   - jekyll-feed       # RSS feed
