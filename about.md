@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: default
 title: 关于我
+permalink: /about/
 ---
 
 ### 自我介绍

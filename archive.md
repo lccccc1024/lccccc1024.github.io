@@ -1,6 +1,7 @@
 ---
 layout: default
 title: 文章归档
+permalink: /archive/     # 可选，加这个更保险
 ---
 
 ## 文章归档
