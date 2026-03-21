@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="个人阅读清单 - 记录读过的书，也记录当时的自己。">
+    <title>阅读清单</title>
+    <link rel="icon" type="image/png" href="/lccccc1024.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --table-bg: #ffffff;
+            --even-row: #f3f6fa;
+            --hover: #dbeafe;
+            --header-bg: #3b82f6;
+            --header-text: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-gradient: linear-gradient(120deg, #1e293b 0%, #0f172a 100%);
+                --text-primary: #e2e8f0;
+                --text-secondary: #94a3b8;
+                --table-bg: #1e293b;
+                --even-row: #334155;
+                --hover: #475569;
+                --header-bg: #2563eb;
+                --header-text: #f1f5f9;
+                --border: #334155;
+            }
+        }
+
+        body {
+            font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px 10px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin: 40px 0 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin: 0 0 24px;
+            font-style: italic;
+        }
+
+        .stats {
+            text-align: center;
+            color: var(--text-secondary);
+            margin: -8px 0 32px;
+            font-size: 1.1rem;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            border-collapse: collapse;
+            background: var(--table-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        caption {
+            caption-side: top;
+            padding: 20px 0 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        th {
+            background: var(--header-bg);
+            color: var(--header-text);
+            font-weight: 600;
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--even-row);
+        }
+
+        tr:hover {
+            background: var(--hover);
+            transition: background 0.18s ease;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 24px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                background: var(--table-bg);
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+                min-height: 44px;
+                border: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            td::before {
+                position: absolute;
+                left: 16px;
+                top: 14px;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: 600;
+                color: var(--header-bg);
+            }
+
+            td:nth-of-type(1)::before { content: "序号"; }
+            td:nth-of-type(2)::before { content: "书名"; }
+            td:nth-of-type(3)::before { content: "作者"; }
+            td:nth-of-type(4)::before { content: "类型"; }
+            td:nth-of-type(5)::before { content: "出版年份"; }
+            td:nth-of-type(6)::before { content: "阅读时间"; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="title">阅读清单</h1>
+    <h2 class="subtitle">书页翻过去的时候，也把一段时间留了下来。</h2>
+    <p class="stats">共记录 <strong id="book-count">计算中...</strong> 本书（按阅读时间倒序）</p>
+
+    <table>
+        <caption>阅读清单</caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>类型</th>
+                <th>出版年份</th>
+                <th>阅读时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>置顶的空位</td>
+                <td>待补充</td>
+                <td>待分类</td>
+                <td>2026</td>
+                <td>2026-03-21</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>你可以先从这里开始</td>
+                <td>待补充</td>
+                <td>随笔</td>
+                <td>2025</td>
+                <td>2025-12-01</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>把最近读完的一本书填进来</td>
+                <td>待补充</td>
+                <td>小说</td>
+                <td>2025</td>
+                <td>2025-08-18</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>给未来想读的书留个位置</td>
+                <td>待补充</td>
+                <td>非虚构</td>
+                <td>2024</td>
+                <td>2024-05-03</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>第一本书</td>
+                <td>待补充</td>
+                <td>文学</td>
+                <td>2023</td>
+                <td>2023-08-04</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('tbody tr');
+        const countElement = document.getElementById('book-count');
+
+        if (countElement) {
+            countElement.textContent = rows.length;
+        }
+    });
+</script>
+
+</body>
+</html>
