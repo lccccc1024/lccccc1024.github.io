@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 文章归档
-permalink: /archive/     # 可选，加这个更保险
+permalink: /archive/
 ---
 
 ## 文章归档
@@ -12,7 +12,7 @@ permalink: /archive/     # 可选，加这个更保险
   {% for post in site.posts %}
     <li style="margin: 0.8em 0;">
       <span style="color: #666; font-size: 0.95em; min-width: 100px; display: inline-block;">
-        {{ post.date | date: "%Y年-%m月-%d日" }}
+        {{ post.date | date: "%Y年%m月%d日" }}
       </span>
       <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
@@ -21,4 +21,4 @@ permalink: /archive/     # 可选，加这个更保险
 
 ---
 
-[← 返回首页](/)
+[返回首页](/)

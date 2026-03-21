@@ -2,162 +2,236 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>想要的东西</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wishlist</title>
   <link rel="icon" type="image/png" href="/lccccc1024.png">
   <style>
-    .title {
-      text-align: center;
-      font-size: 24px;
-      margin: 20px 0 10px;
+    :root {
+      color-scheme: light dark;
     }
+
+    body {
+      margin: 0;
+      padding: 24px 12px 48px;
+      font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      color: #111827;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .title {
+      margin: 20px 0 18px;
+      text-align: center;
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+    }
+
     table {
+      width: 100%;
+      margin: 0 auto 20px;
       border-collapse: collapse;
-      width: 85%;
-      margin: auto;
+      overflow: hidden;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 4px 24px rgba(60, 72, 88, 0.08);
-      margin-bottom: 20px;
     }
+
     th {
-      background: #3b82f6;
-      color: #fff;
-      font-weight: 700;
       padding: 12px 10px;
       text-align: left;
+      font-weight: 700;
+      color: #fff;
+      background: #3b82f6;
     }
-    th:first-child, td:first-child {
+
+    th:first-child,
+    td:first-child {
       text-align: center;
     }
+
     td {
       padding: 12px 10px;
-      color: #374151;
       font-size: 0.98rem;
+      color: #374151;
       border: none;
     }
+
     tr:nth-child(even) {
       background-color: #f3f6fa;
     }
+
     tr:hover {
       background: #e0e7ef;
       transition: background 0.2s;
     }
+
     .strike td,
     .strike td * {
-      text-decoration: line-through;
       color: #888;
+      text-decoration: line-through;
     }
+
     .totals {
-      width: 85%;
-      margin: auto;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 18px;
+      line-height: 2;
+      font-size: 1.1rem;
+      color: #2d3748;
       background: #f1f5f9;
       border-radius: 12px;
-      padding: 18px;
-      font-size: 1.1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      color: #2d3748;
-      line-height: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 16px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      td {
+        position: relative;
+        padding: 14px 12px 14px 45%;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      td::before {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        width: 32%;
+        font-weight: 700;
+        color: #2563eb;
+        white-space: nowrap;
+      }
+
+      td:nth-of-type(1)::before { content: "#"; }
+      td:nth-of-type(2)::before { content: "Name"; }
+      td:nth-of-type(3)::before { content: "Price"; }
+      td:nth-of-type(4)::before { content: "Link"; }
+      td:nth-of-type(5)::before { content: "Date"; }
     }
   </style>
 </head>
 <body>
+  <main class="page">
+    <h1 class="title">Wishlist</h1>
 
-<h1 class="title">想要的东西</h1>
+    <table id="wishlist">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Link</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>房子</td>
+          <td>1200000</td>
+          <td>N/A</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Dji neo</td>
+          <td>1299</td>
+          <td><a href="https://item.jd.com/100134198972.html" target="_blank" rel="noopener noreferrer">Link</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>喜德盛 XD300 公路自行车</td>
+          <td>0</td>
+          <td>老婆送的</td>
+          <td>2025-05</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>IKF V11 Pro 电竞耳机</td>
+          <td>168.31</td>
+          <td><a href="https://item.jd.com/100137893545.html" target="_blank" rel="noopener noreferrer">Link</a></td>
+          <td>2025-07</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>米家方框尼龙偏光太阳镜</td>
+          <td>199</td>
+          <td>154</td>
+          <td>2026-03</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>尼康 Z30 + 16-50 套机</td>
+          <td>4595.08</td>
+          <td><a href="https://mobile.yangkeduo.com/goods1.html?ps=uCg3Bg7zf0" target="_blank" rel="noopener noreferrer">Link</a></td>
+          <td>2025-11</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>尼克尔 Z DX 50-250mm f/4.5-6.3 VR</td>
+          <td>0</td>
+          <td>老婆送的</td>
+          <td>2026-01</td>
+        </tr>
+      </tbody>
+    </table>
 
-<table id="wishlist">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>商品名</th>
-      <th>价格</th>
-      <th>链接</th>
-      <th>购买时间</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>房子</td>
-      <td>1200000</td>
-      <td>N/A</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Dji neo</td>
-      <td>1299</td>
-      <td><a href="https://item.jd.com/100134198972.html" target="_blank">京东</a></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>喜德盛ad300公路自行车</td>
-      <td>0</td>
-      <td>老婆送的</td>
-      <td>2025-05</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>ikf v11 pro电竞耳机</td>
-      <td>168.31</td>
-      <td><a href="https://item.jd.com/100137893545.html" target="_blank">京东</a></td>
-      <td>2025-07</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>米家方框尼龙偏光太阳镜</td>
-      <td>199</td>
-      <td>N/A</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>尼康Z30+16-50套机</td>
-      <td>4595.08</td>
-      <td><a href="https://mobile.yangkeduo.com/goods1.html?ps=uCg3Bg7zf0" target="_blank">拼多多</a></td>
-      <td>2025-11</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>尼克尔 Z DX 50-250mm f/4.5-6.3 VR</td>
-      <td>0</td>
-      <td>老婆送的</td>
-      <td>2026-01</td>
-    </tr>
-  </tbody>
-</table>
+    <div class="totals">
+      Bought total: <span id="bought-total">0.00</span><br>
+      Unbought total: <span id="unbought-total">0.00</span>
+    </div>
+  </main>
 
-<div class="totals">
-  ✅ 已购总价：<span id="bought-total">0.00</span> 元<br>
-  🛒 未购总价：<span id="unbought-total">0.00</span> 元
-</div>
+  <script>
+    const tbody = document.querySelector("#wishlist tbody");
+    const boughtEl = document.getElementById("bought-total");
+    const unboughtEl = document.getElementById("unbought-total");
 
-<script>
-  const tbody = document.querySelector("#wishlist tbody");
-  const boughtEl = document.getElementById("bought-total");
-  const unboughtEl = document.getElementById("unbought-total");
+    function updateTotalsAndStyle() {
+      let bought = 0;
+      let unbought = 0;
 
-  function updateTotalsAndStyle() {
-    let bought = 0, unbought = 0;
+      tbody.querySelectorAll("tr").forEach((tr) => {
+        const price = parseFloat(tr.children[2].textContent.trim()) || 0;
+        const time = tr.children[4].textContent.trim();
 
-    tbody.querySelectorAll("tr").forEach(tr => {
-      const price = parseFloat(tr.children[2].textContent.trim()) || 0;
-      const time = tr.children[4].textContent.trim();
-      if (time) {
-        tr.classList.add("strike");
-        bought += price;
-      } else {
-        tr.classList.remove("strike");
-        unbought += price;
-      }
-    });
+        if (time) {
+          tr.classList.add("strike");
+          bought += price;
+        } else {
+          tr.classList.remove("strike");
+          unbought += price;
+        }
+      });
 
-    boughtEl.textContent = bought.toFixed(2);
-    unboughtEl.textContent = unbought.toFixed(2);
-  }
+      boughtEl.textContent = bought.toFixed(2);
+      unboughtEl.textContent = unbought.toFixed(2);
+    }
 
-  updateTotalsAndStyle();
-</script>
-
+    updateTotalsAndStyle();
+  </script>
 </body>
 </html>

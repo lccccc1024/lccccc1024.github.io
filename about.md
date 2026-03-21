@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 ### 自我介绍
-一个喜欢记录生活的牛马～
+一个喜欢记录生活的牛马。
 
 ### 联系方式
 - GitHub：[lccccc1024](https://github.com/lccccc1024)
