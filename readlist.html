@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="个人阅读清单 - 记录读过的书，也记录当时的自己。">
-    <meta property="og:title" content="阅读清单">
-    <meta property="og:description" content="个人阅读清单 - 记录读过的书，也记录当时的自己。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://lccccc1024.github.io/readlist.html">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="阅读清单">
-    <meta name="twitter:description" content="个人阅读清单 - 记录读过的书，也记录当时的自己。">
-    <title>阅读清单</title>
-    <link rel="icon" type="image/png" href="/lccccc1024.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/list-pages.css">
+    {% include list-head.html title="阅读清单" description="个人阅读清单 - 记录读过的书，也记录当时的自己。" url="https://lccccc1024.github.io/readlist.html" %}
 
     <style>
         /* 阅读清单移动端标签 */
@@ -34,8 +18,7 @@
 <body>
 
 <div class="container">
-    <h1 class="title">阅读清单</h1>
-    <h2 class="subtitle">书页翻过去的时候，也把一段时间留了下来。</h2>
+    {% include list-header.html title="阅读清单" subtitle="书页翻过去的时候，也把一段时间留了下来。" %}
     <p class="stats">共记录 <strong id="book-count">计算中...</strong> 本书（按阅读时间倒序）</p>
 
     <table>
@@ -118,9 +101,8 @@
     </table>
 </div>
 
-<button class="back-to-top" id="back-to-top" title="返回顶部">↑</button>
+{% include list-footer.html %}
 
-<script src="/assets/js/list-pages.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const rows = document.querySelectorAll('tbody tr');

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "fnos+nastool搭建全自动观影追剧"
+categories: [技术]
+tags: [技术, nas, 笔记]
 ---
 # 前言
 虽然早就在家里搭了NAS，但是一直都没有真正发挥出作用来。借着最近Alist被收购不再可靠的缘由研究了一下自动观影追剧的流程，顺便写个文档记录下来。

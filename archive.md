@@ -6,18 +6,28 @@ permalink: /archive/
 
 ## 文章归档
 
-共 {{ site.posts.size }} 篇文章（按时间倒序）：
+共 {{ site.posts.size }} 篇文章：
+
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{% for year in posts_by_year %}
+### {{ year.name }} 年（{{ year.items | size }} 篇）
 
 <ul style="list-style: none; padding-left: 0;">
-  {% for post in site.posts %}
-    <li style="margin: 0.8em 0;">
-      <span style="color: #666; font-size: 0.95em; min-width: 100px; display: inline-block;">
-        {{ post.date | date: "%Y年%m月%d日" }}
+  {% for post in year.items %}
+    <li style="margin: 0.6em 0;">
+      <span style="color: #888; font-size: 0.9em; min-width: 80px; display: inline-block;">
+        {{ post.date | date: "%m-%d" }}
       </span>
       <a href="{{ post.url }}">{{ post.title }}</a>
+      {% if post.categories.size > 0 %}
+        <span style="color: #aaa; font-size: 0.85em; margin-left: 8px;">
+          {{ post.categories | join: ", " }}
+        </span>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>
+{% endfor %}
 
 ---
 

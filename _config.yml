@@ -52,3 +52,7 @@ compress_html:
 # 可选：分页
 # paginate: 10
 # paginate_path: "/page:num/"
+
+# 站点地址
+url: "https://lccccc1024.github.io"
+baseurl: ""

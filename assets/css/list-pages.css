@@ -1,46 +1,41 @@
-/* 公共列表页面样式 - 华丽版 */
+/* 公共列表页面样式 - 极简版 */
 :root {
-    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    --bg-pattern: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
-                  radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0%, transparent 30%);
-    --text-primary: #1a1a2e;
-    --text-secondary: #4a4a6a;
-    --table-bg: rgba(255, 255, 255, 0.95);
-    --even-row: rgba(102, 126, 234, 0.06);
-    --hover: rgba(102, 126, 234, 0.12);
-    --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-gradient: #fafafa;
+    --bg-pattern: none;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --table-bg: #ffffff;
+    --even-row: #f5f5f5;
+    --hover: #ebebeb;
+    --header-bg: #1a1a1a;
     --header-text: #ffffff;
-    --border: rgba(102, 126, 234, 0.15);
-    --accent: #667eea;
-    --accent-light: rgba(102, 126, 234, 0.1);
-    --shadow-color: rgba(102, 126, 234, 0.3);
+    --border: #e0e0e0;
+    --accent: #1a1a1a;
+    --accent-light: #f0f0f0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        --bg-pattern: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
-                      radial-gradient(circle at 40% 80%, rgba(240, 147, 251, 0.05) 0%, transparent 30%);
-        --text-primary: #e8e8f0;
-        --text-secondary: #a0a0c0;
-        --table-bg: rgba(26, 26, 46, 0.9);
-        --even-row: rgba(102, 126, 234, 0.1);
-        --hover: rgba(102, 126, 234, 0.18);
-        --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --header-text: #ffffff;
-        --border: rgba(102, 126, 234, 0.2);
-        --accent: #8b9cf7;
-        --accent-light: rgba(102, 126, 234, 0.15);
-        --shadow-color: rgba(0, 0, 0, 0.4);
+        --bg-gradient: #121212;
+        --bg-pattern: none;
+        --text-primary: #e0e0e0;
+        --text-secondary: #999999;
+        --table-bg: #1e1e1e;
+        --even-row: #252525;
+        --hover: #2a2a2a;
+        --header-bg: #e0e0e0;
+        --header-text: #121212;
+        --border: #333333;
+        --accent: #e0e0e0;
+        --accent-light: #252525;
+        --shadow-color: rgba(0, 0, 0, 0.3);
     }
 }
 
 body {
     font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
     background: var(--bg-gradient);
-    background-attachment: fixed;
     color: var(--text-primary);
     margin: 0;
     padding: 20px 10px;
@@ -48,23 +43,10 @@ body {
     line-height: 1.6;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--bg-pattern);
-    pointer-events: none;
-    z-index: 0;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    z-index: 1;
 }
 
 /* 标题区域 */
@@ -74,39 +56,31 @@ body::before {
     font-weight: 800;
     margin: 40px 0 12px;
     letter-spacing: 2px;
-    background: linear-gradient(135deg, #fff 0%, #f0e6ff 50%, #fff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2));
+    color: var(--text-primary);
 }
 
 .subtitle {
     text-align: center;
     font-size: 1.15rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-secondary);
     margin: 0 0 20px;
     font-style: italic;
     letter-spacing: 1px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .stats {
     text-align: center;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-secondary);
     margin: 0 0 36px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
     display: inline-block;
     padding: 8px 24px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: 1px solid var(--border);
 }
 
 .stats strong {
-    color: #fff;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
@@ -118,11 +92,9 @@ table {
     border-collapse: separate;
     border-spacing: 0;
     background: var(--table-bg);
-    border-radius: 16px;
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 20px 60px var(--shadow-color),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
+    box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 caption {
@@ -131,7 +103,7 @@ caption {
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+    background: var(--accent-light);
     border-bottom: 1px solid var(--border);
 }
 
@@ -145,22 +117,12 @@ th {
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease;
     letter-spacing: 0.5px;
 }
 
-th::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-}
-
 th:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    opacity: 0.85;
 }
 
 th.sorted-asc::before {
@@ -186,7 +148,7 @@ td {
     padding: 16px 14px;
     border-bottom: 1px solid var(--border);
     color: var(--text-primary);
-    transition: all 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 tr:last-child td {
@@ -196,29 +158,14 @@ tr:last-child td {
 /* 链接样式 */
 td a {
     color: var(--accent);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     font-weight: 500;
-    position: relative;
-    transition: all 0.2s ease;
-}
-
-td a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-td a:hover::after {
-    width: 100%;
+    transition: opacity 0.2s ease;
 }
 
 td a:hover {
-    color: var(--accent);
+    opacity: 0.7;
 }
 
 /* 行样式 */
@@ -226,14 +173,8 @@ tr:nth-child(even) {
     background-color: var(--even-row);
 }
 
-tr {
-    transition: all 0.25s ease;
-}
-
 tr:hover {
     background: var(--hover);
-    transform: scale(1.005);
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
 }
 
 /* 删除线样式（用于心愿单） */
@@ -253,9 +194,8 @@ tr:hover {
     font-size: 1.1rem;
     color: var(--text-primary);
     background: var(--table-bg);
-    border-radius: 16px;
-    box-shadow: 0 10px 40px var(--shadow-color);
-    backdrop-filter: blur(20px);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-color);
     border: 1px solid var(--border);
 }
 
@@ -264,19 +204,19 @@ tr:hover {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 52px;
-    height: 52px;
-    border-radius: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
     background: var(--header-bg);
     color: var(--header-text);
     border: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    box-shadow: 0 8px 30px var(--shadow-color);
+    box-shadow: 0 1px 3px var(--shadow-color);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease;
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -289,8 +229,7 @@ tr:hover {
 }
 
 .back-to-top:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 12px 40px var(--shadow-color);
+    opacity: 0.8;
 }
 
 /* 手机端卡片式布局 */
@@ -311,7 +250,7 @@ tr:hover {
 
     table {
         margin-bottom: 20px;
-        border-radius: 12px;
+        border-radius: 4px;
     }
 
     caption {
@@ -329,16 +268,11 @@ tr:hover {
 
     tr {
         margin-bottom: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px var(--shadow-color);
+        border-radius: 4px;
+        box-shadow: 0 1px 3px var(--shadow-color);
         background: var(--table-bg);
         overflow: hidden;
         border: 1px solid var(--border);
-    }
-
-    tr:hover {
-        transform: none;
-        box-shadow: 0 12px 40px var(--shadow-color);
     }
 
     td {
@@ -368,13 +302,13 @@ tr:hover {
     .back-to-top {
         bottom: 20px;
         right: 20px;
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
     }
 
     .totals {
         margin: 0 0 20px;
-        border-radius: 12px;
+        border-radius: 4px;
     }
 }
