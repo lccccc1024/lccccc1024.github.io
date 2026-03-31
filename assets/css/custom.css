@@ -39,3 +39,80 @@
     text-align: left;
   }
 }
+
+/* 归档页 */
+.archive-year {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 1.5em 0 0.8em;
+    color: #333;
+}
+
+.archive-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.archive-item {
+    margin: 0.6em 0;
+}
+
+.archive-date {
+    color: #888;
+    font-size: 0.9em;
+    min-width: 80px;
+    display: inline-block;
+}
+
+.archive-category {
+    color: #aaa;
+    font-size: 0.85em;
+    margin-left: 8px;
+}
+
+/* 文章链接 */
+.post-article a {
+    color: #333;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.post-article a:hover {
+    opacity: 0.7;
+}
+
+/* 首页 */
+.home-subtitle {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 2em;
+    font-size: 0.95em;
+}
+
+.post-category {
+    color: #999;
+    font-size: 0.85em;
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+    .post-article a {
+        color: #ccc;
+    }
+    .archive-year {
+        color: #ddd;
+    }
+    .archive-date {
+        color: #888;
+    }
+    .archive-category {
+        color: #666;
+    }
+    .home-subtitle {
+        color: #888;
+    }
+    .post-category {
+        color: #777;
+    }
+}

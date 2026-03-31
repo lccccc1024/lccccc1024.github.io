@@ -17,6 +17,8 @@
 </head>
 <body>
 
+{% include list-nav.html %}
+
 <div class="container">
     {% include list-header.html title="阅读清单" subtitle="书页翻过去的时候，也把一段时间留了下来。" %}
     <p class="stats">共记录 <strong id="book-count">计算中...</strong> 本书（按阅读时间倒序）</p>
@@ -39,7 +41,7 @@
                 <td>(日)渡边淳一</td>
                 <td>文学</td>
                 <td>-</td>
-                <td>搁浅</td>
+                <td><span class="status-abandoned">搁浅</span></td>
             </tr>
             <tr>
                 <td>7</td>
@@ -55,7 +57,7 @@
                 <td>(加)瑞安·诺思</td>
                 <td>科普</td>
                 <td>-</td>
-                <td>搁浅</td>
+                <td><span class="status-abandoned">搁浅</span></td>
             </tr>
             <tr>
                 <td>5</td>
@@ -79,7 +81,7 @@
                 <td>美国纽约摄影学院</td>
                 <td>摄影</td>
                 <td>-</td>
-                <td>搁浅</td>
+                <td><span class="status-abandoned">搁浅</span></td>
             </tr>
             <tr>
                 <td>2</td>

@@ -10,17 +10,17 @@ permalink: /archive/
 
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 {% for year in posts_by_year %}
-### {{ year.name }} 年（{{ year.items | size }} 篇）
+<h3 class="archive-year">{{ year.name }} 年（{{ year.items | size }} 篇）</h3>
 
-<ul style="list-style: none; padding-left: 0;">
+<ul class="archive-list">
   {% for post in year.items %}
-    <li style="margin: 0.6em 0;">
-      <span style="color: #888; font-size: 0.9em; min-width: 80px; display: inline-block;">
+    <li class="archive-item">
+      <span class="archive-date">
         {{ post.date | date: "%m-%d" }}
       </span>
       <a href="{{ post.url }}">{{ post.title }}</a>
       {% if post.categories.size > 0 %}
-        <span style="color: #aaa; font-size: 0.85em; margin-left: 8px;">
+        <span class="archive-category">
           {{ post.categories | join: ", " }}
         </span>
       {% endif %}

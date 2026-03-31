@@ -21,6 +21,7 @@ no_style_please:
   home_posts_show_more: true
   home_posts_show_more_text: 查看全部文章
   home_posts_show_more_url: /archive/
+  subtitle: 愿日常的琐碎，终将组成完整的你我
   date_format: "%Y年%m月%d日"
   appearance: auto
   back_to_top: true
