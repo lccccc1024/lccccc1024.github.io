@@ -1,0 +1,40 @@
+# 心愿单数据
+- title: 房子
+  price: 1200000
+  link: N/A
+  link_text: N/A
+
+- title: Dji neo
+  price: 1299
+  link: https://item.jd.com/100134198972.html
+  link_text: 京东
+
+- title: "喜德盛 XD300 公路自行车"
+  price: 0
+  link: 老婆送的
+  link_text: 老婆送的
+  date: 2025-05
+
+- title: "IKF V11 Pro 电竞耳机"
+  price: 168.31
+  link: https://item.jd.com/100137893545.html
+  link_text: 京东
+  date: 2025-07
+
+- title: 米家方框尼龙偏光太阳镜
+  price: 199
+  link: /
+  link_text: /
+  date: 2026-03
+
+- title: "尼康 Z30 + 16-50 套机"
+  price: 4595.08
+  link: https://mobile.yangkeduo.com/goods1.html?ps=uCg3Bg7zf0
+  link_text: 拼多多
+  date: 2025-11
+
+- title: "尼克尔 Z DX 50-250mm f/4.5-6.3 VR"
+  price: 0
+  link: 老婆送的
+  link_text: 老婆送的
+  date: 2026-01

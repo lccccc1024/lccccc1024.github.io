@@ -1,119 +1,57 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    {% include list-head.html title="阅读清单" description="个人阅读清单 - 记录读过的书，也记录当时的自己。" url="https://lccccc1024.github.io/readlist.html" %}
+---
+layout: list-page
+title: 阅读清单
+description: 个人阅读清单 - 记录读过的书，也记录当时的自己。
+subtitle: 书页翻过去的时候，也把一段时间留了下来。
+permalink: /readlist.html
+---
 
-    <style>
-        /* 阅读清单移动端标签 */
-        @media (max-width: 768px) {
-            td:nth-of-type(1)::before { content: "序号"; }
-            td:nth-of-type(2)::before { content: "书名"; }
-            td:nth-of-type(3)::before { content: "作者"; }
-            td:nth-of-type(4)::before { content: "类型"; }
-            td:nth-of-type(5)::before { content: "出版年份"; }
-            td:nth-of-type(6)::before { content: "阅读时间"; }
-        }
-    </style>
-</head>
-<body>
+<style>
+  @media (max-width: 768px) {
+    td:nth-of-type(1)::before { content: "序号"; }
+    td:nth-of-type(2)::before { content: "书名"; }
+    td:nth-of-type(3)::before { content: "作者"; }
+    td:nth-of-type(4)::before { content: "类型"; }
+    td:nth-of-type(5)::before { content: "出版年份"; }
+    td:nth-of-type(6)::before { content: "阅读时间"; }
+  }
+</style>
 
-{% include list-nav.html %}
+<p class="stats">共记录 <strong>{{ site.data.books | size }}</strong> 本书（按阅读时间倒序）</p>
 
-<div class="container">
-    {% include list-header.html title="阅读清单" subtitle="书页翻过去的时候，也把一段时间留了下来。" %}
-    <p class="stats">共记录 <strong id="book-count">计算中...</strong> 本书（按阅读时间倒序）</p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>书名</th>
-                <th>作者</th>
-                <th>类型</th>
-                <th>出版年份</th>
-                <th>阅读时间</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>8</td>
-                <td><a href="https://book.douban.com/subject/2119843/" target="_blank">钝感力</a></td>
-                <td>(日)渡边淳一</td>
-                <td>文学</td>
-                <td>-</td>
-                <td><span class="status-abandoned">搁浅</span></td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td><a href="https://book.douban.com/subject/27204860/" target="_blank">指数基金投资指南</a></td>
-                <td>银行螺丝钉</td>
-                <td>理财</td>
-                <td>-</td>
-                <td>2021-09-27</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td><a href="https://book.douban.com/subject/34464674/" target="_blank">万物发明指南：时间旅行者生存手册</a></td>
-                <td>(加)瑞安·诺思</td>
-                <td>科普</td>
-                <td>-</td>
-                <td><span class="status-abandoned">搁浅</span></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td><a href="https://book.douban.com/subject/35546622/" target="_blank">置身事内：中国政府与经济发展</a></td>
-                <td>兰小欢</td>
-                <td>经济</td>
-                <td>-</td>
-                <td>2022-10-01</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><a href="https://book.douban.com/subject/34800351/" target="_blank">半小时漫画经济学</a></td>
-                <td>陈磊 / 半小时漫画团队 / 二混子</td>
-                <td>经济学</td>
-                <td>-</td>
-                <td>2022-10-01</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>美国纽约摄影学院摄影教材</td>
-                <td>美国纽约摄影学院</td>
-                <td>摄影</td>
-                <td>-</td>
-                <td><span class="status-abandoned">搁浅</span></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>太白金星有点烦</td>
-                <td>马伯庸</td>
-                <td>小说</td>
-                <td>-</td>
-                <td>进行中</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>爱的七种对话</td>
-                <td>苏·约翰逊</td>
-                <td>心理学</td>
-                <td>-</td>
-                <td>进行中</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-{% include list-footer.html %}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const rows = document.querySelectorAll('tbody tr');
-        const countElement = document.getElementById('book-count');
-        if (countElement) {
-            countElement.textContent = rows.length;
-        }
-    });
-</script>
-
-</body>
-</html>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>书名</th>
+      <th>作者</th>
+      <th>类型</th>
+      <th>出版年份</th>
+      <th>阅读时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in site.data.books reversed %}
+    <tr>
+      <td>{{ forloop.rindex }}</td>
+      <td>
+        {% if book.url %}
+        <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
+        {% else %}
+        {{ book.title }}
+        {% endif %}
+      </td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.genre }}</td>
+      <td>{{ book.year | default: "-" }}</td>
+      <td>
+        {% if book.date == "搁浅" %}
+        <span class="status-abandoned">搁浅</span>
+        {% else %}
+        {{ book.date }}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

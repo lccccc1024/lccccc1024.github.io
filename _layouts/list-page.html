@@ -1,0 +1,11 @@
+---
+layout: default
+---
+{% include list-nav.html %}
+
+<div class="container">
+    {% include list-header.html title=page.title subtitle=page.subtitle %}
+    {{ content }}
+</div>
+
+{% include list-footer.html %}

@@ -1,136 +1,92 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    {% include list-head.html title="心愿单" description="个人心愿单 - 记录想要的东西，也记录生活的期待。" url="https://lccccc1024.github.io/want.html" %}
+---
+layout: list-page
+title: 心愿单
+description: 个人心愿单 - 记录想要的东西，也记录生活的期待。
+subtitle: 记录想要的东西，也记录生活的期待。
+permalink: /want.html
+---
 
-    <style>
-        /* 心愿单移动端标签 */
-        @media (max-width: 768px) {
-            td:nth-of-type(1)::before { content: "序号"; }
-            td:nth-of-type(2)::before { content: "名称"; }
-            td:nth-of-type(3)::before { content: "价格"; }
-            td:nth-of-type(4)::before { content: "链接"; }
-            td:nth-of-type(5)::before { content: "日期"; }
-        }
-    </style>
-</head>
-<body>
+<style>
+  @media (max-width: 768px) {
+    td:nth-of-type(1)::before { content: "序号"; }
+    td:nth-of-type(2)::before { content: "名称"; }
+    td:nth-of-type(3)::before { content: "价格"; }
+    td:nth-of-type(4)::before { content: "链接"; }
+    td:nth-of-type(5)::before { content: "日期"; }
+  }
+</style>
 
-{% include list-nav.html %}
+<p class="stats">共 <strong id="item-count">0</strong> 个心愿（已购 <strong id="bought-count">0</strong> 个，未购 <strong id="unbought-count">0</strong> 个）</p>
 
-<div class="container">
-    {% include list-header.html title="心愿单" subtitle="记录想要的东西，也记录生活的期待。" %}
-    <p class="stats">共 <strong id="item-count">计算中...</strong> 个心愿（已购 <strong id="bought-count">0</strong> 个，未购 <strong id="unbought-count">0</strong> 个）</p>
+<table id="wishlist">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>名称</th>
+      <th>价格</th>
+      <th>链接</th>
+      <th>日期</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in site.data.wishlist %}
+    <tr>
+      <td>{{ forloop.index }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.price }}</td>
+      <td>
+        {% if item.link contains "http" %}
+        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.link_text | default: "链接" }}</a>
+        {% else %}
+        {{ item.link | default: "N/A" }}
+        {% endif %}
+      </td>
+      <td>{{ item.date | default: "" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-    <table id="wishlist">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>名称</th>
-                <th>价格</th>
-                <th>链接</th>
-                <th>日期</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>房子</td>
-                <td>1200000</td>
-                <td>N/A</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Dji neo</td>
-                <td>1299</td>
-                <td><a href="https://item.jd.com/100134198972.html" target="_blank" rel="noopener noreferrer">京东</a></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>喜德盛 XD300 公路自行车</td>
-                <td>0</td>
-                <td>老婆送的</td>
-                <td>2025-05</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>IKF V11 Pro 电竞耳机</td>
-                <td>168.31</td>
-                <td><a href="https://item.jd.com/100137893545.html" target="_blank" rel="noopener noreferrer">京东</a></td>
-                <td>2025-07</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>米家方框尼龙偏光太阳镜</td>
-                <td>199</td>
-                <td>/</td>
-                <td>2026-03</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>尼康 Z30 + 16-50 套机</td>
-                <td>4595.08</td>
-                <td><a href="https://mobile.yangkeduo.com/goods1.html?ps=uCg3Bg7zf0" target="_blank" rel="noopener noreferrer">拼多多</a></td>
-                <td>2025-11</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>尼克尔 Z DX 50-250mm f/4.5-6.3 VR</td>
-                <td>0</td>
-                <td>老婆送的</td>
-                <td>2026-01</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="totals">
-        已购总价：<span id="bought-total">0.00</span> 元<br>
-        未购总价：<span id="unbought-total">0.00</span> 元
-    </div>
+<div class="totals">
+  已购总价：<span id="bought-total">0.00</span> 元<br>
+  未购总价：<span id="unbought-total">0.00</span> 元
 </div>
 
-{% include list-footer.html %}
-
 <script>
-    const tbody = document.querySelector("#wishlist tbody");
-    const boughtEl = document.getElementById("bought-total");
-    const unboughtEl = document.getElementById("unbought-total");
-    const itemCount = document.getElementById("item-count");
-    const boughtCount = document.getElementById("bought-count");
-    const unboughtCount = document.getElementById("unbought-count");
+  const tbody = document.querySelector("#wishlist tbody");
+  const boughtEl = document.getElementById("bought-total");
+  const unboughtEl = document.getElementById("unbought-total");
+  const itemCount = document.getElementById("item-count");
+  const boughtCount = document.getElementById("bought-count");
+  const unboughtCount = document.getElementById("unbought-count");
 
-    function updateTotalsAndStyle() {
-        let bought = 0;
-        let unbought = 0;
-        let boughtNum = 0;
-        let unboughtNum = 0;
+  function updateTotalsAndStyle() {
+    let bought = 0;
+    let unbought = 0;
+    let boughtNum = 0;
+    let unboughtNum = 0;
 
-        tbody.querySelectorAll("tr").forEach((tr) => {
-            const price = parseFloat(tr.children[2].textContent.trim()) || 0;
-            const time = tr.children[4].textContent.trim();
+    tbody.querySelectorAll("tr").forEach((tr) => {
+      const price = parseFloat(tr.children[2].textContent.trim()) || 0;
+      const time = tr.children[4].textContent.trim();
 
-            if (time) {
-                tr.classList.add("strike");
-                bought += price;
-                boughtNum++;
-            } else {
-                tr.classList.remove("strike");
-                unbought += price;
-                unboughtNum++;
-            }
-        });
+      if (time) {
+        tr.classList.add("strike");
+        bought += price;
+        boughtNum++;
+      } else {
+        tr.classList.remove("strike");
+        unbought += price;
+        unboughtNum++;
+      }
+    });
 
-        boughtEl.textContent = bought.toFixed(2);
-        unboughtEl.textContent = unbought.toFixed(2);
-        itemCount.textContent = boughtNum + unboughtNum;
-        boughtCount.textContent = boughtNum;
-        unboughtCount.textContent = unboughtNum;
-    }
+    boughtEl.textContent = bought.toFixed(2);
+    unboughtEl.textContent = unbought.toFixed(2);
+    itemCount.textContent = boughtNum + unboughtNum;
+    boughtCount.textContent = boughtNum;
+    unboughtCount.textContent = unboughtNum;
+  }
 
-    updateTotalsAndStyle();
+  updateTotalsAndStyle();
 </script>
-
-</body>
-</html>

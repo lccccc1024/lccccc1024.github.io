@@ -1,0 +1,331 @@
+# 电影数据 - 按观看时间倒序排列
+- title: 飞驰人生3
+  genre: 剧情/喜剧/运动
+  director: 韩寒
+  year: 2026
+  date: 2026-02-18
+
+- title: 戏台
+  genre: 剧情/喜剧
+  director: 陈佩斯
+  year: 2025
+  date: 2025-09-14
+
+- title: 捕风追影
+  genre: 剧情/动作/犯罪
+  director: 杨子
+  year: 2025
+  date: 2025-08-17
+
+- title: 南京照相馆
+  genre: 剧情/历史/战争
+  director: 申奥
+  year: 2025
+
+- title: 长安的荔枝
+  genre: 剧情/喜剧/古装
+  director: 大鹏
+  year: 2025
+  date: 2025-07-19
+
+- title: "F1：狂飙飞车"
+  genre: 剧情/动作/运动
+  director: 约瑟夫·克辛斯基
+  year: 2025
+  date: 2025-07-12
+
+- title: "银翼杀手 2049"
+  genre: 剧情/动作/科幻/悬疑/惊悚
+  director: 丹尼斯·维伦纽瓦
+  year: 2017
+
+- title: 美国内战
+  genre: 剧情
+  director: 亚历克斯·加兰
+  year: 2024
+
+- title: 末路狂花钱
+  genre: 剧情/喜剧
+  director: 乌日娜
+  year: 2024
+  date: 2024-05-03
+
+- title: "年会不能停！"
+  genre: 剧情/喜剧
+  director: 董润年
+  year: 2023
+  date: 2024-01-04
+
+- title: "海王2：失落的王国"
+  genre: 动作/奇幻/科幻/冒险
+  director: 温子仁
+  year: 2023
+  date: 2023-12-22
+
+- title: 闻香识女人
+  genre: 剧情
+  director: 马丁·布莱斯特
+  year: 1992
+
+- title: 涉过愤怒的海
+  genre: 剧情/悬疑/犯罪
+  director: 曹保平
+  year: 2023
+  date: 2023-11-26
+
+- title: "鹿鼎记2：神龙教"
+  genre: 动作/喜剧/武侠/古装
+  director: 王晶
+  year: 2023
+
+- title: 鹿鼎记
+  genre: 动作/喜剧/武侠/古装
+  director: 王晶
+  year: 2023
+
+- title: 赌侠
+  genre: 剧情/喜剧
+  director: 王晶
+  year: 2023
+
+- title: 八角笼中
+  genre: 剧情/动作
+  director: 王宝强
+  year: 2023
+
+- title: 奥本海默
+  genre: 剧情/传记/历史
+  director: 克里斯托弗·诺兰
+  year: 2023
+  date: 2023-09-02
+
+- title: 孤注一掷
+  genre: 剧情/犯罪
+  director: 申奥
+  year: 2023
+  date: 2023-08-27
+
+- title: 洛奇3
+  genre: 剧情/运动/动作
+  director: 西尔维斯特·史泰龙
+  year: 1982
+  date: 2023-08-26
+
+- title: 洛奇2
+  genre: 剧情/运动
+  director: 西尔维斯特·史泰龙
+  year: 1979
+  date: 2023-08-21
+
+- title: 千年女优
+  genre: 剧情/爱情/动画
+  director: 今敏
+  year: 2001
+  date: 2023-08-06
+
+- title: 芭比
+  genre: 喜剧/奇幻/冒险
+  director: 格蕾塔·葛韦格
+  year: 2023
+  date: 2023-07-29
+
+- title: 长安三万里
+  genre: 动画/历史
+  director: 谢君伟/邹靖
+  year: 2023
+  date: 2023-07-24
+
+- title: "蜘蛛侠：平行宇宙"
+  genre: 动作/科幻/动画/冒险
+  director: 鲍勃·佩尔西凯蒂/彼得·拉姆齐/罗德尼·罗斯曼
+  year: 2018
+  date: 2023-06-23
+
+- title: 速度与激情10
+  genre: 动作/悬疑/惊悚/犯罪/冒险
+  director: 路易斯·莱特里尔
+  year: 2023
+  date: 2023-06-22
+
+- title: 闪电侠
+  genre: 动作/科幻/奇幻/冒险
+  director: 安德斯·穆斯切蒂
+  year: 2023
+
+- title: 灌篮高手
+  genre: 动画/运动
+  director: 井上雄彦
+  year: 2022
+
+- title: 不止不休
+  genre: 剧情
+  director: 王晶
+  year: 2020
+
+- title: "奇迹·笨小孩"
+  genre: 剧情
+  director: 文牧野
+  year: 2022
+
+- title: 超级马里奥兄弟大电影
+  genre: 喜剧/爱情/科幻/动画/奇幻/冒险
+  director: 亚伦·霍瓦斯/迈克尔·杰勒尼克
+  year: 2023
+
+- title: 流浪地球2
+  genre: 科幻/冒险/灾难
+  director: 郭帆
+  year: 2023
+
+- title: 满江红
+  genre: 剧情/喜剧/悬疑/古装
+  director: 张艺谋
+  year: 2023
+
+- title: 僵尸世界大战
+  genre: 动作/科幻/恐怖
+  director: 马克·福斯特
+  year: 2013
+  date: 2022-11-11
+
+- title: 猫鼠游戏
+  genre: 剧情/传记/犯罪
+  director: 史蒂文·斯皮尔伯格
+  year: 2002
+  date: 2022-08-28
+
+- title: 狩猎
+  genre: 剧情
+  director: 托马斯·温特伯格
+  year: 2012
+  date: 2022-08-23
+
+- title: 壮志凌云
+  genre: 剧情/动作
+  director: 托尼·斯科特
+  year: 1986
+  date: 2022-06-11
+
+- title: 长津湖之水门桥
+  genre: 剧情/历史/战争
+  director: 徐克
+  year: 2022
+
+- title: 时间规划局
+  genre: 动作/科幻
+  director: 安德鲁·尼科尔
+  year: 2011
+  date: 2022-03-14
+
+- title: 爱情神话
+  genre: 剧情/喜剧/爱情
+  director: 邵艺辉
+  year: 2021
+  date: 2022-02-05
+
+- title: 投名状
+  genre: 剧情/动作/战争/古装
+  director: 陈可辛
+  year: 2007
+  date: 2022-01-16
+
+- title: 心迷宫
+  genre: 剧情/悬疑/犯罪
+  director: 忻钰坤
+  year: 2014
+  date: 2021-12-25
+
+- title: "007:无瑕赴死"
+  genre: 动作/惊悚/冒险
+  director: 凯瑞·福永
+  year: 2021
+  date: 2021-12-05
+
+- title: 白日梦想家
+  genre: 剧情/喜剧/冒险
+  director: 本·斯蒂勒
+  year: 2013
+  date: 2021-11-28
+
+- title: 扬名立万
+  genre: 剧情/喜剧/悬疑
+  director: 刘循子墨
+  year: 2021
+  date: 2021-11-20
+
+- title: 霸王别姬
+  genre: 剧情/爱情/同性
+  director: 陈凯歌
+  year: 1993
+  date: 2021-11-07
+
+- title: 第一炉香
+  genre: 剧情/爱情
+  director: 许鞍华
+  year: 2020
+  date: 2021-10-24
+
+- title: 失控玩家
+  genre: 喜剧/动作/科幻
+  director: 肖恩·利维
+  year: 2021
+  date: 2021-10-17
+
+- title: 国王的演讲
+  genre: 剧情/传记/历史
+  director: 汤姆·霍伯
+  year: 2010
+  date: 2021-10-17
+
+- title: 至暗时刻
+  genre: 剧情/传记/历史/战争
+  director: 乔·赖特
+  year: 2017
+
+- title: 遗愿清单
+  genre: 剧情/喜剧/冒险
+  director: 罗伯·莱纳
+  year: 2007
+  date: 2021-09-21
+
+- title: 信条
+  genre: 剧情/动作/科幻
+  director: 克里斯托弗·诺兰
+  year: 2020
+  date: 2021-09-19
+
+- title: 敦刻尔克
+  genre: 剧情/历史/战争
+  director: 克里斯托弗·诺兰
+  year: 2017
+  date: 2021-09-17
+
+- title: 猎杀T34
+  genre: 动作/历史/战争
+  director: 阿列克赛·西多洛夫
+  year: 2019
+  date: 2021-09-05
+
+- title: 三个老枪手
+  genre: 喜剧/犯罪
+  director: 扎克·布拉夫
+  year: 2017
+  date: 2021-09-04
+
+- title: 霍元甲
+  genre: 剧情/动作/传记
+  director: 于仁泰
+  year: 2006
+  date: 2021-08-29
+
+- title: "鬼灭之刃 无限列车篇"
+  genre: 动画/奇幻
+  director: 外崎春雄
+  year: 2021
+  date: 2021-08-18
+
+- title: 旺角卡门
+  genre: 剧情/爱情/犯罪
+  director: 王家卫
+  year: 1988
+  date: 2021-08-04
