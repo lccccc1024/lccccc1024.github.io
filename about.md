@@ -9,4 +9,4 @@ permalink: /about/
 
 ### 联系方式
 - GitHub：[lccccc1024](https://github.com/lccccc1024)
-- 博客地址：https://blog.950922.xyz
+- 博客地址：[lccccc1024]https://blog.950922.xyz
