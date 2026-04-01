@@ -145,6 +145,7 @@ table {
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 1px 3px var(--shadow-color);
+    table-layout: auto;
 }
 
 caption {
@@ -169,6 +170,7 @@ th {
     position: relative;
     transition: background 0.2s ease;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 th:hover {
@@ -199,6 +201,7 @@ td {
     border-bottom: 1px solid var(--border);
     color: var(--text-primary);
     transition: background 0.2s ease;
+    white-space: nowrap;
 }
 
 tr:last-child td {

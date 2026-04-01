@@ -3,8 +3,6 @@ layout: home
 title: 首页
 ---
 
-<p class="home-subtitle">愿日常的琐碎，终将组成完整的你我。</p>
-
 ## 最新文章
 
 <ul class="home-list">
