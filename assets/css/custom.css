@@ -1,43 +1,80 @@
+/* 通用排版优化 */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 1.5em 0 0.8em;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 1.5em 0 0.6em;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 1.2em 0 0.5em;
+}
+
+p {
+    margin: 1em 0;
+    line-height: 1.8;
+}
+
+/* 文章页 */
 .post-article time {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--text-secondary);
-  font-size: 0.95em;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9em;
 }
 
 .post-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 2em;
-  color: var(--text-secondary);
-  font-size: 0.95em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.95em;
 }
 
 .post-nav-next {
-  text-align: right;
+    text-align: right;
 }
 
 .back-home {
-  margin-top: 1.5em;
-  text-align: center;
+    margin-top: 2em;
+    text-align: center;
 }
 
 .back-home a {
-  color: var(--text-primary);
-  text-decoration: none;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.back-home a:hover {
+    background: var(--accent-light);
 }
 
 @media (max-width: 640px) {
-  .post-nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .post-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .post-nav-next {
-    text-align: left;
-  }
+    .post-nav-next {
+        text-align: left;
+    }
 }
 
 /* 归档页 */
@@ -54,7 +91,9 @@
 }
 
 .archive-item {
-    margin: 0.6em 0;
+    margin: 0.8em 0;
+    padding: 0.5em 0;
+    border-bottom: 1px dashed var(--border);
 }
 
 .archive-date {
@@ -75,11 +114,14 @@
 .post-article a {
     color: var(--accent);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .post-article a:hover {
-    opacity: 0.7;
+    color: var(--text-primary);
+    text-decoration-color: var(--accent);
 }
 
 /* 首页 */
@@ -87,12 +129,97 @@
     text-align: center;
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: 2em;
-    font-size: 0.95em;
+    margin-bottom: 2.5em;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+}
+
+.home-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.home-list li {
+    margin: 1em 0;
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.home-list li:hover {
+    background: var(--accent-light);
+}
+
+.home-list li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.home-list li a:hover {
+    color: var(--accent);
+}
+
+.home-date {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    margin-left: 1em;
 }
 
 .post-category {
     color: var(--text-secondary);
     font-size: 0.85em;
     opacity: 0.8;
+    margin-left: 0.5em;
+}
+
+/* 关于页 */
+.about-section {
+    margin: 2em 0;
+    padding: 1.5em;
+    background: var(--accent-light);
+    border-radius: 4px;
+}
+
+.about-section h2 {
+    margin-top: 0;
+}
+
+.about-links {
+    list-style: none;
+    padding-left: 0;
+}
+
+.about-links li {
+    margin: 0.8em 0;
+}
+
+.about-links a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.about-links a:hover {
+    background: var(--accent-light);
+}
+
+/* 返回首页链接 */
+.return-home {
+    display: inline-block;
+    margin-top: 2em;
+    padding: 0.6em 1.2em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.return-home:hover {
+    color: var(--text-primary);
+    border-color: var(--accent);
+    background: var(--accent-light);
 }

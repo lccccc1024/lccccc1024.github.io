@@ -6,7 +6,9 @@ permalink: /archive/
 
 ## 文章归档
 
-共 {{ site.posts.size }} 篇文章：
+<p style="text-align: center; color: var(--text-secondary); margin-bottom: 2em;">
+共 {{ site.posts.size }} 篇文章
+</p>
 
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 {% for year in posts_by_year %}
@@ -31,4 +33,4 @@ permalink: /archive/
 
 ---
 
-[返回首页](/)
+<a href="/" class="return-home">← 返回首页</a>
