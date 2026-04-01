@@ -6,17 +6,6 @@ subtitle: 至少还有电影，幸好还有电影。
 permalink: /light.html
 ---
 
-<style>
-  @media (max-width: 768px) {
-    td:nth-of-type(1)::before { content: "序号"; }
-    td:nth-of-type(2)::before { content: "片名"; }
-    td:nth-of-type(3)::before { content: "类型"; }
-    td:nth-of-type(4)::before { content: "导演"; }
-    td:nth-of-type(5)::before { content: "上映年份"; }
-    td:nth-of-type(6)::before { content: "观看时间"; }
-  }
-</style>
-
 <p class="stats">共记录 <strong>{{ site.data.movies | size }}</strong> 部电影（按观看时间倒序）</p>
 
 <table>
@@ -33,12 +22,12 @@ permalink: /light.html
   <tbody>
     {% for movie in site.data.movies reversed %}
     <tr>
-      <td>{{ forloop.rindex }}</td>
-      <td>{{ movie.title }}</td>
-      <td>{{ movie.genre }}</td>
-      <td>{{ movie.director }}</td>
-      <td>{{ movie.year }}</td>
-      <td>{{ movie.date | default: "—" }}</td>
+      <td data-label="序号">{{ forloop.rindex }}</td>
+      <td data-label="片名">{{ movie.title }}</td>
+      <td data-label="类型">{{ movie.genre }}</td>
+      <td data-label="导演">{{ movie.director }}</td>
+      <td data-label="上映年份">{{ movie.year }}</td>
+      <td data-label="观看时间">{{ movie.date | default: "—" }}</td>
     </tr>
     {% endfor %}
   </tbody>

@@ -341,6 +341,7 @@ tr:hover {
     }
 
     td::before {
+        content: attr(data-label);
         position: absolute;
         left: 14px;
         top: 50%;

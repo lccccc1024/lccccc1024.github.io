@@ -6,17 +6,6 @@ subtitle: 书页翻过去的时候，也把一段时间留了下来。
 permalink: /readlist.html
 ---
 
-<style>
-  @media (max-width: 768px) {
-    td:nth-of-type(1)::before { content: "序号"; }
-    td:nth-of-type(2)::before { content: "书名"; }
-    td:nth-of-type(3)::before { content: "作者"; }
-    td:nth-of-type(4)::before { content: "类型"; }
-    td:nth-of-type(5)::before { content: "出版年份"; }
-    td:nth-of-type(6)::before { content: "阅读时间"; }
-  }
-</style>
-
 <p class="stats">共记录 <strong>{{ site.data.books | size }}</strong> 本书（按阅读时间倒序）</p>
 
 <table>
@@ -33,18 +22,18 @@ permalink: /readlist.html
   <tbody>
     {% for book in site.data.books reversed %}
     <tr>
-      <td>{{ forloop.rindex }}</td>
-      <td>
+      <td data-label="序号">{{ forloop.rindex }}</td>
+      <td data-label="书名">
         {% if book.url %}
         <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
         {% else %}
         {{ book.title }}
         {% endif %}
       </td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.genre }}</td>
-      <td>{{ book.year | default: "-" }}</td>
-      <td>
+      <td data-label="作者">{{ book.author }}</td>
+      <td data-label="类型">{{ book.genre }}</td>
+      <td data-label="出版年份">{{ book.year | default: "-" }}</td>
+      <td data-label="阅读时间">
         {% if book.date == "搁浅" %}
         <span class="status-abandoned">搁浅</span>
         {% else %}

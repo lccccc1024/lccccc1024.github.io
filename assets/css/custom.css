@@ -1,7 +1,7 @@
 .post-article time {
   display: inline-block;
   margin-bottom: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95em;
 }
 
@@ -11,7 +11,7 @@
   align-items: center;
   gap: 1rem;
   margin-top: 2em;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95em;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .back-home a {
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -45,7 +45,7 @@
     font-size: 1.2em;
     font-weight: 700;
     margin: 1.5em 0 0.8em;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .archive-list {
@@ -58,21 +58,22 @@
 }
 
 .archive-date {
-    color: #888;
+    color: var(--text-secondary);
     font-size: 0.9em;
     min-width: 80px;
     display: inline-block;
 }
 
 .archive-category {
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 0.85em;
     margin-left: 8px;
+    opacity: 0.7;
 }
 
 /* 文章链接 */
 .post-article a {
-    color: #333;
+    color: var(--accent);
     text-decoration: underline;
     text-underline-offset: 2px;
 }
@@ -84,35 +85,14 @@
 /* 首页 */
 .home-subtitle {
     text-align: center;
-    color: #888;
+    color: var(--text-secondary);
     font-style: italic;
     margin-bottom: 2em;
     font-size: 0.95em;
 }
 
 .post-category {
-    color: #999;
+    color: var(--text-secondary);
     font-size: 0.85em;
-}
-
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-    .post-article a {
-        color: #ccc;
-    }
-    .archive-year {
-        color: #ddd;
-    }
-    .archive-date {
-        color: #888;
-    }
-    .archive-category {
-        color: #666;
-    }
-    .home-subtitle {
-        color: #888;
-    }
-    .post-category {
-        color: #777;
-    }
+    opacity: 0.8;
 }

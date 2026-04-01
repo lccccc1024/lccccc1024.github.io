@@ -6,16 +6,6 @@ subtitle: 记录想要的东西，也记录生活的期待。
 permalink: /want.html
 ---
 
-<style>
-  @media (max-width: 768px) {
-    td:nth-of-type(1)::before { content: "序号"; }
-    td:nth-of-type(2)::before { content: "名称"; }
-    td:nth-of-type(3)::before { content: "价格"; }
-    td:nth-of-type(4)::before { content: "链接"; }
-    td:nth-of-type(5)::before { content: "日期"; }
-  }
-</style>
-
 <p class="stats">共 <strong id="item-count">0</strong> 个心愿（已购 <strong id="bought-count">0</strong> 个，未购 <strong id="unbought-count">0</strong> 个）</p>
 
 <table id="wishlist">
@@ -31,17 +21,17 @@ permalink: /want.html
   <tbody>
     {% for item in site.data.wishlist %}
     <tr>
-      <td>{{ forloop.index }}</td>
-      <td>{{ item.title }}</td>
-      <td>{{ item.price }}</td>
-      <td>
+      <td data-label="序号">{{ forloop.index }}</td>
+      <td data-label="名称">{{ item.title }}</td>
+      <td data-label="价格">{{ item.price }}</td>
+      <td data-label="链接">
         {% if item.link contains "http" %}
         <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.link_text | default: "链接" }}</a>
         {% else %}
         {{ item.link | default: "N/A" }}
         {% endif %}
       </td>
-      <td>{{ item.date | default: "" }}</td>
+      <td data-label="日期">{{ item.date | default: "" }}</td>
     </tr>
     {% endfor %}
   </tbody>
