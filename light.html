@@ -20,7 +20,7 @@ permalink: /light.html
     </tr>
   </thead>
   <tbody>
-    {% for movie in site.data.movies reversed %}
+    {% for movie in site.data.movies %}
     <tr>
       <td data-label="序号">{{ forloop.rindex }}</td>
       <td data-label="片名">{{ movie.title }}</td>

@@ -337,6 +337,7 @@ tr:hover {
         min-height: 48px;
         border: none;
         border-bottom: 1px solid var(--border);
+        white-space: nowrap;
     }
 
     td:last-child {
