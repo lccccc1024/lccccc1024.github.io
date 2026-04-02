@@ -8,26 +8,26 @@ permalink: /light.html
 
 <p class="stats">共记录 <strong>{{ site.data.movies | size }}</strong> 部电影（按观看时间倒序）</p>
 
-<table>
+<table style="table-layout: fixed; width: 100%;">
   <thead>
     <tr>
-      <th>#</th>
-      <th>片名</th>
-      <th>类型</th>
-      <th>导演</th>
-      <th>上映年份</th>
-      <th>观看时间</th>
+      <th style="white-space: nowrap;">#</th>
+      <th style="white-space: nowrap;">片名</th>
+      <th style="white-space: nowrap;">类型</th>
+      <th style="white-space: nowrap;">导演</th>
+      <th style="white-space: nowrap;">上映年份</th>
+      <th style="white-space: nowrap;">观看时间</th>
     </tr>
   </thead>
   <tbody>
     {% for movie in site.data.movies %}
     <tr>
-      <td data-label="序号">{{ forloop.rindex }}</td>
-      <td data-label="片名">{{ movie.title }}</td>
-      <td data-label="类型">{{ movie.genre }}</td>
-      <td data-label="导演">{{ movie.director }}</td>
-      <td data-label="上映年份">{{ movie.year }}</td>
-      <td data-label="观看时间">{{ movie.date | default: "—" }}</td>
+      <td data-label="序号" style="white-space: nowrap;">{{ forloop.rindex }}</td>
+      <td data-label="片名" style="white-space: nowrap;">{{ movie.title }}</td>
+      <td data-label="类型" style="white-space: nowrap;">{{ movie.genre }}</td>
+      <td data-label="导演" style="white-space: nowrap;">{{ movie.director }}</td>
+      <td data-label="上映年份" style="white-space: nowrap;">{{ movie.year }}</td>
+      <td data-label="观看时间" style="white-space: nowrap;">{{ movie.date | default: "—" }}</td>
     </tr>
     {% endfor %}
   </tbody>

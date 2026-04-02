@@ -8,32 +8,32 @@ permalink: /readlist.html
 
 <p class="stats">共记录 <strong>{{ site.data.books | size }}</strong> 本书（按阅读时间倒序）</p>
 
-<table>
+<table style="table-layout: fixed; width: 100%;">
   <thead>
     <tr>
-      <th>#</th>
-      <th>书名</th>
-      <th>作者</th>
-      <th>类型</th>
-      <th>出版年份</th>
-      <th>阅读时间</th>
+      <th style="white-space: nowrap;">#</th>
+      <th style="white-space: nowrap;">书名</th>
+      <th style="white-space: nowrap;">作者</th>
+      <th style="white-space: nowrap;">类型</th>
+      <th style="white-space: nowrap;">出版年份</th>
+      <th style="white-space: nowrap;">阅读时间</th>
     </tr>
   </thead>
   <tbody>
     {% for book in site.data.books reversed %}
     <tr>
-      <td data-label="序号">{{ forloop.rindex }}</td>
-      <td data-label="书名">
+      <td data-label="序号" style="white-space: nowrap;">{{ forloop.rindex }}</td>
+      <td data-label="书名" style="white-space: nowrap;">
         {% if book.url %}
         <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
         {% else %}
         {{ book.title }}
         {% endif %}
       </td>
-      <td data-label="作者">{{ book.author }}</td>
-      <td data-label="类型">{{ book.genre }}</td>
-      <td data-label="出版年份">{{ book.year | default: "-" }}</td>
-      <td data-label="阅读时间">
+      <td data-label="作者" style="white-space: nowrap;">{{ book.author }}</td>
+      <td data-label="类型" style="white-space: nowrap;">{{ book.genre }}</td>
+      <td data-label="出版年份" style="white-space: nowrap;">{{ book.year | default: "-" }}</td>
+      <td data-label="阅读时间" style="white-space: nowrap;">
         {% if book.date == "搁浅" %}
         <span class="status-abandoned">搁浅</span>
         {% else %}

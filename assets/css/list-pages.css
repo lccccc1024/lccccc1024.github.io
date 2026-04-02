@@ -170,7 +170,7 @@ th {
     position: relative;
     transition: background 0.2s ease;
     letter-spacing: 0.5px;
-    white-space: nowrap;
+    white-space: nowrap !important;
 }
 
 th:hover {
@@ -201,7 +201,7 @@ td {
     border-bottom: 1px solid var(--border);
     color: var(--text-primary);
     transition: background 0.2s ease;
-    white-space: nowrap;
+    white-space: nowrap !important;
 }
 
 tr:last-child td {
