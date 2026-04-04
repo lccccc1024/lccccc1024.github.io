@@ -57,7 +57,7 @@ permalink: /want.html
     let unboughtNum = 0;
 
     tbody.querySelectorAll("tr").forEach((tr) => {
-      const price = parseFloat(tr.children[2].textContent.trim()) || 0;
+      const price = parseFloat(tr.children[2].textContent.trim().replace(/[¥￥$,]/g, '')) || 0;
       const time = tr.children[4].textContent.trim();
 
       if (time) {

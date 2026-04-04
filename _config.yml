@@ -40,7 +40,7 @@ kramdown:
 # SEO
 twitter:
   card: summary
-og_image: /assets/avatar.png
+og_image: /lccccc1024.png
 
 # HTML 压缩
 compress_html:
