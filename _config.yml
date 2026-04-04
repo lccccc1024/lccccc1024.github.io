@@ -25,7 +25,7 @@ no_style_please:
   date_format: "%Y年%m月%d日"
   appearance: auto
   back_to_top: true
-  # favicon: /assets/favicon.ico
+  favicon: /lccccc1024.png
   # logo: /assets/logo.png
   # google_analytics: G-XXXXXXXXXX
 

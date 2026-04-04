@@ -15,6 +15,7 @@ permalink: /about/
 <ul class="about-links">
 <li>GitHub：<a href="https://github.com/lccccc1024" target="_blank">lccccc1024</a></li>
 <li>博客地址：<a href="https://blog.950922.xyz" target="_blank">blog.950922.xyz</a></li>
+<li>邮箱：<a href="mailto:asa.lu@outlook.com">asa.lu@outlook.com</a></li>
 </ul>
 
 ## 其他页面
