@@ -5,6 +5,9 @@ layout: default
 <article class="post-article">
   <h1>{{ page.title }}</h1>
   <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+  {% assign word_count = content | strip_html | strip_newlines | size %}
+  {% assign read_time = word_count | divided_by: 200 | ceil %}
+  <span class="post-meta">{{ word_count }} 字 · 约 {{ read_time }} 分钟</span>
 
   {{ content }}
 

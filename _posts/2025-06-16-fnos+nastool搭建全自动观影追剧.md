@@ -4,11 +4,11 @@ title: "fnos+nastool搭建全自动观影追剧"
 categories: [技术]
 tags: [技术, nas, 笔记]
 ---
-# 前言
+## 前言
 虽然早就在家里搭了NAS，但是一直都没有真正发挥出作用来。借着最近Alist被收购不再可靠的缘由研究了一下自动观影追剧的流程，顺便写个文档记录下来。
 ---
 
-# 一、准备工作
+## 一、准备工作
 我们需要先安装三个东西分别是nastool、qBittorrent、Jackett。
 然后需要注册一个TMDB账户，并生成一个api。
 ## 安装nastool
@@ -26,5 +26,5 @@ tags: [技术, nas, 笔记]
 ## 注册TMDB账号并生成api
 来到官网https://www.themoviedb.org/ ，注册好一个账户并登录。
 点击自己的头像选择账户设置然后点击左侧的api页，生成一个api ,信息随便填一下。
-# 二、开始配置
+## 二、开始配置
 ## 配置qBittorrent、Jackett
