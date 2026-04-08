@@ -154,7 +154,7 @@ body {
 /* 表格样式 */
 table {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto 60px;
     border-collapse: separate;
     border-spacing: 0;
@@ -260,7 +260,7 @@ tr:hover {
 
 /* 总计区域（用于心愿单） */
 .totals {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto 60px;
     padding: 20px 24px;
     line-height: 2;
