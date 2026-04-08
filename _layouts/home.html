@@ -8,12 +8,4 @@ layout: default
   {%-endif-%}
 </header>
 
-{%-if site.data.menu-%}
-<nav class="menu">
-{% for item in site.data.menu.entries %}
-  {% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
-{% endfor %}
-</nav>
-{%-endif-%}
-
 {{ content }}
