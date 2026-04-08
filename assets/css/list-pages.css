@@ -152,10 +152,16 @@ body {
 }
 
 /* 表格样式 */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 0 auto 60px;
+    max-width: 100%;
+}
+
 table {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 60px;
+    max-width: 1100px;
+    margin: 0 auto;
     border-collapse: separate;
     border-spacing: 0;
     background: var(--table-bg);
@@ -319,6 +325,11 @@ tr:hover {
     .stats {
         font-size: 0.9rem;
         padding: 6px 18px;
+    }
+
+    .table-wrapper {
+        overflow-x: visible;
+        margin-bottom: 20px;
     }
 
     table {
