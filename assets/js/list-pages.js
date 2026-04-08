@@ -1,7 +1,28 @@
 /**
  * 公共列表页面脚本
- * 功能：表格排序、返回顶部
+ * 功能：主题切换、表格排序、返回顶部
  */
+
+// 主题切换功能
+function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    const icon = btn.querySelector('.theme-icon');
+
+    function updateIcon() {
+        const isDark = document.documentElement.classList.contains('dark');
+        icon.textContent = isDark ? '☀' : '☾';
+    }
+
+    btn.addEventListener('click', function() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateIcon();
+    });
+
+    updateIcon();
+}
 
 // 返回顶部按钮
 function initBackToTop() {
@@ -101,6 +122,7 @@ function updateRowNumbers(tbody) {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
+    initThemeToggle();
     initBackToTop();
     initTableSort();
 });
