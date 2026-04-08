@@ -43,12 +43,12 @@ twitter:
 og_image: /lccccc1024.png
 
 # HTML 压缩
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  ignore:
-    envs: [development]
+# compress_html:
+#   clippings: all
+#   comments: all
+#   endings: all
+#   ignore:
+#     envs: [development]
 
 # 可选：分页
 # paginate: 10
