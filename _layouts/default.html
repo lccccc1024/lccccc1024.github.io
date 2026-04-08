@@ -1,98 +1,10 @@
+---
+layout: base
+---
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: "en" }}">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>
-    {%- if page.title -%}
-      {{ page.title }}
-    {%- else -%}
-      {{ site.title }}
-    {%- endif -%}
-  </title>
-
-  {%-seo title=false-%}
-  {%-feed_meta-%}
-
-  <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
-  <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.css" integrity="sha384-OH8qNTHoMMVNVcKdKewlipV4SErXqccxxlg6HC9Cwjr5oZu2AdBej1TndeCirael" crossorigin="anonymous">
-
-  <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/assets/css/custom.css">
-  <link rel="stylesheet" href="/assets/css/list-pages.css">
-  <!-- 允许浏览器根据系统切换浅色/深色 -->
-  <meta name="color-scheme" content="light dark">
-  {% include seo-enhanced.html %}
-
-  <!-- 主题切换脚本 -->
-  <script>
-  (function() {
-      const theme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (theme === 'dark' || (!theme && prefersDark)) {
-          document.documentElement.classList.add('dark');
-      }
-  })();
-  </script>
-
-  <style>
-  .theme-toggle-global {
-      position: fixed !important;
-      top: 16px !important;
-      right: 20px !important;
-      z-index: 99999 !important;
-      background: #f5f5f5 !important;
-      border: 1px solid #e0e0e0 !important;
-      cursor: pointer !important;
-      font-size: 18px !important;
-      padding: 8px 12px !important;
-      border-radius: 6px !important;
-      color: #333 !important;
-      transition: all 0.2s ease !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-      font-family: system-ui, -apple-system, sans-serif !important;
-  }
-  .theme-toggle-global:hover {
-      background: #ebebeb !important;
-  }
-  html.dark .theme-toggle-global {
-      background: #2a2a2a !important;
-      border-color: #444 !important;
-      color: #e0e0e0 !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
-  }
-  html.dark .theme-toggle-global:hover {
-      background: #3a3a3a !important;
-  }
-  </style>
-
-  <script>
-  (function() {
-      var btn = document.getElementById('theme-toggle-global');
-      if (!btn) return;
-      var icon = btn.querySelector('.theme-icon');
-      function updateIcon() {
-          icon.textContent = document.documentElement.classList.contains('dark') ? '☀' : '☾';
-      }
-      btn.addEventListener('click', function() {
-          var isDark = document.documentElement.classList.toggle('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-          updateIcon();
-      });
-      updateIcon();
-  })();
-  </script>
-
-</head>
+{% include head.html %}
 <body a="{{ site.theme_config.appearance | default: "auto" }}">
-  <!-- 全局主题切换按钮 -->
-  <button id="theme-toggle-global" class="theme-toggle-global" title="切换主题">
-      <span class="theme-icon">☾</span>
-  </button>
-
   <main class="page-content" aria-label="Content">
     <div class="w">
       {{ content }}

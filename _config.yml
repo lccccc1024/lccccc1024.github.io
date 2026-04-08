@@ -57,3 +57,7 @@ og_image: /lccccc1024.png
 # 站点地址
 url: "https://lccccc1024.github.io"
 baseurl: ""
+
+# 禁用 HTML 压缩
+compress_html:
+  enabled: false
