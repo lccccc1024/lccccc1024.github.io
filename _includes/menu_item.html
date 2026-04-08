@@ -1,0 +1,5 @@
+<nav class="menu">
+{% for item in include.collection %}
+  {% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
+{% endfor %}
+</nav>
