@@ -34,4 +34,11 @@ layout: default
   <p class="back-home">
     <a href="/">← 返回首页</a>
   </p>
+
+  <!-- Giscus 评论 -->
+  {% if page.comments != false %}
+  <div class="comments-section">
+    {% include giscus.html %}
+  </div>
+  {% endif %}
 </article>
