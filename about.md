@@ -13,20 +13,16 @@ permalink: /about/
 
 ## 个人标签
 
-<div class="about-tags">
   - 摄影师新手 📷
   - 骑行爱好者 🚴
   - 电影爱好者 🎬
   - NAS 玩家 🖥️
-</div>
 
 ## 技能树
 
-<div class="about-skills">
   - 日常记录：生活、杂记、周记
   - 技术折腾：NAS、服务器、图床
   - 兴趣爱好：摄影、骑行、观影
-</div>
 
 ## 联系方式
 
