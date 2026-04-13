@@ -19,6 +19,8 @@ layout: base
   <script src="{{ site.baseurl }}/assets/js/code-copy.js" defer></script>
   <script src="{{ site.baseurl }}/assets/js/lightbox.js" defer></script>
 
+  {% include list-footer.html %}
+
   {% if page.custom_js %}
     {% for js_file in page.custom_js %}
       <script type="text/javascript" src="{{ site.baseurl }}/assets/js/{{ js_file }}.js"></script>
