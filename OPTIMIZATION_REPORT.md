@@ -1,6 +1,75 @@
 # 博客网站优化方案
 
 > 最后更新: 2026-04-13
+> 2026-04-25: 锐评后续修复
+
+---
+
+## 六、锐评修复（2026-04-25）
+
+### 问题 6.1: SEO 重复冲突 ✓ 已修复
+**问题**: `head.html` 手动设置 title + `jekyll-seo-tag` + `seo-enhanced.html` 产生冲突。
+
+**解决方案**: 统一使用 jekyll-seo-tag。
+
+**代码变更** (`_includes/head.html`):
+```diff
+- <title>...</title>
+- {%-seo title=false-%}
+- include seo-enhanced.html
++ {%-seo title=true-%}
+- 删除 seo-enhanced.html 引用
+```
+
+**代码变更** (`_includes/head_custom.html`):
+```diff
+- {% include seo-enhanced.html %}
++ <!-- SEO 已由 jekyll-seo-tag 统一处理 -->
+```
+
+---
+
+### 问题 6.2: JS 冗余 ✓ 已修复
+**问题**: `list-pages.js` 与 `theme-toggle.js` 功能重复。
+
+**解决方案**: 将返回顶部功能内联，删除外部依赖。
+
+**代码变更** (`_includes/list-footer.html`):
+```diff
+- <script src="/assets/js/list-pages.js" defer></script>
++ <script>
++ // 内联返回顶部功能（~10行）
++ </script>
+```
+
+---
+
+### 问题 6.3: list-pages.js 精简 ✓ 已修复
+**问题**: 表格排序功能全站未使用。
+
+**结果**: 已删除 list-pages.js，减少一个 HTTP 请求。
+
+---
+
+## 七、当前状态
+
+| 文件 | 状态 |
+|------|------|
+| `theme-toggle.js` | 主题初始化 ✓ |
+| `code-copy.js` | 代码复制（已 defer） |
+| `lightbox.js` | 图片灯箱（已 defer） |
+| `list-pages.js` | 已移除（内联返回顶部） |
+| `seo-enhanced.html` | 已停用（集成到 SEO 插件） |
+
+### JS 加载对比
+
+| 之前 | 现在 |
+|------|------|
+| theme-toggle.js | theme-toggle.js |
+| code-copy.js | code-copy.js |
+| lightbox.js | lightbox.js |
+| list-pages.js | （内联 ~10 行） |
+| **4 个请求** | **3 个请求** |
 
 ## 一、性能诊断与修复
 

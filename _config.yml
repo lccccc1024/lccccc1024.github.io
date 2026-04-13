@@ -21,13 +21,10 @@ no_style_please:
   home_posts_show_more: true
   home_posts_show_more_text: 查看全部文章
   home_posts_show_more_url: /archive/
-  # subtitle: 愿日常的琐碎，终将组成完整的你我
   date_format: "%Y年%m月%d日"
   appearance: auto
   back_to_top: true
   favicon: /lccccc1024.png
-  # logo: /assets/logo.png
-  # google_analytics: G-XXXXXXXXXX
 
 # Markdown 和代码高亮
 markdown: kramdown
@@ -58,6 +55,6 @@ og_image: /lccccc1024.png
 url: "https://lccccc1024.github.io"
 baseurl: ""
 
-# 禁用 HTML 压缩
+# HTML 压缩
 compress_html:
-  enabled: false
+  enabled: true
