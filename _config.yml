@@ -6,6 +6,10 @@ lang: zh-CN
 permalink: /:year/:month/:day/:title/
 timezone: Asia/Shanghai
 
+# 排除文件
+exclude:
+  - OPTIMIZATION_REPORT.md
+
 # 主题设置（GitHub Pages）
 remote_theme: riggraz/no-style-please
 
