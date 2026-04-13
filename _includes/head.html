@@ -16,7 +16,9 @@
 
   <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
   <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.css" integrity="sha384-OH8qNTHoMMVNVcKdKewlipV4SErXqccxxlg6HC9Cwjr5oZu2AdBej1TndeCirael" crossorigin="anonymous">
+  {% if page.math %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-nh8P3kLlM4NEGO2h3cbaMAw9M3Y4z4G5i7M73k5l2Q8x8F8M" crossorigin="anonymous">
+  {% endif %}
 
   {% include head_custom.html %}
 

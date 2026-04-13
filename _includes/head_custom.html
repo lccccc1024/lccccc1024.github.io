@@ -5,16 +5,7 @@
 <meta name="color-scheme" content="light dark">
 {% include seo-enhanced.html %}
 
-<!-- 主题切换脚本 -->
-<script>
-(function() {
-    var theme = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (theme === 'dark' || (!theme && prefersDark)) {
-        document.documentElement.classList.add('dark');
-    }
-})();
-</script>
+<!-- 主题初始化脚本已移至 defer -->
 
 <style>
 .theme-toggle-global {

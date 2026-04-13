@@ -2,7 +2,7 @@
 layout: base
 ---
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: "en" }}">
+<html lang="{{ page.lang | default: "zh-CN" }}">
 {% include head.html %}
 <body a="{{ site.theme_config.appearance | default: "auto" }}">
   <main class="page-content" aria-label="Content">
@@ -15,9 +15,9 @@ layout: base
     {%-include goat_counter.html-%}
   {%-endif-%}
 
-  <script src="{{ site.baseurl }}/assets/js/theme-toggle.js"></script>
-  <script src="{{ site.baseurl }}/assets/js/code-copy.js"></script>
-  <script src="{{ site.baseurl }}/assets/js/lightbox.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/theme-toggle.js" defer></script>
+  <script src="{{ site.baseurl }}/assets/js/code-copy.js" defer></script>
+  <script src="{{ site.baseurl }}/assets/js/lightbox.js" defer></script>
 
   {% if page.custom_js %}
     {% for js_file in page.custom_js %}

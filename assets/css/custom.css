@@ -308,3 +308,34 @@ pre:hover .code-copy-btn,
     font-size: 1.3em;
     margin-bottom: 1em;
 }
+
+/* 图片懒加载优化 */
+.post-article img[loading="lazy"] {
+    background-color: var(--accent-light);
+    min-height: 200px;
+}
+
+/* 首屏图片不懒加载（LCP 优化） */
+.hero-image {
+    loading: eager;
+}
+
+/* 键盘焦点指示器 - 无障碍 */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+/* 移除默认 focus 样式，使用自定义 */
+:focus {
+    outline: none;
+}
