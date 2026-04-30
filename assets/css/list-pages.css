@@ -100,7 +100,7 @@ html.dark {
 }
 
 body {
-    font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     background: var(--bg-gradient);
     color: var(--text-primary);
     margin: 0;
@@ -272,39 +272,6 @@ tr:hover {
     border: 1px solid var(--border);
 }
 
-/* 返回顶部按钮 */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 44px;
-    height: 44px;
-    border-radius: 4px;
-    background: var(--header-bg);
-    color: var(--header-text);
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    box-shadow: 0 1px 3px var(--shadow-color);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    opacity: 0.8;
-}
-
 /* 手机端卡片式布局 */
 @media (max-width: 768px) {
     .title {
@@ -376,14 +343,6 @@ tr:hover {
         font-weight: 700;
         color: var(--accent);
         font-size: 0.9em;
-    }
-
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        border-radius: 4px;
     }
 
     .totals {

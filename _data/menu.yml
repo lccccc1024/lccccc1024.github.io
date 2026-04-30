@@ -3,6 +3,8 @@ entries:
     url: /
   - title: 归档
     url: /archive/
+  - title: 标签
+    url: /tags/
   - title: 关于我
     url: /about/
   - title: 想要的东西
@@ -11,3 +13,5 @@ entries:
     url: /light.html
   - title: 阅读清单
     url: /readlist.html
+  - title: RSS
+    url: /feed.xml

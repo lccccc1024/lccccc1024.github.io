@@ -1,0 +1,38 @@
+---
+layout: default
+title: 分类
+permalink: /categories/
+---
+
+## 分类
+
+{% assign all_cats = "" | split: "" %}
+{% for post in site.posts %}
+  {% for cat in post.categories %}
+    {% assign all_cats = all_cats | push: cat %}
+  {% endfor %}
+{% endfor %}
+{% assign unique_cats = all_cats | uniq | sort %}
+
+{% for cat in unique_cats %}
+  {% assign cat_count = 0 %}
+  {% for post in site.posts %}
+    {% if post.categories contains cat %}
+      {% assign cat_count = cat_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  <h3 id="{{ cat }}" class="archive-year">{{ cat }}（{{ cat_count }} 篇）</h3>
+  <ul class="archive-list">
+  {% for post in site.posts %}
+    {% if post.categories contains cat %}
+      <li class="archive-item">
+        <span class="archive-date">{{ post.date | date: "%m-%d" }}</span>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <span class="archive-category">{{ post.tags | join: ", " }}</span>
+      </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endfor %}
+
+<a href="/" class="return-home">← 返回首页</a>

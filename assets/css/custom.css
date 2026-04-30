@@ -265,6 +265,16 @@ pre:hover .code-copy-btn,
 .post-article img {
     cursor: zoom-in;
     transition: transform 0.2s ease;
+    height: auto;
+}
+
+/* 降低 CLS：图片加载前按常见比例占位 */
+.post-article p > img {
+    aspect-ratio: attr(width) / attr(height);
+}
+
+.post-article img:not([width]) {
+    aspect-ratio: 16 / 9;
 }
 
 .post-article img:active {
@@ -338,4 +348,98 @@ select:focus-visible {
 /* 移除默认 focus 样式，使用自定义 */
 :focus {
     outline: none;
+}
+
+/* 跳转到主要内容（无障碍） */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 8px 16px;
+    background: var(--accent, #333);
+    color: var(--accent-light, #fff);
+    z-index: 10001;
+    text-decoration: none;
+    font-size: 14px;
+    transition: top 0.1s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* 搜索框 */
+.search-box {
+    margin: 2em 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1em;
+}
+
+.search-box summary {
+    cursor: pointer;
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.2em 0;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--accent-light);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    margin-top: 0.8em;
+}
+
+#search-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    background: var(--accent-light, #f0f0f0);
+    color: var(--text-primary, #1a1a1a);
+    border: 1px solid var(--border, #e0e0e0);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
 }

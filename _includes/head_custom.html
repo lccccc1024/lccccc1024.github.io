@@ -1,11 +1,18 @@
 <!-- 自定义样式 -->
 <link rel="stylesheet" href="/assets/css/custom.css">
+{% if page.layout == "list-page" %}
 <link rel="stylesheet" href="/assets/css/list-pages.css">
+{% endif %}
 <!-- 允许浏览器根据系统切换浅色/深色 -->
 <meta name="color-scheme" content="light dark">
 <!-- SEO 已由 jekyll-seo-tag 统一处理 -->
 
-<!-- 主题初始化脚本已移至 defer -->
+<!-- 第三方域名预连接 -->
+<link rel="preconnect" href="https://giscus.app">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+<!-- 主题初始化：阻止深色模式 FOUC -->
+<script>var t=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&p)){document.documentElement.classList.add('dark');}</script>
 
 <style>
 .theme-toggle-global {
