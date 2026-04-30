@@ -1,53 +1,20 @@
 /* 公共列表页面样式 - 极简版 */
 :root {
     --bg-gradient: #fafafa;
-    --bg-pattern: none;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666666;
     --table-bg: #ffffff;
     --even-row: #f5f5f5;
-    --hover: #ebebeb;
     --header-bg: #333333;
     --header-text: #ffffff;
-    --border: #e0e0e0;
-    --accent: #1a1a1a;
-    --accent-light: #f0f0f0;
     --shadow-color: rgba(0, 0, 0, 0.08);
 }
 
-/* 手动dark模式 */
 html.dark {
     --bg-gradient: #121212;
-    --bg-pattern: none;
-    --text-primary: #e0e0e0;
-    --text-secondary: #999999;
     --table-bg: #1e1e1e;
     --even-row: #252525;
-    --hover: #2a2a2a;
     --header-bg: #dddddd;
     --header-text: #121212;
-    --border: #333333;
-    --accent: #e0e0e0;
-    --accent-light: #252525;
     --shadow-color: rgba(0, 0, 0, 0.3);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-gradient: #121212;
-        --bg-pattern: none;
-        --text-primary: #e0e0e0;
-        --text-secondary: #999999;
-        --table-bg: #1e1e1e;
-        --even-row: #252525;
-        --hover: #2a2a2a;
-        --header-bg: #dddddd;
-        --header-text: #121212;
-        --border: #333333;
-        --accent: #e0e0e0;
-        --accent-light: #252525;
-        --shadow-color: rgba(0, 0, 0, 0.3);
-    }
 }
 
 /* 清单页导航条 */

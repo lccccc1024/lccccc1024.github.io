@@ -26,7 +26,7 @@ no_style_please:
   home_posts_show_more_text: 查看全部文章
   home_posts_show_more_url: /archive/
   date_format: "%Y年%m月%d日"
-  appearance: auto
+  appearance: light
   back_to_top: true
   favicon: /lccccc1024.png
 
