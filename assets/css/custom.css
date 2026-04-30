@@ -1,3 +1,28 @@
+/* ===== 主题变量 ===== */
+:root {
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --border: #e0e0e0;
+    --accent: #1a1a1a;
+    --accent-light: #f0f0f0;
+    --hover: #ebebeb;
+    --bg: #ffffff;
+}
+
+html.dark {
+    --text-primary: #e0e0e0;
+    --text-secondary: #999999;
+    --border: #333333;
+    --accent: #e0e0e0;
+    --accent-light: #252525;
+    --hover: #2a2a2a;
+    --bg: #121212;
+}
+
+html, body {
+    background: var(--bg);
+}
+
 /* 通用排版优化 */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
