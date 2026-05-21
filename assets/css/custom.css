@@ -393,6 +393,21 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   display: block;
 }
 
+.home-thumb-placeholder {
+  background: linear-gradient(135deg, var(--accent-light), var(--bg-code));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.home-thumb-icon {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .home-post-body { flex: 1; min-width: 0; }
 
 .home-list li a {
