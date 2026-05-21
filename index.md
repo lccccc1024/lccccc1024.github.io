@@ -16,9 +16,8 @@ title: 首页
       <img src="{{ first_img }}" alt="" class="home-thumb" loading="lazy">
     </a>
     {% else %}
-    <a href="{{ post.url }}" class="home-thumb-link home-thumb-placeholder">
-      <span class="home-thumb-icon">{{ post.categories | first | default: "📝" }}</span>
-    </a>
+    {% assign cat = post.categories | first %}
+    <a href="{{ post.url }}" class="home-thumb-link home-thumb-placeholder"{% if cat %} data-category="{{ cat }}"{% endif %}></a>
     {% endif %}
     <div class="home-post-body">
       <a href="{{ post.url }}">{{ post.title }}</a>

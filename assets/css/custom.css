@@ -379,8 +379,8 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 
 .home-thumb-link {
   flex-shrink: 0;
-  width: 120px;
-  height: 80px;
+  width: 140px;
+  height: 94px;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--bg-code);
@@ -390,22 +390,70 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
 }
 
+/* ===== Placeholder thumbnails ===== */
+
 .home-thumb-placeholder {
-  background: linear-gradient(135deg, var(--accent-light), var(--bg-code));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  display: block;
   text-decoration: none;
+  overflow: hidden;
 }
-.home-thumb-icon {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+
+/* Subtle dot pattern overlay */
+.home-thumb-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 14px 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Decorative circle */
+.home-thumb-placeholder::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  bottom: -24px;
+  right: -24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Per-category gradients (more refined palette) */
+.home-thumb-placeholder[data-category="技术"] {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.home-thumb-placeholder[data-category="生活"] {
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+}
+
+.home-thumb-placeholder[data-category="杂记"] {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+.home-thumb-placeholder[data-category="影评"] {
+  background: linear-gradient(135deg, #e11d48 0%, #f59e0b 100%);
+}
+
+.home-thumb-placeholder[data-category="其他"] {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+}
+
+/* Default fallback (no category) */
+.home-thumb-placeholder:not([data-category]) {
+  background: linear-gradient(135deg, var(--accent-light), var(--bg-code));
 }
 
 .home-post-body { flex: 1; min-width: 0; }
