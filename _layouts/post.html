@@ -1,44 +1,77 @@
 ---
 layout: default
 ---
-
-<article class="post-article">
-  <h1>{{ page.title }}</h1>
-  <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-  {% assign word_count = content | strip_html | strip_newlines | size %}
-  {% assign read_time = word_count | divided_by: 200 | ceil %}
-  <span class="post-meta">{{ word_count }} 字 · 约 {{ read_time }} 分钟</span>
-
-  {{ content }}
-
-  <!-- 返回首页 + 上一篇/下一篇导航 -->
-  <nav class="post-nav">
-    <div>
-      {% if page.previous.url %}
-        <a href="{{ page.previous.url }}" rel="prev">← 上一篇：{{ page.previous.title }}</a>
-      {% else %}
-        <span>已是第一篇</span>
+<article class="post-card">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% assign word_count = content | strip_html | strip_newlines | size %}
+      {% assign read_time = word_count | divided_by: 200 | ceil %}
+      <span class="meta-separator">·</span>
+      <span>{{ word_count }} 字 · 约 {{ read_time }} 分钟</span>
+      {% if page.categories.size > 0 %}
+        <span class="meta-separator">·</span>
+        <span class="post-categories">{{ page.categories | join: " / " }}</span>
       {% endif %}
     </div>
+  </header>
 
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    <div class="post-nav-prev">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url }}" rel="prev">
+          <span class="nav-label">← 上一篇</span>
+          <span class="nav-title">{{ page.previous.title }}</span>
+        </a>
+      {% endif %}
+    </div>
     <div class="post-nav-next">
       {% if page.next.url %}
-        <a href="{{ page.next.url }}" rel="next">下一篇：{{ page.next.title }} →</a>
-      {% else %}
-        <span>已是最后一篇</span>
+        <a href="{{ page.next.url }}" rel="next">
+          <span class="nav-label">下一篇 →</span>
+          <span class="nav-title">{{ page.next.title }}</span>
+        </a>
       {% endif %}
     </div>
   </nav>
 
-  <!-- 返回首页链接 -->
-  <p class="back-home">
-    <a href="/">← 返回首页</a>
-  </p>
-
-  <!-- Giscus 评论 -->
   {% if page.comments != false %}
   <div class="comments-section">
     {% include giscus.html %}
   </div>
   {% endif %}
 </article>
+
+{% assign related = "" | split: "" %}
+{% assign max_related = 3 %}
+{% for post in site.posts %}
+  {% if post.url != page.url %}
+    {% assign common_tags = post.tags | intersect: page.tags %}
+    {% if common_tags.size > 0 %}
+      {% assign related = related | push: post %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign related = related | slice: 0, max_related %}
+{% if related.size > 0 %}
+<div class="related-posts">
+  <h3 class="related-title">相关文章</h3>
+  <ul class="related-list">
+  {% for post in related %}
+    <li>
+      <a href="{{ post.url }}">
+        <span class="related-post-title">{{ post.title }}</span>
+        <span class="related-post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<script src="/assets/js/toc.js" defer></script>

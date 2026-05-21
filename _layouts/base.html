@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "zh-CN" }}">
+{% include head.html %}
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  {{ content }}
+
+  <script src="/assets/js/theme-toggle.js" defer></script>
+  <script src="/assets/js/lightbox.js" defer></script>
+  <script src="/assets/js/code-copy.js" defer></script>
+
+  {% if page.custom_js %}
+    {% for js_file in page.custom_js %}
+      <script src="/assets/js/{{ js_file }}.js"></script>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>

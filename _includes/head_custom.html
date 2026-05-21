@@ -1,46 +1,9 @@
-<!-- 自定义样式 -->
 <link rel="stylesheet" href="/assets/css/custom.css">
 {% if page.layout == "list-page" %}
 <link rel="stylesheet" href="/assets/css/list-pages.css">
 {% endif %}
-<!-- 允许浏览器根据系统切换浅色/深色 -->
-<meta name="color-scheme" content="light dark">
-<!-- SEO 已由 jekyll-seo-tag 统一处理 -->
 
-<!-- 第三方域名预连接 -->
 <link rel="preconnect" href="https://giscus.app">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-<!-- 主题初始化：阻止深色模式 FOUC -->
 <script>var t=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&p)){document.documentElement.classList.add('dark');}</script>
-
-<style>
-.theme-toggle-global {
-    position: fixed;
-    top: 16px;
-    right: 20px;
-    z-index: 99999;
-    background: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #333;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    font-family: system-ui, -apple-system, sans-serif;
-}
-.theme-toggle-global:hover {
-    background: #ebebeb;
-}
-html.dark .theme-toggle-global {
-    background: #2a2a2a;
-    border-color: #444;
-    color: #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-html.dark .theme-toggle-global:hover {
-    background: #3a3a3a;
-}
-</style>

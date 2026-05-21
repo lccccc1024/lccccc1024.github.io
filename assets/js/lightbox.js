@@ -54,7 +54,7 @@
             lightboxImg = lightbox.querySelector('img');
         }
 
-        var images = document.querySelectorAll('.post-article img, article img');
+        var images = document.querySelectorAll('.post-card img, .post-content img, article img');
         images.forEach(function(img) {
             if (img.closest('a')) return;
             init(img);

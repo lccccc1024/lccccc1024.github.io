@@ -1,13 +1,17 @@
-<button class="back-to-top" id="back-to-top" title="返回顶部">↑</button>
+<button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('back-to-top');
-    if (!btn) return;
-    window.addEventListener('scroll', function() {
-        btn.classList.toggle('visible', window.scrollY > 300);
-    });
-    btn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  var btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
 </script>

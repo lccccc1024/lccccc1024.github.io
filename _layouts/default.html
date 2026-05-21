@@ -1,31 +1,72 @@
 ---
 layout: base
 ---
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: "zh-CN" }}">
-{% include head.html %}
-<body a="{{ site.theme_config.appearance | default: "auto" }}">
-  <a href="#main-content" class="skip-link">跳到主要内容</a>
-  <main class="page-content" aria-label="Content" id="main-content">
-    <div class="w">
-      {{ content }}
-    </div>
-  </main>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">{{ site.title }}</a>
+    <ul class="nav-links">
+      {% for entry in site.data.menu.entries %}
+        {% if entry.entries %}
+        <li class="nav-dropdown">
+          <a class="nav-dropdown-trigger">{{ entry.title }}</a>
+          <ul class="nav-dropdown-menu">
+            {% for sub in entry.entries %}
+              {% if sub.url %}
+              <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+        {% elsif entry.url %}
+          <li><a href="{{ entry.url }}" {% if page.url == entry.url %}class="active"{% endif %}>{{ entry.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
+      <span class="theme-icon-nav"></span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-  {%-if site.goat_counter and jekyll.environment == "production"-%}
-    {%-include goat_counter.html-%}
-  {%-endif-%}
-
-  <script src="{{ site.baseurl }}/assets/js/theme-toggle.js" defer></script>
-  <script src="{{ site.baseurl }}/assets/js/lightbox.js" defer></script>
-  <script src="{{ site.baseurl }}/assets/js/code-copy.js" defer></script>
-
-  {% include list-footer.html %}
-
-  {% if page.custom_js %}
-    {% for js_file in page.custom_js %}
-      <script type="text/javascript" src="{{ site.baseurl }}/assets/js/{{ js_file }}.js"></script>
+<div class="nav-overlay" id="nav-overlay">
+  <ul class="nav-overlay-links">
+    {% for entry in site.data.menu.entries %}
+      {% if entry.entries %}
+        <li class="overlay-section">{{ entry.title }}</li>
+        {% for sub in entry.entries %}
+          {% if sub.url %}
+          <li class="overlay-sub"><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% elsif entry.url %}
+        <li><a href="{{ entry.url }}" {% if page.url == entry.url %}class="active"{% endif %}>{{ entry.title }}</a></li>
+      {% endif %}
     {% endfor %}
-  {% endif %}
-</body>
-</html>
+  </ul>
+</div>
+
+<main class="page-content" id="main-content" aria-label="内容">
+  <div class="wrapper">
+    {{ content }}
+  </div>
+</main>
+
+{% include list-footer.html %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.getElementById('nav-hamburger');
+  var overlay = document.getElementById('nav-overlay');
+  if (hamburger && overlay) {
+    hamburger.addEventListener('click', function() {
+      overlay.classList.toggle('active');
+    });
+    overlay.querySelectorAll('a').forEach(function(l) {
+      l.addEventListener('click', function() { overlay.classList.remove('active'); });
+    });
+  }
+});
+</script>

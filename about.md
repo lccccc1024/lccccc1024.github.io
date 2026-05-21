@@ -6,25 +6,35 @@ permalink: /about/
 
 ## 自我介绍
 
-<div class="about-section">
+<div class="about-card">
   <p>一个喜欢记录生活的牛马。</p>
   <p>这里是用来记录日常生活和技术笔记的地方。</p>
 </div>
 
 ## 个人标签
 
+<div class="about-card">
+
   - 摄影师新手 📷
   - 骑行爱好者 🚴
   - 电影爱好者 🎬
   - NAS 玩家 🖥️
 
+</div>
+
 ## 技能树
+
+<div class="about-card">
 
   - 日常记录：生活、杂记、周记
   - 技术折腾：NAS、服务器、图床
   - 兴趣爱好：摄影、骑行、观影
 
+</div>
+
 ## 联系方式
+
+<div class="about-card">
 
 <ul class="about-links">
 <li>GitHub：<a href="https://github.com/lccccc1024" target="_blank">lccccc1024</a></li>
@@ -32,7 +42,11 @@ permalink: /about/
 <li>邮箱：<a href="mailto:asa.lu@outlook.com">asa.lu@outlook.com</a></li>
 </ul>
 
+</div>
+
 ## 其他页面
+
+<div class="about-card">
 
 <ul class="about-links">
 <li><a href="/readlist.html">阅读清单</a> - 读过的书</li>
@@ -41,6 +55,8 @@ permalink: /about/
 <li><a href="/archive/">文章归档</a> - 所有文章</li>
 </ul>
 
+</div>
+
 ---
 
-<a href="/" class="return-home">← 返回首页</a>
+<a href="/" class="more-posts">← 返回首页</a>

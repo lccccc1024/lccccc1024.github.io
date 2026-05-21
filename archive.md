@@ -4,10 +4,12 @@ title: 文章归档
 permalink: /archive/
 ---
 
+<div class="post-card">
+
 ## 文章归档
 
-<p style="text-align: center; color: var(--text-secondary); margin-bottom: 2em;">
-共 {{ site.posts.size }} 篇文章
+<p class="stats" style="margin-bottom: 2em;">
+共 <strong>{{ site.posts.size }}</strong> 篇文章
 </p>
 
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
@@ -33,4 +35,6 @@ permalink: /archive/
 
 ---
 
-<a href="/" class="return-home">← 返回首页</a>
+<a href="/" class="more-posts">← 返回首页</a>
+
+</div>

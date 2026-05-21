@@ -1,13 +1,9 @@
 ---
 layout: default
 ---
-<header>
-  <h1>{{ site.title }}</h1>
-  {%-if site.theme_config.show_description-%}
-    <p>{{ site.description }}</p>
-  {%-endif-%}
-</header>
-
-{%-include menu_item.html collection=site.data.menu.entries-%}
+<section class="hero">
+  <h1 class="hero-title">{{ site.title }}</h1>
+  <p class="hero-description">{{ site.description }}</p>
+</section>
 
 {{ content }}

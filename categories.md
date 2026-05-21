@@ -4,6 +4,8 @@ title: 分类
 permalink: /categories/
 ---
 
+<div class="post-card">
+
 ## 分类
 
 {% assign all_cats = "" | split: "" %}
@@ -35,4 +37,6 @@ permalink: /categories/
   </ul>
 {% endfor %}
 
-<a href="/" class="return-home">← 返回首页</a>
+<a href="/" class="more-posts">← 返回首页</a>
+
+</div>

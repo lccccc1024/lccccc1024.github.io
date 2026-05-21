@@ -4,6 +4,8 @@ title: 标签
 permalink: /tags/
 ---
 
+<div class="post-card">
+
 ## 标签
 
 {% assign all_tags = "" | split: "" %}
@@ -35,4 +37,6 @@ permalink: /tags/
   </ul>
 {% endfor %}
 
-<a href="/" class="return-home">← 返回首页</a>
+<a href="/" class="more-posts">← 返回首页</a>
+
+</div>

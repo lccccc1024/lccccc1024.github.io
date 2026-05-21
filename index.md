@@ -3,23 +3,40 @@ layout: home
 title: 首页
 ---
 
-## 最新文章
+<h2 class="home-section-title">最新文章</h2>
 
 <ul class="home-list">
 {% for post in site.posts limit: 8 %}
 <li>
-<a href="{{ post.url }}">{{ post.title }}</a>
-<span class="home-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-{% if post.categories.size > 0 %}<span class="post-category">{{ post.categories | join: ", " }}</span>{% endif %}
+  <div class="home-post-inner">
+    {% assign first_img = post.content | split: '<img ' | last | split: 'src="' | last | split: '"' | first %}
+    {% if first_img and first_img != "" %}
+    <a href="{{ post.url }}" class="home-thumb-link">
+      <img src="{{ first_img }}" alt="" class="home-thumb" loading="lazy">
+    </a>
+    {% endif %}
+    <div class="home-post-body">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <div class="home-post-meta">
+        <span class="home-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        {% if post.categories.size > 0 %}<span class="post-category">{{ post.categories | join: ", " }}</span>{% endif %}
+      </div>
+      {% assign excerpt = post.excerpt | strip_html | strip_newlines | truncate: 120 %}
+      {% if excerpt != "" %}
+      <p class="home-excerpt">{{ excerpt }}</p>
+      {% endif %}
+    </div>
+  </div>
 </li>
 {% endfor %}
 </ul>
 
-<details class="search-box">
-  <summary>🔍 搜索文章</summary>
-  <input type="search" id="search-input" placeholder="输入关键词搜索..." aria-label="搜索文章">
+<a href="/archive/" class="more-posts">查看全部文章 →</a>
+
+<div class="search-box">
+  <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章">
   <ul id="search-results" class="home-list" style="display: none;"></ul>
-</details>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
