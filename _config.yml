@@ -22,6 +22,7 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 kramdown:
+  parse_block_html: true
   syntax_highlighter_opts:
     block:
       line_numbers: false

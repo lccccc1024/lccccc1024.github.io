@@ -9,8 +9,9 @@ title: 首页
 {% for post in site.posts limit: 8 %}
 <li>
   <div class="home-post-inner">
-    {% assign first_img = post.content | split: '<img ' | last | split: 'src="' | last | split: '"' | first %}
-    {% if first_img and first_img != "" %}
+    {% assign has_img = post.content | prepend: " " | split: '<img ' | size %}
+    {% if has_img > 1 %}
+      {% assign first_img = post.content | split: '<img ' | last | split: 'src="' | last | split: '"' | first %}
     <a href="{{ post.url }}" class="home-thumb-link">
       <img src="{{ first_img }}" alt="" class="home-thumb" loading="lazy">
     </a>
