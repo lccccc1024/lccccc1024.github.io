@@ -47,13 +47,11 @@
         document.body.style.overflow = '';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var existingLightbox = document.getElementById('lightbox-overlay');
-        if (existingLightbox) {
-            lightbox = existingLightbox;
-            lightboxImg = lightbox.querySelector('img');
-        }
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) close();
+    });
 
+    document.addEventListener('DOMContentLoaded', function() {
         var images = document.querySelectorAll('.post-card img, .post-content img, article img');
         images.forEach(function(img) {
             if (img.closest('a')) return;
