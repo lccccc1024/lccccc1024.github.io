@@ -5,6 +5,8 @@ entries:
     url: /archive/
   - title: 标签
     url: /tags/
+  - title: 分类
+    url: /categories/
   - title: 关于我
     url: /about/
   - title: 清单

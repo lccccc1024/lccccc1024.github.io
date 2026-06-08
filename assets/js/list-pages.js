@@ -86,7 +86,7 @@ function updateRowNumbers(tbody) {
             // 检查是否是数字（序号列）
             const currentVal = firstCell.textContent.trim();
             if (!isNaN(parseInt(currentVal))) {
-                firstCell.textContent = total - index;
+                firstCell.textContent = index + 1;
             }
         }
     });

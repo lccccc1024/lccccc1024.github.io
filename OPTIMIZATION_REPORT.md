@@ -2,6 +2,7 @@
 
 > 最后更新: 2026-04-13
 > 2026-04-25: 锐评后续修复
+> 2026-04-25: 全面代码审查，修正报告与实际代码不一致项
 
 ---
 
@@ -30,9 +31,9 @@
 ---
 
 ### 问题 6.2: JS 冗余 ✓ 已修复
-**问题**: `list-pages.js` 与 `theme-toggle.js` 功能重复。
+**问题**: `list-pages.js` 包含的返回顶部功能与 `list-footer.html` 功能重复。
 
-**解决方案**: 将返回顶部功能内联，删除外部依赖。
+**解决方案**: 将返回顶部功能内联到 `list-footer.html`，保留 `list-pages.js` 用于表格排序。
 
 **代码变更** (`_includes/list-footer.html`):
 ```diff
@@ -44,10 +45,10 @@
 
 ---
 
-### 问题 6.3: list-pages.js 精简 ✓ 已修复
-**问题**: 表格排序功能全站未使用。
+### 问题 6.3: 表格排序功能保留 ✓
+**问题**: 此前报告称表格排序功能全站未使用。
 
-**结果**: 已删除 list-pages.js，减少一个 HTTP 请求。
+**实际情况**: `list-pages.js` 为电影清单、阅读清单、心愿单三个页面的表格提供排序功能（`light.html`、`readlist.html`、`want.html`），不应删除。已保留并通过 `list-page.html` 布局引用。
 
 ---
 
@@ -55,21 +56,24 @@
 
 | 文件 | 状态 |
 |------|------|
-| `theme-toggle.js` | 主题初始化 ✓ |
-| `code-copy.js` | 代码复制（已 defer） |
-| `lightbox.js` | 图片灯箱（已 defer） |
-| `list-pages.js` | 已移除（内联返回顶部） |
+| `theme-toggle.js` | 主题切换（已 defer） |
+| `code-copy.js` | 代码复制（已 defer，IIFE 包裹） |
+| `lightbox.js` | 图片灯箱（已 defer，事件监听器已修复） |
+| `toc.js` | 文章目录自动生成（已 defer） |
+| `list-pages.js` | 表格排序（已 defer，电影/阅读/心愿清单使用） |
 | `seo-enhanced.html` | 已停用（集成到 SEO 插件） |
 
-### JS 加载对比
+### JS 加载
 
-| 之前 | 现在 |
-|------|------|
-| theme-toggle.js | theme-toggle.js |
-| code-copy.js | code-copy.js |
-| lightbox.js | lightbox.js |
-| list-pages.js | （内联 ~10 行） |
-| **4 个请求** | **3 个请求** |
+| 文件 | 用途 | 加载方式 |
+|------|------|----------|
+| `theme-toggle.js` | 主题切换按钮 | defer |
+| `code-copy.js` | 代码块复制 | defer |
+| `lightbox.js` | 图片灯箱 | defer |
+| `toc.js` | 文章目录 | defer（仅文章页） |
+| `list-pages.js` | 表格排序 | defer（仅列表页） |
+| `list-footer.html` | 返回顶部 | 内联 ~10 行 |
+| `head_custom.html` | 防 FOUC 主题初始化 | `<head>` 同步（必须） |
 
 ## 一、性能诊断与修复
 
@@ -110,14 +114,16 @@ math: true
 
 ---
 
-### 问题 1.3: 主题切换脚本阻塞渲染 ✓ 已修复
+### 问题 1.3: 主题切换脚本阻塞渲染
 **问题描述**: 内联脚本在 `<head>` 中执行，阻塞首屏渲染。
 
-**解决方案**: 将主题初始化移至 defer 脚本中。
+**实际决策**: 保留 `head_custom.html` 中的阻塞内联脚本。该脚本在 `<head>` 中同步执行是防止深色模式 FOUC（页面闪烁）的标准做法——必须在页面渲染前应用 `dark` class，`defer` 脚本无法满足此需求。脚本已最小化（单行），对首屏渲染的影响可忽略（<1ms）。
 
-**代码变更** (`assets/js/theme-toggle.js`):
-- 添加 `initTheme()` 函数初始化主题
-- 移除 `head_custom.html` 中的阻塞内联脚本
+**代码变更** (`_includes/head_custom.html`):
+```html
+<!-- 保留：防止深色模式 FOUC，必须在 <head> 中同步执行 -->
+<script>var t=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&p)){document.documentElement.classList.add('dark');}</script>
+```
 
 ---
 

@@ -15,6 +15,11 @@
             lightboxImg = document.createElement('img');
             lightbox.appendChild(lightboxImg);
             document.body.appendChild(lightbox);
+
+            // 点击背景关闭灯箱
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) close();
+            });
         }
 
         img.setAttribute('tabindex', '0');
@@ -46,10 +51,6 @@
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
-
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) close();
-    });
 
     document.addEventListener('DOMContentLoaded', function() {
         var images = document.querySelectorAll('.post-card img, .post-content img, article img');

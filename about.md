@@ -53,6 +53,8 @@ permalink: /about/
 <li><a href="/light.html">电影清单</a> - 看过的电影</li>
 <li><a href="/want.html">心愿单</a> - 想要的东西</li>
 <li><a href="/archive/">文章归档</a> - 所有文章</li>
+<li><a href="/categories/">文章分类</a> - 按分类浏览</li>
+<li><a href="/tags/">文章标签</a> - 按标签浏览</li>
 </ul>
 
 </div>

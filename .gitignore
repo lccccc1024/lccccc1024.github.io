@@ -10,3 +10,6 @@ Gemfile.lock
 
 # macOS
 .DS_Store
+
+# CodeGraph
+.codegraph/
