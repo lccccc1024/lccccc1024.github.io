@@ -425,9 +425,15 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   display: block;
   text-decoration: none;
   overflow: hidden;
+  background-size: 120% 120%;
+  animation: bg-drift 15s ease infinite;
 }
 
-/* Subtle dot pattern overlay */
+@keyframes bg-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .home-thumb-placeholder::before {
   content: '';
   position: absolute;
@@ -438,18 +444,25 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   z-index: 1;
 }
 
-/* Decorative circle */
+/* Animated glow orb */
 .home-thumb-placeholder::after {
   content: '';
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  bottom: -24px;
-  right: -24px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  top: -30px;
+  right: -30px;
   pointer-events: none;
   z-index: 1;
+  animation: orb-drift 8s ease-in-out infinite;
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-15px, 15px) scale(1.15); }
+  66% { transform: translate(-5px, 5px) scale(0.95); }
 }
 
 /* Per-category gradients (more refined palette) */
@@ -716,11 +729,30 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
+  padding-top: calc(var(--space-lg) + 24px);
   margin: 1.5em 0;
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+/* macOS-style top bar with traffic light dots */
+.post-content pre::before,
+.post-content .highlight::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  width: 44px;
+  height: 10px;
+  background:
+    radial-gradient(circle at 6px 5px, #ff5f57 10px, transparent 10px),
+    radial-gradient(circle at 22px 5px, #ffbd2e 10px, transparent 10px),
+    radial-gradient(circle at 38px 5px, #28c840 10px, transparent 10px);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
 }
 
 .post-content code {
@@ -751,16 +783,20 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   flex-direction: column;
   gap: var(--space-xs);
   padding: var(--space-md);
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   height: 100%;
 }
 .post-nav a:hover {
   border-color: var(--accent);
   background: var(--accent-light);
-  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-label {
@@ -856,10 +892,12 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   gap: var(--space-md);
   padding: var(--space-md) var(--space-lg);
   margin-bottom: var(--space-sm);
-  background: var(--bg-card);
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   box-shadow: var(--shadow-sm);
 }
 .archive-item:hover {
@@ -930,8 +968,8 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 .tag-cloud a:hover {
   background: var(--accent);
   color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
 /* ===== 搜索框 ===== */
