@@ -37,6 +37,7 @@ title: 首页
 
 <a href="/archive/" class="more-posts">查看全部文章 →</a>
 
+{::nomarkdown}
 <div class="search-box">
   <div class="search-inner">
     <span class="search-icon" aria-hidden="true"></span>
@@ -44,6 +45,7 @@ title: 首页
   </div>
   <ul id="search-results" class="home-list" style="display: none;"></ul>
 </div>
+{:/nomarkdown}
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
