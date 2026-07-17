@@ -724,14 +724,33 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 
 /* ===== 代码块 ===== */
 
-.post-content pre,
 .post-content .highlight {
   position: relative;
   background: var(--bg-code);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  margin: 1.5em 0;
+  overflow: hidden;
+}
+
+.post-content .highlight pre {
+  background: none;
+  border: none;
   padding: var(--space-lg);
-  padding-top: calc(var(--space-lg) + 24px);
+  padding-top: calc(var(--space-lg) + 14px);
+  margin: 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Standalone pre (no .highlight wrapper) */
+.post-content > pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
   margin: 1.5em 0;
   overflow-x: auto;
   font-family: var(--font-mono);
@@ -740,7 +759,6 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 }
 
 /* macOS-style top bar with traffic light dots */
-.post-content pre::before,
 .post-content .highlight::before {
   content: '';
   position: absolute;
