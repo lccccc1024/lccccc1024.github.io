@@ -38,7 +38,13 @@ title: 首页
 <a href="/archive/" class="more-posts">查看全部文章 →</a>
 
 <div class="search-box">
-  <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章">
+  <div class="search-inner">
+    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章">
+  </div>
   <ul id="search-results" class="home-list" style="display: none;"></ul>
 </div>
 

@@ -3,10 +3,22 @@
 {% include head.html %}
 <body>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
+  <div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div>
 
   {{ content }}
 
   <script src="/assets/js/theme-toggle.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    }, { passive: true });
+  });
+  </script>
   <script src="/assets/js/lightbox.js" defer></script>
   <script src="/assets/js/code-copy.js" defer></script>
 
