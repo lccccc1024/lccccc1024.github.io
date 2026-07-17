@@ -39,7 +39,7 @@ title: 首页
 
 <div class="search-box">
   <div class="search-inner">
-    {% include search-icon.html %}
+    <span class="search-icon" aria-hidden="true"></span>
     <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章">
   </div>
   <ul id="search-results" class="home-list" style="display: none;"></ul>
