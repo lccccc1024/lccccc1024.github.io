@@ -48,6 +48,16 @@ title: 首页
 {:/nomarkdown}
 
 <script>
+// Keyboard shortcut: / or Ctrl+K to focus search
+document.addEventListener('keydown', function(e) {
+  if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input, textarea, [contenteditable]')) ||
+      ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
+    e.preventDefault();
+    var input = document.getElementById('search-input');
+    if (input) input.focus();
+  }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('search-input');
     var results = document.getElementById('search-results');
