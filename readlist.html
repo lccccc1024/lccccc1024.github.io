@@ -6,7 +6,7 @@ subtitle: 书页翻过去的时候，也把一段时间留了下来。
 permalink: /readlist.html
 ---
 
-<p class="stats">共记录 <strong>{{ site.data.books | size }}</strong> 本书（按阅读时间倒序）</p>
+<p class="stats">共记录 <strong>{{ site.data.books | size }}</strong> 本书（按添加顺序排列）</p>
 
 <div class="table-container">
 <table>
@@ -21,7 +21,7 @@ permalink: /readlist.html
     </tr>
   </thead>
   <tbody>
-    {% for book in site.data.books reversed %}
+    {% for book in site.data.books %}
     <tr>
       <td data-label="序号">{{ forloop.index }}</td>
       <td data-label="书名">
