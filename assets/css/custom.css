@@ -1311,11 +1311,9 @@ td .genre-badge {
 }
 
 /* Table row entrance */
-.table-container tbody tr {
+.table-container tbody tr.row-enter {
   opacity: 0;
   transform: translateX(-8px);
-}
-.table-container tbody tr.row-enter {
   animation: row-slide-in 0.35s ease-out forwards;
 }
 
@@ -1592,12 +1590,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 
 /* ===== 首页卡片交错入场 ===== */
 
-.home-list li {
+.home-list li.card-enter {
   opacity: 0;
   transform: translateY(16px);
-}
-
-.home-list li.card-enter {
   animation: card-enter 0.5s ease-out forwards;
 }
 
