@@ -25,7 +25,7 @@ permalink: /light.html
     <tr>
       <td data-label="序号">{{ forloop.rindex }}</td>
       <td data-label="片名">{{ movie.title }}</td>
-      <td data-label="类型">{{ movie.genre }}</td>
+      <td data-label="类型"><span class="genre-badge">{{ movie.genre }}</span></td>
       <td data-label="导演">{{ movie.director }}</td>
       <td data-label="上映年份">{{ movie.year }}</td>
       <td data-label="观看时间">{{ movie.date | default: "—" }}</td>

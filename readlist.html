@@ -32,7 +32,7 @@ permalink: /readlist.html
         {% endif %}
       </td>
       <td data-label="作者">{{ book.author }}</td>
-      <td data-label="类型">{{ book.genre }}</td>
+      <td data-label="类型"><span class="genre-badge">{{ book.genre }}</span></td>
       <td data-label="出版年份">{{ book.year | default: "-" }}</td>
       <td data-label="阅读时间">
         {% if book.date == "搁浅" %}
