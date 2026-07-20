@@ -984,6 +984,62 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 .about-card ul { padding-left: 1.2em; }
 .about-card li { margin: 0.4em 0; }
 
+/* ===== 社交按钮 ===== */
+
+.social-buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.25s ease;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.social-btn--github:hover {
+  color: #24292e;
+  border-color: #24292e;
+  background: rgba(36,41,46,0.08);
+  transform: translateY(-2px);
+}
+
+.social-btn--blog:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+.social-btn--email:hover {
+  color: #ea4335;
+  border-color: #ea4335;
+  background: rgba(234,67,53,0.08);
+  transform: translateY(-2px);
+}
+
+.social-btn span {
+  font-size: 0.85rem;
+}
+
 .about-links { list-style: none; }
 .about-links li { padding: var(--space-sm) 0; border-bottom: 1px solid var(--border-light); }
 .about-links li:last-child { border-bottom: none; }
@@ -999,20 +1055,64 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   margin-bottom: var(--space-xl);
 }
 .tag-cloud a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: var(--space-xs) var(--space-md);
   background: var(--accent-light);
   color: var(--accent);
-  border-radius: 20px;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
+  border-radius: 20px;
   transition: all 0.2s ease;
+}
+
+.tag-count {
+  font-size: 0.75rem;
+  opacity: 0.6;
 }
 .tag-cloud a:hover {
   background: var(--accent);
   color: #ffffff;
   transform: translateY(-2px) scale(1.05);
   box-shadow: var(--shadow-md);
+}
+
+/* ===== 404 页面 ===== */
+
+.error-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: var(--space-xl) 0 var(--space-md);
+  user-select: none;
+}
+
+.error-404-num {
+  color: var(--accent);
+  animation: error-bounce 2s ease-in-out infinite;
+}
+
+.error-404-zero {
+  color: var(--text-tertiary);
+  animation: error-spin 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes error-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes error-spin {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.1); }
+  75% { transform: rotate(10deg) scale(1.1); }
 }
 
 /* ===== 搜索框 ===== */
