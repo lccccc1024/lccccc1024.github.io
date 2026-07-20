@@ -38,8 +38,8 @@
   --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
 
   --nav-height: 56px;
-  --content-max-width: 720px;
-  --wide-max-width: 1100px;
+  --content-max-width: 860px;
+  --wide-max-width: 1200px;
 }
 
 html.dark {
