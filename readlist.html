@@ -23,7 +23,7 @@ permalink: /readlist.html
   <tbody>
     {% for book in site.data.books reversed %}
     <tr>
-      <td data-label="序号">{{ forloop.rindex }}</td>
+      <td data-label="序号">{{ forloop.index }}</td>
       <td data-label="书名">
         {% if book.url %}
         <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
