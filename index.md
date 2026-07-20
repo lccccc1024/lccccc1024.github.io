@@ -58,6 +58,15 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+// Stagger entrance for article cards
+document.addEventListener('DOMContentLoaded', function() {
+  var cards = document.querySelectorAll('.home-list li');
+  cards.forEach(function(card, i) {
+    card.style.animationDelay = (i * 0.08) + 's';
+    card.classList.add('card-enter');
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('search-input');
     var results = document.getElementById('search-results');
