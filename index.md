@@ -95,7 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         results.style.display = 'block';
         results.innerHTML = matched.map(function(p) {
-            return '<li><a href="' + p.url + '">' + p.title +
+            var title = p.title;
+            // Highlight matched term in title
+            if (q.length > 0) {
+                var re = new RegExp('(' + q.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+                title = title.replace(re, '<mark class=\"search-highlight\">$1</mark>');
+            }
+            return '<li><a href="' + p.url + '">' + title +
                    '</a><span class="home-date">' + p.date + '</span></li>';
         }).join('');
     });
