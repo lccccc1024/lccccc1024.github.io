@@ -64,7 +64,8 @@
     gridOffset = (gridOffset + 0.05) % GRID_SPACING;
 
     ctx.save();
-    ctx.strokeStyle = ctx.canvas.classList.contains('dark')
+    var isDark = document.documentElement.classList.contains('dark');
+    ctx.strokeStyle = isDark
       ? 'rgba(255,255,255,' + GRID_OPACITY + ')'
       : 'rgba(0,0,0,' + GRID_OPACITY + ')';
     ctx.lineWidth = 0.5;

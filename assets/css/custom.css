@@ -4,7 +4,7 @@
 
 :root {
   --bg-body: #f5f5f7;
-  --bg-card: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.90);
   --bg-nav: rgba(255, 255, 255, 0.80);
   --bg-code: #f6f8fa;
 
@@ -44,7 +44,7 @@
 
 html.dark {
   --bg-body: #111113;
-  --bg-card: #1c1c1e;
+  --bg-card: rgba(28, 28, 30, 0.88);
   --bg-nav: rgba(28,28,30,0.80);
   --bg-code: #2c2c2e;
 
