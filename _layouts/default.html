@@ -63,10 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
   if (hamburger && overlay) {
     hamburger.addEventListener('click', function() {
       overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
     });
     overlay.querySelectorAll('a').forEach(function(l) {
-      l.addEventListener('click', function() { overlay.classList.remove('active'); });
+      l.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
     });
   }
 });
 </script>
+
+{% include footer.html %}
