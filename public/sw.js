@@ -8,6 +8,7 @@ const ASSETS = [
   '/js/image-blur.js',
   '/js/ui-enhance.js',
   '/js/list-pages.js',
+  '/js/fuse.min.js',
   '/js/toc.js',
   '/lccccc1024.png',
 ];

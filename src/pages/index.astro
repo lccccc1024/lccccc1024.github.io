@@ -33,7 +33,7 @@ function firstImg(body) {
           <a href={`/posts/${post.id}/`} class="home-thumb-link">
             {firstImg(post.body)
               ? <img src={firstImg(post.body)} alt="" class="home-thumb" loading="lazy" />
-              : <div class="home-thumb-placeholder"{post.data.categories?.[0] ? ` data-category="${post.data.categories[0]}"` : ''}></div>
+              : <div class="home-thumb-placeholder" data-category={post.data.categories?.[0]}></div>
             }
           </a>
           <div class="home-post-body">
@@ -92,9 +92,8 @@ function firstImg(body) {
           includeScore: true,
           minMatchCharLength: 1,
         });
-      });
-
-      input.addEventListener('input', function() {
+        // Register input listener AFTER data is loaded
+        input.addEventListener('input', function() {
         var q = input.value.trim();
         if (q.length < 1) { results.style.display = 'none'; return; }
 
@@ -118,6 +117,7 @@ function firstImg(body) {
                  '</a><span class="home-date">' + p.date + '</span></li>';
         }).join('');
       });
+    });
     });
 
     document.addEventListener('DOMContentLoaded', function() {
