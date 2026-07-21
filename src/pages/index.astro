@@ -60,6 +60,7 @@ function fmt(d) {
     <ul id="search-results" class="home-list" style="display: none;"></ul>
   </div>
 
+  <script is:inline src="/js/fuse.min.js"></script>
   <script>
     document.addEventListener('keydown', function(e) {
       if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input, textarea, [contenteditable]')) ||
@@ -73,22 +74,22 @@ function fmt(d) {
     document.addEventListener('DOMContentLoaded', function() {
       var input = document.getElementById('search-input');
       var results = document.getElementById('search-results');
-      var posts = [];
+      var fuse = null;
 
       fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
-        posts = data;
+        fuse = new Fuse(data, {
+          keys: ['title', 'excerpt', 'categories', 'tags'],
+          threshold: 0.4,
+          includeScore: true,
+          minMatchCharLength: 1,
+        });
       });
 
       input.addEventListener('input', function() {
-        var q = input.value.trim().toLowerCase();
+        var q = input.value.trim();
         if (q.length < 1) { results.style.display = 'none'; return; }
 
-        var matched = posts.filter(function(p) {
-          return p.title.toLowerCase().indexOf(q) !== -1 ||
-                 (p.excerpt && p.excerpt.toLowerCase().indexOf(q) !== -1) ||
-                 (p.categories && p.categories.some(function(c) { return c.toLowerCase().indexOf(q) !== -1; })) ||
-                 (p.tags && p.tags.some(function(t) { return t.toLowerCase().indexOf(q) !== -1; }));
-        });
+        var matched = fuse ? fuse.search(q).map(function(r) { return r.item; }) : [];
 
         if (matched.length === 0) {
           results.style.display = 'block';
@@ -99,8 +100,9 @@ function fmt(d) {
         results.style.display = 'block';
         results.innerHTML = matched.map(function(p) {
           var title = p.title;
-          if (q.length > 0) {
-            var re = new RegExp('(' + q.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+          var qLower = q.toLowerCase();
+          if (qLower.length > 0) {
+            var re = new RegExp('(' + qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
             title = title.replace(re, '<mark class="search-highlight">$1</mark>');
           }
           return '<li><a href="' + p.url + '">' + title +

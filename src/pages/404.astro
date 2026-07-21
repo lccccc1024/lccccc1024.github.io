@@ -9,7 +9,58 @@ import PageLayout from '../layouts/PageLayout.astro';
       <span class="error-404-zero">0</span>
       <span class="error-404-num">4</span>
     </div>
-    <p style="font-size: 1.1rem; color: var(--text-secondary); margin: 1em 0 2em;">抱歉，这个页面好像迷路了……</p>
+    <p style="font-size: 1.1rem; color: var(--text-secondary); margin: 1em 0 1.5em;">抱歉，这个页面好像迷路了……</p>
+
+    <div class="search-box" style="max-width: 400px; margin: 0 auto 2em;">
+      <div class="search-inner">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input type="search" id="search-input-404" placeholder="搜索文章..." aria-label="搜索文章" style="background: transparent;" />
+      </div>
+      <ul id="search-results-404" class="home-list" style="display: none;"></ul>
+    </div>
+
     <p><a href="/" class="more-posts" style="display: inline-flex;">← 返回首页</a></p>
   </article>
+
+  <script is:inline src="/js/fuse.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var input = document.getElementById('search-input-404');
+      var results = document.getElementById('search-results-404');
+      var fuse = null;
+
+      fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
+        fuse = new Fuse(data, {
+          keys: ['title', 'excerpt', 'categories', 'tags'],
+          threshold: 0.4,
+          includeScore: true,
+          minMatchCharLength: 1,
+        });
+      });
+
+      input.addEventListener('input', function() {
+        var q = input.value.trim();
+        if (q.length < 1) { results.style.display = 'none'; return; }
+
+        var matched = fuse ? fuse.search(q).map(function(r) { return r.item; }) : [];
+
+        if (matched.length === 0) {
+          results.style.display = 'block';
+          results.innerHTML = '<li style="color:var(--text-secondary);padding:1em;">未找到匹配文章</li>';
+          return;
+        }
+
+        results.style.display = 'block';
+        results.innerHTML = matched.slice(0, 5).map(function(p) {
+          var title = p.title;
+          var qLower = q.toLowerCase();
+          if (qLower.length > 0) {
+            var re = new RegExp('(' + qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
+          }
+          return '<li><a href="' + p.url + '">' + title + '</a></li>';
+        }).join('');
+      });
+    });
+  </script>
 </PageLayout>

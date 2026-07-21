@@ -21,6 +21,8 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   <title>{pageTitle}</title>
   <meta name="description" content={description || '分享日常杂记、技术笔记的极简博客'} />
   <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#5e5ce6" />
   <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/feed.xml" />
   <ClientRouter fallback="animate" />
   <link rel="stylesheet" href="/css/global.css" />
@@ -63,6 +65,13 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
         bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
       }, { passive: true });
     });
+
+    // Service worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
   </script>
 </body>
 </html>
