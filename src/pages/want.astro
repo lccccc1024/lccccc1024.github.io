@@ -1,0 +1,66 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import wishlist from '../data/wishlist';
+
+// Calculate totals
+let boughtTotal = 0, unboughtTotal = 0;
+let boughtCount = 0, unboughtCount = 0;
+
+wishlist.forEach(item => {
+  const price = parseFloat(String(item.price).replace(/[¥￥$,]/g, '')) || 0;
+  if (item.date) {
+    boughtTotal += price;
+    boughtCount++;
+  } else {
+    unboughtTotal += price;
+    unboughtCount++;
+  }
+});
+---
+
+<PageLayout title="心愿单" description="个人心愿单">
+  <div class="list-page-header">
+    <h1 class="list-page-title">心愿单</h1>
+    <p class="list-page-subtitle">记录想要的东西，也记录生活的期待。</p>
+  </div>
+
+  <div class="list-page-content">
+    <p class="stats">共 <strong>{wishlist.length}</strong> 个心愿（已购 <strong>{boughtCount}</strong> 个，未购 <strong>{unboughtCount}</strong> 个）</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>价格</th>
+            <th>链接</th>
+            <th>日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          {wishlist.map((item, i) => (
+            <tr class={item.date ? 'strike' : ''}>
+              <td data-label="序号">{i + 1}</td>
+              <td data-label="名称">{item.title}</td>
+              <td data-label="价格">{typeof item.price === 'number' ? item.price.toFixed(2) : item.price}</td>
+              <td data-label="链接">
+                {item.link && String(item.link).startsWith('http')
+                  ? <a href={item.link} target="_blank" rel="noopener noreferrer">{item.link_text || '链接'}</a>
+                  : (item.link || 'N/A')}
+              </td>
+              <td data-label="日期">{item.date || ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      已购总价：<strong>{boughtTotal.toFixed(2)}</strong> 元<br />
+      未购总价：<strong>{unboughtTotal.toFixed(2)}</strong> 元
+    </div>
+
+    <p><a href="/" class="more-posts">← 返回首页</a></p>
+  </div>
+</PageLayout>
