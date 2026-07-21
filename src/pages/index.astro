@@ -10,6 +10,12 @@ const posts = allPosts
 function fmt(d) {
   return d.toISOString().slice(0, 10);
 }
+
+// Extract first image from post body
+function firstImg(body) {
+  var m = body.match(/!\[.*?\]\((.*?)\)/);
+  return m ? m[1] : null;
+}
 ---
 
 <PageLayout title="首页">
@@ -25,7 +31,10 @@ function fmt(d) {
       <li>
         <div class="home-post-inner">
           <a href={`/posts/${post.id}/`} class="home-thumb-link">
-            <div class="home-thumb-placeholder" data-category={post.data.categories?.[0] || ''}></div>
+            {firstImg(post.body)
+              ? <img src={firstImg(post.body)} alt="" class="home-thumb" loading="lazy" />
+              : <div class="home-thumb-placeholder"{post.data.categories?.[0] ? ` data-category="${post.data.categories[0]}"` : ''}></div>
+            }
           </a>
           <div class="home-post-body">
             <a href={`/posts/${post.id}/`}>{post.data.title}</a>
