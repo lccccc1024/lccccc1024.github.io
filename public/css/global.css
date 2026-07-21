@@ -1718,3 +1718,51 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ===== 暗色模式图片自适应 ===== */
+
+html.dark .post-content img {
+  opacity: 0.85;
+  filter: brightness(0.9);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+html.dark .post-content img:hover {
+  opacity: 1;
+  filter: brightness(1);
+}
+
+/* ===== 数字跳动动画 ===== */
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stats strong {
+  display: inline-block;
+  animation: count-up 0.5s ease-out both;
+}
+
+.stats strong:nth-child(1) { animation-delay: 0.1s; }
+.stats strong:nth-child(2) { animation-delay: 0.2s; }
+
+/* ===== 阅读进度百分比 ===== */
+
+.read-progress-text {
+  position: fixed;
+  bottom: 80px;
+  right: 32px;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+  pointer-events: none;
+  z-index: 49;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.read-progress-text.visible {
+  opacity: 1;
+}

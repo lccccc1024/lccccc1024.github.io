@@ -45,6 +45,7 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 <body>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
   <div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div>
+  <span class="read-progress-text" id="read-progress-text"></span>
 
   <slot />
 
@@ -58,11 +59,18 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     // Reading progress bar
     document.addEventListener('DOMContentLoaded', function() {
       var bar = document.getElementById('progress-bar');
+      var pct = document.getElementById('read-progress-text');
       if (!bar) return;
       window.addEventListener('scroll', function() {
         var scrollTop = window.scrollY;
         var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        bar.style.width = (progress * 100) + '%';
+        if (pct) {
+          var p = Math.round(progress * 100);
+          pct.textContent = p + '%';
+          pct.classList.toggle('visible', scrollTop > 300);
+        }
       }, { passive: true });
     });
 
