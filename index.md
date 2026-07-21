@@ -24,7 +24,17 @@ title: 首页
       <div class="home-post-meta">
         <span class="home-date">{{ post.date | date: "%Y-%m-%d" }}</span>
         {% if post.categories.size > 0 %}<span class="post-category">{{ post.categories | join: ", " }}</span>{% endif %}
+        {% assign wc = post.content | strip_html | strip_newlines | size %}
+        {% assign rt = wc | divided_by: 200 | ceil %}
+        {% if rt > 0 %}<span class="home-reading-time">{{ rt }} min</span>{% endif %}
       </div>
+      {% if post.tags.size > 0 %}
+      <div class="home-post-tags">
+        {% for tag in post.tags limit:4 %}
+        <span class="post-tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
       {% assign excerpt = post.excerpt | strip_html | strip_newlines | truncate: 120 %}
       {% if excerpt != "" %}
       <p class="home-excerpt">{{ excerpt }}</p>

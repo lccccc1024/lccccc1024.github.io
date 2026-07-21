@@ -571,6 +571,33 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
   font-size: 0.85rem;
 }
 
+.home-reading-time {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+}
+
+.home-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--space-xs);
+}
+
+.post-tag {
+  display: inline-block;
+  padding: 1px 7px;
+  background: var(--bg-code);
+  color: var(--text-tertiary);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.post-tag:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
 .post-category {
   display: inline-block;
   padding: 2px 8px;
@@ -646,6 +673,34 @@ h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
 
 .meta-separator { color: var(--text-tertiary); }
 .post-categories { color: var(--accent); font-weight: 500; }
+
+.copy-link-btn {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.copy-link-btn:hover {
+  color: var(--accent);
+}
+.copy-link-btn.copied {
+  color: #34c759;
+}
+
+/* Post footer tags */
+.post-footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
 
 /* ===== 文章内容 ===== */
 
