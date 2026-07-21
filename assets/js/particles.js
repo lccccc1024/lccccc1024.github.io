@@ -16,6 +16,7 @@
   function init() {
     canvas = document.createElement('canvas');
     canvas.id = 'bg-particles';
+    canvas.setAttribute('aria-hidden', 'true');
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
     document.body.insertBefore(canvas, document.body.firstChild);
 

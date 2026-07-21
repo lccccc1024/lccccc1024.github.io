@@ -4,24 +4,23 @@
   function init() {
     var images = document.querySelectorAll('.post-content img:not([data-no-blur])');
     images.forEach(function(img) {
-      // Skip small images (icons, etc.)
-      if (img.width < 100 && !img.complete) return;
-
-      // Apply loading state
-      img.classList.add('img-loading');
-
-      if (img.complete && img.naturalWidth > 0) {
-        imgLoaded(img);
-      } else {
-        img.addEventListener('load', function() { imgLoaded(img); });
-        img.addEventListener('error', function() { img.classList.remove('img-loading'); });
+      // If already loaded (from cache), skip blur to avoid flash
+      if (img.complete) {
+        // Skip tiny images (icons, emoji, etc.)
+        if (img.naturalWidth < 100) return;
+        return; // Cached full-size image, already visible
       }
-    });
-  }
 
-  function imgLoaded(img) {
-    img.classList.remove('img-loading');
-    img.classList.add('img-loaded');
+      // Apply blur placeholder for loading images
+      img.classList.add('img-loading');
+      img.addEventListener('load', function() {
+        img.classList.remove('img-loading');
+        img.classList.add('img-loaded');
+      });
+      img.addEventListener('error', function() {
+        img.classList.remove('img-loading');
+      });
+    });
   }
 
   if (document.readyState === 'loading') {

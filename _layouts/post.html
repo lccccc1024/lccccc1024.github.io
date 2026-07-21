@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.textContent = '复制链接';
         btn.classList.remove('copied');
       }, 2000);
+    }).catch(function() {
+      // Fallback for non-HTTPS or permission denied
+      btn.textContent = '复制失败';
+      setTimeout(function() { btn.textContent = '复制链接'; }, 2000);
     });
   });
 });
