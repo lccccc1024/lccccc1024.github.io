@@ -1774,10 +1774,3 @@ html.dark .post-content img:hover {
   align-items: center;
   justify-content: center;
 }
-
-/* Empty data-category fallback */
-.home-thumb-placeholder[data-category=""] {
-  background: linear-gradient(135deg, var(--accent-light), var(--bg-code));
-  background-size: 120% 120%;
-  animation: bg-drift 15s ease infinite;
-}
