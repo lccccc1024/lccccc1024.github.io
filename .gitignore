@@ -18,3 +18,7 @@ dist
 node_modules
 *.py
 
+
+
+# Jekyll legacy
+assets/
