@@ -1,0 +1,47 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function fmt(d) {
+  return d.toISOString().slice(0, 10);
+}
+
+const yearMap = {};
+posts.forEach(post => {
+  const year = post.data.date.getFullYear().toString();
+  if (!yearMap[year]) yearMap[year] = [];
+  yearMap[year].push(post);
+});
+const years = Object.keys(yearMap).sort((a, b) => b - a);
+---
+
+<PageLayout title="文章归档">
+  <article class="post-card">
+    <h2>文章归档</h2>
+    <p class="stats" style="margin-bottom: 2em;">
+      共 <strong>{posts.length}</strong> 篇文章
+    </p>
+
+    {years.map(year => (
+      <div>
+        <h3 class="archive-year">{year} 年（{yearMap[year].length} 篇）</h3>
+        <ul class="archive-list">
+          {yearMap[year].map(post => (
+            <li class="archive-item">
+              <span class="archive-date">{post.data.date.toISOString().slice(5, 10)}</span>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              {post.data.categories?.length > 0 && (
+                <span class="archive-category">{post.data.categories.join(', ')}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <a href="/" class="more-posts">← 返回首页</a>
+  </article>
+</PageLayout>

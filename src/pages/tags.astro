@@ -1,0 +1,52 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Collect all unique tags
+const tagMap = {};
+posts.forEach(post => {
+  (post.data.tags || []).forEach(tag => {
+    if (!tagMap[tag]) tagMap[tag] = [];
+    tagMap[tag].push(post);
+  });
+});
+const tags = Object.keys(tagMap).sort();
+const fmt = d => d.toISOString().slice(0, 10);
+---
+
+<PageLayout title="标签">
+  <article class="post-card">
+    <h2>标签</h2>
+
+    {tags.length > 0 && (
+      <div class="tag-cloud">
+        {tags.map(tag => (
+          <a href={`#${tag}`}>
+            {tag}
+            <span class="tag-count">{tagMap[tag].length}</span>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {tags.map(tag => (
+      <div>
+        <h3 id={tag} class="archive-year">{tag}（{tagMap[tag].length} 篇）</h3>
+        <ul class="archive-list">
+          {tagMap[tag].map(post => (
+            <li class="archive-item">
+              <span class="archive-date">{fmt(post.data.date)}</span>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <span class="archive-category">{post.data.categories?.join(', ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <a href="/" class="more-posts">← 返回首页</a>
+  </article>
+</PageLayout>

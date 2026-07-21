@@ -1,0 +1,65 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  math?: boolean;
+}
+
+const { title, description, lang, math } = Astro.props;
+const siteTitle = '闲话';
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+---
+
+<!DOCTYPE html>
+<html lang={lang || 'zh-CN'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description || '分享日常杂记、技术笔记的极简博客'} />
+  <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
+  <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/feed.xml" />
+  <link rel="stylesheet" href="/css/global.css" />
+
+  <script is:inline>
+    // Prevent FOUC: set dark class before paint
+    (function() {
+      var t = localStorage.getItem('theme');
+      var p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && p)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  {math && (
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  )}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+  <div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div>
+
+  <slot />
+
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/particles.js" defer></script>
+  <script src="/js/lightbox.js" defer></script>
+  <script src="/js/code-copy.js" defer></script>
+  <script src="/js/image-blur.js" defer></script>
+  <script src="/js/ui-enhance.js" defer></script>
+  <script is:inline>
+    // Reading progress bar
+    document.addEventListener('DOMContentLoaded', function() {
+      var bar = document.getElementById('progress-bar');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>

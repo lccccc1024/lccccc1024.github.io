@@ -1,0 +1,51 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const catMap = {};
+posts.forEach(post => {
+  (post.data.categories || []).forEach(cat => {
+    if (!catMap[cat]) catMap[cat] = [];
+    catMap[cat].push(post);
+  });
+});
+const cats = Object.keys(catMap).sort();
+const fmt = d => d.toISOString().slice(0, 10);
+---
+
+<PageLayout title="分类">
+  <article class="post-card">
+    <h2>分类</h2>
+
+    {cats.length > 0 && (
+      <div class="tag-cloud" style="margin-bottom: var(--space-2xl);">
+        {cats.map(cat => (
+          <a href={`#${cat}`}>
+            {cat}
+            <span class="tag-count">{catMap[cat].length}</span>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {cats.map(cat => (
+      <div>
+        <h3 id={cat} class="archive-year">{cat} 分类（{catMap[cat].length} 篇）</h3>
+        <ul class="archive-list">
+          {catMap[cat].map(post => (
+            <li class="archive-item">
+              <span class="archive-date">{fmt(post.data.date)}</span>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <span class="archive-category">{post.data.tags?.join(', ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <a href="/" class="more-posts">← 返回首页</a>
+  </article>
+</PageLayout>

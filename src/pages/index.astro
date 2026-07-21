@@ -1,0 +1,120 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 8);
+
+function fmt(d) {
+  return d.toISOString().slice(0, 10);
+}
+---
+
+<PageLayout title="首页">
+  <section class="hero">
+    <h1 class="hero-title">闲话</h1>
+    <p class="hero-description">分享日常杂记、技术笔记的极简博客</p>
+  </section>
+
+  <h2 class="home-section-title">最新文章</h2>
+
+  <ul class="home-list">
+    {posts.map((post) => (
+      <li>
+        <div class="home-post-inner">
+          <a href={`/posts/${post.id}/`} class="home-thumb-link">
+            <div class="home-thumb-placeholder" data-category={post.data.categories?.[0] || ''}></div>
+          </a>
+          <div class="home-post-body">
+            <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+            <div class="home-post-meta">
+              <span class="home-date">{fmt(post.data.date)}</span>
+              {post.data.categories?.length > 0 && (
+                <span class="post-category">{post.data.categories.join(', ')}</span>
+              )}
+              <span class="home-reading-time">{Math.ceil(post.body.length / 200)} min</span>
+            </div>
+            {post.data.tags?.length > 0 && (
+              <div class="home-post-tags">
+                {post.data.tags.slice(0, 4).map((tag) => (
+                  <span class="post-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            <p class="home-excerpt">{post.data.description || post.body.slice(0, 120)}</p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <a href="/archive/" class="more-posts">查看全部文章 →</a>
+
+  <div class="search-box">
+    <div class="search-inner">
+      <span class="search-icon" aria-hidden="true"></span>
+      <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章" />
+    </div>
+    <ul id="search-results" class="home-list" style="display: none;"></ul>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function(e) {
+      if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input, textarea, [contenteditable]')) ||
+          ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
+        e.preventDefault();
+        var input = document.getElementById('search-input');
+        if (input) input.focus();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var input = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var posts = [];
+
+      fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
+        posts = data;
+      });
+
+      input.addEventListener('input', function() {
+        var q = input.value.trim().toLowerCase();
+        if (q.length < 1) { results.style.display = 'none'; return; }
+
+        var matched = posts.filter(function(p) {
+          return p.title.toLowerCase().indexOf(q) !== -1 ||
+                 (p.excerpt && p.excerpt.toLowerCase().indexOf(q) !== -1) ||
+                 (p.categories && p.categories.some(function(c) { return c.toLowerCase().indexOf(q) !== -1; })) ||
+                 (p.tags && p.tags.some(function(t) { return t.toLowerCase().indexOf(q) !== -1; }));
+        });
+
+        if (matched.length === 0) {
+          results.style.display = 'block';
+          results.innerHTML = '<li style="color:var(--text-secondary);padding:1em;">未找到匹配文章</li>';
+          return;
+        }
+
+        results.style.display = 'block';
+        results.innerHTML = matched.map(function(p) {
+          var title = p.title;
+          if (q.length > 0) {
+            var re = new RegExp('(' + q.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
+          }
+          return '<li><a href="' + p.url + '">' + title +
+                 '</a><span class="home-date">' + p.date + '</span></li>';
+        }).join('');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var cards = document.querySelectorAll('.home-list li');
+      cards.forEach(function(card, i) {
+        card.style.animationDelay = (i * 0.08) + 's';
+        card.classList.add('card-enter');
+      });
+    });
+  </script>
+</PageLayout>

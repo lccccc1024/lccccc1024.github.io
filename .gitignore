@@ -13,3 +13,8 @@ Gemfile.lock
 
 # CodeGraph
 .codegraph/
+
+dist
+node_modules
+*.py
+

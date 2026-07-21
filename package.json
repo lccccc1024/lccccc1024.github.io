@@ -1,0 +1,20 @@
+{
+  "name": "lccccc1024.github.io",
+  "version": "1.0.0",
+  "description": "闲话 — 分享日常杂记、技术笔记的极简博客",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lccccc1024/lccccc1024.github.io.git"
+  },
+  "author": "Lcc",
+  "license": "ISC",
+  "dependencies": {
+    "astro": "^7.1.3"
+  }
+}
