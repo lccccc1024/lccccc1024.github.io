@@ -25,9 +25,25 @@ const related = sorted
   .filter(p => p.id !== post.id && p.data.tags?.some(t => post.data.tags?.includes(t)))
   .slice(0, 3);
 const fmt = (d) => d.toISOString().slice(0, 10);
+
+// JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  description: post.data.description || '',
+  author: {
+    '@type': 'Person',
+    name: 'Lcc',
+  },
+  keywords: (post.data.tags || []).join(', '),
+};
 ---
 
 <PageLayout title={post.data.title} description={post.data.description} math={post.data.math}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
   <article class="post-card">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
