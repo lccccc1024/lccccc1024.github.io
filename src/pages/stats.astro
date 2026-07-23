@@ -1,0 +1,160 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+// Total stats
+const totalPosts = posts.length;
+const totalWords = posts.reduce((sum, p) => sum + p.body.length, 0);
+const totalMinutes = Math.ceil(totalWords / 200);
+const oldest = posts[0]?.data.date || new Date();
+const newest = posts[posts.length - 1]?.data.date || new Date();
+const spanDays = Math.ceil((newest - oldest) / (1000 * 60 * 60 * 24));
+
+// Heatmap data (last 365 days)
+const heatmap = {};
+const today = new Date();
+for (let i = 364; i >= 0; i--) {
+  const d = new Date(today);
+  d.setDate(d.getDate() - i);
+  const key = d.toISOString().slice(0, 10);
+  heatmap[key] = 0;
+}
+posts.forEach(p => {
+  const key = p.data.date.toISOString().slice(0, 10);
+  if (heatmap[key] !== undefined) heatmap[key] = (heatmap[key] || 0) + 1;
+});
+
+// Posts by year/month
+const byYear = {};
+posts.forEach(p => {
+  const y = p.data.date.getFullYear();
+  if (!byYear[y]) byYear[y] = { count: 0, words: 0 };
+  byYear[y].count++;
+  byYear[y].words += p.body.length;
+});
+
+// Categories
+const cats = {};
+posts.forEach(p => (p.data.categories || []).forEach(c => { cats[c] = (cats[c] || 0) + 1; }));
+const sortedCats = Object.entries(cats).sort((a, b) => b[1] - a[1]);
+
+// Tags
+const tags = {};
+posts.forEach(p => (p.data.tags || []).forEach(t => { tags[t] = (tags[t] || 0) + 1; }));
+const sortedTags = Object.entries(tags).sort((a, b) => b[1] - a[1]);
+
+// Longest posts
+const longest = [...posts].sort((a, b) => b.body.length - a.body.length).slice(0, 5);
+
+const fmt = d => d.toISOString().slice(0, 10);
+const weeks = ['日', '一', '二', '三', '四', '五', '六'];
+const now = new Date();
+const startOfWeek = new Date(now);
+startOfWeek.setDate(now.getDate() - now.getDay() - 364);
+---
+
+<PageLayout title="写作统计">
+  <article class="post-card">
+    <h2>📊 写作统计</h2>
+
+    <!-- Overview cards -->
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-value">{totalPosts}</span><span class="stat-label">文章</span></div>
+      <div class="stat-card"><span class="stat-value">{(totalWords / 1000).toFixed(1)}k</span><span class="stat-label">字数</span></div>
+      <div class="stat-card"><span class="stat-value">{totalMinutes}</span><span class="stat-label">分钟阅读量</span></div>
+      <div class="stat-card"><span class="stat-value">{spanDays}</span><span class="stat-label">天跨度</span></div>
+    </div>
+
+    <!-- Heatmap -->
+    <h3 style="margin-top: var(--space-xl);">写作热力图</h3>
+    <div class="heatmap">
+      <div class="heatmap-labels">
+        {['一', '三', '五'].map(d => <span class="heatmap-day-label">{d}</span>)}
+      </div>
+      <div class="heatmap-grid">
+        {Object.entries(heatmap).map(([date, count]) => {
+          const dt = new Date(date);
+          const level = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3;
+          return <div class={'heatmap-cell level-' + level} title={date + ': ' + count + ' 篇'}></div>;
+        })}
+      </div>
+    </div>
+
+    <!-- Yearly stats -->
+    <h3 style="margin-top: var(--space-xl);">按年统计</h3>
+    <div class="bar-chart">
+      {Object.entries(byYear).sort((a, b) => b[0] - a[0]).map(([year, data]) => {
+        const maxCount = Math.max(...Object.values(byYear).map(d => d.count));
+        const pct = (data.count / maxCount) * 100;
+        return (
+          <div class="bar-row">
+            <span class="bar-label">{year}</span>
+            <div class="bar-track">
+              <div class="bar-fill" style={'width: ' + pct + '%'}></div>
+            </div>
+            <span class="bar-value">{data.count} 篇 · {(data.words / 1000).toFixed(1)}k 字</span>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Category distribution -->
+    <h3 style="margin-top: var(--space-xl);">分类分布</h3>
+    <div class="tag-cloud">
+      {sortedCats.map(([cat, count]) => {
+        const size = 0.85 + (count / Math.max(...sortedCats.map(c => c[1]))) * 0.4;
+        return <a href={'/categories/#' + cat} style={'font-size: ' + size + 'rem;'}>{cat}<span class="tag-count">{count}</span></a>;
+      })}
+    </div>
+
+    <!-- Tag cloud -->
+    <h3 style="margin-top: var(--space-xl);">标签分布</h3>
+    <div class="tag-cloud">
+      {sortedTags.map(([tag, count]) => {
+        const size = 0.85 + (count / Math.max(...sortedTags.map(t => t[1]))) * 0.4;
+        return <a href={'/tags/#' + tag} style={'font-size: ' + size + 'rem;'}>{tag}<span class="tag-count">{count}</span></a>;
+      })}
+    </div>
+
+    <!-- Longest posts -->
+    <h3 style="margin-top: var(--space-xl);">最长的文章</h3>
+    <ol class="top-list">
+      {longest.map(p => (
+        <li>
+          <a href={'/posts/' + p.id + '/'}>{p.data.title}</a>
+          <span class="top-list-meta">{p.body.length} 字 · {Math.ceil(p.body.length / 200)} 分钟</span>
+        </li>
+      ))}
+    </ol>
+
+    <p style="margin-top: var(--space-xl);"><a href="/" class="more-posts">← 返回首页</a></p>
+  </article>
+</PageLayout>
+
+<style>
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin: var(--space-lg) 0; }
+  .stat-card { text-align: center; padding: var(--space-lg); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); }
+  .stat-value { display: block; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1.2; }
+  .stat-label { font-size: 0.85rem; color: var(--text-tertiary); }
+  .heatmap { display: flex; gap: 6px; margin: var(--space-md) 0; }
+  .heatmap-labels { display: flex; flex-direction: column; gap: 14px; padding-top: 2px; }
+  .heatmap-day-label { font-size: 0.65rem; color: var(--text-tertiary); height: 12px; }
+  .heatmap-grid { display: grid; grid-template-columns: repeat(53, 1fr); gap: 3px; flex: 1; }
+  .heatmap-cell { width: 12px; height: 12px; border-radius: 2px; background: var(--bg-code); }
+  .heatmap-cell.level-1 { background: var(--accent-light); }
+  .heatmap-cell.level-2 { background: var(--accent); opacity: 0.6; }
+  .heatmap-cell.level-3 { background: var(--accent); }
+  .bar-chart { display: flex; flex-direction: column; gap: var(--space-sm); margin: var(--space-md) 0; }
+  .bar-row { display: flex; align-items: center; gap: var(--space-md); }
+  .bar-label { width: 50px; font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); flex-shrink: 0; }
+  .bar-track { flex: 1; height: 24px; background: var(--bg-code); border-radius: var(--radius-sm); overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #8b5cf6); border-radius: var(--radius-sm); transition: width 0.5s ease; }
+  .bar-value { width: 120px; font-size: 0.8rem; color: var(--text-tertiary); flex-shrink: 0; text-align: right; }
+  .top-list { list-style: decimal; padding-left: 1.5em; }
+  .top-list li { margin: var(--space-sm) 0; }
+  .top-list-meta { font-size: 0.8rem; color: var(--text-tertiary); margin-left: var(--space-sm); }
+  @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .heatmap-grid { gap: 2px; } .heatmap-cell { width: 8px; height: 8px; } .bar-value { display: none; } }
+</style>
