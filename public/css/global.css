@@ -1887,3 +1887,62 @@ html.dark-mode-transitioning *::after {
   border-radius: 3px; font-family: var(--font-mono);
   font-size: 0.7rem; min-width: 18px; text-align: center;
 }
+
+
+/* ===== 签名档 ===== */
+.post-signature {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+.post-signature-author {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.8rem;
+  font-style: normal;
+  opacity: 0.6;
+}
+
+/* ===== 系列导航 ===== */
+.post-series {
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--accent-light);
+  border-radius: var(--radius-md);
+}
+.post-series-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--accent);
+}
+.post-series-list {
+  list-style: none;
+  padding: 0;
+}
+.post-series-list li {
+  padding: var(--space-xs) 0;
+  font-size: 0.9rem;
+}
+.post-series-list li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.post-series-list li a:hover {
+  color: var(--accent);
+}
+.post-series-list li.series-current a {
+  color: var(--accent);
+  font-weight: 600;
+}
+.post-series-list li.series-current::before {
+  content: '→ ';
+  color: var(--accent);
+  font-weight: 600;
+}

@@ -24,6 +24,17 @@ const next = currentIdx > 0 ? sorted[currentIdx - 1] : null;
 const related = sorted
   .filter(p => p.id !== post.id && p.data.tags?.some(t => post.data.tags?.includes(t)))
   .slice(0, 3);
+
+// Series detection: find posts with same title base
+function seriesBase(title) {
+  // Remove trailing numbers and whitespace: "杂记03" → "杂记", "weekly01" → "weekly"
+  return title.replace(/[\s\d]*$/, '').trim();
+}
+const base = seriesBase(post.data.title);
+const seriesPosts = base.length > 1 ? sorted.filter(p => seriesBase(p.data.title) === base).reverse() : [];
+const seriesIdx = seriesPosts.findIndex(p => p.id === post.id); // -1 since filtered out
+
+import pickSignature from '../../data/signature.ts';
 const fmt = (d) => d.toISOString().slice(0, 10);
 
 // JSON-LD structured data
@@ -84,6 +95,26 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
         ))}
       </div>
     )}
+
+    <!-- Series navigation -->
+    {seriesPosts.length > 0 && (
+      <div class="post-series">
+        <h4 class="post-series-title">📚 系列文章</h4>
+        <ul class="post-series-list">
+          {seriesPosts.map(sp => (
+            <li class={sp.id === post.id ? 'series-current' : ''}>
+              <a href={`/posts/${sp.id}/`}>{sp.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Signature -->
+    <div class="post-signature">
+      <p>{pickSignature(post.id)}</p>
+      <span class="post-signature-author">—— 闲话</span>
+    </div>
 
     <nav class="post-nav">
       <div class="post-nav-prev">
