@@ -28,10 +28,18 @@
         });
 
         btn.addEventListener('click', function() {
-            var isDark = document.documentElement.classList.toggle('dark');
+            var root = document.documentElement;
+            // Enable transition animation
+            root.classList.add('dark-mode-transitioning');
+            // Toggle theme
+            var isDark = root.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateIcon();
             updateGiscusTheme(isDark);
+            // Remove transition class after animation completes
+            setTimeout(function() {
+                root.classList.remove('dark-mode-transitioning');
+            }, 400);
         });
 
         updateIcon();

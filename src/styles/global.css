@@ -1774,3 +1774,36 @@ html.dark .post-content img:hover {
   align-items: center;
   justify-content: center;
 }
+
+
+/* ===== 文章时效提示 ===== */
+.post-age-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+  background: rgba(255, 189, 46, 0.12);
+  border: 1px solid rgba(255, 189, 46, 0.3);
+  border-radius: var(--radius-md);
+  color: #b8860b;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+html.dark .post-age-notice {
+  background: rgba(255, 189, 46, 0.08);
+  border-color: rgba(255, 189, 46, 0.2);
+  color: #d4a843;
+}
+
+/* ===== 暗色模式切换动画 ===== */
+html.dark-mode-transitioning,
+html.dark-mode-transitioning *,
+html.dark-mode-transitioning *::before,
+html.dark-mode-transitioning *::after {
+  transition: background-color 0.35s ease,
+              color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}

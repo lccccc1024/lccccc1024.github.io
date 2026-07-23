@@ -40,6 +40,10 @@ const jsonLd = {
   },
   keywords: (post.data.tags || []).join(', '),
 };
+
+// Post age check
+const now = new Date();
+const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
 ---
 
 <PageLayout title={post.data.title} description={post.data.description} math={post.data.math}>
@@ -61,6 +65,13 @@ const jsonLd = {
         <button class="copy-link-btn" id="copy-link-btn" title="复制链接" aria-label="复制文章链接">复制链接</button>
       </div>
     </header>
+
+    {postAge >= 1 && (
+      <div class="post-age-notice">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="12" x2="12" y2="8"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="12" y1="12" x2="16" y2="12"/></svg>
+        <span>本文写于 {postAge} 年前，内容可能已过时</span>
+      </div>
+    )}
 
     <div class="post-content">
       <Content />
