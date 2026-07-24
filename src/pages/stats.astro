@@ -87,7 +87,7 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
     <h3 style="margin-top: var(--space-xl);">按年统计</h3>
     <div class="bar-chart">
       {Object.entries(byYear).sort((a, b) => b[0] - a[0]).map(([year, data]) => {
-        const maxCount = Math.max(...Object.values(byYear).map(d => d.count));
+        const maxCount = Math.max(...Object.values(byYear).map(d => d.count), 1);
         const pct = (data.count / maxCount) * 100;
         return (
           <div class="bar-row">

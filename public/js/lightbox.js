@@ -52,7 +52,7 @@
         document.body.style.overflow = '';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    function init_lightbox() {
         var images = document.querySelectorAll('.post-card img, .post-content img, article img');
         images.forEach(function(img) {
             if (img.closest('a')) return;
@@ -64,5 +64,6 @@
                 close();
             }
         });
-    });
+    }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init_lightbox); else init_lightbox();
 })();

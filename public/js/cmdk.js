@@ -3,6 +3,7 @@
 
   var overlay, input, results, selectedIndex = -1;
   var pagefind, searchTimeout;
+  window.addEventListener('unhandledrejection', function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); });
 
   function init() {
     // Create DOM

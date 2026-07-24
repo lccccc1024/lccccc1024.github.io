@@ -93,6 +93,5 @@ function updateRowNumbers(tbody) {
 }
 
 // 页面加载完成后初始化表格排序
-document.addEventListener('DOMContentLoaded', function() {
-    initTableSort();
-});
+function initList() { initTableSort(); }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initList); else initList();

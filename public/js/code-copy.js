@@ -3,7 +3,7 @@
  * 为文章中的代码块添加复制按钮
  */
 (function() {
-    document.addEventListener('DOMContentLoaded', function() {
+    function init_copy() {
         var codeBlocks = document.querySelectorAll('.highlight');
 
         codeBlocks.forEach(function(block) {

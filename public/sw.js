@@ -9,6 +9,8 @@ const ASSETS = [
   '/js/ui-enhance.js',
   '/js/list-pages.js',
   '/js/fuse.min.js',
+  '/js/cmdk.js',
+  '/search.json',
   '/js/toc.js',
   '/lccccc1024.png',
 ];
