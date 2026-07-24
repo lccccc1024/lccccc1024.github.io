@@ -1,0 +1,169 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import photos, { categories } from '../data/photos';
+---
+
+<PageLayout title="摄影作品" description="用镜头记录生活的瞬间">
+  <section class="photo-hero">
+    <div class="photo-hero-bg" style={`background-image: url(${photos[0].src})`}></div>
+    <div class="photo-hero-content">
+      <h1 class="photo-hero-title">摄影作品</h1>
+      <p class="photo-hero-desc">用镜头记录生活的瞬间</p>
+      <p class="photo-hero-count">{photos.length} 张照片</p>
+    </div>
+  </section>
+
+  <!-- 3D Tunnel Carousel -->
+  <section class="tunnel-section">
+    <h2 class="section-title">🎠 时光隧道</h2>
+    <div class="tunnel-container" id="tunnel">
+      <div class="tunnel-stage" id="tunnel-stage">
+        {photos.map((photo, i) => {
+          const angle = (360 / photos.length) * i;
+          return (
+            <div class="tunnel-card" style={`transform: rotateY(${angle}deg) translateZ(300px)`}>
+              <img src={photo.src} alt={photo.title} loading="lazy" />
+              <span class="tunnel-label">{photo.title}</span>
+            </div>
+          );
+        })}
+      </div>
+      <button class="tunnel-nav tunnel-prev" id="tunnel-prev" aria-label="上一张">‹</button>
+      <button class="tunnel-nav tunnel-next" id="tunnel-next" aria-label="下一张">›</button>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="gallery-section">
+    <h2 class="section-title">📷 全部作品</h2>
+
+    <div class="gallery-filters" id="gallery-filters">
+      <button class="gallery-filter active" data-filter="all">全部</button>
+      {categories.map(cat => (
+        <button class="gallery-filter" data-filter={cat}>{cat}</button>
+      ))}
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      {photos.map((photo, i) => (
+        <div class="gallery-item" data-category={photo.category}>
+          <a href={photo.src} class="gallery-link" data-lightbox="photography">
+            <img src={photo.src} alt={photo.title} loading="lazy" class="gallery-img" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">{photo.title}</span>
+              {photo.location && <span class="gallery-location">{photo.location}</span>}
+              {photo.date && <span class="gallery-date">{photo.date}</span>}
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<script data-astro-rerun>
+// 3D Tunnel control
+(function() {
+  var stage = document.getElementById('tunnel-stage');
+  var prev = document.getElementById('tunnel-prev');
+  var next = document.getElementById('tunnel-next');
+  if (!stage || !prev || !next) return;
+
+  var angle = 0;
+  var autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+
+  function rotate(dir) {
+    angle += dir * 30; // 360 / 12 photos
+    stage.style.transition = 'transform 0.6s ease';
+    stage.style.transform = 'rotateY(' + angle + 'deg)';
+    setTimeout(function() { stage.style.transition = ''; }, 600);
+    // Reset auto-rotate timer
+    clearInterval(autoRotate);
+    autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+  }
+
+  prev.addEventListener('click', function() { rotate(-1); });
+  next.addEventListener('click', function() { rotate(1); });
+
+  // Pause on hover
+  var tunnel = document.getElementById('tunnel');
+  tunnel.addEventListener('mouseenter', function() { clearInterval(autoRotate); });
+  tunnel.addEventListener('mouseleave', function() {
+    clearInterval(autoRotate);
+    autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+  });
+})();
+
+// Gallery filter
+(function() {
+  var filters = document.querySelectorAll('.gallery-filter');
+  var items = document.querySelectorAll('.gallery-item');
+
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      items.forEach(function(item) {
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.style.display = '';
+          item.classList.add('gallery-enter');
+        } else {
+          item.style.display = 'none';
+          item.classList.remove('gallery-enter');
+        }
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+/* ===== Photo Hero ===== */
+.photo-hero { position: relative; height: 50vh; min-height: 320px; display: flex; align-items: center; justify-content: center; margin: calc(-1 * var(--space-xl)) 0 var(--space-xl); overflow: hidden; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+.photo-hero-bg { position: absolute; inset: -10px; background-size: cover; background-position: center; filter: brightness(0.5) blur(2px); }
+.photo-hero-content { position: relative; text-align: center; color: white; z-index: 1; padding: var(--space-xl); }
+.photo-hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: var(--space-sm); color: white; }
+.photo-hero-desc { font-size: 1.2rem; opacity: 0.85; }
+.photo-hero-count { margin-top: var(--space-md); font-size: 0.9rem; opacity: 0.6; }
+
+/* ===== 3D Tunnel ===== */
+.tunnel-section { margin: var(--space-2xl) 0; }
+.tunnel-container { position: relative; height: 400px; perspective: 900px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.tunnel-stage { position: relative; width: 200px; height: 150px; transform-style: preserve-3d; }
+.tunnel-card { position: absolute; width: 200px; height: 150px; backface-visibility: hidden; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.2); cursor: pointer; }
+.tunnel-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tunnel-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; font-size: 0.85rem; font-weight: 500; }
+.tunnel-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-nav); backdrop-filter: blur(20px); color: var(--text-primary); font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: var(--shadow-md); }
+.tunnel-nav:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.tunnel-prev { left: 10%; }
+.tunnel-next { right: 10%; }
+
+/* ===== Gallery ===== */
+.gallery-section { margin: var(--space-2xl) 0; }
+.section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-lg); color: var(--text-primary); }
+.gallery-filters { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg); }
+.gallery-filter { padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 0.9rem; font-family: var(--font-sans); transition: all 0.2s; }
+.gallery-filter:hover, .gallery-filter.active { background: var(--accent); color: white; border-color: var(--accent); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-md); }
+.gallery-item { border-radius: var(--radius-md); overflow: hidden; position: relative; }
+.gallery-item.gallery-enter { animation: gallery-in 0.4s ease-out both; }
+@keyframes gallery-in { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.gallery-link { display: block; position: relative; overflow: hidden; text-decoration: none; }
+.gallery-img { width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.gallery-link:hover .gallery-img { transform: scale(1.08); }
+.gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-md); background: linear-gradient(transparent, rgba(0,0,0,0.75)); color: white; opacity: 0; transition: opacity 0.3s; }
+.gallery-link:hover .gallery-overlay { opacity: 1; }
+.gallery-title { display: block; font-weight: 600; font-size: 1rem; }
+.gallery-location, .gallery-date { display: block; font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+@media (max-width: 768px) {
+  .photo-hero { height: 35vh; min-height: 240px; }
+  .photo-hero-title { font-size: 2.2rem; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .gallery-img { height: 160px; }
+  .tunnel-container { height: 300px; }
+  .tunnel-card { width: 160px; height: 120px; }
+  .tunnel-card { transform: rotateY(var(--angle)) translateZ(200px) !important; }
+}
+</style>
