@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>测试一下 | 闲话</title><meta name="description" content="这是一篇测试文章"><link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#5e5ce6"><link rel="alternate" type="application/rss+xml" title="闲话" href="/feed.xml"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><link rel="stylesheet" href="/css/global.css"><script>
+    // Prevent FOUC: set dark class before paint
+    (function() {
+      var t = localStorage.getItem('theme');
+      var p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && p)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*),[data-astro-transition-scope]{animation:none!important}}.astro-route-announcer{clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;width:1px;height:1px;position:absolute;top:0;left:0;overflow:hidden}
+</style><style>[data-astro-transition-scope="astro-dj2qnjhp-1"] { view-transition-name: astro-dj2qnjhp-1; }@layer astro { ::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back]::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back]::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeIn, astroSlideFromLeft; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeIn, astroSlideFromLeft; }</style></head><body><a href="#main-content" class="skip-link">跳到主要内容</a><div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div><span class="read-progress-text" id="read-progress-text"></span><nav class="site-nav"><div class="nav-inner"><a href="/" class="nav-logo">闲话</a><ul class="nav-links"><li><a href="/">首页</a></li><li><a href="/archive/">归档</a></li><li class="nav-dropdown"><a class="nav-dropdown-trigger">清单</a><ul class="nav-dropdown-menu"><li><a href="/light/">电影清单</a></li><li><a href="/readlist/">阅读清单</a></li><li><a href="/want/">心愿单</a></li></ul></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/about/">关于</a></li><li><a href="/stats">📊 统计</a></li><li><a href="/random" id="nav-random">🎲 随便看看</a></li><li><a href="/feed.xml" id="nav-rss">RSS</a></li></ul><button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题"><span class="theme-icon-nav"></span></button><button class="nav-hamburger" id="nav-hamburger" aria-label="菜单"><span></span><span></span><span></span></button></div></nav><div class="nav-overlay" id="nav-overlay"><ul class="nav-overlay-links"><li><a href="/">首页</a></li><li class="overlay-section">清单</li><li class="overlay-sub"><a href="/light/">电影清单</a></li><li class="overlay-sub"><a href="/readlist/">阅读清单</a></li><li class="overlay-sub"><a href="/want/">心愿单</a></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/stats/">📊 统计</a></li><li><a href="/random">🎲 随便看看</a></li><li><a href="/about/">关于</a></li><li><a href="/feed.xml">RSS</a></li></ul></div><main data-astro-transition-scope="astro-dj2qnjhp-1" class="page-content" id="main-content" aria-label="内容"><div class="wrapper"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"测试一下","datePublished":"2021-07-16T00:00:00.000Z","dateModified":"2021-07-16T00:00:00.000Z","description":"这是一篇测试文章","author":{"@type":"Person","name":"Lcc"},"keywords":"测试"}</script><article class="post-card"><header class="post-header"><h1 class="post-title">测试一下</h1><div class="post-meta"><time datetime="2021-07-16">2021-07-16</time><span class="meta-separator">·</span><span>135 字 · 约 1 分钟</span><span class="meta-separator">·</span><span class="post-categories">杂记</span><span class="meta-separator">·</span><button class="copy-link-btn" id="copy-link-btn" title="复制链接" aria-label="复制文章链接">复制链接</button></div></header><div class="post-age-notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="12" x2="12" y2="8"></line><line x1="12" y1="16" x2="12.01" y2="16"></line><line x1="12" y1="12" x2="16" y2="12"></line></svg><span>本文写于 5 年前，内容可能已过时</span></div><div class="post-content"><h2 id="hello-world">Hello World</h2>
+<p>这是博客的第一篇文章，用于测试系统是否正常运行。</p>
+<h3 id="代码测试">代码测试</h3>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#24292E">console.</span><span style="color:#6F42C1">log</span><span style="color:#24292E">(</span><span style="color:#032F62">'Hello, World!'</span><span style="color:#24292E">);</span></span></code></pre>
+<h3 id="图片测试">图片测试</h3>
+<p><img src="/lccccc1024.png" alt="测试图片"></p>
+</div><div class="post-footer-tags"><a href="/tags/#测试" class="post-tag">测试</a></div><!-- Series navigation --><div class="post-series"><h4 class="post-series-title">📚 系列文章</h4><ul class="post-series-list"><li class="series-current"><a href="/posts/test-post/">测试一下</a></li></ul></div><!-- Signature --><div class="post-signature"><p>保持记录，保持诚实。</p><span class="post-signature-author">—— 闲话</span></div><nav class="post-nav"><div class="post-nav-prev"></div><div class="post-nav-next"><a href="/posts/2021-07-16-测试一下/" rel="next"><span class="nav-label">下一篇 →</span><span class="nav-title">测试一下效果</span></a></div></nav><div class="comments-section"><script src="https://giscus.app/client.js" data-repo="lccccc1024/lccccc1024.github.io" data-repo-id="R_kgDOIBXa0g" data-category="Announcements" data-category-id="DIC_kwDOIBXa0s4C6Wys" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+        </script></div></article><script src="/js/toc.js" defer data-astro-rerun></script><script type="module" src="/_astro/_...slug_.astro_astro_type_script_index_0_lang.DuKXldXw.js"></script></div></main><button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部"><svg class="back-to-top-ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2" opacity="0.15"></circle><circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="119.38" stroke-dashoffset="119.38" stroke-linecap="round" transform="rotate(-90 22 22)"></circle></svg><svg class="back-to-top-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><footer class="site-footer"><div class="footer-inner"><span class="footer-copy">&copy; 2026 Lcc</span><span class="footer-sep">·</span><span class="footer-powered">Powered by Astro</span></div></footer><script data-astro-rerun>
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.getElementById('nav-hamburger');
+      var overlay = document.getElementById('nav-overlay');
+      if (hamburger && overlay) {
+        hamburger.addEventListener('click', function() {
+          overlay.classList.toggle('active');
+          hamburger.classList.toggle('active');
+        });
+        overlay.querySelectorAll('a').forEach(function(l) {
+          l.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script><script data-astro-rerun>
+    // Back to top
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('back-to-top');
+      var ring = document.getElementById('ring-fill');
+      if (!btn) return;
+      var circumference = 119.38;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        btn.classList.toggle('visible', scrollTop > 300);
+        if (ring) ring.style.strokeDashoffset = circumference * (1 - progress);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script><script src="/js/theme-toggle.js" defer data-astro-rerun></script><script src="/js/cmdk.js" defer data-astro-rerun></script><script src="/js/particles.js" defer></script><script src="/js/lightbox.js" defer data-astro-rerun></script><script src="/js/code-copy.js" defer data-astro-rerun></script><script src="/js/image-blur.js" defer data-astro-rerun></script><script src="/js/ui-enhance.js" defer data-astro-rerun></script><script>
+    // Reading progress bar
+    document.addEventListener('DOMContentLoaded', function() {
+      var bar = document.getElementById('progress-bar');
+      var pct = document.getElementById('read-progress-text');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        bar.style.width = (progress * 100) + '%';
+        if (pct) {
+          var p = Math.round(progress * 100);
+          pct.textContent = p + '%';
+          pct.classList.toggle('visible', scrollTop > 300);
+        }
+      }, { passive: true });
+    });
+
+    // Service worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script></body></html>

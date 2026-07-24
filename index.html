@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>首页 | 闲话</title><meta name="description" content="分享日常杂记、技术笔记的极简博客"><link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#5e5ce6"><link rel="alternate" type="application/rss+xml" title="闲话" href="/feed.xml"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><link rel="stylesheet" href="/css/global.css"><script>
+    // Prevent FOUC: set dark class before paint
+    (function() {
+      var t = localStorage.getItem('theme');
+      var p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && p)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*),[data-astro-transition-scope]{animation:none!important}}.astro-route-announcer{clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;width:1px;height:1px;position:absolute;top:0;left:0;overflow:hidden}
+</style><style>[data-astro-transition-scope="astro-dj2qnjhp-1"] { view-transition-name: astro-dj2qnjhp-1; }@layer astro { ::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back]::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back]::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeIn, astroSlideFromLeft; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeIn, astroSlideFromLeft; }</style></head><body><a href="#main-content" class="skip-link">跳到主要内容</a><div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div><span class="read-progress-text" id="read-progress-text"></span><nav class="site-nav"><div class="nav-inner"><a href="/" class="nav-logo">闲话</a><ul class="nav-links"><li><a href="/">首页</a></li><li><a href="/archive/">归档</a></li><li class="nav-dropdown"><a class="nav-dropdown-trigger">清单</a><ul class="nav-dropdown-menu"><li><a href="/light/">电影清单</a></li><li><a href="/readlist/">阅读清单</a></li><li><a href="/want/">心愿单</a></li></ul></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/about/">关于</a></li><li><a href="/stats">📊 统计</a></li><li><a href="/random" id="nav-random">🎲 随便看看</a></li><li><a href="/feed.xml" id="nav-rss">RSS</a></li></ul><button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题"><span class="theme-icon-nav"></span></button><button class="nav-hamburger" id="nav-hamburger" aria-label="菜单"><span></span><span></span><span></span></button></div></nav><div class="nav-overlay" id="nav-overlay"><ul class="nav-overlay-links"><li><a href="/">首页</a></li><li class="overlay-section">清单</li><li class="overlay-sub"><a href="/light/">电影清单</a></li><li class="overlay-sub"><a href="/readlist/">阅读清单</a></li><li class="overlay-sub"><a href="/want/">心愿单</a></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/stats/">📊 统计</a></li><li><a href="/random">🎲 随便看看</a></li><li><a href="/about/">关于</a></li><li><a href="/feed.xml">RSS</a></li></ul></div><main data-astro-transition-scope="astro-dj2qnjhp-1" class="page-content" id="main-content" aria-label="内容"><div class="wrapper"><section class="hero"><h1 class="hero-title">闲话</h1><p class="hero-description">分享日常杂记、技术笔记的极简博客</p></section><h2 class="home-section-title">最新文章</h2><ul class="home-list"><li><div class="home-post-inner"><a href="/posts/2026-04-04-写点什么1/" class="home-thumb-link"><div class="home-thumb-placeholder" data-category="杂记"></div></a><div class="home-post-body"><a href="/posts/2026-04-04-写点什么1/">写点什么1</a><div class="home-post-meta"><span class="home-date">2026-04-04</span><span class="post-category">杂记</span><span class="home-reading-time">6 min</span></div><div class="home-post-tags"><span class="post-tag">生活</span><span class="post-tag">摄影</span></div><p class="home-excerpt">## 2026年04月04日·星期六·晴
+---
+1. 距离上一次写点什么已经过了近半年的时间，时间是过的越来越快了。最近这半年以来AI的发展可以说是日新月异，几乎每段时间都会有一个新的概念出现。前段时间是openclaw很空出世，然后</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-11-21-杂记11/" class="home-thumb-link"><div class="home-thumb-placeholder" data-category="杂记"></div></a><div class="home-post-body"><a href="/posts/2025-11-21-杂记11/">杂记11</a><div class="home-post-meta"><span class="home-date">2025-11-21</span><span class="post-category">杂记</span><span class="home-reading-time">6 min</span></div><div class="home-post-tags"><span class="post-tag">生活</span><span class="post-tag">摄影</span><span class="post-tag">出差</span></div><p class="home-excerpt">## 2025年11月21日·星期五·晴
+---
+1. 最近终于入手了人生中的第一台真正意义上的相机，尼康Z30小套。虽然这只能算是最入门级的半画幅微单，但应该也够用了。毕竟现在的摄影水平可以用没有来形容，等到小Z30满足不了的时候出掉</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-06-16-fnosnastool搭建全自动观影追剧/" class="home-thumb-link"><img src="https://cdn.jsdelivr.net/gh/lccccc1024/images/20250618101549.png" alt="" class="home-thumb" loading="lazy"></a><div class="home-post-body"><a href="/posts/2025-06-16-fnosnastool搭建全自动观影追剧/">fnos+nastool搭建全自动观影追剧</a><div class="home-post-meta"><span class="home-date">2025-06-16</span><span class="post-category">技术</span><span class="home-reading-time">5 min</span></div><div class="home-post-tags"><span class="post-tag">技术</span><span class="post-tag">nas</span><span class="post-tag">笔记</span></div><p class="home-excerpt">## 前言
+虽然早就在家里搭了NAS，但是一直都没有真正发挥出作用来。借着最近Alist被收购不再可靠的缘由研究了一下自动观影追剧的流程，顺便写个文档记录下来。
+---
+
+## 一、准备工作
+我们需要先安装三个东西分别是nasto</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-05-28-杂记10/" class="home-thumb-link"><div class="home-thumb-placeholder" data-category="杂记"></div></a><div class="home-post-body"><a href="/posts/2025-05-28-杂记10/">杂记10</a><div class="home-post-meta"><span class="home-date">2025-05-28</span><span class="post-category">杂记</span><span class="home-reading-time">1 min</span></div><div class="home-post-tags"><span class="post-tag">生活</span><span class="post-tag">日常</span><span class="post-tag">杂记</span></div><p class="home-excerpt">## 2025年5月28日 · 星期三 · 小雨转晴
+---
+一大早就收到手机推送的暴雨预警，等了一天都没来，下午甚至还变成了晴天。
+
+---
+
+*愿日常的琐碎，终将组成完整的你我。*</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-04-25-使用githubpicgo搭建免费图床/" class="home-thumb-link"><img src="https://cdn.jsdelivr.net/gh/lccccc1024/images/202504251055572.png" alt="" class="home-thumb" loading="lazy"></a><div class="home-post-body"><a href="/posts/2025-04-25-使用githubpicgo搭建免费图床/">使用GitHub+picgo搭建免费图床</a><div class="home-post-meta"><span class="home-date">2025-04-25</span><span class="post-category">技术</span><span class="home-reading-time">7 min</span></div><div class="home-post-tags"><span class="post-tag">技术</span><span class="post-tag">图床</span><span class="post-tag">笔记</span></div><p class="home-excerpt">## 前言
+最近尝试把工作中写的文档进行整理，以备不时之需，结果发现没办法把图片上传到文章中并且正常显示，一番学习之后找到一个简单方便的方法，就是 GitHub+PicGo的方案，使用 GitHub 搭配 PicGo 搭建图床是一个简单高</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-04-24-kms服务器搭建/" class="home-thumb-link"><img src="https://cdn.jsdelivr.net/gh/lccccc1024/images@master/01.png" alt="" class="home-thumb" loading="lazy"></a><div class="home-post-body"><a href="/posts/2025-04-24-kms服务器搭建/">kms服务器搭建</a><div class="home-post-meta"><span class="home-date">2025-04-24</span><span class="post-category">技术</span><span class="home-reading-time">9 min</span></div><div class="home-post-tags"><span class="post-tag">技术</span><span class="post-tag">服务器</span><span class="post-tag">笔记</span></div><p class="home-excerpt">## 一、前言
+[vlmcsd ](https://github.com/Wind4/vlmcsd)是一个开源的 KMS 激活服务器模拟器,主要用于在局域网环境下模拟微软官方的 Key Management Service，实现对 Win</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2025-04-23-杂记09/" class="home-thumb-link"><div class="home-thumb-placeholder" data-category="杂记"></div></a><div class="home-post-body"><a href="/posts/2025-04-23-杂记09/">杂记09</a><div class="home-post-meta"><span class="home-date">2025-04-23</span><span class="post-category">杂记</span><span class="home-reading-time">2 min</span></div><div class="home-post-tags"><span class="post-tag">生活</span><span class="post-tag">日常</span><span class="post-tag">杂记</span></div><p class="home-excerpt">1. 有好久没有更新了，今天来写一下最近的一些事情。ai 的发展实在是太快了，我也在不断的学习和探索。这不现在这个短文就是用 trae 这个软件来写的，它能直接结合上下文来生成文本，我只要写一段话的开头，它就能预测我接下来想说的话。虽然说它</p></div></div></li><li><div class="home-post-inner"><a href="/posts/2024-10-25-杂记08/" class="home-thumb-link"><div class="home-thumb-placeholder" data-category="杂记"></div></a><div class="home-post-body"><a href="/posts/2024-10-25-杂记08/">杂记08</a><div class="home-post-meta"><span class="home-date">2024-10-25</span><span class="post-category">杂记</span><span class="home-reading-time">5 min</span></div><div class="home-post-tags"><span class="post-tag">生活</span><span class="post-tag">日常</span><span class="post-tag">杂记</span></div><p class="home-excerpt">1. 最近一段时间相对来说是比较清闲了，我发现有时候就有点奇怪，太忙了受不了，太闲了也受不了。这段时间一旦没办法给自己安排一点任务就会焦虑，摸鱼都不能专心致志。仿佛这辈子注定了是劳苦命。马上秋天就要过完啦，今年的冬天不知道会不会像去年那样极</p></div></div></li></ul><a href="/archive/" class="more-posts">查看全部文章 →</a><div class="search-box"><div class="search-inner"><span class="search-icon" aria-hidden="true"></span><input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章"></div><ul id="search-results" class="home-list" style="display: none;"></ul></div><script src="/js/fuse.min.js"></script><script type="module" src="/_astro/index.astro_astro_type_script_index_0_lang.Db6z4ehX.js"></script></div></main><button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部"><svg class="back-to-top-ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2" opacity="0.15"></circle><circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="119.38" stroke-dashoffset="119.38" stroke-linecap="round" transform="rotate(-90 22 22)"></circle></svg><svg class="back-to-top-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><footer class="site-footer"><div class="footer-inner"><span class="footer-copy">&copy; 2026 Lcc</span><span class="footer-sep">·</span><span class="footer-powered">Powered by Astro</span></div></footer><script data-astro-rerun>
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.getElementById('nav-hamburger');
+      var overlay = document.getElementById('nav-overlay');
+      if (hamburger && overlay) {
+        hamburger.addEventListener('click', function() {
+          overlay.classList.toggle('active');
+          hamburger.classList.toggle('active');
+        });
+        overlay.querySelectorAll('a').forEach(function(l) {
+          l.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script><script data-astro-rerun>
+    // Back to top
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('back-to-top');
+      var ring = document.getElementById('ring-fill');
+      if (!btn) return;
+      var circumference = 119.38;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        btn.classList.toggle('visible', scrollTop > 300);
+        if (ring) ring.style.strokeDashoffset = circumference * (1 - progress);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script><script src="/js/theme-toggle.js" defer data-astro-rerun></script><script src="/js/cmdk.js" defer data-astro-rerun></script><script src="/js/particles.js" defer></script><script src="/js/lightbox.js" defer data-astro-rerun></script><script src="/js/code-copy.js" defer data-astro-rerun></script><script src="/js/image-blur.js" defer data-astro-rerun></script><script src="/js/ui-enhance.js" defer data-astro-rerun></script><script>
+    // Reading progress bar
+    document.addEventListener('DOMContentLoaded', function() {
+      var bar = document.getElementById('progress-bar');
+      var pct = document.getElementById('read-progress-text');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        bar.style.width = (progress * 100) + '%';
+        if (pct) {
+          var p = Math.round(progress * 100);
+          pct.textContent = p + '%';
+          pct.classList.toggle('visible', scrollTop > 300);
+        }
+      }, { passive: true });
+    });
+
+    // Service worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script></body></html>
