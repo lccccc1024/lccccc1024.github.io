@@ -2,16 +2,16 @@
   'use strict';
 
   // === 配置 ===
-  var PARTICLE_COUNT = 20;
-  var PARTICLE_MAX_SIZE = 4;
-  var PARTICLE_MIN_SIZE = 2;
-  var SPEED = 0.15;
-  var CONNECT_DIST = 100;
-  var FPS = 30;
-  var GRID_SPACING = 60;
-  var GRID_OPACITY = 0.04;
+  let PARTICLE_COUNT = 20;
+  let PARTICLE_MAX_SIZE = 4;
+  let PARTICLE_MIN_SIZE = 2;
+  let SPEED = 0.15;
+  let CONNECT_DIST = 100;
+  let FPS = 30;
+  let GRID_SPACING = 60;
+  let GRID_OPACITY = 0.04;
 
-  var canvas, ctx, particles, width, height, mouse, gridOffset;
+  let canvas, ctx, particles, width, height, mouse, gridOffset;
 
   function init() {
     canvas = document.createElement('canvas');
@@ -48,7 +48,7 @@
 
   function createParticles() {
     particles = [];
-    for (var i = 0; i < PARTICLE_COUNT; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -65,14 +65,14 @@
     gridOffset = (gridOffset + 0.05) % GRID_SPACING;
 
     ctx.save();
-    var isDark = document.documentElement.classList.contains('dark');
+    let isDark = document.documentElement.classList.contains('dark');
     ctx.strokeStyle = isDark
       ? 'rgba(255,255,255,' + GRID_OPACITY + ')'
       : 'rgba(0,0,0,' + GRID_OPACITY + ')';
     ctx.lineWidth = 0.5;
 
     // Vertical lines
-    for (var x = gridOffset; x < width; x += GRID_SPACING) {
+    for (let x = gridOffset; x < width; x += GRID_SPACING) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, height);
@@ -80,7 +80,7 @@
     }
 
     // Horizontal lines
-    for (var y = gridOffset; y < height; y += GRID_SPACING) {
+    for (let y = gridOffset; y < height; y += GRID_SPACING) {
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(width, y);
@@ -91,11 +91,11 @@
   }
 
   function drawParticles() {
-    var isDark = document.documentElement.classList.contains('dark');
+    let isDark = document.documentElement.classList.contains('dark');
 
     // Update particle positions
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
       p.x += p.vx * p.speed;
       p.y += p.vy * p.speed;
 
@@ -108,14 +108,14 @@
 
     // Draw connections
     ctx.save();
-    for (var i = 0; i < particles.length; i++) {
-      for (var j = i + 1; j < particles.length; j++) {
-        var dx = particles[i].x - particles[j].x;
-        var dy = particles[i].y - particles[j].y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        let dx = particles[i].x - particles[j].x;
+        let dy = particles[i].y - particles[j].y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONNECT_DIST) {
-          var alpha = (1 - dist / CONNECT_DIST) * 0.12;
+          let alpha = (1 - dist / CONNECT_DIST) * 0.12;
           ctx.strokeStyle = isDark
             ? 'rgba(139, 140, 247, ' + alpha + ')'
             : 'rgba(94, 92, 230, ' + alpha + ')';
@@ -130,14 +130,14 @@
     ctx.restore();
 
     // Draw particles
-    var time = Date.now() / 1000;
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      var glow = 0.5 + 0.5 * Math.sin(time * 0.5 + p.phase);
+    let time = Date.now() / 1000;
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      let glow = 0.5 + 0.5 * Math.sin(time * 0.5 + p.phase);
 
       ctx.save();
       // Glow
-      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+      let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
       if (isDark) {
         gradient.addColorStop(0, 'rgba(139, 140, 247, ' + (0.3 * glow) + ')');
         gradient.addColorStop(1, 'rgba(139, 140, 247, 0)');
@@ -161,13 +161,13 @@
     }
   }
 
-  var lastTick = 0;
-  var tickInterval = 1000 / FPS;
+  let lastTick = 0;
+  let tickInterval = 1000 / FPS;
 
   function animate(timestamp) {
     requestAnimationFrame(animate);
 
-    var elapsed = timestamp - lastTick;
+    let elapsed = timestamp - lastTick;
     if (elapsed < tickInterval) return;
     lastTick = timestamp - (elapsed % tickInterval);
 

@@ -2,7 +2,7 @@
   'use strict';
 
   function init() {
-    var images = document.querySelectorAll('.post-content img:not([data-no-blur])');
+    let images = document.querySelectorAll('.post-content img:not([data-no-blur])');
     images.forEach(function(img) {
       // If already loaded (from cache), skip blur to avoid flash
       if (img.complete) {

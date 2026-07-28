@@ -3,20 +3,20 @@
 
   function init() {
     // Code block language labels
-    var highlights = document.querySelectorAll('.post-content .highlight');
+    let highlights = document.querySelectorAll('.post-content .highlight');
     highlights.forEach(function(block) {
-      var code = block.querySelector('code');
+      let code = block.querySelector('code');
       if (!code) return;
 
       // Extract language from class (e.g., "language-javascript" → "js")
-      var langClass = Array.from(code.classList).find(function(c) {
+      let langClass = Array.from(code.classList).find(function(c) {
         return c.startsWith('language-');
       });
       if (!langClass) return;
 
-      var lang = langClass.replace('language-', '');
+      let lang = langClass.replace('language-', '');
       // Shorten common names
-      var short = {
+      let short = {
         'javascript': 'js',
         'typescript': 'ts',
         'python': 'py',
@@ -26,16 +26,16 @@
         'yaml': 'yml',
         'markdown': 'md'
       };
-      var label = short[lang] || lang;
+      let label = short[lang] || lang;
 
-      var el = document.createElement('span');
+      let el = document.createElement('span');
       el.className = 'code-lang-label';
       el.textContent = label;
       block.appendChild(el);
     });
 
     // Table row entrance
-    var rows = document.querySelectorAll('.table-container tbody tr');
+    let rows = document.querySelectorAll('.table-container tbody tr');
     rows.forEach(function(row, i) {
       row.style.animationDelay = (i * 0.04) + 's';
       row.classList.add('row-enter');

@@ -3,7 +3,7 @@
  * 点击文章中的图片可放大查看（单例模式）
  */
 (function() {
-    var lightbox, lightboxImg;
+    let lightbox, lightboxImg;
 
     function init(img) {
         if (!lightbox) {
@@ -53,7 +53,7 @@
     }
 
     function init_lightbox() {
-        var images = document.querySelectorAll('.post-card img, .post-content img, article img');
+        let images = document.querySelectorAll('.post-card img, .post-content img, article img');
         images.forEach(function(img) {
             if (img.closest('a')) return;
             init(img);

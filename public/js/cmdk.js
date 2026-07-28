@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  var overlay, input, results, selectedIndex = -1;
-  var pagefind, searchTimeout;
+  let overlay, input, results, selectedIndex = -1;
+  let pagefind, searchTimeout;
   window.addEventListener('unhandledrejection', function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); });
 
   function init() {
@@ -29,7 +29,7 @@
     results = document.getElementById('cmdk-results');
 
     // Load Pagefind
-    var pfScript = document.createElement('script');
+    let pfScript = document.createElement('script');
     pfScript.src = '/pagefind/pagefind.js';
     pfScript.onload = function() {
       pagefind = window.pagefind;
@@ -68,7 +68,7 @@
     // Input handler
     input.addEventListener('input', function() {
       clearTimeout(searchTimeout);
-      var q = input.value.trim();
+      let q = input.value.trim();
       if (q.length < 1) {
         results.innerHTML = '';
         results.classList.remove('has-results');
@@ -124,7 +124,7 @@
   }
 
   function navigate(dir) {
-    var items = results.querySelectorAll('.cmdk-result-item');
+    let items = results.querySelectorAll('.cmdk-result-item');
     if (items.length === 0) return;
     if (selectedIndex >= 0) items[selectedIndex].classList.remove('selected');
     selectedIndex = Math.max(0, Math.min(items.length - 1, selectedIndex + dir));
@@ -133,7 +133,7 @@
   }
 
   function go() {
-    var items = results.querySelectorAll('.cmdk-result-item');
+    let items = results.querySelectorAll('.cmdk-result-item');
     if (selectedIndex >= 0 && items[selectedIndex]) {
       window.location.href = items[selectedIndex].href;
     } else if (items.length > 0) {

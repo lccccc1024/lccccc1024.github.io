@@ -4,15 +4,15 @@
  */
 (function() {
     function init_copy() {
-        var codeBlocks = document.querySelectorAll('.highlight');
+        let codeBlocks = document.querySelectorAll('.highlight');
 
         codeBlocks.forEach(function(block) {
-            var code = block.querySelector('code');
+            let code = block.querySelector('code');
             if (!code) return;
 
-            var codeText = code.textContent;
+            let codeText = code.textContent;
 
-            var btn = document.createElement('button');
+            let btn = document.createElement('button');
             btn.className = 'code-copy-btn';
             btn.textContent = '复制';
 
