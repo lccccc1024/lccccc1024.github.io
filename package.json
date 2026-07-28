@@ -5,7 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npx pagefind --source dist",
+    "build": "astro build",
+    "build:search": "npx pagefind --source dist || echo 'skip'",
+    "build:all": "npm run build && npm run build:search",
     "preview": "astro preview"
   },
   "repository": {
@@ -19,7 +21,6 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.3",
     "fuse.js": "^7.5.0",
-    "pagefind": "^1.5.2",
-    "@astrojs/og": "0.0.4"
+    "pagefind": "^1.5.2"
   }
 }
