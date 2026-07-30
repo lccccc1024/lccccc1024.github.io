@@ -13,7 +13,7 @@ function fmt(d) {
 
 // Extract first image from post body
 function firstImg(body) {
-  var m = body.match(/!\[.*?\]\((.*?)\)/);
+  const m = body.match(/!\[.*?\]\((.*?)\)/);
   return m ? m[1] : null;
 }
 ---
@@ -83,7 +83,7 @@ function firstImg(body) {
     document.addEventListener('DOMContentLoaded', function() {
       var input = document.getElementById('search-input');
       var results = document.getElementById('search-results');
-      var fuse = null;
+      let fuse = null;
 
       fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
         fuse = new Fuse(data, {
@@ -107,11 +107,12 @@ function firstImg(body) {
 
         results.style.display = 'block';
         results.innerHTML = matched.map(function(p) {
-          var title = p.title;
-          var qLower = q.toLowerCase();
+          let title = p.title;
+          const qLower = q.toLowerCase();
           if (qLower.length > 0) {
-            var re = new RegExp('(' + qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
+            const escaped = qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp('(' + escaped + ')', 'gi');
+            title = title.replace(re, (match) => '<mark class="search-highlight">' + match.replace(/</g, '&lt;') + '</mark>');
           }
           return '<li><a href="' + p.url + '">' + title +
                  '</a><span class="home-date">' + p.date + '</span></li>';
@@ -121,7 +122,7 @@ function firstImg(body) {
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      var cards = document.querySelectorAll('.home-list li');
+      const cards = document.querySelectorAll('.home-list li');
       cards.forEach(function(card, i) {
         card.style.animationDelay = (i * 0.08) + 's';
         card.classList.add('card-enter');

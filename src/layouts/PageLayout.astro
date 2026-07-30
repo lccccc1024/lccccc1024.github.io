@@ -85,15 +85,15 @@ const { title, description, math } = Astro.props;
 
   <script data-astro-rerun>
     // Hamburger menu
-    document.addEventListener('DOMContentLoaded', function() {
-      var hamburger = document.getElementById('nav-hamburger');
-      var overlay = document.getElementById('nav-overlay');
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const overlay = document.getElementById('nav-overlay');
       if (hamburger && overlay) {
         hamburger.addEventListener('click', function() {
           overlay.classList.toggle('active');
           hamburger.classList.toggle('active');
         });
-        overlay.querySelectorAll('a').forEach(function(l) {
+        overlay.querySelectorAll('a').forEach((l) => {
           l.addEventListener('click', function() {
             overlay.classList.remove('active');
             hamburger.classList.remove('active');
@@ -104,15 +104,15 @@ const { title, description, math } = Astro.props;
   </script>
   <script data-astro-rerun>
     // Back to top
-    document.addEventListener('DOMContentLoaded', function() {
-      var btn = document.getElementById('back-to-top');
-      var ring = document.getElementById('ring-fill');
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      const ring = document.getElementById('ring-fill');
       if (!btn) return;
       var circumference = 119.38;
-      window.addEventListener('scroll', function() {
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
         btn.classList.toggle('visible', scrollTop > 300);
         if (ring) ring.style.strokeDashoffset = circumference * (1 - progress);
       }, { passive: true });

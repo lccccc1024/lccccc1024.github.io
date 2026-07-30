@@ -18,7 +18,7 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'; form-action 'self'" />
   <title>{pageTitle}</title>
   <meta name="description" content={description || '分享日常杂记、技术笔记的极简博客'} />
   <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
@@ -30,9 +30,9 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 
   <script is:inline>
     // Prevent FOUC: set dark class before paint
-    (function() {
-      var t = localStorage.getItem('theme');
-      var p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    (() => {
+      const t = localStorage.getItem('theme');
+      const p = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (t === 'dark' || (!t && p)) {
         document.documentElement.classList.add('dark');
       }
@@ -59,17 +59,17 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   <script src="/js/ui-enhance.js" defer data-astro-rerun></script>
   <script is:inline>
     // Reading progress bar
-    document.addEventListener('DOMContentLoaded', function() {
-      var bar = document.getElementById('progress-bar');
-      var pct = document.getElementById('read-progress-text');
+    document.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('progress-bar');
+      const pct = document.getElementById('read-progress-text');
       if (!bar) return;
-      window.addEventListener('scroll', function() {
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
         bar.style.width = (progress * 100) + '%';
         if (pct) {
-          var p = Math.round(progress * 100);
+          const p = Math.round(progress * 100);
           pct.textContent = p + '%';
           pct.classList.toggle('visible', scrollTop > 300);
         }
