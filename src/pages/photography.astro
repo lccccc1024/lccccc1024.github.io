@@ -63,48 +63,46 @@ import photos, { categories } from '../data/photos';
 
 <script data-astro-rerun>
 // 3D Tunnel control
-(function() {
-  var stage = document.getElementById('tunnel-stage');
-  var prev = document.getElementById('tunnel-prev');
-  var next = document.getElementById('tunnel-next');
+(() => {
+  const stage = document.getElementById('tunnel-stage');
+  const prev = document.getElementById('tunnel-prev');
+  const next = document.getElementById('tunnel-next');
   if (!stage || !prev || !next) return;
 
-  var angle = 0;
-  var autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+  let angle = 0;
+  let autoRotate = setInterval(() => { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
 
   function rotate(dir) {
-    angle += dir * 30; // 360 / 12 photos
+    angle += dir * 30;
     stage.style.transition = 'transform 0.6s ease';
     stage.style.transform = 'rotateY(' + angle + 'deg)';
-    setTimeout(function() { stage.style.transition = ''; }, 600);
-    // Reset auto-rotate timer
+    setTimeout(() => { stage.style.transition = ''; }, 600);
     clearInterval(autoRotate);
-    autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+    autoRotate = setInterval(() => { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
   }
 
-  prev.addEventListener('click', function() { rotate(-1); });
-  next.addEventListener('click', function() { rotate(1); });
+  prev.addEventListener('click', () => { rotate(-1); });
+  next.addEventListener('click', () => { rotate(1); });
 
-  // Pause on hover
-  var tunnel = document.getElementById('tunnel');
-  tunnel.addEventListener('mouseenter', function() { clearInterval(autoRotate); });
-  tunnel.addEventListener('mouseleave', function() {
+  const tunnel = document.getElementById('tunnel');
+  tunnel.addEventListener('mouseenter', () => { clearInterval(autoRotate); });
+  tunnel.addEventListener('mouseleave', () => {
     clearInterval(autoRotate);
-    autoRotate = setInterval(function() { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
+    autoRotate = setInterval(() => { angle -= 0.5; stage.style.transform = 'rotateY(' + angle + 'deg)'; }, 30);
   });
 })();
 
 // Gallery filter
-(function() {
-  var filters = document.querySelectorAll('.gallery-filter');
-  var items = document.querySelectorAll('.gallery-item');
+(() => {
+  const filters = document.querySelectorAll('.gallery-filter');
+  const items = document.querySelectorAll('.gallery-item');
 
-  filters.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      filters.forEach(function(b) { b.classList.remove('active'); });
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filters.forEach((b) => { b.classList.remove('active'); });
       btn.classList.add('active');
-      var filter = btn.getAttribute('data-filter');
-      items.forEach(function(item) {
+      const filter = btn.getAttribute('data-filter');
+      items.forEach((item) => {
         if (filter === 'all' || item.getAttribute('data-category') === filter) {
           item.style.display = '';
           item.classList.add('gallery-enter');
