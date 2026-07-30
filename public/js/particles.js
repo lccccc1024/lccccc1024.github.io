@@ -14,6 +14,10 @@
   let canvas, ctx, particles, width, height, mouse, gridOffset;
 
   function init() {
+    // Remove old canvas if re-initializing (data-astro-rerun)
+    let old = document.getElementById('bg-particles');
+    if (old) old.remove();
+
     canvas = document.createElement('canvas');
     canvas.id = 'bg-particles';
     canvas.setAttribute('aria-hidden', 'true');

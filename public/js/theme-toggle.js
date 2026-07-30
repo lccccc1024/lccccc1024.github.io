@@ -5,6 +5,15 @@
 
         let icon = btn.querySelector('.theme-icon-nav');
 
+        // Apply saved theme on navigation (FOUC only runs on first load)
+        let saved = localStorage.getItem('theme');
+        let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
         function updateIcon() {
             let isDark = document.documentElement.classList.contains('dark');
             icon.innerHTML = isDark
