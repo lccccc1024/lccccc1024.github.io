@@ -24,12 +24,12 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   <script is:inline src="/js/fuse.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var input = document.getElementById('search-input-404');
-      var results = document.getElementById('search-results-404');
-      var fuse = null;
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('search-input-404');
+      const results = document.getElementById('search-results-404');
+      let fuse = null;
 
-      fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
+      fetch('/search.json').then((r) => r.json()).then((data) => {
         fuse = new Fuse(data, {
           keys: ['title', 'excerpt', 'categories', 'tags'],
           threshold: 0.4,
@@ -38,11 +38,11 @@ import PageLayout from '../layouts/PageLayout.astro';
         });
       });
 
-      input.addEventListener('input', function() {
-        var q = input.value.trim();
+      input.addEventListener('input', () => {
+        const q = input.value.trim();
         if (q.length < 1) { results.style.display = 'none'; return; }
 
-        var matched = fuse ? fuse.search(q).map(function(r) { return r.item; }) : [];
+        const matched = fuse ? fuse.search(q).map((r) => r.item) : [];
 
         if (matched.length === 0) {
           results.style.display = 'block';
@@ -51,14 +51,15 @@ import PageLayout from '../layouts/PageLayout.astro';
         }
 
         results.style.display = 'block';
-        results.innerHTML = matched.slice(0, 5).map(function(p) {
-          var title = p.title;
-          var qLower = q.toLowerCase();
+        results.innerHTML = matched.slice(0, 5).map((p) => {
+          let title = p.title;
+          const qLower = q.toLowerCase();
           if (qLower.length > 0) {
-            var re = new RegExp('(' + qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
+            const escaped = qLower.replace(/[.*+?^=!${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp('(' + escaped + ')', 'gi');
+            title = title.replace(re, (match) => '<mark class="search-highlight">' + match.replace(/</g, '&lt;') + '</mark>');
           }
-          return '<li><a href="' + p.url + '">' + title + '</a></li>';
+          return '<li><a href="' + p.url.replace(/[#"<>]/g, '') + '">' + title + '</a></li>';
         }).join('');
       });
     });

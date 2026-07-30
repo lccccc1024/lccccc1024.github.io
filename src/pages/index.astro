@@ -75,14 +75,14 @@ function firstImg(body) {
       if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input, textarea, [contenteditable]')) ||
           ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
         e.preventDefault();
-        var input = document.getElementById('search-input');
+        let input = document.getElementById('search-input');
         if (input) input.focus();
       }
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      var input = document.getElementById('search-input');
-      var results = document.getElementById('search-results');
+      const input = document.getElementById('search-input');
+      const results = document.getElementById('search-results');
       let fuse = null;
 
       fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
@@ -94,10 +94,10 @@ function firstImg(body) {
         });
         // Register input listener AFTER data is loaded
         input.addEventListener('input', function() {
-        var q = input.value.trim();
+        const q = input.value.trim();
         if (q.length < 1) { results.style.display = 'none'; return; }
 
-        var matched = fuse ? fuse.search(q).map(function(r) { return r.item; }) : [];
+        const matched = fuse ? fuse.search(q).map(function(r) { return r.item; }) : [];
 
         if (matched.length === 0) {
           results.style.display = 'block';
@@ -114,7 +114,7 @@ function firstImg(body) {
             const re = new RegExp('(' + escaped + ')', 'gi');
             title = title.replace(re, (match) => '<mark class="search-highlight">' + match.replace(/</g, '&lt;') + '</mark>');
           }
-          return '<li><a href="' + p.url + '">' + title +
+          return '<li><a href="' + p.url.replace(/[#"<>]/g, '') + '">' + title.replace(/</g, '&lt;') +
                  '</a><span class="home-date">' + p.date + '</span></li>';
         }).join('');
       });
