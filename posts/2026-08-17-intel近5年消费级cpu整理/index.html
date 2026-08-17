@@ -1,0 +1,582 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'; form-action 'self'"><title>intel近5年消费级cpu整理 | 闲话</title><meta name="description" content="分享日常杂记、技术笔记的极简博客"><link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#5e5ce6"><link rel="alternate" type="application/rss+xml" title="闲话" href="/feed.xml"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><link rel="stylesheet" href="/css/global.css"><script>
+    // Prevent FOUC: set dark class before paint
+    (() => {
+      const t = localStorage.getItem('theme');
+      const p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && p)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*),[data-astro-transition-scope]{animation:none!important}}.astro-route-announcer{clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;width:1px;height:1px;position:absolute;top:0;left:0;overflow:hidden}
+</style><style>[data-astro-transition-scope="astro-dj2qnjhp-1"] { view-transition-name: astro-dj2qnjhp-1; }@layer astro { ::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back]::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back]::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeIn, astroSlideFromLeft; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeIn, astroSlideFromLeft; }</style></head><body><a href="#main-content" class="skip-link">跳到主要内容</a><div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div><span class="read-progress-text" id="read-progress-text"></span><nav class="site-nav"><div class="nav-inner"><a href="/" class="nav-logo">闲话</a><ul class="nav-links"><li><a href="/">首页</a></li><li><a href="/archive/">归档</a></li><li class="nav-dropdown"><a class="nav-dropdown-trigger">清单</a><ul class="nav-dropdown-menu"><li><a href="/light/">电影清单</a></li><li><a href="/readlist/">阅读清单</a></li><li><a href="/want/">心愿单</a></li></ul></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/about/">关于</a></li><li><a href="/stats">📊 统计</a></li><li><a href="/random" id="nav-random">🎲 随便看看</a></li><li><a href="/feed.xml" id="nav-rss">RSS</a></li></ul><button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题"><span class="theme-icon-nav"></span></button><button class="nav-hamburger" id="nav-hamburger" aria-label="菜单"><span></span><span></span><span></span></button></div></nav><div class="nav-overlay" id="nav-overlay"><ul class="nav-overlay-links"><li><a href="/">首页</a></li><li class="overlay-section">清单</li><li class="overlay-sub"><a href="/light/">电影清单</a></li><li class="overlay-sub"><a href="/readlist/">阅读清单</a></li><li class="overlay-sub"><a href="/want/">心愿单</a></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/stats/">📊 统计</a></li><li><a href="/random">🎲 随便看看</a></li><li><a href="/about/">关于</a></li><li><a href="/feed.xml">RSS</a></li></ul></div><main data-astro-transition-scope="astro-dj2qnjhp-1" class="page-content" id="main-content" aria-label="内容"><div class="wrapper"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"intel近5年消费级cpu整理","datePublished":"2026-08-17T00:00:00.000Z","dateModified":"2026-08-17T00:00:00.000Z","description":"","author":{"@type":"Person","name":"Lcc"},"keywords":"技术, 硬件, cpu, intel, 笔记"}</script><article class="post-card"><header class="post-header"><h1 class="post-title">intel近5年消费级cpu整理</h1><div class="post-meta"><time datetime="2026-08-17">2026-08-17</time><span class="meta-separator">·</span><span>3606 字 · 约 19 分钟</span><span class="meta-separator">·</span><span class="post-categories">技术</span><span class="meta-separator">·</span><button class="copy-link-btn" id="copy-link-btn" title="复制链接" aria-label="复制文章链接">复制链接</button></div></header><div class="post-content"><h2 id="说明">说明</h2>
+<ul>
+<li><strong>桌面格式</strong>：PL1(基础TDP) / MTP(最大睿频功耗)</li>
+<li><strong>笔记本格式</strong>：PL1(基础功耗) / MTP(最大睿频功耗)</li>
+<li><strong>PL1</strong>：长时间持续运行基准功耗；<strong>MTP</strong>：短时爆发功耗；笔记本厂商可自定义功耗墙，实际会有差异</li>
+<li><strong>档位</strong>：高 = 旗舰，中 = 主流甜品，低 = 入门</li>
+</ul>
+<h2 id="桌面平台">桌面平台</h2>
+<h3 id="alder-lakes-赤杨湖2022intel7lga1700">Alder Lake‑S 赤杨湖｜2022｜Intel7｜LGA1700</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">i9‑12900K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">241W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">i5‑12600K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">190W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">i5‑12400F</td>
+<td style="text-align: right">65W</td>
+<td style="text-align: right">117W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raptor-lakes-猛禽湖2022q4intel7lga1700">Raptor Lake‑S 猛禽湖｜2022Q4｜Intel7｜LGA1700</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">i9‑13900K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">253W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">i5‑13600K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">181W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">i5‑13400F</td>
+<td style="text-align: right">65W</td>
+<td style="text-align: right">148W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raptor-lakes-refresh-猛禽湖刷新14-代桌面2023q4intel7lga1700">Raptor Lake‑S Refresh 猛禽湖刷新（14 代桌面）｜2023Q4｜Intel7｜LGA1700</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">i9‑14900K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">253W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">i5‑14600KF</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">181W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">i5‑14400F</td>
+<td style="text-align: right">65W</td>
+<td style="text-align: right">117W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="arrow-lakes-箭湖s-ultra200s2024q4intel3lga1851">Arrow Lake‑S 箭湖‑S Ultra200S｜2024Q4｜Intel3｜LGA1851</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">Ultra9‑285K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">250W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">Ultra7‑265K</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">210W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">Ultra5‑245KF</td>
+<td style="text-align: right">125W</td>
+<td style="text-align: right">180W</td>
+</tr>
+</tbody>
+</table>
+<h2 id="移动端平台bga-笔记本">移动端平台（BGA 笔记本）</h2>
+<h3 id="alder-lakehpuhx-赤杨湖移动2022intel7">Alder Lake‑H/P/U/HX 赤杨湖移动｜2022｜Intel7</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">i9‑12900HX</td>
+<td style="text-align: right">55W</td>
+<td style="text-align: right">157W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">i7‑12700H</td>
+<td style="text-align: right">45W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">i5‑1245U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raptor-lakehpuhx-猛禽湖移动2023intel7">Raptor Lake‑H/P/U/HX 猛禽湖移动｜2023｜Intel7</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">i9‑14900HX</td>
+<td style="text-align: right">55W</td>
+<td style="text-align: right">157W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">i7‑1470H</td>
+<td style="text-align: right">45W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">i5‑1435U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="core-series1马甲底层-raptoru2024intel7无-npu">Core Series1（马甲，底层 Raptor‑U）｜2024｜Intel7｜无 NPU</h3>
+<blockquote>
+<p>U 低压</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">酷睿 7‑150U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">酷睿 5‑120U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">酷睿 3‑100U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="core-series2马甲底层-raptorhu2025intel7无-npu">Core Series2（马甲，底层 Raptor‑H/U）｜2025｜Intel7｜无 NPU</h3>
+<blockquote>
+<p>H 标压</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">酷睿 9‑270H</td>
+<td style="text-align: right">45W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">酷睿 5‑220H</td>
+<td style="text-align: right">45W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">酷睿 5‑210H</td>
+<td style="text-align: right">45W</td>
+<td style="text-align: right">115W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="meteor-lake-流星湖-ultra100-series12023q4intel4npu1无-hx">Meteor Lake 流星湖 Ultra100 Series1｜2023Q4｜Intel4｜NPU1｜无 HX</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">Ultra7‑165H</td>
+<td style="text-align: right">28W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">Ultra5‑135H</td>
+<td style="text-align: right">28W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">Ultra5‑125U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">64W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="arrow-lakehhxu-箭湖-ultra200-series22025intel3npu2">Arrow Lake‑H/HX/U 箭湖 Ultra200 Series2｜2025｜Intel3｜NPU2</h3>
+<blockquote>
+<p>2026 HX Plus 小改；HX 为 55W 满血游戏本</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">Ultra9‑290HX Plus</td>
+<td style="text-align: right">55W</td>
+<td style="text-align: right">150W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">Ultra7‑255H</td>
+<td style="text-align: right">28W</td>
+<td style="text-align: right">115W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">Ultra5‑225U</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">64W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lunar-lake-月湖-ultra200vv-后缀板载焊死内存2025tsmc-n3bnpu4">Lunar Lake 月湖 Ultra200V（V 后缀，板载焊死内存）｜2025｜TSMC N3B｜NPU4</h3>
+<blockquote>
+<p>PL1=17W，MTP=37W，全部 V 系列统一功耗</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">Ultra9‑288V</td>
+<td style="text-align: right">17W</td>
+<td style="text-align: right">37W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">Ultra7‑266V</td>
+<td style="text-align: right">17W</td>
+<td style="text-align: right">37W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">Ultra5‑226V</td>
+<td style="text-align: right">17W</td>
+<td style="text-align: right">37W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="panther-lake-黑豹湖-ultra3002026intel18anpu5无-hx">Panther Lake 黑豹湖 Ultra300｜2026｜Intel18A｜NPU5｜无 HX</h3>
+<blockquote>
+<p>PL1=25W，MTP=80W（8H/6H 统一）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">Ultra X9‑388H</td>
+<td style="text-align: right">25W</td>
+<td style="text-align: right">80W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">Ultra5‑338H</td>
+<td style="text-align: right">25W</td>
+<td style="text-align: right">80W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">Ultra5‑336H</td>
+<td style="text-align: right">25W</td>
+<td style="text-align: right">80W</td>
+</tr>
+</tbody>
+</table>
+<h3 id="wildcat-lake-野猫湖-core-series3无-ultra2026intel18anpu5不满足-copilot">Wildcat Lake 野猫湖 Core Series3（无 Ultra）｜2026｜Intel18A｜NPU5，不满足 Copilot+</h3>
+<blockquote>
+<p>PL1=15W，MTP=55W</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">档位</th>
+<th style="text-align: left">型号</th>
+<th style="text-align: right">PL1</th>
+<th style="text-align: right">MTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">高</td>
+<td style="text-align: left">酷睿 7‑360</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+<tr>
+<td style="text-align: center">中</td>
+<td style="text-align: left">酷睿 5‑320</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+<tr>
+<td style="text-align: center">低</td>
+<td style="text-align: left">酷睿 3‑305</td>
+<td style="text-align: right">15W</td>
+<td style="text-align: right">55W</td>
+</tr>
+</tbody>
+</table>
+<h2 id="微架构对应速览">微架构对应速览</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">平台</th>
+<th style="text-align: left">P 核</th>
+<th style="text-align: left">E 核</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">Alder Lake</td>
+<td style="text-align: left">Golden Cove</td>
+<td style="text-align: left">Gracemont</td>
+</tr>
+<tr>
+<td style="text-align: left">Raptor Lake / Series1 / Series2 马甲</td>
+<td style="text-align: left">Raptor Cove</td>
+<td style="text-align: left">Gracemont</td>
+</tr>
+<tr>
+<td style="text-align: left">Meteor Lake</td>
+<td style="text-align: left">Redwood Cove</td>
+<td style="text-align: left">Crestmont</td>
+</tr>
+<tr>
+<td style="text-align: left">Arrow Lake</td>
+<td style="text-align: left">Redwood Cove</td>
+<td style="text-align: left">Crestmont + Skymont(LPE)</td>
+</tr>
+<tr>
+<td style="text-align: left">Lunar Lake</td>
+<td style="text-align: left">Lion Cove</td>
+<td style="text-align: left">Skymont</td>
+</tr>
+<tr>
+<td style="text-align: left">Panther Lake</td>
+<td style="text-align: left">Cougar Cove</td>
+<td style="text-align: left">Darkmont(E/LPE)</td>
+</tr>
+<tr>
+<td style="text-align: left">Wildcat Lake</td>
+<td style="text-align: left">Cougar Cove</td>
+<td style="text-align: left">Darkmont(LPE)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="重要备注">重要备注</h2>
+<ol>
+<li><strong>Series1、Series2 不是全新硅架构</strong>，是 Raptor Lake 重命名马甲，无 NPU，请勿和 Ultra100/Ultra200 混淆。</li>
+<li><strong>Meteor / Lunar / Panther / Wildcat 没有桌面 CPU。</strong></li>
+<li><strong>Panther Lake 没有 HX 型号</strong>；2026 满血游戏本平台依旧为 Arrow Lake‑HX Plus。</li>
+</ol>
+</div><div class="post-footer-tags"><a href="/tags/#技术" class="post-tag">技术</a><a href="/tags/#硬件" class="post-tag">硬件</a><a href="/tags/#cpu" class="post-tag">cpu</a><a href="/tags/#intel" class="post-tag">intel</a><a href="/tags/#笔记" class="post-tag">笔记</a></div><!-- Series navigation --><div class="post-series"><h4 class="post-series-title">📚 系列文章</h4><ul class="post-series-list"><li class="series-current"><a href="/posts/2026-08-17-intel近5年消费级cpu整理/">intel近5年消费级cpu整理</a></li></ul></div><!-- Signature --><div class="post-signature"><p>保持记录，保持诚实。</p><span class="post-signature-author">—— 闲话</span></div><nav class="post-nav"><div class="post-nav-prev"><a href="/posts/2026-04-04-写点什么1/" rel="prev"><span class="nav-label">← 上一篇</span><span class="nav-title">写点什么1</span></a></div><div class="post-nav-next"></div></nav><div class="comments-section"><script src="https://giscus.app/client.js" data-repo="lccccc1024/lccccc1024.github.io" data-repo-id="R_kgDOIBXa0g" data-category="Announcements" data-category-id="DIC_kwDOIBXa0s4C6Wys" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+        </script></div><div class="related-posts"><h3 class="related-title">相关文章</h3><ul class="related-list"><li><a href="/posts/2025-06-16-fnosnastool搭建全自动观影追剧/"><span class="related-post-title">fnos+nastool搭建全自动观影追剧</span><span class="related-post-date">2025-06-16</span></a></li><li><a href="/posts/2025-04-25-使用githubpicgo搭建免费图床/"><span class="related-post-title">使用GitHub+picgo搭建免费图床</span><span class="related-post-date">2025-04-25</span></a></li><li><a href="/posts/2025-04-24-kms服务器搭建/"><span class="related-post-title">kms服务器搭建</span><span class="related-post-date">2025-04-24</span></a></li></ul></div></article><script src="/js/toc.js" defer data-astro-rerun></script><script type="module" src="/_astro/_...slug_.astro_astro_type_script_index_0_lang.DuKXldXw.js"></script></div></main><button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部"><svg class="back-to-top-ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2" opacity="0.15"></circle><circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="119.38" stroke-dashoffset="119.38" stroke-linecap="round" transform="rotate(-90 22 22)"></circle></svg><svg class="back-to-top-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><footer class="site-footer"><div class="footer-inner"><span class="footer-copy">&copy; 2026 Lcc</span><span class="footer-sep">·</span><span class="footer-powered">Powered by Astro</span></div></footer><script data-astro-rerun>
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const overlay = document.getElementById('nav-overlay');
+      if (hamburger && overlay) {
+        hamburger.addEventListener('click', function() {
+          overlay.classList.toggle('active');
+          hamburger.classList.toggle('active');
+        });
+        overlay.querySelectorAll('a').forEach((l) => {
+          l.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script><script data-astro-rerun>
+    // Back to top
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      const ring = document.getElementById('ring-fill');
+      if (!btn) return;
+      const circumference = 119.38;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        btn.classList.toggle('visible', scrollTop > 300);
+        if (ring) ring.style.strokeDashoffset = circumference * (1 - progress);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script><script src="/js/theme-toggle.js" defer data-astro-rerun></script><script src="/js/cmdk.js" defer data-astro-rerun></script><script src="/js/particles.js" defer data-astro-rerun></script><script src="/js/lightbox.js" defer data-astro-rerun></script><script src="/js/code-copy.js" defer data-astro-rerun></script><script src="/js/image-blur.js" defer data-astro-rerun></script><script src="/js/ui-enhance.js" defer data-astro-rerun></script><script>
+    // Reading progress bar
+    document.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('progress-bar');
+      const pct = document.getElementById('read-progress-text');
+      if (!bar) return;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        bar.style.width = (progress * 100) + '%';
+        if (pct) {
+          const p = Math.round(progress * 100);
+          pct.textContent = p + '%';
+          pct.classList.toggle('visible', scrollTop > 300);
+        }
+      }, { passive: true });
+    });
+
+    // Service worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script></body></html>
