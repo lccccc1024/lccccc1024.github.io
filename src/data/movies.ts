@@ -1,5 +1,12 @@
 const data = [
   {
+    "title": "欢迎来龙餐馆",
+    "genre": "剧情/战争",
+    "director": "文牧野",
+    "year": 2026,
+    "date": "2026-08-15"
+  },
+  {
     "title": "三国第一部：争洛阳",
     "genre": "动画/历史",
     "director": "谢君伟",
