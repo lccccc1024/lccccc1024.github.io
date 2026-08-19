@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'; form-action 'self'"><title>Kindle越狱与KOReader安装全记录 | 闲话</title><meta name="description" content="分享日常杂记、技术笔记的极简博客"><link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#5e5ce6"><link rel="alternate" type="application/rss+xml" title="闲话" href="/feed.xml"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><link rel="stylesheet" href="/css/global.css"><script>
+    // Prevent FOUC: set dark class before paint
+    (() => {
+      const t = localStorage.getItem('theme');
+      const p = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && p)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*),[data-astro-transition-scope]{animation:none!important}}.astro-route-announcer{clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;width:1px;height:1px;position:absolute;top:0;left:0;overflow:hidden}
+</style><style>[data-astro-transition-scope="astro-dj2qnjhp-1"] { view-transition-name: astro-dj2qnjhp-1; }@layer astro { ::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back]::view-transition-old(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back]::view-transition-new(astro-dj2qnjhp-1) { 
+	animation-name: astroFadeIn, astroSlideFromLeft; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 90ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both, both;
+	animation-name: astroFadeOut, astroSlideToLeft; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-duration: 210ms, 220ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1), cubic-bezier(0.76, 0, 0.24, 1);
+	animation-delay: 30ms;
+	animation-fill-mode: both, both;
+	animation-name: astroFadeIn, astroSlideFromRight; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeOut, astroSlideToRight; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-dj2qnjhp-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-dj2qnjhp-1"] { 
+	animation-name: astroFadeIn, astroSlideFromLeft; }</style></head><body><a href="#main-content" class="skip-link">跳到主要内容</a><div class="progress-bar" id="progress-bar" role="progressbar" aria-hidden="true"></div><span class="read-progress-text" id="read-progress-text"></span><nav class="site-nav"><div class="nav-inner"><a href="/" class="nav-logo">闲话</a><ul class="nav-links"><li><a href="/">首页</a></li><li><a href="/archive/">归档</a></li><li class="nav-dropdown"><a class="nav-dropdown-trigger">清单</a><ul class="nav-dropdown-menu"><li><a href="/light/">电影清单</a></li><li><a href="/readlist/">阅读清单</a></li><li><a href="/want/">心愿单</a></li></ul></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/about/">关于</a></li><li><a href="/stats">📊 统计</a></li><li><a href="/random" id="nav-random">🎲 随便看看</a></li><li><a href="/feed.xml" id="nav-rss">RSS</a></li></ul><button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题"><span class="theme-icon-nav"></span></button><button class="nav-hamburger" id="nav-hamburger" aria-label="菜单"><span></span><span></span><span></span></button></div></nav><div class="nav-overlay" id="nav-overlay"><ul class="nav-overlay-links"><li><a href="/">首页</a></li><li class="overlay-section">清单</li><li class="overlay-sub"><a href="/light/">电影清单</a></li><li class="overlay-sub"><a href="/readlist/">阅读清单</a></li><li class="overlay-sub"><a href="/want/">心愿单</a></li><li><a href="/tags/">标签</a></li><li><a href="/categories/">分类</a></li><li><a href="/photography/">📷 摄影</a></li><li><a href="/stats/">📊 统计</a></li><li><a href="/random">🎲 随便看看</a></li><li><a href="/about/">关于</a></li><li><a href="/feed.xml">RSS</a></li></ul></div><main data-astro-transition-scope="astro-dj2qnjhp-1" class="page-content" id="main-content" aria-label="内容"><div class="wrapper"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kindle越狱与KOReader安装全记录","datePublished":"2026-08-16T00:00:00.000Z","dateModified":"2026-08-16T00:00:00.000Z","description":"","author":{"@type":"Person","name":"Lcc"},"keywords":"技术, kindle, 越狱, koreader, 笔记"}</script><article class="post-card"><header class="post-header"><h1 class="post-title">Kindle越狱与KOReader安装全记录</h1><div class="post-meta"><time datetime="2026-08-16">2026-08-16</time><span class="meta-separator">·</span><span>3933 字 · 约 20 分钟</span><span class="meta-separator">·</span><span class="post-categories">技术</span><span class="meta-separator">·</span><button class="copy-link-btn" id="copy-link-btn" title="复制链接" aria-label="复制文章链接">复制链接</button></div></header><div class="post-content"><h2 id="一背景">一、背景</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">项目</th>
+<th style="text-align: left">设备 1</th>
+<th style="text-align: left">设备 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">型号</td>
+<td style="text-align: left">Kindle 8 代</td>
+<td style="text-align: left">Kindle 7 代基础款</td>
+</tr>
+<tr>
+<td style="text-align: left">年份</td>
+<td style="text-align: left">2016</td>
+<td style="text-align: left">2014</td>
+</tr>
+<tr>
+<td style="text-align: left">代号</td>
+<td style="text-align: left">KT3 (tinker)</td>
+<td style="text-align: left">KT2</td>
+</tr>
+<tr>
+<td style="text-align: left">固件</td>
+<td style="text-align: left">5.16.2.1.1</td>
+<td style="text-align: left">5.12.2.2</td>
+</tr>
+<tr>
+<td style="text-align: left">结果</td>
+<td style="text-align: left">越狱 + KOReader + 全套插件</td>
+<td style="text-align: left">越狱 + KOReader + 全套插件</td>
+</tr>
+</tbody>
+</table>
+<p>两台设备均使用 <strong>LanguageBreak</strong> 越狱（适用于固件 ≤ 5.16.2.1.1 的所有 Kindle），原理是利用 langpicker-nativebridge 漏洞，无需拆机、无需焊接。</p>
+<h2 id="二越狱流程languagebreak">二、越狱流程（LanguageBreak）</h2>
+<h3 id="准备">准备</h3>
+<ol>
+<li>备份 Kindle 中的书籍</li>
+<li>开启飞行模式</li>
+<li><strong>关闭密码锁</strong>（卡在密码界面可输入 <code>111222777</code> 恢复出厂，但会清空数据）</li>
+<li>确认根目录无残留 <code>.bin</code> 文件或 <code>update.bin.tmp.partial</code></li>
+</ol>
+<h3 id="正式流程">正式流程</h3>
+<ol>
+<li>搜索栏输入 <code>;enter_demo</code> 回车，然后<strong>手动重启</strong>设备</li>
+<li>进入演示模式设置：跳过 Wi-Fi → 注册信息随便填 → Skip（跳过演示内容）→ Standard（标准演示）→ Done</li>
+<li>等待进入演示主界面，做<strong>秘密手势</strong>：右下角双指同时按下，向左滑</li>
+<li>搜索栏输入 <code>;demo</code> → 选择 <strong>Sideload Content</strong></li>
+<li>插入 USB，将 LanguageBreak 文件夹内容<strong>完整复制</strong>到 Kindle 根目录（第一次复制）</li>
+<li>安全弹出，拔线 → 再次输入 <code>;demo</code> → 选择 <strong>Resell Device</strong> → 确认 Yes</li>
+<li>屏幕出现 <strong>“Press the Power Button”</strong> 时，<strong>立即</strong>插回 USB 并再次复制 LanguageBreak 文件（第二次复制，关键步骤！）</li>
+<li>安全弹出，按屏幕提示<strong>长按电源键</strong>重启</li>
+<li>出现语言选择界面，选择<strong>简体中文</strong>（老固件上通常是列表最后一项，且没有 Pseudot 语言）</li>
+<li>设备重启，屏幕右上角闪过英文日志文字 = 桥（bridge）安装成功</li>
+<li>搜索栏输入 <code>;uzb</code> → 插 USB → 将 <code>update_hotfix_languagebreak-zh-Hans-CN.bin</code> 复制到根目录</li>
+<li>弹出 → <code>;dsts</code> → <strong>更新您的 Kindle</strong> → 自动重启</li>
+<li>验证：插 USB 检查根目录是否有 <strong>mkk</strong> 文件夹（有 = 越狱永久生效）</li>
+</ol>
+<h3 id="日志确认">日志确认</h3>
+<p>越狱成功后，根目录会留下 <code>languagebreak_log</code>，内容示例：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>LanguageBreak by Marek</span></span>
+<span class="line"><span>It was the chinese all along.</span></span>
+<span class="line"><span>Loaded logging functions</span></span>
+<span class="line"><span>I am root - uid=0(root) gid=0(root)</span></span>
+<span class="line"><span>Enabled developer flag</span></span>
+<span class="line"><span>Enabled mntus exec flag</span></span>
+<span class="line"><span>Finished installing jailbreak!</span></span></code></pre>
+<h2 id="三踩坑记录kt2-固件-51222-特有">三、踩坑记录（KT2 固件 5.12.2.2 特有）</h2>
+<h3 id="1-更新错误-007">1. 更新错误 007</h3>
+<p>安装 hotfix 时提示“更新错误 007”，原因：设备仍处于<strong>受管/演示模式</strong>，更新机制被锁定。</p>
+<p><strong>解决</strong>：先退出受管模式（见第 3 条），恢复正常模式后再装 hotfix。</p>
+<h3 id="2-出厂模式错误电池电量过高">2. 出厂模式错误：电池电量过高</h3>
+<p><code>;demo</code> 进演示菜单时报“出厂模式错误，电池电量过高”（满电时常见）。</p>
+<p><strong>解决</strong>：在 Kindle 根目录创建<strong>空文件</strong> <code>DONT_CHECK_BATTERY</code>（无扩展名），有时需要<strong>重启一次设备</strong>才生效。</p>
+<h3 id="3-wifi-灰色不可用受管模式残留">3. WiFi 灰色不可用（受管模式残留）</h3>
+<p>越狱后 WiFi 设置是灰色的，这是受管模式（demo/managed）残留的表现。README 官方解法：</p>
+<p>搜索栏输入 <code>;demo</code> → 在弹出的菜单中按<strong>右侧按钮</strong>（“Enter Demo”）→ 设备会实际<strong>重置回正常模式</strong>（界面变英文）。</p>
+<blockquote>
+<p>⚠️ 注意：此操作会<strong>清空用户存储</strong>（KOReader、插件等全部删除），但系统侧的越狱桥不受影响，重装文件即可。</p>
+</blockquote>
+<h3 id="4-log-无反应--桥没装上">4. <code>;log</code> 无反应 = 桥没装上</h3>
+<p>如果 <code>;log mrpi</code> 没有任何反应，说明桥没有安装成功。常见原因是<strong>第二次文件复制</strong>没有成功（第 7 步时 USB 未挂载）。</p>
+<p><strong>解决</strong>：重跑整个越狱流程，重点确保“Press the Power Button”出现后的第二次复制成功。</p>
+<h3 id="5-根目录残留文件干扰">5. 根目录残留文件干扰</h3>
+<p>README 明确要求：开始前确保无残留 <code>.bin</code> / <code>update.bin.tmp.partial</code> 文件，失败的更新会留下这些文件干扰后续操作，需要清理。</p>
+<h2 id="四koreader-安装booklet-方式">四、KOReader 安装（Booklet 方式）</h2>
+<h3 id="组件">组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">组件</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">KOReader</td>
+<td style="text-align: left"><code>koreader-kindlepw2-v2026.07.1</code>（KT2/KT3 等触屏设备通用）</td>
+</tr>
+<tr>
+<td style="text-align: left">MRPI</td>
+<td style="text-align: left">MR Package Installer（通过 <code>;log mrpi</code> 安装更新包）</td>
+</tr>
+<tr>
+<td style="text-align: left">KOL Booklet</td>
+<td style="text-align: left">让 KOReader 以“书”的形式出现在图书馆</td>
+</tr>
+</tbody>
+</table>
+<h3 id="步骤">步骤</h3>
+<ol>
+<li>将 <code>koreader</code> 文件夹复制到 Kindle 根目录</li>
+<li>将 <code>extensions/koreader</code>、<code>extensions/MRInstaller</code> 复制到 <code>extensions/</code> 目录</li>
+<li>将 KOL 安装包（4 个 bin）放入 <code>mrpackages/</code> 目录</li>
+<li>搜索栏输入 <code>;log mrpi</code> 回车 → 自动安装 KOL</li>
+<li>重启设备，图书馆出现 <strong>KOReader</strong> 书标</li>
+</ol>
+<blockquote>
+<p>安装了 KOL v1.5 标准版与 v1.5.3 Frameworkless 版两个书标，Frameworkless 版更省内存，日常建议用这个。</p>
+</blockquote>
+<h2 id="五插件与优化">五、插件与优化</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">项目</th>
+<th style="text-align: left">内容</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">微信读书</td>
+<td style="text-align: left">weread.koplugin v1.2.0</td>
+<td style="text-align: left">复制到 <code>koreader/plugins/</code>，扫码登录，需微信读书 Skill API Key</td>
+</tr>
+<tr>
+<td style="text-align: left">界面美化</td>
+<td style="text-align: left">simpleui.koplugin 2.1.1</td>
+<td style="text-align: left">复制到 <code>koreader/plugins/</code></td>
+</tr>
+<tr>
+<td style="text-align: left">中文字体</td>
+<td style="text-align: left">霞鹜文楷 LXGW WenKai v1.522</td>
+<td style="text-align: left"><code>LXGWWenKai-Regular.ttf</code> 放入 <code>koreader/fonts/</code>，阅读界面字体设置中选择</td>
+</tr>
+<tr>
+<td style="text-align: left">英汉词典</td>
+<td style="text-align: left">StarDict cdict-gb</td>
+<td style="text-align: left"><code>.ifo/.idx/.dict.dz</code> 放入 <code>koreader/data/dict/</code>，词典设置中启用</td>
+</tr>
+<tr>
+<td style="text-align: left">性能优化</td>
+<td style="text-align: left">autosuspend</td>
+<td style="text-align: left">KOReader 自带，设置中配置自动休眠</td>
+</tr>
+</tbody>
+</table>
+<h3 id="关于禁用-ota">关于禁用 OTA</h3>
+<p>计划用 renameotabin + PEKI（KUAL 替代品）禁用系统更新，但 KT3 上图书馆未出现 KUAL 书标，未能生效。不过 Kindle 7/8 代已停止维护，亚马逊不再推送新固件，实际风险很低，可跳过。</p>
+<h2 id="六注意事项">六、注意事项</h2>
+<ol>
+<li><strong>不要升级固件超过 5.16.2.1.1</strong>（新固件会封堵越狱）</li>
+<li><strong>KOReader 运行时不要插 USB 线</strong></li>
+<li>受管模式退出会清空用户存储，所有文件务必在电脑上留备份</li>
+<li>老固件（5.12.x）语言选择界面中“简体中文”是列表最后一项，且没有 Pseudot 语言，属正常现象</li>
+<li>设备被重置后检查 <code>mkk</code> 文件夹，缺失则重新安装 hotfix 即可恢复越狱</li>
+</ol>
+<h2 id="七文件备份清单电脑端">七、文件备份清单（电脑端）</h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>LanguageBreak/                  越狱 exploit 文件</span></span>
+<span class="line"><span>Update_hotfix_languagebreak-zh-Hans-CN.bin   hotfix 补丁</span></span>
+<span class="line"><span>koreader-pkg/                   KOReader 本体 + extensions</span></span>
+<span class="line"><span>mrpi-pkg/                       MRPI 安装器</span></span>
+<span class="line"><span>mrpackages/                     KOL Booklet 安装包</span></span>
+<span class="line"><span>weread-pkg/                     微信读书插件</span></span>
+<span class="line"><span>simpleui-pkg/                   SimpleUI 插件</span></span>
+<span class="line"><span>LXGWWenKai-Regular.ttf          霞鹜文楷字体</span></span>
+<span class="line"><span>stardict-cdict-gb-2.4.2/        英汉词典</span></span></code></pre>
+<p>以上文件均保留在电脑上，设备被清空后可随时一键重装。</p>
+</div><div class="post-footer-tags"><a href="/tags/#技术" class="post-tag">技术</a><a href="/tags/#kindle" class="post-tag">kindle</a><a href="/tags/#越狱" class="post-tag">越狱</a><a href="/tags/#koreader" class="post-tag">koreader</a><a href="/tags/#笔记" class="post-tag">笔记</a></div><!-- Series navigation --><div class="post-series"><h4 class="post-series-title">📚 系列文章</h4><ul class="post-series-list"><li class="series-current"><a href="/posts/2026-08-16-kindle越狱与koreader安装全记录/">Kindle越狱与KOReader安装全记录</a></li></ul></div><!-- Signature --><div class="post-signature"><p>生活不是我们活过的日子，而是我们记住的日子。</p><span class="post-signature-author">—— 闲话</span></div><nav class="post-nav"><div class="post-nav-prev"><a href="/posts/2026-04-04-写点什么1/" rel="prev"><span class="nav-label">← 上一篇</span><span class="nav-title">写点什么1</span></a></div><div class="post-nav-next"><a href="/posts/2026-08-17-intel近5年消费级cpu整理/" rel="next"><span class="nav-label">下一篇 →</span><span class="nav-title">intel近5年消费级cpu整理</span></a></div></nav><div class="comments-section"><script src="https://giscus.app/client.js" data-repo="lccccc1024/lccccc1024.github.io" data-repo-id="R_kgDOIBXa0g" data-category="Announcements" data-category-id="DIC_kwDOIBXa0s4C6Wys" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" async>
+        </script></div><div class="related-posts"><h3 class="related-title">相关文章</h3><ul class="related-list"><li><a href="/posts/2026-08-17-intel近5年消费级cpu整理/"><span class="related-post-title">intel近5年消费级cpu整理</span><span class="related-post-date">2026-08-17</span></a></li><li><a href="/posts/2025-06-16-fnosnastool搭建全自动观影追剧/"><span class="related-post-title">fnos+nastool搭建全自动观影追剧</span><span class="related-post-date">2025-06-16</span></a></li><li><a href="/posts/2025-04-25-使用githubpicgo搭建免费图床/"><span class="related-post-title">使用GitHub+picgo搭建免费图床</span><span class="related-post-date">2025-04-25</span></a></li></ul></div></article><script src="/js/toc.js" defer data-astro-rerun></script><script type="module" src="/_astro/_...slug_.astro_astro_type_script_index_0_lang.DuKXldXw.js"></script></div></main><button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部"><svg class="back-to-top-ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2" opacity="0.15"></circle><circle class="ring-fill" id="ring-fill" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="119.38" stroke-dashoffset="119.38" stroke-linecap="round" transform="rotate(-90 22 22)"></circle></svg><svg class="back-to-top-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><footer class="site-footer"><div class="footer-inner"><span class="footer-copy">&copy; 2026 Lcc</span><span class="footer-sep">·</span><span class="footer-powered">Powered by Astro</span></div></footer><script data-astro-rerun>
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const overlay = document.getElementById('nav-overlay');
+      if (hamburger && overlay) {
+        hamburger.addEventListener('click', function() {
+          overlay.classList.toggle('active');
+          hamburger.classList.toggle('active');
+        });
+        overlay.querySelectorAll('a').forEach((l) => {
+          l.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script><script data-astro-rerun>
+    // Back to top
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      const ring = document.getElementById('ring-fill');
+      if (!btn) return;
+      const circumference = 119.38;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        btn.classList.toggle('visible', scrollTop > 300);
+        if (ring) ring.style.strokeDashoffset = circumference * (1 - progress);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script><script src="/js/theme-toggle.js" defer data-astro-rerun></script><script src="/js/cmdk.js" defer data-astro-rerun></script><script src="/js/particles.js" defer data-astro-rerun></script><script src="/js/lightbox.js" defer data-astro-rerun></script><script src="/js/code-copy.js" defer data-astro-rerun></script><script src="/js/image-blur.js" defer data-astro-rerun></script><script src="/js/ui-enhance.js" defer data-astro-rerun></script><script>
+    // Reading progress bar
+    document.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('progress-bar');
+      const pct = document.getElementById('read-progress-text');
+      if (!bar) return;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        bar.style.width = (progress * 100) + '%';
+        if (pct) {
+          const p = Math.round(progress * 100);
+          pct.textContent = p + '%';
+          pct.classList.toggle('visible', scrollTop > 300);
+        }
+      }, { passive: true });
+    });
+
+    // Service worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script></body></html>
