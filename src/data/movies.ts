@@ -1,5 +1,12 @@
 const data = [
   {
+    "title": "奥德赛",
+    "genre": "动作/冒险/奇幻",
+    "director": "克里斯托弗·诺兰",
+    "year": 2026,
+    "date": "2026-08-23"
+  },
+  {
     "title": "欢迎来龙餐馆",
     "genre": "剧情/战争",
     "director": "文牧野",
