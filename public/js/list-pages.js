@@ -2,6 +2,7 @@
  * 公共列表页面脚本
  * 功能：表格排序
  */
+(function() {
 
 // 表格排序功能
 function initTableSort() {
@@ -95,3 +96,5 @@ function updateRowNumbers(tbody) {
 // 页面加载完成后初始化表格排序
 function initList() { initTableSort(); }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initList); else initList();
+
+})();

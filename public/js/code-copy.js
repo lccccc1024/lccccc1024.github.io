@@ -9,6 +9,7 @@
         codeBlocks.forEach(function(block) {
             let code = block.querySelector('code');
             if (!code) return;
+            if (block.querySelector('.code-copy-btn')) return;
 
             let codeText = code.textContent;
 

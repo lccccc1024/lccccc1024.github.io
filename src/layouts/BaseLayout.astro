@@ -20,7 +20,7 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://giscus.app; base-uri 'self'; form-action 'self'" />
   <title>{pageTitle}</title>
   <meta name="description" content={ogDescription} />
   <link rel="canonical" href={canonicalURL} />
@@ -29,9 +29,12 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
   <meta property="og:description" content={ogDescription} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:site_name" content={siteTitle} />
+  <meta property="og:image" content={new URL('/lccccc1024.png', Astro.site)} />
+  <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={new URL('/lccccc1024.png', Astro.site)} />
   <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#5e5ce6" />
