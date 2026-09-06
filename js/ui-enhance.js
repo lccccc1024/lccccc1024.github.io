@@ -7,6 +7,7 @@
     highlights.forEach(function(block) {
       let code = block.querySelector('code');
       if (!code) return;
+      if (block.querySelector('.code-lang-label')) return;
 
       // Extract language from class (e.g., "language-javascript" → "js")
       let langClass = Array.from(code.classList).find(function(c) {

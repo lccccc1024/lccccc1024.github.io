@@ -1,5 +1,17 @@
 (function() {
+    let boundMessage, boundClick;
+
+    function cleanup() {
+        if (boundMessage) window.removeEventListener('message', boundMessage);
+        if (boundClick) {
+            let btn = document.getElementById('theme-toggle-nav');
+            if (btn) btn.removeEventListener('click', boundClick);
+        }
+        boundMessage = boundClick = null;
+    }
+
     function init() {
+        cleanup();
         let btn = document.getElementById('theme-toggle-nav');
         if (!btn) return;
 
@@ -31,12 +43,13 @@
             }
         }
 
-        window.addEventListener('message', function(e) {
+        boundMessage = function(e) {
             if (e.origin !== 'https://giscus.app') return;
             updateGiscusTheme(document.documentElement.classList.contains('dark'));
-        });
+        };
+        window.addEventListener('message', boundMessage);
 
-        btn.addEventListener('click', function() {
+        boundClick = function() {
             let root = document.documentElement;
             // Enable transition animation
             root.classList.add('dark-mode-transitioning');
@@ -49,7 +62,8 @@
             setTimeout(function() {
                 root.classList.remove('dark-mode-transitioning');
             }, 400);
-        });
+        };
+        btn.addEventListener('click', boundClick);
 
         updateIcon();
     }

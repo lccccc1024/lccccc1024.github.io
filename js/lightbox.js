@@ -4,6 +4,12 @@
  */
 (function() {
     let lightbox, lightboxImg;
+    let boundKeydown;
+
+    function cleanup() {
+        if (boundKeydown) document.removeEventListener('keydown', boundKeydown);
+        boundKeydown = null;
+    }
 
     function init(img) {
         if (!lightbox) {
@@ -22,6 +28,8 @@
             });
         }
 
+        if (img.closest('.lightbox-attached')) return;
+        img.classList.add('lightbox-attached');
         img.setAttribute('tabindex', '0');
         img.setAttribute('role', 'button');
         img.setAttribute('aria-label', '点击查看大图: ' + (img.alt || '图片'));
@@ -53,17 +61,19 @@
     }
 
     function init_lightbox() {
+        cleanup();
         let images = document.querySelectorAll('.post-card img, .post-content img, article img');
         images.forEach(function(img) {
             if (img.closest('a')) return;
             init(img);
         });
 
-        document.addEventListener('keydown', function(e) {
+        boundKeydown = function(e) {
             if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
                 close();
             }
-        });
+        };
+        document.addEventListener('keydown', boundKeydown);
     }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init_lightbox); else init_lightbox();
 })();

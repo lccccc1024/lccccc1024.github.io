@@ -3,14 +3,27 @@
 
   let overlay, input, results, selectedIndex = -1;
   let pagefind, searchTimeout;
-  window.addEventListener('unhandledrejection', function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); });
+  let boundKeydown, boundUnhandledRejection;
 
   function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
+  function cleanup() {
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    overlay = null; input = null; results = null;
+    if (boundKeydown) document.removeEventListener('keydown', boundKeydown);
+    if (boundUnhandledRejection) window.removeEventListener('unhandledrejection', boundUnhandledRejection);
+    boundKeydown = boundUnhandledRejection = null;
+  }
+
   function init() {
+    cleanup();
+
+    boundUnhandledRejection = function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); };
+    window.addEventListener('unhandledrejection', boundUnhandledRejection);
+
     // Create DOM
     overlay = document.createElement('div');
     overlay.className = 'cmdk-overlay';
@@ -42,7 +55,7 @@
     document.body.appendChild(pfScript);
 
     // Keyboard shortcut
-    document.addEventListener('keydown', function(e) {
+    boundKeydown = function(e) {
       // Cmd+K or Ctrl+K
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -68,7 +81,8 @@
         e.preventDefault();
         go();
       }
-    });
+    };
+    document.addEventListener('keydown', boundKeydown);
 
     // Input handler
     input.addEventListener('input', function() {
