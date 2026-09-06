@@ -19,6 +19,7 @@
             lightbox.setAttribute('aria-modal', 'true');
             lightbox.setAttribute('aria-label', '图片预览');
             lightboxImg = document.createElement('img');
+            lightboxImg.setAttribute('tabindex', '0');
             lightbox.appendChild(lightboxImg);
             document.body.appendChild(lightbox);
 

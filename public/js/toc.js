@@ -1,5 +1,15 @@
 (function() {
+  let boundScroll;
+
+  function cleanup() {
+    if (boundScroll) window.removeEventListener('scroll', boundScroll);
+    boundScroll = null;
+    let oldToc = document.querySelector('.post-toc');
+    if (oldToc) oldToc.remove();
+  }
+
   function buildTOC() {
+    cleanup();
     let content = document.querySelector('.post-content');
     if (!content) return;
 
@@ -80,7 +90,8 @@
     }
 
     updateActive();
-    window.addEventListener('scroll', updateActive, { passive: true });
+    boundScroll = updateActive;
+    window.addEventListener('scroll', boundScroll, { passive: true });
   }
 
   if (document.readyState === 'loading') {

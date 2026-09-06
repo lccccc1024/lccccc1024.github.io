@@ -34,6 +34,18 @@ import PageLayout from '../layouts/PageLayout.astro';
         return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       }
 
+      function highlightText(text, query) {
+        if (!query) return escapeHtml(text);
+        const escaped = query.replace(/[.*+?^=!${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp('(' + escaped + ')', 'gi');
+        return text.split(re).map((part) => {
+          if (part.toLowerCase() === query.toLowerCase()) {
+            return '<mark class="search-highlight">' + escapeHtml(part) + '</mark>';
+          }
+          return escapeHtml(part);
+        }).join('');
+      }
+
       fetch('/search.json').then((r) => r.json()).then((data) => {
         fuse = new Fuse(data, {
           keys: ['title', 'excerpt', 'categories', 'tags'],
@@ -41,31 +53,24 @@ import PageLayout from '../layouts/PageLayout.astro';
           includeScore: true,
           minMatchCharLength: 1,
         });
-      });
 
-      input.addEventListener('input', () => {
-        const q = input.value.trim();
-        if (q.length < 1) { results.style.display = 'none'; return; }
+        input.addEventListener('input', () => {
+          const q = input.value.trim();
+          if (q.length < 1) { results.style.display = 'none'; return; }
 
-        const matched = fuse ? fuse.search(q).map((r) => r.item) : [];
+          const matched = fuse ? fuse.search(q).map((r) => r.item) : [];
 
-        if (matched.length === 0) {
-          results.style.display = 'block';
-          results.innerHTML = '<li style="color:var(--text-secondary);padding:1em;">未找到匹配文章</li>';
-          return;
-        }
-
-        results.style.display = 'block';
-        results.innerHTML = matched.slice(0, 5).map((p) => {
-          let title = escapeHtml(p.title);
-          const qLower = q.toLowerCase();
-          if (qLower.length > 0) {
-            const escaped = qLower.replace(/[.*+?^=!${}()|[\]\\]/g, '\\$&');
-            const re = new RegExp('(' + escaped + ')', 'gi');
-            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
+          if (matched.length === 0) {
+            results.style.display = 'block';
+            results.innerHTML = '<li style="color:var(--text-secondary);padding:1em;">未找到匹配文章</li>';
+            return;
           }
-          return '<li><a href="' + escapeHtml(p.url) + '">' + title + '</a></li>';
-        }).join('');
+
+          results.style.display = 'block';
+          results.innerHTML = matched.slice(0, 5).map((p) => {
+            return '<li><a href="' + escapeHtml(p.url) + '">' + highlightText(p.title, q) + '</a></li>';
+          }).join('');
+        });
       });
     });
   </script>

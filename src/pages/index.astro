@@ -90,6 +90,18 @@ function firstImg(body) {
         return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       }
 
+      function highlightText(text, query) {
+        if (!query) return escapeHtml(text);
+        const escaped = query.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp('(' + escaped + ')', 'gi');
+        return text.split(re).map(function(part) {
+          if (part.toLowerCase() === query.toLowerCase()) {
+            return '<mark class="search-highlight">' + escapeHtml(part) + '</mark>';
+          }
+          return escapeHtml(part);
+        }).join('');
+      }
+
       fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
         fuse = new Fuse(data, {
           keys: ['title', 'excerpt', 'categories', 'tags'],
@@ -112,14 +124,7 @@ function firstImg(body) {
 
         results.style.display = 'block';
         results.innerHTML = matched.map(function(p) {
-          let title = escapeHtml(p.title);
-          const qLower = q.toLowerCase();
-          if (qLower.length > 0) {
-            const escaped = qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&');
-            const re = new RegExp('(' + escaped + ')', 'gi');
-            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
-          }
-          return '<li><a href="' + escapeHtml(p.url) + '">' + title +
+          return '<li><a href="' + escapeHtml(p.url) + '">' + highlightText(p.title, q) +
                  '</a><span class="home-date">' + escapeHtml(p.date) + '</span></li>';
         }).join('');
       });
