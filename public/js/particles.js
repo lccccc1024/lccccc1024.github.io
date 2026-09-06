@@ -12,8 +12,20 @@
   let GRID_OPACITY = 0.04;
 
   let canvas, ctx, particles, width, height, mouse, gridOffset;
+  let rafId = null;
+  let boundResize, boundMouseMove, boundMouseLeave;
+
+  function cleanup() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (boundResize) window.removeEventListener('resize', boundResize);
+    if (boundMouseMove) document.removeEventListener('mousemove', boundMouseMove);
+    if (boundMouseLeave) document.removeEventListener('mouseleave', boundMouseLeave);
+    boundResize = boundMouseMove = boundMouseLeave = null;
+  }
 
   function init() {
+    cleanup();
+
     // Remove old canvas if re-initializing (data-astro-rerun)
     let old = document.getElementById('bg-particles');
     if (old) old.remove();
@@ -32,12 +44,12 @@
     createParticles();
     animate();
 
-    window.addEventListener('resize', resize);
-    document.addEventListener('mousemove', function(e) {
+    window.addEventListener('resize', boundResize = resize);
+    document.addEventListener('mousemove', boundMouseMove = function(e) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     });
-    document.addEventListener('mouseleave', function() {
+    document.addEventListener('mouseleave', boundMouseLeave = function() {
       mouse.x = -9999;
       mouse.y = -9999;
     });
@@ -169,7 +181,7 @@
   let tickInterval = 1000 / FPS;
 
   function animate(timestamp) {
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
 
     let elapsed = timestamp - lastTick;
     if (elapsed < tickInterval) return;

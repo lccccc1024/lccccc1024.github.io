@@ -5,6 +5,11 @@
   let pagefind, searchTimeout;
   window.addEventListener('unhandledrejection', function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); });
 
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
   function init() {
     // Create DOM
     overlay = document.createElement('div');
@@ -112,9 +117,9 @@
             return;
           }
           results.innerHTML = data.map(function(item, i) {
-            return '<a href="' + item.url + '" class="cmdk-result-item" data-index="' + i + '">' +
-              '<span class="cmdk-result-title">' + item.meta.title + '</span>' +
-              (item.excerpt ? '<span class="cmdk-result-excerpt">' + item.excerpt.slice(0, 100) + '</span>' : '') +
+            return '<a href="' + escapeHtml(item.url) + '" class="cmdk-result-item" data-index="' + i + '">' +
+              '<span class="cmdk-result-title">' + escapeHtml(item.meta.title) + '</span>' +
+              (item.excerpt ? '<span class="cmdk-result-excerpt">' + escapeHtml(item.excerpt.slice(0, 100)) + '</span>' : '') +
             '</a>';
           }).join('');
           results.classList.add('has-results');

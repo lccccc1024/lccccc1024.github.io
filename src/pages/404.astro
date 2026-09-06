@@ -29,6 +29,11 @@ import PageLayout from '../layouts/PageLayout.astro';
       const results = document.getElementById('search-results-404');
       let fuse = null;
 
+      function escapeHtml(s) {
+        if (!s) return '';
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
       fetch('/search.json').then((r) => r.json()).then((data) => {
         fuse = new Fuse(data, {
           keys: ['title', 'excerpt', 'categories', 'tags'],
@@ -52,14 +57,14 @@ import PageLayout from '../layouts/PageLayout.astro';
 
         results.style.display = 'block';
         results.innerHTML = matched.slice(0, 5).map((p) => {
-          let title = p.title;
+          let title = escapeHtml(p.title);
           const qLower = q.toLowerCase();
           if (qLower.length > 0) {
             const escaped = qLower.replace(/[.*+?^=!${}()|[\]\\]/g, '\\$&');
             const re = new RegExp('(' + escaped + ')', 'gi');
-            title = title.replace(re, (match) => '<mark class="search-highlight">' + match.replace(/</g, '&lt;') + '</mark>');
+            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
           }
-          return '<li><a href="' + p.url.replace(/[#"<>]/g, '') + '">' + title + '</a></li>';
+          return '<li><a href="' + escapeHtml(p.url) + '">' + title + '</a></li>';
         }).join('');
       });
     });

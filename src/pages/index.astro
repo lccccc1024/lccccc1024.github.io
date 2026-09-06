@@ -85,6 +85,11 @@ function firstImg(body) {
       const results = document.getElementById('search-results');
       let fuse = null;
 
+      function escapeHtml(s) {
+        if (!s) return '';
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
       fetch('/search.json').then(function(r) { return r.json(); }).then(function(data) {
         fuse = new Fuse(data, {
           keys: ['title', 'excerpt', 'categories', 'tags'],
@@ -107,15 +112,15 @@ function firstImg(body) {
 
         results.style.display = 'block';
         results.innerHTML = matched.map(function(p) {
-          let title = p.title;
+          let title = escapeHtml(p.title);
           const qLower = q.toLowerCase();
           if (qLower.length > 0) {
             const escaped = qLower.replace(/[.*+?^=!:${}()|[\]\\]/g, '\\$&');
             const re = new RegExp('(' + escaped + ')', 'gi');
-            title = title.replace(re, (match) => '<mark class="search-highlight">' + match.replace(/</g, '&lt;') + '</mark>');
+            title = title.replace(re, '<mark class="search-highlight">$1</mark>');
           }
-          return '<li><a href="' + p.url.replace(/[#"<>]/g, '') + '">' + title.replace(/</g, '&lt;') +
-                 '</a><span class="home-date">' + p.date + '</span></li>';
+          return '<li><a href="' + escapeHtml(p.url) + '">' + title +
+                 '</a><span class="home-date">' + escapeHtml(p.date) + '</span></li>';
         }).join('');
       });
     });
