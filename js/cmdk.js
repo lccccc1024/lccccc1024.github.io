@@ -4,6 +4,7 @@
   let overlay, input, results, selectedIndex = -1;
   let pagefind, searchTimeout;
   let boundKeydown, boundUnhandledRejection;
+  let pfScript;
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -12,7 +13,8 @@
 
   function cleanup() {
     if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    overlay = null; input = null; results = null;
+    if (pfScript && pfScript.parentNode) pfScript.parentNode.removeChild(pfScript);
+    overlay = null; input = null; results = null; pfScript = null;
     if (boundKeydown) document.removeEventListener('keydown', boundKeydown);
     if (boundUnhandledRejection) window.removeEventListener('unhandledrejection', boundUnhandledRejection);
     boundKeydown = boundUnhandledRejection = null;
@@ -47,7 +49,7 @@
     results = document.getElementById('cmdk-results');
 
     // Load Pagefind
-    let pfScript = document.createElement('script');
+    pfScript = document.createElement('script');
     pfScript.src = '/pagefind/pagefind.js';
     pfScript.onload = function() {
       pagefind = window.pagefind;
