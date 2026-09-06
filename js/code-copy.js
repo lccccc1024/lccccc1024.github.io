@@ -36,5 +36,11 @@
             block.style.position = 'relative';
             block.appendChild(btn);
         });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init_copy);
+    } else {
+        init_copy();
+    }
 })();
