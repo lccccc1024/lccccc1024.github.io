@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { margin: 0; padding: 0; }
+    html, body, #map { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    window._AMapSecurityConfig = {
+      securityJsCode: 'd8fa834b0ec75037053251b01d958f01',
+    }
+  </script>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=be9dd191700058ef7da897f2763e4782"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var places = [];
+      try { places = JSON.parse(decodeURIComponent(location.hash.slice(1))); } catch(e) {}
+
+      var map = new AMap.Map('map', {
+        zoom: 4,
+        center: [104.1954, 35.8617],
+        viewMode: '2D'
+      });
+
+      var isDark = false;
+      try { isDark = parent.document.documentElement.classList.contains('dark'); } catch(e) {}
+      if (isDark) map.setMapStyle('amap://styles/dark');
+
+      places.forEach(function(p) {
+        var m = new AMap.Marker({ position: [p.lng, p.lat], title: p.name, animation: 'AMAP_ANIMATION_DROP' });
+        var iw = new AMap.InfoWindow({
+          content: '<div style="padding:4px 2px;line-height:1.6;font-size:14px"><b>' + p.name + '</b><br>' + p.date + (p.note ? '<br><span style="opacity:.7">' + p.note + '</span>' : '') + '</div>',
+          offset: new AMap.Pixel(0, -20)
+        });
+        m.on('click', function() { iw.open(map, m.getPosition()); });
+        map.add(m);
+      });
+
+      if (places.length > 0) map.setFitView(null, false, [60, 60, 60, 60]);
+
+      // Listen for theme changes from parent
+      try {
+        new MutationObserver(function() {
+          var d = parent.document.documentElement.classList.contains('dark');
+          map.setMapStyle(d ? 'amap://styles/dark' : 'amap://styles/normal');
+        }).observe(parent.document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>
