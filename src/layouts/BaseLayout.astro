@@ -20,7 +20,7 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://giscus.app https://webapi.amap.com https://*.amap.com https://*.autonavi.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com https://*.amap.com; connect-src 'self' https://*.autonavi.com https://*.amap.com; frame-src https://giscus.app; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data: https:; font-src * data:; connect-src *; frame-src *" />
   <title>{pageTitle}</title>
   <meta name="description" content={ogDescription} />
   <link rel="canonical" href={canonicalURL} />
