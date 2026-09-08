@@ -5,12 +5,13 @@ export interface Props {
   title?: string;
   description?: string;
   math?: boolean;
+  leaflet?: boolean;
 }
 
-const { title, description, math } = Astro.props;
+const { title, description, math, leaflet } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} math={math}>
+<BaseLayout title={title} description={description} math={math} leaflet={leaflet}>
   <nav class="site-nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">闲话</a>
