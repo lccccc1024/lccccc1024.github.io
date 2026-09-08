@@ -6,29 +6,12 @@
 
   var places = window.__PLACES__ || []
 
-  var isDark = function () {
-    return document.documentElement.classList.contains('dark')
-  }
-
   var map = new AMap.Map('map', {
     zoom: 4,
     center: [104.1954, 35.8617],
     viewMode: '2D',
-    mapStyle: isDark() ? 'amap://styles/dark' : 'amap://styles/normal'
+    mapStyle: 'amap://styles/normal'
   })
-
-  var darkMode = isDark()
-
-  function updateStyle () {
-    var nowDark = isDark()
-    if (nowDark !== darkMode) {
-      darkMode = nowDark
-      map.setMapStyle(nowDark ? 'amap://styles/dark' : 'amap://styles/normal')
-    }
-  }
-
-  var observer = new MutationObserver(updateStyle)
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
   places.forEach(function (p) {
     var marker = new AMap.Marker({
@@ -57,6 +40,17 @@
   if (places.length > 0) {
     map.setFitView(null, false, [60, 60, 60, 60])
   }
+
+  var darkMode = document.documentElement.classList.contains('dark')
+
+  var observer = new MutationObserver(function () {
+    var nowDark = document.documentElement.classList.contains('dark')
+    if (nowDark !== darkMode) {
+      darkMode = nowDark
+      map.setMapStyle(nowDark ? 'amap://styles/dark' : 'amap://styles/normal')
+    }
+  })
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
   window.addEventListener('astro:before-swap', function () {
     observer.disconnect()
