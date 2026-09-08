@@ -12,7 +12,7 @@ const categoryColors: Record<string, string> = {
 const sortedPlaces = [...places].reverse()
 ---
 
-<PageLayout title="足迹地图" description="记录我去过的地方" leaflet>
+<PageLayout title="足迹地图" description="记录我去过的地方">
   <div class="list-page-header">
     <h1 class="list-page-title">足迹地图</h1>
     <p class="list-page-subtitle">世界那么大，我想去看看。</p>
@@ -53,7 +53,7 @@ const sortedPlaces = [...places].reverse()
     </div>
   </div>
 
-  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script is:inline src="https://webapi.amap.com/maps?v=2.0&key=e6524b153f2ff8fb5b893da8bf98f416"></script>
   <script is:inline define:vars={{ placesData: JSON.stringify(places) }}>
     window.__PLACES__ = JSON.parse(placesData);
   </script>
@@ -79,33 +79,6 @@ const sortedPlaces = [...places].reverse()
       color: var(--badge-color);
       background: color-mix(in srgb, var(--badge-color) 12%, transparent);
       border: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
-    }
-
-    :global(.custom-marker) {
-      background: none !important;
-      border: none !important;
-    }
-
-    :global(.marker-dot) {
-      width: 14px;
-      height: 14px;
-      background: #3b82f6;
-      border: 2.5px solid #fff;
-      border-radius: 50%;
-      box-shadow: 0 1px 4px rgba(0,0,0,.35);
-      transition: transform .2s;
-    }
-
-    :global(.marker-dot:hover) {
-      transform: scale(1.35);
-    }
-
-    :global(.dark .marker-dot) {
-      border-color: #1e293b;
-    }
-
-    :global(.leaflet-popup-content-wrapper) {
-      border-radius: var(--radius-lg) !important;
     }
 
     @media (max-width: 768px) {
