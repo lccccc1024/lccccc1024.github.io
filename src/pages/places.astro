@@ -53,7 +53,12 @@ const sortedPlaces = [...places].reverse()
     </div>
   </div>
 
-  <script is:inline src="https://webapi.amap.com/maps?v=2.0&key=e6524b153f2ff8fb5b893da8bf98f416"></script>
+  <script is:inline>
+    window._AMapSecurityConfig = {
+      securityJsCode: 'd8fa834b0ec75037053251b01d958f01',
+    }
+  </script>
+  <script is:inline src="https://webapi.amap.com/maps?v=2.0&key=be9dd191700058ef7da897f2763e4782"></script>
   <script is:inline define:vars={{ placesData: JSON.stringify(places) }}>
     window.__PLACES__ = JSON.parse(placesData);
   </script>
