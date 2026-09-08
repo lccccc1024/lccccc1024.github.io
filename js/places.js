@@ -1,68 +1,65 @@
 (function () {
-  if (typeof L === 'undefined') return
+  if (typeof AMap === 'undefined') return
 
-  const mapEl = document.getElementById('map')
+  var mapEl = document.getElementById('map')
   if (!mapEl) return
 
-  const places = window.__PLACES__ || []
+  var places = window.__PLACES__ || []
 
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: true }).setView([35.8617, 104.1954], 4)
-
-  const lightLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}', {
-    subdomains: '1234',
-    attribution: '&copy; <a href="https://amap.com">高德地图</a>',
-    maxZoom: 18
-  })
-
-  const darkLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-    subdomains: '1234',
-    attribution: '&copy; <a href="https://amap.com">高德地图</a>',
-    maxZoom: 18
-  })
-
-  function isDark() {
+  var isDark = function () {
     return document.documentElement.classList.contains('dark')
   }
 
-  function updateLayer() {
-    if (isDark()) {
-      if (map.hasLayer(lightLayer)) map.removeLayer(lightLayer)
-      if (!map.hasLayer(darkLayer)) darkLayer.addTo(map)
-    } else {
-      if (map.hasLayer(darkLayer)) map.removeLayer(darkLayer)
-      if (!map.hasLayer(lightLayer)) lightLayer.addTo(map)
+  var map = new AMap.Map('map', {
+    zoom: 4,
+    center: [104.1954, 35.8617],
+    viewMode: '2D',
+    mapStyle: isDark() ? 'amap://styles/dark' : 'amap://styles/normal'
+  })
+
+  var darkMode = isDark()
+
+  function updateStyle () {
+    var nowDark = isDark()
+    if (nowDark !== darkMode) {
+      darkMode = nowDark
+      map.setMapStyle(nowDark ? 'amap://styles/dark' : 'amap://styles/normal')
     }
   }
 
-  updateLayer()
-
-  const markerIcon = L.divIcon({
-    className: 'custom-marker',
-    html: '<div class="marker-dot"></div>',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
-  })
-
-  const markers = []
-  places.forEach(function (p) {
-    const marker = L.marker([p.lat, p.lng], { icon: markerIcon }).addTo(map)
-    const popup = '<b>' + p.name + '</b><br>' + p.date + (p.note ? '<br><span style="opacity:.7">' + p.note + '</span>' : '')
-    marker.bindPopup(popup)
-    markers.push(marker)
-  })
-
-  if (markers.length > 0) {
-    const group = L.featureGroup(markers)
-    map.fitBounds(group.getBounds().pad(0.15))
-  }
-
-  const observer = new MutationObserver(function () {
-    updateLayer()
-  })
+  var observer = new MutationObserver(updateStyle)
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+  places.forEach(function (p) {
+    var marker = new AMap.Marker({
+      position: [p.lng, p.lat],
+      title: p.name,
+      animation: 'AMAP_ANIMATION_DROP'
+    })
+
+    var info = new AMap.InfoWindow({
+      content:
+        '<div style="padding:4px 2px;line-height:1.6;font-size:14px">' +
+        '<b>' + p.name + '</b><br>' +
+        p.date +
+        (p.note ? '<br><span style="opacity:.7">' + p.note + '</span>' : '') +
+        '</div>',
+      offset: new AMap.Pixel(0, -20)
+    })
+
+    marker.on('click', function () {
+      info.open(map, marker.getPosition())
+    })
+
+    map.add(marker)
+  })
+
+  if (places.length > 0) {
+    map.setFitView(null, false, [60, 60, 60, 60])
+  }
 
   window.addEventListener('astro:before-swap', function () {
     observer.disconnect()
-    map.remove()
+    map.destroy()
   })
 })()
