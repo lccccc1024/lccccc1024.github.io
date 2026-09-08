@@ -42,7 +42,7 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
             <tr>
               <td data-label="序号">{i + 1}</td>
               <td data-label="地点">{place.name}</td>
-              <td data-label="日期">{place.date}</td>
+              <td data-label="日期">{place.date === '0000-00-00' ? '—' : place.date}</td>
               <td data-label="分类">
                 <span class="category-badge" style={`--badge-color: ${categoryColors[place.category] || '#8b5cf6'}`}>
                   {place.category}
