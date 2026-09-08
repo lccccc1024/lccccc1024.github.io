@@ -8,13 +8,15 @@
 
   const map = L.map('map', { zoomControl: true, scrollWheelZoom: true }).setView([35.8617, 104.1954], 4)
 
-  const lightLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  const lightLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}', {
+    subdomains: '1234',
+    attribution: '&copy; <a href="https://amap.com">高德地图</a>',
     maxZoom: 18
   })
 
-  const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  const darkLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+    subdomains: '1234',
+    attribution: '&copy; <a href="https://amap.com">高德地图</a>',
     maxZoom: 18
   })
 
@@ -24,11 +26,11 @@
 
   function updateLayer() {
     if (isDark()) {
-      map.removeLayer(lightLayer)
-      darkLayer.addTo(map)
+      if (map.hasLayer(lightLayer)) map.removeLayer(lightLayer)
+      if (!map.hasLayer(darkLayer)) darkLayer.addTo(map)
     } else {
-      map.removeLayer(darkLayer)
-      lightLayer.addTo(map)
+      if (map.hasLayer(darkLayer)) map.removeLayer(darkLayer)
+      if (!map.hasLayer(lightLayer)) lightLayer.addTo(map)
     }
   }
 
