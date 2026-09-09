@@ -37,10 +37,11 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
   <meta name="twitter:image" content={new URL('/lccccc1024.png', Astro.site)} />
   <link rel="shortcut icon" type="image/png" href="/lccccc1024.png" />
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#5e5ce6" />
+  <meta name="theme-color" content="#285c4d" />
   <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/feed.xml" />
 
   <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/journal.css" />
 
   <script is:inline>
     // Prevent FOUC: set dark class before paint
@@ -66,7 +67,6 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
 
   <script is:inline src="/js/theme-toggle.js" defer></script>
   <script is:inline src="/js/cmdk.js" defer></script>
-  <script is:inline src="/js/particles.js" defer></script>
   <script is:inline src="/js/lightbox.js" defer></script>
   <script is:inline src="/js/code-copy.js" defer></script>
   <script is:inline src="/js/image-blur.js" defer></script>

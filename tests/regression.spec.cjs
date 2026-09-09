@@ -53,7 +53,7 @@ test('mobile menu, progress and copy survive navigation', async ({ page, context
   await expect(page.locator('#read-progress-text')).toHaveClass(/visible/);
   await page.locator('#back-to-top').click();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  await expect(page.locator('#bg-particles')).toHaveCount(1);
+  await expect(page.locator('#bg-particles')).toHaveCount(0);
 });
 
 test('date sorting compares month and day', async ({ page }) => {

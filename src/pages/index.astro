@@ -11,6 +11,10 @@ function fmt(d: Date) {
   return d.toISOString().slice(0, 10);
 }
 
+function excerpt(body = '') {
+  return body.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/[#*\x60>]/g, '').slice(0, 120);
+}
+
 // Extract first image from post body
 function firstImg(body: string = '') {
   const m = body.match(/!\[.*?\]\((.*?)\)/);
@@ -19,14 +23,23 @@ function firstImg(body: string = '') {
 ---
 
 <PageLayout title="首页">
-  <section class="hero">
-    <h1 class="hero-title">闲话</h1>
-    <p class="hero-description">分享日常杂记、技术笔记的极简博客</p>
+  <section class="hero journal-hero">
+    <div class="hero-copy">
+      <span class="eyebrow">LCC’S JOURNAL · 生活与记录</span>
+      <h1 class="hero-title">闲话之间，<br />留住日常。</h1>
+      <p class="hero-description">一些生活的切片，一些折腾的笔记。<br />把值得记住的事，慢慢写下来。</p>
+      <div class="hero-actions"><a href="/archive/" class="journal-button">翻开文章 <span aria-hidden="true">↗</span></a><a href="/about/" class="quiet-link">关于这个小站 →</a></div>
+    </div>
+    <aside class="journal-note" aria-label="小站概览">
+      <span class="note-number">闲 / 话</span>
+      <p>日子很长，<br />总有些小事<br />值得一记。</p>
+      <div class="note-bottom"><span>持续记录中</span><strong>{allPosts.length}<small> 篇随笔与笔记</small></strong></div>
+    </aside>
   </section>
 
-  <h2 class="home-section-title">最新文章</h2>
+  <div class="journal-section-heading"><h2 class="home-section-title">最近写下的</h2><span>文字是时间的另一种刻度</span></div>
 
-  <ul class="home-list">
+  <ul class="home-list journal-posts">
     {posts.map((post) => (
       <li>
         <div class="home-post-inner">
@@ -52,7 +65,7 @@ function firstImg(body: string = '') {
                 ))}
               </div>
             )}
-            <p class="home-excerpt">{post.data.description || (post.body || '').slice(0, 120)}</p>
+            <p class="home-excerpt">{post.data.description || excerpt(post.body)}</p>
           </div>
         </div>
       </li>
