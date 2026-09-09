@@ -1,0 +1,19 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+const posts = await getCollection('posts');
+const urls = posts.map(post => `/posts/${post.id}/`);
+---
+<PageLayout title="随便看看">
+  <section id="random-post" data-urls={JSON.stringify(urls)}>
+    <h1>随便看看</h1>
+    <p>正在选择一篇文章…</p>
+    <noscript><p>启用 JavaScript 可随机选择，或从下方列表打开文章。</p></noscript>
+    <ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul>
+  </section>
+  <script>
+    const el = document.getElementById('random-post');
+    const urls: string[] = JSON.parse(el?.dataset.urls || '[]');
+    if (urls.length) window.location.replace(urls[Math.floor(Math.random() * urls.length)]);
+  </script>
+</PageLayout>

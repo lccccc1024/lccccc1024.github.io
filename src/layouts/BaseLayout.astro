@@ -1,5 +1,5 @@
 ---
-import ClientRouter from 'astro/components/ClientRouter.astro';
+
 
 export interface Props {
   title?: string;
@@ -35,11 +35,11 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={ogDescription} />
   <meta name="twitter:image" content={new URL('/lccccc1024.png', Astro.site)} />
-  <link rel="shortcut icon" type="image/x-icon" href="/lccccc1024.png" />
+  <link rel="shortcut icon" type="image/png" href="/lccccc1024.png" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#5e5ce6" />
   <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/feed.xml" />
-  <ClientRouter fallback="animate" />
+
   <link rel="stylesheet" href="/css/global.css" />
 
   <script is:inline>
@@ -64,13 +64,13 @@ const ogDescription = description || '分享日常杂记、技术笔记的极简
 
   <slot />
 
-  <script src="/js/theme-toggle.js" defer data-astro-rerun></script>
-  <script src="/js/cmdk.js" defer data-astro-rerun></script>
-  <script src="/js/particles.js" defer data-astro-rerun></script>
-  <script src="/js/lightbox.js" defer data-astro-rerun></script>
-  <script src="/js/code-copy.js" defer data-astro-rerun></script>
-  <script src="/js/image-blur.js" defer data-astro-rerun></script>
-  <script src="/js/ui-enhance.js" defer data-astro-rerun></script>
+  <script is:inline src="/js/theme-toggle.js" defer></script>
+  <script is:inline src="/js/cmdk.js" defer></script>
+  <script is:inline src="/js/particles.js" defer></script>
+  <script is:inline src="/js/lightbox.js" defer></script>
+  <script is:inline src="/js/code-copy.js" defer></script>
+  <script is:inline src="/js/image-blur.js" defer></script>
+  <script is:inline src="/js/ui-enhance.js" defer></script>
   <script is:inline>
     // Reading progress bar
     document.addEventListener('DOMContentLoaded', () => {

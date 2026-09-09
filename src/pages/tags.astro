@@ -6,7 +6,7 @@ const allPosts = await getCollection('posts');
 const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 // Collect all unique tags
-const tagMap = {};
+const tagMap: Record<string, typeof posts> = Object.create(null);
 posts.forEach(post => {
   (post.data.tags || []).forEach(tag => {
     if (!tagMap[tag]) tagMap[tag] = [];
@@ -14,7 +14,7 @@ posts.forEach(post => {
   });
 });
 const tags = Object.keys(tagMap).sort();
-const fmt = d => d.toISOString().slice(0, 10);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
 <PageLayout title="标签">

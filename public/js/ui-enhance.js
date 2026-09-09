@@ -3,7 +3,7 @@
 
   function init() {
     // Code block language labels
-    let highlights = document.querySelectorAll('.post-content .highlight');
+    let highlights = document.querySelectorAll('.post-content pre.astro-code');
     highlights.forEach(function(block) {
       let code = block.querySelector('code');
       if (!code) return;
@@ -13,9 +13,9 @@
       let langClass = Array.from(code.classList).find(function(c) {
         return c.startsWith('language-');
       });
-      if (!langClass) return;
+      if (!langClass && !block.dataset.language) return;
 
-      let lang = langClass.replace('language-', '');
+      let lang = block.dataset.language || langClass.replace('language-', '');
       // Shorten common names
       let short = {
         'javascript': 'js',

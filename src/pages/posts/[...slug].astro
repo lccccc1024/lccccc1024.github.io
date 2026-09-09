@@ -26,16 +26,15 @@ const related = sorted
   .slice(0, 3);
 
 // Series detection: find posts with same title base
-function seriesBase(title) {
+function seriesBase(title: string) {
   // Remove trailing numbers and whitespace: "杂记03" → "杂记", "weekly01" → "weekly"
   return title.replace(/[\s\d]*$/, '').trim();
 }
 const base = seriesBase(post.data.title);
 const seriesPosts = base.length > 1 ? sorted.filter(p => seriesBase(p.data.title) === base).reverse() : [];
-const seriesIdx = seriesPosts.findIndex(p => p.id === post.id); // -1 since filtered out
 
 import pickSignature from '../../data/signature.ts';
-const fmt = (d) => d.toISOString().slice(0, 10);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
 // JSON-LD structured data
 const jsonLd = {
@@ -58,14 +57,14 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
 ---
 
 <PageLayout title={post.data.title} description={post.data.description} math={post.data.math}>
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
   <article class="post-card">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
       <div class="post-meta">
         <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
         <span class="meta-separator">·</span>
-        <span>{post.body.length} 字 · 约 {Math.ceil(post.body.length / 200)} 分钟</span>
+        <span>{(post.body || '').length} 字 · 约 {Math.ceil((post.body || '').length / 200)} 分钟</span>
         {post.data.categories?.length > 0 && (
           <>
             <span class="meta-separator">·</span>
@@ -173,10 +172,10 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
     )}
   </article>
 
-  <script src="/js/toc.js" defer data-astro-rerun></script>
+  <script is:inline src="/js/toc.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var btn = document.getElementById('copy-link-btn');
+      const btn = document.getElementById('copy-link-btn');
       if (!btn) return;
       btn.addEventListener('click', function() {
         navigator.clipboard.writeText(window.location.href).then(function() {

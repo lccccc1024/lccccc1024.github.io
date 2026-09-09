@@ -5,17 +5,13 @@ import { getCollection } from 'astro:content';
 const allPosts = await getCollection('posts');
 const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-function fmt(d) {
-  return d.toISOString().slice(0, 10);
-}
-
-const yearMap = {};
+const yearMap: Record<string, typeof posts> = Object.create(null);
 posts.forEach(post => {
   const year = post.data.date.getFullYear().toString();
   if (!yearMap[year]) yearMap[year] = [];
   yearMap[year].push(post);
 });
-const years = Object.keys(yearMap).sort((a, b) => b - a);
+const years = Object.keys(yearMap).sort((a, b) => Number(b) - Number(a));
 ---
 
 <PageLayout title="文章归档">

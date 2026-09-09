@@ -18,7 +18,7 @@ const signatures = [
 ];
 
 // Deterministically pick one based on a string hash
-function pick(str) {
+function pick(str: string) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = ((hash << 5) - hash) + str.charCodeAt(i);

@@ -1,36 +1,52 @@
-name: Deploy to GitHub Pages
+name: Validate and deploy GitHub Pages
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+permissions:
+  contents: read
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build:all
+      - run: npx playwright install --with-deps chrome
+      - run: npm test
+      - run: npm audit --audit-level=moderate
+      - run: touch dist/.nojekyll
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist/
+          include-hidden-files: true
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build:all
-
-      - name: Add .nojekyll
-        run: touch dist/.nojekyll
-
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: github-pages-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist

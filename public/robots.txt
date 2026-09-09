@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.950922.xyz/sitemap-index.xml

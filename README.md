@@ -30,7 +30,8 @@ public/
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # 构建生产版本
+npm run build:all # 构建生产版本、搜索索引和版本化离线缓存
+npm run verify   # 类型检查、生产构建、浏览器回归测试
 ```
 
 ## 功能特性
@@ -46,3 +47,15 @@ npm run build    # 构建生产版本
 ## 部署
 
 推送到 `main` 分支自动触发 GitHub Actions 构建并部署到 `gh-pages` 分支。
+
+## 验证与维护
+
+首次运行测试需要本机安装 Chrome，或执行 `npx playwright install chrome`。
+`npm run check` 执行 Astro/TypeScript 检查，`npm test` 对已构建的 `dist` 运行浏览器回归测试。
+`npm audit` 检查依赖漏洞。PR 和 main 推送都会运行检查，仅 main 推送或手动运行会部署。
+
+页面采用标准浏览器导航，每个页面独立初始化交互。跨页过渡动画已移除，避免路由切换后的监听器和动画残留。
+Service Worker 在生产构建结束后按产物内容生成版本，在线重新请求资源，断网时读取已缓存资源。
+图片及 robots.txt 等公开资源必须放入 `public/`；站点图标实际尺寸为 256×256。
+
+详见 [修复后审查报告](AUDIT_REPORT.md)。

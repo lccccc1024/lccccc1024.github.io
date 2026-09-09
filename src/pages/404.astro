@@ -22,56 +22,8 @@ import PageLayout from '../layouts/PageLayout.astro';
     <p><a href="/" class="more-posts" style="display: inline-flex;">← 返回首页</a></p>
   </article>
 
-  <script is:inline src="/js/fuse.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const input = document.getElementById('search-input-404');
-      const results = document.getElementById('search-results-404');
-      let fuse = null;
-
-      function escapeHtml(s) {
-        if (!s) return '';
-        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-      }
-
-      function highlightText(text, query) {
-        if (!query) return escapeHtml(text);
-        const escaped = query.replace(/[.*+?^=!${}()|[\]\\]/g, '\\$&');
-        const re = new RegExp('(' + escaped + ')', 'gi');
-        return text.split(re).map((part) => {
-          if (part.toLowerCase() === query.toLowerCase()) {
-            return '<mark class="search-highlight">' + escapeHtml(part) + '</mark>';
-          }
-          return escapeHtml(part);
-        }).join('');
-      }
-
-      fetch('/search.json').then((r) => r.json()).then((data) => {
-        fuse = new Fuse(data, {
-          keys: ['title', 'excerpt', 'categories', 'tags'],
-          threshold: 0.4,
-          includeScore: true,
-          minMatchCharLength: 1,
-        });
-
-        input.addEventListener('input', () => {
-          const q = input.value.trim();
-          if (q.length < 1) { results.style.display = 'none'; return; }
-
-          const matched = fuse ? fuse.search(q).map((r) => r.item) : [];
-
-          if (matched.length === 0) {
-            results.style.display = 'block';
-            results.innerHTML = '<li style="color:var(--text-secondary);padding:1em;">未找到匹配文章</li>';
-            return;
-          }
-
-          results.style.display = 'block';
-          results.innerHTML = matched.slice(0, 5).map((p) => {
-            return '<li><a href="' + escapeHtml(p.url) + '">' + highlightText(p.title, q) + '</a></li>';
-          }).join('');
-        });
-      });
-    });
+    import { initSearch } from '../scripts/search';
+    initSearch('search-input-404', 'search-results-404');
   </script>
 </PageLayout>

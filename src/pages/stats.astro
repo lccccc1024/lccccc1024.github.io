@@ -7,14 +7,14 @@ const posts = allPosts.sort((a, b) => a.data.date.getTime() - b.data.date.getTim
 
 // Total stats
 const totalPosts = posts.length;
-const totalWords = posts.reduce((sum, p) => sum + p.body.length, 0);
+const totalWords = posts.reduce((sum, p) => sum + (p.body || '').length, 0);
 const totalMinutes = Math.ceil(totalWords / 200);
 const oldest = posts[0]?.data.date || new Date();
 const newest = posts[posts.length - 1]?.data.date || new Date();
-const spanDays = Math.ceil((newest - oldest) / (1000 * 60 * 60 * 24));
+const spanDays = Math.ceil((newest.getTime() - oldest.getTime()) / (1000 * 60 * 60 * 24));
 
 // Heatmap data (last 365 days)
-const heatmap = {};
+const heatmap: Record<string, number> = {};
 const today = new Date();
 for (let i = 364; i >= 0; i--) {
   const d = new Date(today);
@@ -22,38 +22,34 @@ for (let i = 364; i >= 0; i--) {
   const key = d.toISOString().slice(0, 10);
   heatmap[key] = 0;
 }
+const paddingDays = new Date(Object.keys(heatmap)[0]).getUTCDay();
 posts.forEach(p => {
   const key = p.data.date.toISOString().slice(0, 10);
   if (heatmap[key] !== undefined) heatmap[key] = (heatmap[key] || 0) + 1;
 });
 
 // Posts by year/month
-const byYear = {};
+const byYear: Record<string, { count: number; words: number }> = {};
 posts.forEach(p => {
   const y = p.data.date.getFullYear();
   if (!byYear[y]) byYear[y] = { count: 0, words: 0 };
   byYear[y].count++;
-  byYear[y].words += p.body.length;
+  byYear[y].words += (p.body || '').length;
 });
 
 // Categories
-const cats = {};
+const cats: Record<string, number> = Object.create(null);
 posts.forEach(p => (p.data.categories || []).forEach(c => { cats[c] = (cats[c] || 0) + 1; }));
 const sortedCats = Object.entries(cats).sort((a, b) => b[1] - a[1]);
 
 // Tags
-const tags = {};
+const tags: Record<string, number> = Object.create(null);
 posts.forEach(p => (p.data.tags || []).forEach(t => { tags[t] = (tags[t] || 0) + 1; }));
 const sortedTags = Object.entries(tags).sort((a, b) => b[1] - a[1]);
 
 // Longest posts
-const longest = [...posts].sort((a, b) => b.body.length - a.body.length).slice(0, 5);
+const longest = [...posts].sort((a, b) => (b.body || '').length - (a.body || '').length).slice(0, 5);
 
-const fmt = d => d.toISOString().slice(0, 10);
-const weeks = ['日', '一', '二', '三', '四', '五', '六'];
-const now = new Date();
-const startOfWeek = new Date(now);
-startOfWeek.setDate(now.getDate() - now.getDay() - 364);
 ---
 
 <PageLayout title="写作统计">
@@ -72,11 +68,11 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
     <h3 style="margin-top: var(--space-xl);">写作热力图</h3>
     <div class="heatmap">
       <div class="heatmap-labels">
-        {['一', '三', '五'].map(d => <span class="heatmap-day-label">{d}</span>)}
+        {['日', '一', '二', '三', '四', '五', '六'].map(d => <span class="heatmap-day-label">{d}</span>)}
       </div>
       <div class="heatmap-grid">
+        {Array.from({ length: paddingDays }, () => <div class="heatmap-cell" style="visibility:hidden"></div>)}
         {Object.entries(heatmap).map(([date, count]) => {
-          const dt = new Date(date);
           const level = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3;
           return <div class={'heatmap-cell level-' + level} title={date + ': ' + count + ' 篇'}></div>;
         })}
@@ -86,7 +82,7 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
     <!-- Yearly stats -->
     <h3 style="margin-top: var(--space-xl);">按年统计</h3>
     <div class="bar-chart">
-      {Object.entries(byYear).sort((a, b) => b[0] - a[0]).map(([year, data]) => {
+      {Object.entries(byYear).sort((a, b) => Number(b[0]) - Number(a[0])).map(([year, data]) => {
         const maxCount = Math.max(...Object.values(byYear).map(d => d.count), 1);
         const pct = (data.count / maxCount) * 100;
         return (
@@ -125,7 +121,7 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
       {longest.map(p => (
         <li>
           <a href={'/posts/' + p.id + '/'}>{p.data.title}</a>
-          <span class="top-list-meta">{p.body.length} 字 · {Math.ceil(p.body.length / 200)} 分钟</span>
+          <span class="top-list-meta">{(p.body || '').length} 字 · {Math.ceil((p.body || '').length / 200)} 分钟</span>
         </li>
       ))}
     </ol>
@@ -139,10 +135,10 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
   .stat-card { text-align: center; padding: var(--space-lg); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); }
   .stat-value { display: block; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1.2; }
   .stat-label { font-size: 0.85rem; color: var(--text-tertiary); }
-  .heatmap { display: flex; gap: 6px; margin: var(--space-md) 0; }
-  .heatmap-labels { display: flex; flex-direction: column; gap: 14px; padding-top: 2px; }
+  .heatmap { overflow-x: auto; display: flex; gap: 6px; margin: var(--space-md) 0; }
+  .heatmap-labels { display: flex; flex-direction: column; gap: 3px; padding-top: 0; }
   .heatmap-day-label { font-size: 0.65rem; color: var(--text-tertiary); height: 12px; }
-  .heatmap-grid { display: grid; grid-template-columns: repeat(53, 1fr); gap: 3px; flex: 1; }
+  .heatmap-grid { display: grid; grid-template-rows: repeat(7, 12px); grid-auto-flow: column; grid-auto-columns: 12px; gap: 3px; }
   .heatmap-cell { width: 12px; height: 12px; border-radius: 2px; background: var(--bg-code); }
   .heatmap-cell.level-1 { background: var(--accent-light); }
   .heatmap-cell.level-2 { background: var(--accent); opacity: 0.6; }
@@ -156,5 +152,5 @@ startOfWeek.setDate(now.getDate() - now.getDay() - 364);
   .top-list { list-style: decimal; padding-left: 1.5em; }
   .top-list li { margin: var(--space-sm) 0; }
   .top-list-meta { font-size: 0.8rem; color: var(--text-tertiary); margin-left: var(--space-sm); }
-  @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .heatmap-grid { gap: 2px; } .heatmap-cell { width: 8px; height: 8px; } .bar-value { display: none; } }
+  @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); }  .bar-value { display: none; } }
 </style>

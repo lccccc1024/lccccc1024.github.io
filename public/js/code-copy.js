@@ -4,7 +4,7 @@
  */
 (function() {
     function init_copy() {
-        let codeBlocks = document.querySelectorAll('.highlight');
+        let codeBlocks = document.querySelectorAll('pre.astro-code');
 
         codeBlocks.forEach(function(block) {
             let code = block.querySelector('code');

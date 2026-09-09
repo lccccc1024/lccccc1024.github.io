@@ -21,6 +21,7 @@
       var places = [];
       try { places = JSON.parse(decodeURIComponent(location.hash.slice(1))); } catch(e) {}
 
+      if (typeof AMap === 'undefined') { document.getElementById('map').textContent = '地图暂不可用，请稍后重试'; return; }
       var map = new AMap.Map('map', {
         zoom: 4,
         center: [104.1954, 35.8617],
@@ -31,10 +32,22 @@
       try { isDark = parent.document.documentElement.classList.contains('dark'); } catch(e) {}
       if (isDark) map.setMapStyle('amap://styles/dark');
 
+      if (!Array.isArray(places)) places = [];
+      places = places.filter(function(p) {
+        return p && typeof p.name === 'string' && typeof p.date === 'string' &&
+          (p.note == null || typeof p.note === 'string') &&
+          Number.isFinite(p.lng) && Math.abs(p.lng) <= 180 &&
+          Number.isFinite(p.lat) && Math.abs(p.lat) <= 90;
+      }).slice(0, 1000);
       places.forEach(function(p) {
+        var content = document.createElement('div');
+        var name = document.createElement('b');
+        name.textContent = p.name;
+        content.append(name, document.createElement('br'), document.createTextNode(p.date === '0000-00-00' ? '—' : p.date));
+        if (p.note) content.append(document.createElement('br'), document.createTextNode(p.note));
         var m = new AMap.Marker({ position: [p.lng, p.lat], title: p.name, animation: 'AMAP_ANIMATION_DROP' });
         var iw = new AMap.InfoWindow({
-          content: '<div style="padding:4px 2px;line-height:1.6;font-size:14px"><b>' + p.name + '</b><br>' + p.date + (p.note ? '<br><span style="opacity:.7">' + p.note + '</span>' : '') + '</div>',
+          content: content,
           offset: new AMap.Pixel(0, -20)
         });
         m.on('click', function() { iw.open(map, m.getPosition()); });

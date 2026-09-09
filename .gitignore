@@ -22,3 +22,7 @@ node_modules
 
 # Jekyll legacy
 assets/
+
+.astro/
+test-results/
+playwright-report/
