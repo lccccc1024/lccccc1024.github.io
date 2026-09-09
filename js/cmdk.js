@@ -3,8 +3,8 @@
 
   let overlay, input, results, selectedIndex = -1;
   let pagefind, searchTimeout;
-  let boundKeydown, boundUnhandledRejection;
-  let pfScript;
+  let boundKeydown;
+  let searchGeneration = 0;
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -13,18 +13,14 @@
 
   function cleanup() {
     if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    if (pfScript && pfScript.parentNode) pfScript.parentNode.removeChild(pfScript);
-    overlay = null; input = null; results = null; pfScript = null;
+    overlay = null; input = null; results = null;
     if (boundKeydown) document.removeEventListener('keydown', boundKeydown);
-    if (boundUnhandledRejection) window.removeEventListener('unhandledrejection', boundUnhandledRejection);
-    boundKeydown = boundUnhandledRejection = null;
+    boundKeydown = null;
   }
 
   function init() {
     cleanup();
 
-    boundUnhandledRejection = function(e) { if (e.reason && e.reason.message && e.reason.message.includes('pagefind')) e.preventDefault(); };
-    window.addEventListener('unhandledrejection', boundUnhandledRejection);
 
     // Create DOM
     overlay = document.createElement('div');
@@ -47,14 +43,6 @@
 
     input = document.getElementById('cmdk-input');
     results = document.getElementById('cmdk-results');
-
-    // Load Pagefind
-    pfScript = document.createElement('script');
-    pfScript.src = '/pagefind/pagefind.js';
-    pfScript.onload = function() {
-      pagefind = window.pagefind;
-    };
-    document.body.appendChild(pfScript);
 
     // Keyboard shortcut
     boundKeydown = function(e) {
@@ -88,6 +76,8 @@
 
     // Input handler
     input.addEventListener('input', function() {
+      searchGeneration++;
+      selectedIndex = -1;
       clearTimeout(searchTimeout);
       let q = input.value.trim();
       if (q.length < 1) {
@@ -104,13 +94,19 @@
     });
   }
 
-  function open() {
+  async function open() {
     overlay.classList.add('active');
-    setTimeout(function() { input.focus(); }, 50);
+    input.focus();
+    if (!pagefind) {
+      try { pagefind = await import('/pagefind/pagefind.js'); if (input.value.trim()) doSearch(input.value.trim()); }
+      catch { results.textContent = '搜索暂不可用，请稍后重试'; }
+    }
   }
 
   function close() {
     overlay.classList.remove('active');
+    searchGeneration++;
+    clearTimeout(searchTimeout);
     input.value = '';
     results.innerHTML = '';
     results.classList.remove('has-results');
@@ -119,14 +115,17 @@
 
   function doSearch(q) {
     if (!pagefind) return;
+    const generation = ++searchGeneration;
     pagefind.search(q).then(function(searchResults) {
+      if (generation !== searchGeneration || input.value.trim() !== q) return;
       if (!searchResults || !searchResults.results) {
         results.innerHTML = '<div class="cmdk-empty">未找到匹配文章</div>';
         results.classList.add('has-results');
         return;
       }
-      Promise.all(searchResults.results.slice(0, 10).map(function(r) { return r.data(); }))
+      return Promise.all(searchResults.results.slice(0, 10).map(function(r) { return r.data(); }))
         .then(function(data) {
+          if (generation !== searchGeneration || input.value.trim() !== q) return;
           if (data.length === 0) {
             results.innerHTML = '<div class="cmdk-empty">未找到匹配文章</div>';
             results.classList.add('has-results');
@@ -141,13 +140,13 @@
           results.classList.add('has-results');
           selectedIndex = -1;
         });
-    });
+    }).catch(function() { if (generation === searchGeneration) results.textContent = '搜索失败，请重试'; });
   }
 
   function navigate(dir) {
     let items = results.querySelectorAll('.cmdk-result-item');
     if (items.length === 0) return;
-    if (selectedIndex >= 0) items[selectedIndex].classList.remove('selected');
+    if (items[selectedIndex]) items[selectedIndex].classList.remove('selected');
     selectedIndex = Math.max(0, Math.min(items.length - 1, selectedIndex + dir));
     items[selectedIndex].classList.add('selected');
     items[selectedIndex].scrollIntoView({ block: 'nearest' });

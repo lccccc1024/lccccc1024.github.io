@@ -45,8 +45,11 @@ function initTableSort() {
                     let bVal = b.children[index]?.textContent.trim() || '';
 
                     // 尝试数字排序
-                    const aNum = parseFloat(aVal);
-                    const bNum = parseFloat(bVal);
+                    if (/^\d{4}-\d{2}(?:-\d{2})?$/.test(aVal) && /^\d{4}-\d{2}(?:-\d{2})?$/.test(bVal)) {
+                        return isAsc ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
+                    }
+                    const aNum = Number(aVal.replace(/[,¥￥$]/g, ''));
+                    const bNum = Number(bVal.replace(/[,¥￥$]/g, ''));
 
                     if (!isNaN(aNum) && !isNaN(bNum)) {
                         return isAsc ? bNum - aNum : aNum - bNum;

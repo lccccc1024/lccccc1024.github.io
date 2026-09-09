@@ -24,6 +24,7 @@
   }
 
   function init() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     cleanup();
 
     // Remove old canvas if re-initializing (data-astro-rerun)
@@ -42,7 +43,8 @@
 
     resize();
     createParticles();
-    animate();
+    lastTick = performance.now();
+    rafId = requestAnimationFrame(animate);
 
     window.addEventListener('resize', boundResize = resize);
     document.addEventListener('mousemove', boundMouseMove = function(e) {

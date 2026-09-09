@@ -1,60 +1,35 @@
-const CACHE = 'xianhua-v1';
-const ASSETS = [
-  '/css/global.css',
-  '/js/theme-toggle.js',
-  '/js/particles.js',
-  '/js/lightbox.js',
-  '/js/code-copy.js',
-  '/js/image-blur.js',
-  '/js/ui-enhance.js',
-  '/js/list-pages.js',
-  '/js/fuse.min.js',
-  '/js/cmdk.js',
-  '/search.json',
-  '/js/toc.js',
-  '/lccccc1024.png',
-];
-
-// Install: cache assets
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(ASSETS))
-  );
-  self.skipWaiting();
+const CACHE = 'xianhua-23432023fca2e071';
+const ASSETS = ['/', '/css/global.css', '/js/theme-toggle.js', '/js/cmdk.js', '/search.json', '/lccccc1024.png'];
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
-
-// Activate: clean old caches
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
-  );
+self.addEventListener('activate', event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(
+    keys.filter(key => key.startsWith('xianhua-') && key !== CACHE).map(key => caches.delete(key))
+  )).then(() => self.clients.claim()));
 });
-
-// Fetch: network first for pages, cache first for assets
-self.addEventListener('fetch', (e) => {
-  const url = new URL(e.request.url);
-
-  // Only handle same-origin requests
-  if (url.origin !== location.origin) return;
-
-  // Static assets: cache first
-  if (ASSETS.some((a) => url.pathname === a)) {
-    e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
-    return;
-  }
-
-  // Pages: network first, fallback to cache, then offline page
-  e.respondWith(
-    fetch(e.request)
-      .then((res) => {
-        const clone = res.clone();
-        caches.open(CACHE).then((cache) => cache.put(e.request, clone));
-        return res;
-      })
-      .catch(() =>
-        caches.match(e.request).then((r) => r || caches.match('/'))
-      )
-  );
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // Revalidate every request: current content online, cached content offline.
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    try {
+      const response = await fetch(request);
+      if (response.ok && response.type === 'basic') {
+        try { await cache.put(request, response.clone()); } catch { /* Quota must not break online access. */ }
+      }
+      return response;
+    } catch {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+      if (request.mode === 'navigate') {
+        return new Response('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>离线</title><h1>当前处于离线状态</h1><p>此页面尚未缓存，请联网后重试。</p><a href="/">返回首页</a></html>', {
+          status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' }
+        });
+      }
+      return Response.error();
+    }
+  })());
 });

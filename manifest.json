@@ -9,12 +9,7 @@
   "icons": [
     {
       "src": "/lccccc1024.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/lccccc1024.png",
-      "sizes": "512x512",
+      "sizes": "256x256",
       "type": "image/png"
     }
   ]
