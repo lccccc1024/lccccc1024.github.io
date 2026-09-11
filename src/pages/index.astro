@@ -20,12 +20,20 @@ function firstImg(body: string = '') {
   const m = body.match(/!\[.*?\]\((.*?)\)/);
   return m ? m[1] : null;
 }
+
+function coverVariant(id: string) {
+  return [...id].reduce((sum, char) => sum + char.codePointAt(0)!, 0) % 4;
+}
+
+function coverLabel(title: string) {
+  return title.replace(/[\s\d._+\-—（）()]/g, '').slice(0, 4) || '随笔';
+}
 ---
 
 <PageLayout title="首页">
   <section class="hero journal-hero">
     <div class="hero-copy">
-      <span class="eyebrow">LCC’S JOURNAL · 生活与记录</span>
+      <span class="eyebrow">ASA’S JOURNAL · 生活与记录</span>
       <h1 class="hero-title">闲话之间，<br />留住日常。</h1>
       <p class="hero-description">一些生活的切片，一些折腾的笔记。<br />把值得记住的事，慢慢写下来。</p>
       <div class="hero-actions"><a href="/archive/" class="journal-button">翻开文章 <span aria-hidden="true">↗</span></a><a href="/about/" class="quiet-link">关于这个小站 →</a></div>
@@ -40,13 +48,25 @@ function firstImg(body: string = '') {
   <div class="journal-section-heading"><h2 class="home-section-title">最近写下的</h2><span>文字是时间的另一种刻度</span></div>
 
   <ul class="home-list journal-posts">
-    {posts.map((post) => (
+    {posts.map((post, index) => (
       <li>
         <div class="home-post-inner">
           <a href={`/posts/${post.id}/`} class="home-thumb-link">
             {firstImg(post.body)
               ? <img src={firstImg(post.body)} alt="" class="home-thumb" loading="lazy" />
-              : <div class="home-thumb-placeholder" data-category={post.data.categories?.[0]}></div>
+              : (
+                <div
+                  class="home-thumb-placeholder generated-cover"
+                  data-cover={coverVariant(post.id)}
+                  aria-hidden="true"
+                >
+                  <span class="cover-index">NO. {String(index + 1).padStart(2, '0')}</span>
+                  <span class="cover-category">{post.data.categories?.[0] || '闲话'}</span>
+                  <strong class="cover-title">{coverLabel(post.data.title)}</strong>
+                  <span class="cover-rule"></span>
+                  <span class="cover-signature">ASA · JOURNAL</span>
+                </div>
+              )
             }
           </a>
           <div class="home-post-body">

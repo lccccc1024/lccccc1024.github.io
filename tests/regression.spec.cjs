@@ -31,6 +31,15 @@ test('search works after navigation and uses one command panel', async ({ page }
   expect(errors).toEqual([]);
 });
 
+test('posts without images receive a visible generated cover', async ({ page }) => {
+  await page.goto('/');
+  const covers = page.locator('.generated-cover');
+  expect(await covers.count()).toBeGreaterThan(0);
+  await expect(covers.first()).toBeVisible();
+  await expect(covers.first().locator('.cover-title')).not.toHaveText('');
+  await expect(covers.first().locator('.cover-signature')).toHaveText('ASA · JOURNAL');
+});
+
 test('mobile menu, progress and copy survive navigation', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.setViewportSize({ width: 390, height: 844 });
