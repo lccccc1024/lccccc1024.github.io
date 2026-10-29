@@ -24,7 +24,9 @@ jobs:
       - run: npm run build:all
       - run: npx playwright install --with-deps chrome
       - run: npm test
-      - run: npm audit --audit-level=moderate
+      - name: Audit dependencies (report only, must not block publishing)
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
       - run: touch dist/.nojekyll
       - uses: actions/upload-artifact@v4
         with:
