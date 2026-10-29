@@ -1,1 +1,0 @@
-import{t as e}from"./rolldown-runtime.B8xr6ykz.js";var t=e((()=>{var e=document.getElementById(`random-post`),t=JSON.parse(e?.dataset.urls||`[]`);t.length&&window.location.replace(t[Math.floor(Math.random()*t.length)])}));export default t();

@@ -1,0 +1,1 @@
+import{t as e}from"./rolldown-runtime.Czjbc987.js";import{n as t,t as n}from"./search.DRtkpDLL.js";var r=e((()=>{t(),n(`search-input-404`,`search-results-404`)}));export default r();
