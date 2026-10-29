@@ -1,0 +1,1 @@
+import{t as e}from"./rolldown-runtime.B8xr6ykz.js";import{n as t,t as n}from"./search.By_7iLg2.js";var r=e((()=>{t(),n(`search-input`,`search-results`),document.querySelectorAll(`.home-list li`).forEach((e,t)=>{e.style.animationDelay=`${t*.08}s`,e.classList.add(`card-enter`)})}));export default r();
