@@ -2,6 +2,8 @@
 
 分享日常杂记、技术笔记的极简博客。
 
+**在线阅读：** https://blog.950922.xyz/  ·  基于 Astro 构建，GitHub Pages 托管
+
 ## 技术栈
 
 - **框架**: [Astro](https://astro.build) v7
