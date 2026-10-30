@@ -60,4 +60,23 @@ npm run verify   # 类型检查、生产构建、浏览器回归测试
 Service Worker 在生产构建结束后按产物内容生成版本，在线重新请求资源，断网时读取已缓存资源。
 图片及 robots.txt 等公开资源必须放入 `public/`；站点图标实际尺寸为 256×256。
 
+### 站点「看起来坏了」时的排查顺序
+
+2026-10-29 出现过一次：页面样式和交互都失效，但服务端返回 200、CSS 和 JS 都能正常下载。
+根因没有完全复现（倾向于浏览器里仍在使用上一版 HTML，而它引用的 `_astro/*.js` 已被新构建改名并删除）。
+
+按这个顺序查，能在 1 分钟内区分是服务端问题还是本地缓存问题：
+
+1. **无痕窗口打开同一地址**。正常 → 本地缓存问题，跳第 2 步；仍然坏 → 服务端，跳第 3 步
+2. **`Ctrl+F5` 硬刷新**；还不行就清除该站点数据（DevTools → Application → Storage → Clear site data）。
+   站点注册了 Service Worker，普通刷新不一定会让它失效
+3. 服务端确认（都不需要浏览器）：
+   - `gh-pages` 分支的产物树是否有 404 引用：`gh api repos/lccccc1024/lccccc1024.github.io/git/trees/gh-pages?recursive=1`
+   - 样式是否被改动：对比 `css/global.css` 的 blob sha，未变即为零变化
+   - 缓存版本是否更新：`sw.js` 里的 `const CACHE = 'xianhua-<hash>'` 每次构建都会变；
+     版本变了说明新构建已生效，旧缓存会在 `activate` 时清掉
+
+代码侧的保障：`sw.js` 由 `scripts/version-sw.cjs` 按产物内容生成版本号，在线时走网络优先，
+断网才读缓存，因此不会长期停留在旧版本。
+
 详见 [修复后审查报告](AUDIT_REPORT.md)。
