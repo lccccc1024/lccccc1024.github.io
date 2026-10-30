@@ -18,7 +18,7 @@
     "url": "git+https://github.com/lccccc1024/lccccc1024.github.io.git"
   },
   "author": "Lcc",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
