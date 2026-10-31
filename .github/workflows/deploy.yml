@@ -22,6 +22,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build:all
+      - name: Check internal links
+        run: npm run check:links
       - run: npx playwright install --with-deps chrome
       - run: npm test
       - name: Audit dependencies (report only, must not block publishing)
