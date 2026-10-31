@@ -16,7 +16,6 @@ Gemfile.lock
 
 dist
 node_modules
-*.py
 
 
 
