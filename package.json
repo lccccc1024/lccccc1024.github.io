@@ -10,8 +10,9 @@
     "build:all": "npm run build && npm run build:search && node scripts/version-sw.cjs",
     "preview": "astro preview",
     "check": "astro check",
+    "check:links": "node scripts/check-links.cjs",
     "test": "playwright test",
-    "verify": "npm run check && npm run build:all && npm test"
+    "verify": "npm run check && npm run build:all && npm run check:links && npm test"
   },
   "repository": {
     "type": "git",
