@@ -160,27 +160,46 @@
   color: var(--accent);
 }
 
-/* ============ 列表页 / 标题 ============ */
+/* ============ 页面骨架：全站唯一一套 ============ */
 
+.page-head,
 .list-page-header {
-  margin-bottom: 34px;
-  padding-bottom: 22px;
+  margin: 0 0 30px;
+  padding: 8px 0 26px;
   border-bottom: 1px solid var(--border);
   text-align: left;
 }
 
+.page-title,
 .list-page-title {
+  margin: 0;
   font-size: clamp(26px, 3.6vw, 32px);
   font-weight: 500;
+  line-height: 1.35;
   letter-spacing: 0.012em;
+  color: var(--text-primary);
   background: none;
   -webkit-text-fill-color: currentColor;
 }
 
+.page-sub,
 .list-page-subtitle {
-  margin-top: 10px;
+  margin: 10px 0 0;
   font-size: 14px;
+  line-height: 1.8;
   color: var(--text-secondary);
+}
+
+/* 页面内部的二级小节标题 */
+.section-title {
+  margin: 34px 0 12px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.section-title:first-child {
+  margin-top: 0;
 }
 
 .list-page-content {
@@ -502,4 +521,90 @@
   .archive-item .archive-excerpt {
     grid-column: 1 / -1;
   }
+}
+
+/* =====================================================
+   页面通用元素 · 全站统一
+   ===================================================== */
+
+.page-rule {
+  margin: 40px 0 24px;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.page-end {
+  display: inline-block;
+  margin: 40px 0 8px;
+  padding-bottom: 2px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-end:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-secondary);
+}
+
+/* 页头下方的一行说明（原 .stats） */
+.stats {
+  margin: 0 0 24px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.stats strong {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tag-cloud {
+  margin-bottom: 34px;
+}
+
+/* 404：与其它页面同一套页头，数字只做视觉元素 */
+.error-404 {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 56px 0 20px;
+  font-size: 88px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.error-404-num {
+  color: var(--text-secondary);
+}
+
+.error-404-zero {
+  color: var(--text-tertiary);
+}
+
+/* =====================================================
+   社交按钮：统一到单一强调色，不做位移
+   ===================================================== */
+
+.social-btn,
+.social-btn--github,
+.social-btn--blog,
+.social-btn--email {
+  color: var(--text-secondary);
+  border-color: var(--border);
+  background: transparent;
+  transform: none;
+}
+
+.social-btn--github:hover,
+.social-btn--blog:hover,
+.social-btn--email:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: none;
+  box-shadow: none;
 }

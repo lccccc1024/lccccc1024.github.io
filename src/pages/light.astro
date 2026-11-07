@@ -6,9 +6,9 @@ const reverseMovies = [...movies].reverse();
 ---
 
 <PageLayout title="电影清单" description="个人电影观看记录清单">
-  <div class="list-page-header">
-    <h1 class="list-page-title">电影清单</h1>
-    <p class="list-page-subtitle">至少还有电影，幸好还有电影。</p>
+  <div class="page-head">
+    <h1 class="page-title">电影清单</h1>
+    <p class="page-sub">至少还有电影，幸好还有电影。</p>
   </div>
 
   <div class="list-page-content">
@@ -41,5 +41,6 @@ const reverseMovies = [...movies].reverse();
       </table>
     </div>
   </div>
+  <a href="/" class="page-end">← 返回首页</a>
   <script is:inline src="/js/list-pages.js" defer></script>
 </PageLayout>

@@ -3,10 +3,10 @@ import PageLayout from '../layouts/PageLayout.astro';
 import places from '../data/places';
 
 const categoryColors: Record<string, string> = {
-  '旅游': '#3b82f6',
-  '出差': '#f59e0b',
-  '探亲': '#10b981',
-  '其他': '#8b5cf6'
+  '旅游': '#2b5a4b',
+  '出差': '#3f5d78',
+  '探亲': '#7a5a3f',
+  '其他': '#6f6f68'
 }
 
 const sortedPlaces = [...places].reverse()
@@ -14,9 +14,9 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
 ---
 
 <PageLayout title="足迹地图" description="记录我去过的地方">
-  <div class="list-page-header">
-    <h1 class="list-page-title">足迹地图</h1>
-    <p class="list-page-subtitle">世界那么大，我想去看看。</p>
+  <div class="page-head">
+    <h1 class="page-title">足迹地图</h1>
+    <p class="page-sub">世界那么大，我想去看看。</p>
   </div>
 
   <div class="list-page-content">
@@ -56,6 +56,8 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
     </div>
   </div>
 
+  <a href="/" class="page-end">← 返回首页</a>
+
   <style>
     #map-wrap {
       width: 100%;
@@ -84,7 +86,7 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
       border: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 720px) {
       #map-wrap { height: 350px; }
     }
   </style>

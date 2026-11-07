@@ -53,8 +53,12 @@ const longest = [...posts].sort((a, b) => (b.body || '').length - (a.body || '')
 ---
 
 <PageLayout title="写作统计">
-  <article class="post-card">
-    <h2>📊 写作统计</h2>
+  <div class="page-head">
+    <h1 class="page-title">写作统计</h1>
+    <p class="page-sub">这些年写下的字数、节奏与分布。</p>
+  </div>
+
+  <div>
 
     <!-- Overview cards -->
     <div class="stats-grid">
@@ -126,8 +130,8 @@ const longest = [...posts].sort((a, b) => (b.body || '').length - (a.body || '')
       ))}
     </ol>
 
-    <p style="margin-top: var(--space-xl);"><a href="/" class="more-posts">← 返回首页</a></p>
-  </article>
+    <a href="/" class="page-end">← 返回首页</a>
+  </div>
 </PageLayout>
 
 <style>
@@ -147,7 +151,7 @@ const longest = [...posts].sort((a, b) => (b.body || '').length - (a.body || '')
   .bar-row { display: flex; align-items: center; gap: var(--space-md); }
   .bar-label { width: 50px; font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); flex-shrink: 0; }
   .bar-track { flex: 1; height: 24px; background: var(--bg-code); border-radius: var(--radius-sm); overflow: hidden; }
-  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #8b5cf6); border-radius: var(--radius-sm); transition: width var(--dur-3) var(--ease); }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: var(--radius-sm); transition: width var(--dur-3) var(--ease); }
   .bar-value { width: 120px; font-size: 0.8rem; color: var(--text-tertiary); flex-shrink: 0; text-align: right; }
   .top-list { list-style: decimal; padding-left: 1.5em; }
   .top-list li { margin: var(--space-sm) 0; }
