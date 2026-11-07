@@ -1,0 +1,446 @@
+/* =====================================================
+   首页 · Bento 网格
+   12 栅格 + 固定行高，格子跨行跨列组成不对称布局。
+   ===================================================== */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 186px 186px 186px 172px;
+  grid-template-areas:
+    "hero hero hero hero hero hero hero hero p1   p1   p1   p1"
+    "hero hero hero hero hero hero hero hero p2   p2   p2   p2"
+    "stat stat stat lst  lst  lst  lst  lst  bok  bok  bok  bok"
+    "tag  tag  tag  tag  tag  map  map  map  map  map  map  map";
+  gap: 13px;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 18px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+a.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tile-k {
+  font: 9.5px var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.hero-tile { grid-area: hero; }
+.post-tile.p1 { grid-area: p1; }
+.post-tile.p2 { grid-area: p2; }
+.stat-tile { grid-area: stat; }
+.list-tile { grid-area: lst; }
+.books-tile { grid-area: bok; }
+.tag-tile { grid-area: tag; }
+.map-tile { grid-area: map; }
+
+/* ============ Hero ============ */
+
+.hero-tile {
+  justify-content: space-between;
+  padding: 26px;
+  background: var(--hero-bg);
+  border: 0;
+  color: var(--hero-ink);
+}
+
+.hero-tile .tile-k {
+  color: var(--hero-ink-3);
+}
+
+.eyebrow {
+  display: block;
+  font: 10px var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hero-ink-3);
+}
+
+.hero-title {
+  margin: 14px 0 0;
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  font-weight: 680;
+  color: var(--hero-ink);
+}
+
+.hero-description {
+  margin: 12px 0 0;
+  max-width: 34ch;
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--hero-ink-2);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 18px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: #1a2410;
+  background: var(--highlight);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-1px);
+}
+
+.hero-meta {
+  font: 10px var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--hero-ink-3);
+  white-space: nowrap;
+}
+
+/* ============ 文章格 ============ */
+
+.post-tile {
+  justify-content: space-between;
+}
+
+.post-tile .generated-cover {
+  height: 72px;
+  flex: none;
+  margin-bottom: 11px;
+  padding: 10px 11px;
+  border-radius: 11px;
+}
+
+.post-tile .cover-index,
+.post-tile .cover-category {
+  top: 9px;
+  font-size: 8px;
+}
+
+.post-tile .cover-index { left: 11px; }
+.post-tile .cover-category { right: 11px; }
+
+.post-tile .cover-title {
+  left: 11px;
+  right: 11px;
+  bottom: 8px;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.post-tile .cover-rule,
+.post-tile .cover-signature {
+  display: none;
+}
+
+.post-tile-img {
+  display: block;
+  width: 100%;
+  height: 72px;
+  margin-bottom: 11px;
+  object-fit: cover;
+  border-radius: 11px;
+  background: var(--bg-code);
+}
+
+.post-tile h3 {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 620;
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-tile .tile-meta {
+  margin-top: 6px;
+  font: 10px var(--font-mono);
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+/* ============ 统计格 ============ */
+
+.stat-tile {
+  justify-content: space-between;
+  background: var(--accent);
+  border: 0;
+  color: var(--bg-card);
+}
+
+.stat-tile .tile-k {
+  color: currentColor;
+  opacity: 0.62;
+}
+
+.stat-value {
+  display: block;
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 660;
+  letter-spacing: -0.04em;
+}
+
+.stat-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 9px;
+  font-size: 11px;
+  color: currentColor;
+  opacity: 0.72;
+}
+
+/* ============ 最新发布列表 ============ */
+
+.list-tile .tile-k {
+  margin-bottom: 8px;
+}
+
+.tile-rows {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.tile-row {
+  display: flex;
+  gap: 9px;
+  align-items: baseline;
+  padding: 7px 0;
+  font-size: 12.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tile-row:last-of-type {
+  border-bottom: 0;
+}
+
+.tile-row em {
+  flex: none;
+  font: 9.5px var(--font-mono);
+  font-style: normal;
+  color: var(--text-tertiary);
+}
+
+.tile-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile-row:hover span {
+  color: var(--accent);
+}
+
+.tile-more {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+
+.tile-more:hover {
+  color: var(--accent);
+}
+
+/* ============ 在读 ============ */
+
+.books-tile .spines {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.spine {
+  width: 30px;
+  height: 58px;
+  border-radius: 4px;
+  background: var(--hero-bg);
+  opacity: 0.9;
+}
+
+.spine:nth-child(2) { opacity: 0.62; }
+.spine:nth-child(3) { opacity: 0.38; }
+
+.books-tile .tile-note {
+  margin-top: auto;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ============ 标签 ============ */
+
+.tile-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: flex-start;
+  margin-top: 11px;
+}
+
+.tile-chip {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.tile-chip:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* ============ 足迹 ============ */
+
+.map-tile {
+  justify-content: flex-end;
+  background: var(--bg-code);
+  border-color: var(--border);
+}
+
+.map-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--text-tertiary) 1px, transparent 1px);
+  background-size: 13px 13px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.map-tile .map-label {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.map-tile .map-label b {
+  font-size: 22px;
+  font-weight: 660;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ============ 响应式 ============ */
+
+@media (max-width: 1279px) {
+  .bento {
+    grid-template-rows: auto;
+    grid-template-areas:
+      "hero hero hero hero hero hero hero hero hero hero hero hero"
+      "p1   p1   p1   p1   p1   p1   p2   p2   p2   p2   p2   p2"
+      "stat stat stat bok  bok  bok  tag  tag  tag  map  map  map"
+      "lst  lst  lst  lst  lst  lst  lst  lst  lst  lst  lst  lst";
+  }
+
+  .hero-tile {
+    min-height: 300px;
+  }
+
+  .post-tile,
+  .stat-tile,
+  .books-tile,
+  .tag-tile,
+  .map-tile {
+    min-height: 172px;
+  }
+
+  .list-tile {
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "hero"
+      "p1"
+      "p2"
+      "stat"
+      "lst"
+      "bok"
+      "tag"
+      "map";
+    gap: 11px;
+  }
+
+  .hero-tile {
+    min-height: 260px;
+    padding: 22px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .post-tile {
+    min-height: 0;
+  }
+
+  .post-tile .generated-cover,
+  .post-tile-img {
+    height: 84px;
+  }
+
+  .stat-tile {
+    min-height: 140px;
+  }
+
+  .tile {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .hero-button,
+  .tag-cloud a {
+    transition: none;
+  }
+
+  a.tile:hover {
+    transform: none;
+  }
+}

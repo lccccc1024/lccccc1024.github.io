@@ -1,0 +1,121 @@
+/* =====================================================
+   设计系统 · Design tokens
+   改动这个文件即可整体换肤；其余样式只消费变量。
+   ===================================================== */
+
+:root {
+  /* —— 表面 —— */
+  --bg-body: #eef0f3;
+  --bg-card: #ffffff;
+  --bg-side: #f7f8f9;
+  --bg-nav: rgba(238, 240, 243, 0.88);
+  --bg-code: #f4f5f7;
+  --bg-hover: #f1f3f6;
+
+  /* —— 文字 —— */
+  --text-primary: #121316;
+  --text-secondary: #5b6070;
+  --text-tertiary: #8e93a3;
+
+  /* —— 强调 —— */
+  --accent: #1f5c46;
+  --accent-hover: #16483a;
+  --accent-light: #e7f1ec;
+  --highlight: #d7f36a;
+
+  /* —— 描边 —— */
+  --border: #e4e6ea;
+  --border-light: #eef0f3;
+
+  /* —— 阴影 —— */
+  --shadow-sm: 0 1px 2px rgba(18, 19, 22, 0.06);
+  --shadow-md: 0 8px 20px rgba(18, 19, 22, 0.08);
+  --shadow-lg: 0 16px 34px rgba(18, 19, 22, 0.10);
+
+  /* —— 圆角 —— */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 17px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* —— 间距（8pt 基准）—— */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 14px;
+  --space-lg: 20px;
+  --space-xl: 28px;
+  --space-2xl: 40px;
+  --space-3xl: 56px;
+
+  /* —— 字体 —— */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  --fs-xs: 11px;
+  --fs-sm: 12.5px;
+  --fs-base: 14.5px;
+  --fs-md: 16px;
+  --fs-lg: 19px;
+  --fs-xl: 24px;
+  --fs-2xl: 32px;
+  --fs-display: clamp(30px, 3.2vw, 44px);
+
+  /* —— 布局 —— */
+  --sidebar-w: 268px;
+  --nav-height: 60px;
+  --content-max-width: 1120px;
+  --wide-max-width: 1280px;
+
+  /* —— 反相块（hero / logo 用，深浅色互换）—— */
+  --hero-bg: #121316;
+  --hero-ink: #ffffff;
+  --hero-ink-2: #b9bdc9;
+  --hero-ink-3: #8e93a3;
+}
+
+html.dark {
+  --bg-body: #0e0f11;
+  --bg-card: #17181c;
+  --bg-side: #131417;
+  --bg-nav: rgba(14, 15, 17, 0.88);
+  --bg-code: #1d1f24;
+  --bg-hover: #1b1d22;
+
+  --text-primary: #f2f3f5;
+  --text-secondary: #a3a8b3;
+  --text-tertiary: #6f7480;
+
+  --accent: #5fbf98;
+  --accent-hover: #7fd4b0;
+  --accent-light: #1b2b24;
+  --highlight: #d7f36a;
+
+  --border: #26272c;
+  --border-light: #1c1d21;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 34px rgba(0, 0, 0, 0.50);
+
+  /* 深色下反相块变浅 */
+  --hero-bg: #e9eaee;
+  --hero-ink: #0e0f11;
+  --hero-ink-2: #3d424d;
+  --hero-ink-3: #6f7480;
+}
+
+/* —— 基础修正 —— */
+::selection {
+  background: var(--accent);
+  color: var(--bg-body);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+body {
+  letter-spacing: 0.005em;
+}

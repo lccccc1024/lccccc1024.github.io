@@ -1,22 +1,48 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import books from '../data/books';
+import places from '../data/places';
 
 const allPosts = await getCollection('posts');
-const posts = allPosts
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 8);
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const tiles = sorted.slice(0, 2);
+const latest = sorted.slice(0, 3);
+const postCount = sorted.length;
+
+const years = sorted.map((p) => p.data.date.getFullYear());
+const firstYear = years.length ? Math.min(...years) : new Date().getFullYear();
+const lastYear = years.length ? Math.max(...years) : new Date().getFullYear();
+const spanYears = years.length ? (lastYear - firstYear).toFixed(1) : '0';
+
+const lastDate = sorted[0] ? sorted[0].data.date.toISOString().slice(0, 10) : '—';
+
+const tagFreq = new Map<string, number>();
+for (const post of sorted) {
+  for (const tag of post.data.tags ?? []) {
+    tagFreq.set(tag, (tagFreq.get(tag) ?? 0) + 1);
+  }
+}
+const topTags = [...tagFreq.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 7)
+  .map(([tag]) => tag);
 
 function fmt(d: Date) {
   return d.toISOString().slice(0, 10);
 }
 
-function excerpt(body = '') {
-  return body.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/[#*\x60>]/g, '').slice(0, 120);
+function shortDate(d: Date) {
+  const iso = d.toISOString().slice(0, 10);
+  return `${iso.slice(5, 7)}.${iso.slice(8, 10)}`;
 }
 
-// Extract first image from post body
-function firstImg(body: string = '') {
+function readingTime(body = '') {
+  return Math.max(1, Math.ceil(body.length / 200));
+}
+
+function firstImg(body = '') {
   const m = body.match(/!\[.*?\]\((.*?)\)/);
   return m ? m[1] : null;
 }
@@ -26,88 +52,96 @@ function coverVariant(id: string) {
 }
 
 function coverLabel(title: string) {
-  return title.replace(/[\s\d._+\-—（）()]/g, '').slice(0, 4) || '随笔';
+  return title.replace(/[\s\d._+\-—（）()]/g, '').slice(0, 8) || '随笔';
 }
 ---
 
-<PageLayout title="首页">
-  <section class="hero journal-hero">
-    <div class="hero-copy">
-      <span class="eyebrow">ASA’S JOURNAL · 生活与记录</span>
-      <h1 class="hero-title">闲话之间，<br />留住日常。</h1>
-      <p class="hero-description">一些生活的切片，一些折腾的笔记。<br />把值得记住的事，慢慢写下来。</p>
-      <div class="hero-actions"><a href="/archive/" class="journal-button">翻开文章 <span aria-hidden="true">↗</span></a><a href="/about/" class="quiet-link">关于这个小站 →</a></div>
-    </div>
-    <aside class="journal-note" aria-label="小站概览">
-      <span class="note-number">闲 / 话</span>
-      <p>日子很长，<br />总有些小事<br />值得一记。</p>
-      <div class="note-bottom"><span>持续记录中</span><strong>{allPosts.length}<small> 篇随笔与笔记</small></strong></div>
-    </aside>
-  </section>
+<PageLayout title="首页" pageStyles={['/css/home.css']}>
+  <div class="bento">
+    <section class="tile hero-tile" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow">Vol. {postCount} · {firstYear} → {lastYear}</span>
+        <h1 class="hero-title" id="hero-title">闲话之间，<br />留住日常。</h1>
+        <p class="hero-description">一些生活的切片，一些折腾的笔记。把值得记住的事，慢慢写下来。</p>
+      </div>
+      <div class="hero-actions">
+        <a class="hero-button" href="/archive/">翻开文章 <span aria-hidden="true">↗</span></a>
+        <span class="hero-meta">LAST · {lastDate}</span>
+      </div>
+    </section>
 
-  <div class="journal-section-heading"><h2 class="home-section-title">最近写下的</h2><span>文字是时间的另一种刻度</span></div>
-
-  <ul class="home-list journal-posts">
-    {posts.map((post, index) => (
-      <li>
-        <div class="home-post-inner">
-          <a href={`/posts/${post.id}/`} class="home-thumb-link">
-            {firstImg(post.body)
-              ? <img src={firstImg(post.body)} alt="" class="home-thumb" loading="lazy" />
-              : (
-                <div
-                  class="home-thumb-placeholder generated-cover"
-                  data-cover={coverVariant(post.id)}
-                  aria-hidden="true"
-                >
-                  <span class="cover-index">NO. {String(index + 1).padStart(2, '0')}</span>
-                  <span class="cover-category">{post.data.categories?.[0] || '闲话'}</span>
-                  <strong class="cover-title">{coverLabel(post.data.title)}</strong>
-                  <span class="cover-rule"></span>
-                  <span class="cover-signature">ASA · JOURNAL</span>
-                </div>
-              )
-            }
-          </a>
-          <div class="home-post-body">
-            <a href={`/posts/${post.id}/`}>{post.data.title}</a>
-            <div class="home-post-meta">
-              <span class="home-date">{fmt(post.data.date)}</span>
-              {post.data.categories?.length > 0 && (
-                <span class="post-category">{post.data.categories.join(', ')}</span>
-              )}
-              <span class="home-reading-time">{Math.ceil((post.body || '').length / 200)} min</span>
+    {tiles.map((post, index) => {
+      const img = firstImg(post.body);
+      const category = post.data.categories?.[0] || '闲话';
+      return (
+        <a class={`tile post-tile p${index + 1}`} href={`/posts/${post.id}/`}>
+          {img ? (
+            <img src={img} alt="" class="post-tile-img" loading="lazy" />
+          ) : (
+            <div class="generated-cover" data-cover={coverVariant(post.id)} aria-hidden="true">
+              <span class="cover-index">NO. {String(index + 1).padStart(2, '0')}</span>
+              <span class="cover-category">{category}</span>
+              <strong class="cover-title">{coverLabel(post.data.title)}</strong>
+              <span class="cover-rule"></span>
+              <span class="cover-signature">ASA · JOURNAL</span>
             </div>
-            {post.data.tags?.length > 0 && (
-              <div class="home-post-tags">
-                {post.data.tags.slice(0, 4).map((tag) => (
-                  <span class="post-tag">{tag}</span>
-                ))}
-              </div>
-            )}
-            <p class="home-excerpt">{post.data.description || excerpt(post.body)}</p>
+          )}
+          <div>
+            <h3>{post.data.title}</h3>
+            <div class="tile-meta">
+              {fmt(post.data.date)} · {category} · {readingTime(post.body)} MIN
+            </div>
           </div>
+        </a>
+      );
+    })}
+
+    <div class="tile stat-tile">
+      <span class="tile-k">Archive</span>
+      <div>
+        <strong class="stat-value">{postCount}</strong>
+        <div class="stat-foot">
+          <span>篇文章</span>
+          <span>{spanYears} 年</span>
         </div>
-      </li>
-    ))}
-  </ul>
-
-  <a href="/archive/" class="more-posts">查看全部文章 →</a>
-
-  <div class="search-box">
-    <div class="search-inner">
-      <span class="search-icon" aria-hidden="true"></span>
-      <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章" />
+      </div>
     </div>
-    <ul id="search-results" class="home-list" style="display: none;"></ul>
-  </div>
 
-  <script>
-    import { initSearch } from '../scripts/search';
-    initSearch('search-input', 'search-results');
-    document.querySelectorAll<HTMLElement>('.home-list li').forEach((card, i) => {
-      card.style.animationDelay = `${i * 0.08}s`;
-      card.classList.add('card-enter');
-    });
-  </script>
+    <div class="tile list-tile">
+      <span class="tile-k">最新发布</span>
+      <div class="tile-rows">
+        {latest.map((post) => (
+          <a class="tile-row" href={`/posts/${post.id}/`}>
+            <em>{shortDate(post.data.date)}</em>
+            <span>{post.data.title}</span>
+          </a>
+        ))}
+      </div>
+      <a class="tile-more" href="/archive/">查看全部 {postCount} 篇 →</a>
+    </div>
+
+    <div class="tile books-tile">
+      <span class="tile-k">在读</span>
+      <div class="spines" aria-hidden="true">
+        {books.slice(0, 3).map(() => <span class="spine"></span>)}
+      </div>
+      <p class="tile-note">《{books[0]?.title ?? '书单'}》等 {books.length} 本</p>
+    </div>
+
+    <div class="tile tag-tile">
+      <span class="tile-k">标签</span>
+      <div class="tile-chips">
+        {topTags.map((tag) => <a class="tile-chip" href={`/tags/#${tag}`}>{tag}</a>)}
+        <a class="tile-chip" href="/tags/">全部 →</a>
+      </div>
+    </div>
+
+    <a class="tile map-tile" href="/places/">
+      <span class="tile-k">足迹</span>
+      <div class="map-label">
+        <b>{places.length}</b>
+        <span>座城市 · 查看地图 →</span>
+      </div>
+    </a>
+  </div>
 </PageLayout>

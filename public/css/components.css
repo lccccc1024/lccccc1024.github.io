@@ -1,0 +1,375 @@
+/* =====================================================
+   组件层 · 内页样式
+   覆盖 global.css 的旧主题，统一到 tokens。
+   ===================================================== */
+
+/* ============ 生成封面 ============ */
+
+.generated-cover {
+  --cover-bg: #e7ebee;
+  --cover-ink: #22303f;
+  --cover-line: rgba(34, 48, 63, 0.18);
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 16px 18px;
+  background: var(--cover-bg);
+  color: var(--cover-ink);
+  border-radius: var(--radius-md);
+  isolation: isolate;
+}
+
+.generated-cover[data-cover="1"] {
+  --cover-bg: #e8eafb;
+  --cover-ink: #33356b;
+  --cover-line: rgba(51, 53, 107, 0.18);
+}
+
+.generated-cover[data-cover="2"] {
+  --cover-bg: #e2f3ee;
+  --cover-ink: #1d4d40;
+  --cover-line: rgba(29, 77, 64, 0.18);
+}
+
+.generated-cover[data-cover="3"] {
+  --cover-bg: #f6e9e5;
+  --cover-ink: #6b3a2c;
+  --cover-line: rgba(107, 58, 44, 0.18);
+}
+
+html.dark .generated-cover {
+  filter: brightness(0.82) saturate(0.85);
+}
+
+.generated-cover::before {
+  content: "";
+  position: absolute;
+  right: -34px;
+  bottom: -34px;
+  width: 118px;
+  height: 118px;
+  border: 1px solid var(--cover-line);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.generated-cover::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 50%;
+  height: 1px;
+  background: var(--cover-line);
+  transform: rotate(-8deg);
+  z-index: -1;
+}
+
+.cover-index,
+.cover-category,
+.cover-signature {
+  position: absolute;
+  font: 600 9px var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.cover-index { top: 14px; left: 18px; }
+.cover-category { top: 14px; right: 18px; }
+
+.cover-title {
+  position: absolute;
+  left: 18px;
+  bottom: 30px;
+  right: 18px;
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cover-rule {
+  position: absolute;
+  left: 18px;
+  bottom: 22px;
+  width: 28px;
+  height: 2px;
+  background: var(--cover-ink);
+  opacity: 0.5;
+}
+
+.cover-signature {
+  right: 18px;
+  bottom: 12px;
+}
+
+/* 旧版占位封面（其他页面可能仍在用）关闭动画与渐变 */
+.home-thumb-placeholder {
+  animation: none;
+  background: var(--bg-code);
+}
+
+.home-thumb-placeholder::before,
+.home-thumb-placeholder::after {
+  content: none;
+}
+
+/* ============ 文章页 ============ */
+
+.post-card {
+  border-radius: var(--radius-lg);
+  padding: clamp(22px, 4vw, 52px);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  box-shadow: none;
+}
+
+.post-title {
+  font-size: clamp(26px, 3.2vw, 36px);
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  font-weight: 680;
+}
+
+.post-header {
+  padding-bottom: 26px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.post-content {
+  font-size: var(--fs-md);
+  line-height: 1.95;
+  color: var(--text-primary);
+}
+
+.post-content h2 {
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  margin-top: 2em;
+}
+
+.post-content h3 {
+  font-size: 18.5px;
+  letter-spacing: -0.01em;
+}
+
+.post-content p {
+  margin-bottom: 1.35em;
+}
+
+.post-content blockquote {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px 22px;
+  color: var(--text-secondary);
+}
+
+.post-content img {
+  border-radius: var(--radius-sm);
+}
+
+.post-content a {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.post-toc,
+.post-series,
+.post-signature,
+.post-age-notice {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  box-shadow: none;
+  border-radius: var(--radius-md);
+}
+
+.post-toc a {
+  color: var(--text-secondary);
+}
+
+.post-toc a:hover {
+  color: var(--accent);
+}
+
+.post-card > h2:first-child {
+  font-size: 28px;
+  margin-top: 0;
+}
+
+/* ============ 归档 / 列表页 ============ */
+
+.archive-year {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.archive-item {
+  padding: 13px 0;
+  border-color: var(--border-light);
+}
+
+.list-page-header {
+  text-align: left;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.list-page-title {
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.list-page-subtitle {
+  margin-top: 10px;
+  font-size: var(--fs-base);
+  color: var(--text-secondary);
+}
+
+.list-page-content {
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* ============ 标签云 ============ */
+
+.tag-cloud {
+  gap: 8px;
+}
+
+.tag-cloud a {
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.tag-cloud a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ============ 表格 ============ */
+
+.table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.table-container table {
+  margin: 0;
+}
+
+.table-container th {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.table-container td {
+  font-size: 13px;
+  border-color: var(--border-light);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.table-container tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* ============ 关于页 / 统计页 ============ */
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  padding: 24px;
+}
+
+.totals {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.stat-card {
+  box-shadow: none;
+  border-radius: var(--radius-md);
+}
+
+.bar-chart .bar-fill {
+  background: var(--accent);
+}
+
+/* ============ 搜索 ============ */
+
+.search-box {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.search-inner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.cmdk-modal {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-card);
+}
+
+/* ============ 全局小组件 ============ */
+
+.progress-bar {
+  height: 2px;
+  background: var(--accent);
+}
+
+.back-to-top {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.back-to-top:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.read-progress-text {
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+}
+
+/* 顶栏里的汉堡按钮在桌面端隐藏 */
+@media (min-width: 1024px) {
+  .nav-hamburger {
+    display: none;
+  }
+}

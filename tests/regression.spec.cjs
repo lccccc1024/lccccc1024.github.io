@@ -17,7 +17,7 @@ test('production resources and XML routes exist', async ({ request }) => {
 test('search works after navigation and uses one command panel', async ({ page }) => {
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/about/');
-  await page.locator('.nav-logo').click();
+  await page.locator('.side-brand').click();
   await page.locator('#search-input').fill('Kindle');
   await expect(page.locator('#search-results a').first()).toContainText('Kindle');
   await page.keyboard.press('Control+k');
