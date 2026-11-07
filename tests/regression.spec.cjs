@@ -19,6 +19,8 @@ test('search works after navigation and uses one command panel', async ({ page }
   await page.goto('/about/');
   await page.locator('.wordmark').click();
   await expect(page.locator('.hero-title')).toBeVisible();
+  // cmdk.js 是 defer 脚本，必须等 load 完再发快捷键，否则按键会打在监听器绑定之前
+  await page.waitForFunction(() => document.readyState === 'complete');
   await page.keyboard.press('Control+k');
   await page.locator('#cmdk-input').fill('Kindle');
   await expect(page.locator('.cmdk-result-item').first()).toBeVisible();
