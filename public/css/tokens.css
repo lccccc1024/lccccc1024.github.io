@@ -1,43 +1,41 @@
 /* =====================================================
    设计系统 · Design tokens
-   改动这个文件即可整体换肤；其余样式只消费变量。
+   一个暖白、一个墨、一个低饱和强调色。
+   中文排版约定：不用负字距，标题字重不超过 600。
    ===================================================== */
 
 :root {
   /* —— 表面 —— */
-  --bg-body: #eef0f3;
+  --bg-body: #faf9f6;
   --bg-card: #ffffff;
-  --bg-side: #f7f8f9;
-  --bg-nav: rgba(238, 240, 243, 0.88);
-  --bg-code: #f4f5f7;
-  --bg-hover: #f1f3f6;
+  --bg-nav: rgba(250, 249, 246, 0.88);
+  --bg-code: #f2f1ec;
+  --bg-hover: #f4f3ee;
 
   /* —— 文字 —— */
-  --text-primary: #121316;
-  --text-secondary: #5b6070;
-  --text-tertiary: #8e93a3;
+  --text-primary: #1a1a18;
+  --text-secondary: #5f5f59;
+  --text-tertiary: #9c9c94;
 
   /* —— 强调 —— */
-  --accent: #1f5c46;
-  --accent-hover: #16483a;
-  --accent-light: #e7f1ec;
-  --highlight: #d7f36a;
+  --accent: #2b5a4b;
+  --accent-hover: #1f4539;
+  --accent-light: #edf1ee;
 
   /* —— 描边 —— */
-  --border: #e4e6ea;
-  --border-light: #eef0f3;
+  --border: #e6e4dd;
+  --border-light: #f0eee8;
 
-  /* —— 阴影 —— */
-  --shadow-sm: 0 1px 2px rgba(18, 19, 22, 0.06);
-  --shadow-md: 0 8px 20px rgba(18, 19, 22, 0.08);
-  --shadow-lg: 0 16px 34px rgba(18, 19, 22, 0.10);
+  /* —— 阴影（只在必要时用）—— */
+  --shadow-sm: 0 1px 2px rgba(26, 26, 24, 0.04);
+  --shadow-md: 0 6px 18px rgba(26, 26, 24, 0.06);
+  --shadow-lg: 0 14px 32px rgba(26, 26, 24, 0.08);
 
   /* —— 圆角 —— */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 17px;
-  --radius-xl: 22px;
-  --radius-pill: 999px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
 
   /* —— 间距（8pt 基准）—— */
   --space-xs: 4px;
@@ -49,63 +47,70 @@
   --space-3xl: 56px;
 
   /* —— 字体 —— */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  --font-sans: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC",
+    -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, monospace;
+
+  /* —— 字阶 —— */
   --fs-xs: 11px;
   --fs-sm: 12.5px;
-  --fs-base: 14.5px;
+  --fs-base: 14px;
   --fs-md: 16px;
   --fs-lg: 19px;
   --fs-xl: 24px;
-  --fs-2xl: 32px;
-  --fs-display: clamp(30px, 3.2vw, 44px);
+  --fs-2xl: 30px;
+  --fs-display: clamp(38px, 5.2vw, 58px);
 
   /* —— 布局 —— */
-  --sidebar-w: 268px;
-  --nav-height: 60px;
-  --content-max-width: 1120px;
-  --wide-max-width: 1280px;
-
-  /* —— 反相块（hero / logo 用，深浅色互换）—— */
-  --hero-bg: #121316;
-  --hero-ink: #ffffff;
-  --hero-ink-2: #b9bdc9;
-  --hero-ink-3: #8e93a3;
+  --content-max-width: 760px;
+  --wide-max-width: 1000px;
+  --nav-height: 66px;
 }
 
 html.dark {
-  --bg-body: #0e0f11;
-  --bg-card: #17181c;
-  --bg-side: #131417;
-  --bg-nav: rgba(14, 15, 17, 0.88);
-  --bg-code: #1d1f24;
-  --bg-hover: #1b1d22;
+  --bg-body: #141413;
+  --bg-card: #1c1c1a;
+  --bg-nav: rgba(20, 20, 19, 0.88);
+  --bg-code: #232320;
+  --bg-hover: #1f1f1d;
 
-  --text-primary: #f2f3f5;
-  --text-secondary: #a3a8b3;
-  --text-tertiary: #6f7480;
+  --text-primary: #eeede8;
+  --text-secondary: #a8a79f;
+  --text-tertiary: #6f6f68;
 
-  --accent: #5fbf98;
-  --accent-hover: #7fd4b0;
-  --accent-light: #1b2b24;
-  --highlight: #d7f36a;
+  --accent: #8fb9a4;
+  --accent-hover: #a8cbb8;
+  --accent-light: #1e2a24;
 
-  --border: #26272c;
-  --border-light: #1c1d21;
+  --border: #2b2b28;
+  --border-light: #22221f;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 16px 34px rgba(0, 0, 0, 0.50);
-
-  /* 深色下反相块变浅 */
-  --hero-bg: #e9eaee;
-  --hero-ink: #0e0f11;
-  --hero-ink-2: #3d424d;
-  --hero-ink-3: #6f7480;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* —— 基础修正 —— */
+/* ===================== 中文排版基线 ===================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  background: var(--bg-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 标题一律 500/600，禁止 700+ 触发中文假粗 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.012em;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--bg-body);
@@ -114,8 +119,4 @@ html.dark {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-}
-
-body {
-  letter-spacing: 0.005em;
 }

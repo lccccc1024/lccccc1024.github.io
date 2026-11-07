@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { getCollection } from 'astro:content';
 
 export interface Props {
   title?: string;
@@ -10,117 +9,47 @@ export interface Props {
 }
 
 const { title, description, math, pageStyles = [] } = Astro.props;
-
-const posts = await getCollection('posts');
-const postCount = posts.length;
-const tagCount = new Set(posts.flatMap((p) => p.data.tags ?? [])).size;
-const catCount = new Set(posts.flatMap((p) => p.data.categories ?? [])).size;
-
-const dates = posts.map((p) => p.data.date.getTime());
-const spanYears =
-  dates.length > 1
-    ? ((Math.max(...dates) - Math.min(...dates)) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)
-    : '0';
-
-const isHome = !title || title === '首页';
-const crumb = isHome ? '概览' : title;
 ---
 
 <BaseLayout title={title} description={description} math={math} pageStyles={pageStyles}>
-  <div class="app">
-    <aside class="sidebar" aria-label="站点导航">
-      <a href="/" class="side-brand">
-        <span class="side-mark" aria-hidden="true">闲</span>
-        <span class="brand-text">
-          <b>闲话</b>
-          <span>ASA'S JOURNAL</span>
-        </span>
-      </a>
+  <header class="top">
+    <a class="wordmark" href="/">闲话</a>
 
-      <button class="side-search" id="side-search" type="button">
-        <span aria-hidden="true">⌕</span>
-        搜索文章
-        <kbd>⌘K</kbd>
+    <nav class="top-nav" aria-label="站点导航">
+      <a href="/archive/">归档</a>
+      <a href="/tags/">标签</a>
+      <a href="/categories/">分类</a>
+      <a href="/readlist/">清单</a>
+      <a href="/stats/">统计</a>
+      <a href="/about/">关于</a>
+    </nav>
+
+    <div class="top-actions">
+      <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
+        <span class="theme-icon-nav"></span>
       </button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-      <nav class="side-nav">
-        <span class="grp">浏览</span>
-        <a href="/">首页</a>
-        <a href="/archive/">归档<em>{postCount}</em></a>
-        <a href="/tags/">标签<em>{tagCount}</em></a>
-        <a href="/categories/">分类<em>{catCount}</em></a>
+  <main class="page-content" id="main-content" aria-label="内容">
+    <div class="wrapper">
+      <slot />
+    </div>
+  </main>
 
-        <span class="grp">清单</span>
-        <a href="/readlist/">阅读清单</a>
-        <a href="/light/">电影清单</a>
-        <a href="/want/">心愿单</a>
-        <a href="/places/">足迹地图</a>
-
-        <span class="grp">其他</span>
-        <a href="/stats/">统计</a>
-        <a href="/about/">关于</a>
-        <a href="/random/">随便看看</a>
-        <a href="/feed.xml">RSS</a>
-      </nav>
-
-      <div class="side-foot">
-        <div class="side-stat">
-          <div><b>{postCount}</b><span>篇文章</span></div>
-          <div><b>{spanYears}y</b><span>跨度</span></div>
-        </div>
-        <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
-          <span class="theme-label">深色模式</span>
-          <span class="theme-icon-nav"></span>
-        </button>
-      </div>
-    </aside>
-
-    <main class="page-content" id="main-content" aria-label="内容">
-      <div class="topbar">
-        <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单" type="button">
-          <span></span><span></span><span></span>
-        </button>
-
-        <nav class="crumb" aria-label="面包屑">
-          <a href="/">首页</a>
-          <span aria-hidden="true">/</span>
-          <b>{crumb}</b>
-        </nav>
-
-        <div class="top-actions">
-          <div class="top-search">
-            <span class="top-search-icon" aria-hidden="true">⌕</span>
-            <input
-              id="search-input"
-              type="search"
-              placeholder="搜索"
-              autocomplete="off"
-              aria-label="搜索文章"
-            />
-            <kbd>⌘K</kbd>
-          </div>
-        </div>
-
-        <ul id="search-results" class="search-results" role="listbox" aria-label="搜索结果"></ul>
-      </div>
-
-      <div class="wrapper">
-        <slot />
-      </div>
-
-      <footer class="site-footer">
-        <div class="footer-inner">
-          <span class="footer-copy">&copy; 2026 Lcc</span>
-          <span class="footer-powered">把日常写成值得回看的片段 · Astro</span>
-        </div>
-      </footer>
-    </main>
-  </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Lcc</span>
+      <span class="footer-powered">把日常写成值得回看的片段 · Astro</span>
+    </div>
+  </footer>
 
   <div class="nav-overlay" id="nav-overlay">
     <ul class="nav-overlay-links">
       <li><a href="/">首页</a></li>
-      <li class="overlay-section">浏览</li>
       <li><a href="/archive/">归档</a></li>
       <li><a href="/tags/">标签</a></li>
       <li><a href="/categories/">分类</a></li>
@@ -138,21 +67,9 @@ const crumb = isHome ? '概览' : title;
   </div>
 
   <script>
-    import { initSearch } from '../scripts/search';
-
     // 当前页高亮
-    document.querySelectorAll<HTMLAnchorElement>('.side-nav a, .nav-overlay-links a').forEach((link) => {
+    document.querySelectorAll<HTMLAnchorElement>('.top-nav a, .nav-overlay-links a').forEach((link) => {
       if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
-    });
-
-    // 顶栏搜索
-    initSearch('search-input', 'search-results');
-
-    // 搜索按钮 → 命令面板
-    document.querySelectorAll<HTMLElement>('#side-search').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }));
-      });
     });
 
     // 移动端抽屉
