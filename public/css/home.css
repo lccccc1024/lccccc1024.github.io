@@ -50,7 +50,7 @@
   text-decoration: none;
   padding-bottom: 3px;
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
-  transition: border-color 0.18s ease;
+  transition: border-color var(--dur-2) var(--ease);
 }
 
 .links a:hover {
@@ -127,7 +127,7 @@
   line-height: 1.55;
   letter-spacing: 0.012em;
   color: var(--text-primary);
-  transition: color 0.18s ease;
+  transition: color var(--dur-2) var(--ease);
 }
 
 .feed-row p {
@@ -138,7 +138,7 @@
   font-size: 14.5px;
   line-height: 1.8;
   color: var(--text-secondary);
-  transition: max-height 0.28s ease, opacity 0.28s ease, margin 0.28s ease;
+  transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out), margin var(--dur-3) var(--ease-out);
 }
 
 .feed-row .cat {

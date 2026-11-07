@@ -360,3 +360,146 @@
     font-size: 24px;
   }
 }
+
+/* =====================================================
+   动效契约 · 全站只有一套
+   1. 入场：只有页面级一次 page-enter（--dur-3）
+   2. 逐元素的阶梯入场：全部取消
+   3. 无限循环的装饰动画：全部取消
+   4. 悬浮：只改颜色/背景/边框/透明度，统一 --dur-2 + --ease
+   ===================================================== */
+
+/* 1. 唯一的入场：整页淡入上移 */
+.page-content {
+  animation: page-enter var(--dur-3) var(--ease-out) both;
+}
+
+/* 2. 取消阶梯入场（列表行、统计数字） */
+.table-container tbody tr,
+.table-container tbody tr.row-enter,
+.stats strong,
+.home-list li.card-enter {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
+}
+
+/* 3. 取消无限循环装饰（404 弹跳、标题流光、封面漂移） */
+.error-404-num,
+.error-404-zero,
+.hero-title,
+.home-thumb-placeholder,
+.home-thumb-placeholder::after {
+  animation: none !important;
+}
+
+/* 4. 悬浮过渡统一 */
+.archive-item,
+.archive-item a,
+.tag-cloud a,
+.post-toc a,
+.post-content a,
+.more-posts,
+.back-to-top,
+.copy-link-btn,
+.top-nav a,
+.table-container tbody tr {
+  transition-property: color, background-color, border-color, opacity, text-decoration-color;
+  transition-duration: var(--dur-2);
+  transition-timing-function: var(--ease);
+}
+
+/* 文章图片不做缩放缓动，只保留加载时的模糊淡入 */
+.post-content img {
+  transition-property: filter, opacity, transform;
+  transition-duration: var(--dur-3);
+  transition-timing-function: var(--ease);
+}
+
+.post-content img:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-content img.img-loading {
+  transition-duration: var(--dur-3);
+  transition-timing-function: var(--ease);
+}
+
+/* =====================================================
+   归档页：与首页同一种「行 + hover 展开摘要」
+   ===================================================== */
+
+.archive-item {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: 13px 0;
+  margin: 0;
+  /* 抹掉 global.css 里归档行的卡片外观与上浮动效 */
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.archive-item:hover {
+  background: none;
+  border-color: var(--border-light);
+  box-shadow: none;
+  transform: none;
+}
+
+.archive-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.archive-item:hover a {
+  color: var(--accent);
+}
+
+.archive-item .archive-date {
+  font: 11.5px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  min-width: 0;
+}
+
+.archive-item .archive-excerpt {
+  grid-column: 2 / 4;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out),
+    margin var(--dur-3) var(--ease-out);
+}
+
+.archive-item:hover .archive-excerpt {
+  max-height: 80px;
+  margin-top: 8px;
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .archive-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .archive-item .archive-date {
+    grid-column: 1 / -1;
+  }
+
+  .archive-item .archive-excerpt {
+    grid-column: 1 / -1;
+  }
+}

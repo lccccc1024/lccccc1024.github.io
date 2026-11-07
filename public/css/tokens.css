@@ -61,6 +61,13 @@
   --fs-2xl: 30px;
   --fs-display: clamp(38px, 5.2vw, 58px);
 
+  /* —— 动效 —— */
+  --dur-1: 120ms;   /* 微交互：颜色、边框 */
+  --dur-2: 200ms;   /* 状态：背景、透明度 */
+  --dur-3: 320ms;   /* 入场、展开 */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
   /* —— 布局 —— */
   --content-max-width: 760px;
   --wide-max-width: 1000px;
@@ -119,4 +126,16 @@ h1, h2, h3, h4, h5, h6 {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* 全站统一的减弱动效开关 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

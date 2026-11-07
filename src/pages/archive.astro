@@ -12,6 +12,17 @@ posts.forEach(post => {
   yearMap[year].push(post);
 });
 const years = Object.keys(yearMap).sort((a, b) => Number(b) - Number(a));
+
+function excerptOf(post: (typeof posts)[number]) {
+  if (post.data.description) return post.data.description;
+  const body = post.body ?? '';
+  return body
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/[#*`>\-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 64);
+}
 ---
 
 <PageLayout title="文章归档">
@@ -32,6 +43,7 @@ const years = Object.keys(yearMap).sort((a, b) => Number(b) - Number(a));
               {post.data.categories?.length > 0 && (
                 <span class="archive-category">{post.data.categories.join(', ')}</span>
               )}
+              <p class="archive-excerpt">{excerptOf(post)}</p>
             </li>
           ))}
         </ul>
