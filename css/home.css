@@ -1,0 +1,231 @@
+/* =====================================================
+   首页 · 单栏排版流
+   靠字号、行距和发丝线分层，不用卡片。
+   ===================================================== */
+
+.intro {
+  padding: 48px 0 64px;
+}
+
+.kicker {
+  font: 11px/1 var(--font-mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.hero-title {
+  margin: 32px 0 0;
+  font-size: var(--fs-display);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  text-wrap: balance;
+  /* 抵掉 global.css 旧版 .hero-title 的渐变文字与动画 */
+  background: none;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+}
+
+.lede {
+  margin: 28px 0 0;
+  max-width: 34em;
+  font-size: 16.5px;
+  line-height: 1.95;
+  color: var(--text-secondary);
+}
+
+.links {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.links a {
+  color: var(--accent);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  transition: border-color var(--dur-2) var(--ease);
+}
+
+.links a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ===================== 列表 ===================== */
+
+.feed {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.feed-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.feed-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.feed-head span {
+  font: 10.5px var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+}
+
+.feed-year {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 30px 0 6px;
+  font: 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+}
+
+.feed-year::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.feed-row {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: baseline;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+}
+
+.feed-row time {
+  padding-top: 5px;
+  font: 11.5px var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.feed-row h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: 0.012em;
+  color: var(--text-primary);
+  transition: color var(--dur-2) var(--ease);
+}
+
+.feed-row p {
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out), margin var(--dur-3) var(--ease-out);
+}
+
+.feed-row .cat {
+  padding-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.feed-row:hover h3,
+.feed-row:focus-visible h3 {
+  color: var(--accent);
+}
+
+.feed-row:hover p,
+.feed-row:focus-visible p {
+  max-height: 90px;
+  margin-top: 10px;
+  opacity: 1;
+}
+
+/* ===================== 更多 ===================== */
+
+.more {
+  display: flex;
+  justify-content: center;
+  padding: 44px 0 88px;
+}
+
+.more a {
+  padding-bottom: 4px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.more a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-secondary);
+}
+
+/* ===================== 响应式 ===================== */
+
+@media (max-width: 720px) {
+  .intro {
+    padding: 24px 0 44px;
+  }
+
+  .hero-title {
+    margin-top: 26px;
+    font-size: 34px;
+    line-height: 1.38;
+  }
+
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.9;
+  }
+
+  .links {
+    margin-top: 32px;
+    gap: 24px;
+  }
+
+  .feed-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .feed-row time {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+
+  .feed-row h3 {
+    font-size: 17px;
+  }
+
+  .more {
+    padding: 36px 0 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed-row p {
+    transition: none;
+  }
+}
