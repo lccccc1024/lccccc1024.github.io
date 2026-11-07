@@ -18,6 +18,7 @@ test('search works after navigation and uses one command panel', async ({ page }
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/about/');
   await page.locator('.wordmark').click();
+  await expect(page.locator('.hero-title')).toBeVisible();
   await page.keyboard.press('Control+k');
   await page.locator('#cmdk-input').fill('Kindle');
   await expect(page.locator('.cmdk-result-item').first()).toBeVisible();
