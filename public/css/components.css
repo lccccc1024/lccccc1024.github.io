@@ -1,0 +1,629 @@
+/* =====================================================
+   组件层 · 内页
+   全部平面化：发丝线代替边框和阴影，字重不超过 600。
+   ===================================================== */
+
+/* ============ 文章页 ============ */
+
+.post-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.post-header {
+  margin-bottom: 40px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-title {
+  margin-bottom: 16px;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: 0.012em;
+}
+
+.post-meta {
+  font: 11.5px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.post-categories {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.copy-link-btn {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+}
+
+.copy-link-btn.copied {
+  color: var(--accent);
+}
+
+.post-content {
+  font-size: var(--fs-md);
+  line-height: 1.95;
+  letter-spacing: 0.012em;
+  color: var(--text-primary);
+}
+
+.post-content h2 {
+  margin: 2.2em 0 0.7em;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.012em;
+}
+
+.post-content h3 {
+  margin: 1.8em 0 0.6em;
+  font-size: 18.5px;
+  font-weight: 600;
+}
+
+.post-content h4 {
+  font-size: 16.5px;
+  font-weight: 600;
+}
+
+.post-content p {
+  margin: 1.2em 0;
+}
+
+.post-content blockquote {
+  margin: 1.6em 0;
+  padding: 4px 0 4px 22px;
+  background: none;
+  border-left: 2px solid var(--accent);
+  color: var(--text-secondary);
+}
+
+.post-content blockquote::before {
+  content: none;
+}
+
+.post-content a {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  text-underline-offset: 3px;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.post-content img {
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+}
+
+.post-content hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.4em 0;
+}
+
+.post-content code {
+  font-size: 0.9em;
+}
+
+/* TOC / 系列 / 签名 / 时效提示：平面，不抢正文 */
+.post-toc,
+.post-series,
+.post-signature,
+.post-age-notice {
+  background: var(--bg-code);
+  border: 0;
+  border-left: 2px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 16px 20px;
+}
+
+.post-toc a {
+  color: var(--text-secondary);
+}
+
+.post-toc a:hover {
+  color: var(--accent);
+}
+
+.post-related {
+  border-top: 1px solid var(--border);
+}
+
+/* ============ 归档 ============ */
+
+.archive-year {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.archive-item {
+  padding: 12px 0;
+  border-color: var(--border-light);
+}
+
+.archive-item a {
+  color: var(--text-primary);
+}
+
+.archive-item a:hover {
+  color: var(--accent);
+}
+
+/* ============ 页面骨架：全站唯一一套 ============ */
+
+.page-head,
+.list-page-header {
+  margin: 0 0 30px;
+  padding: 8px 0 26px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.page-title,
+.list-page-title {
+  margin: 0;
+  font-size: clamp(26px, 3.6vw, 32px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.012em;
+  color: var(--text-primary);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.page-sub,
+.list-page-subtitle {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* 页面内部的二级小节标题 */
+.section-title {
+  margin: 34px 0 12px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.section-title:first-child {
+  margin-top: 0;
+}
+
+.list-page-content {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.more-posts {
+  color: var(--accent);
+  font-size: 13.5px;
+}
+
+/* ============ 标签云 ============ */
+
+.tag-cloud {
+  gap: 10px 14px;
+}
+
+.tag-cloud a {
+  padding: 6px 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.tag-cloud a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: none;
+}
+
+/* ============ 表格 ============ */
+
+.table-container {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.table-container table {
+  margin: 0;
+}
+
+.table-container th {
+  background: transparent;
+  color: var(--text-tertiary);
+  font: 11px var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-container td {
+  font-size: 13.5px;
+  border-color: var(--border-light);
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.table-container tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* ============ 关于 / 统计 ============ */
+
+.about-card {
+  background: transparent;
+  border: 0;
+  border-left: 2px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 4px 0 4px 22px;
+}
+
+.totals {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.stat-card {
+  box-shadow: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.bar-chart .bar-fill {
+  background: var(--accent);
+  background-image: none;
+}
+
+/* ============ 搜索 / 命令面板 ============ */
+
+.search-box {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.search-inner {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.cmdk-modal {
+  background: var(--bg-body);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============ 小组件 ============ */
+
+.progress-bar {
+  height: 2px;
+  background: var(--accent);
+}
+
+.back-to-top {
+  background: var(--bg-body);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.back-to-top:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.read-progress-text {
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+}
+
+/* 旧占位封面关闭动画 */
+.home-thumb-placeholder {
+  animation: none;
+  background: var(--bg-code);
+}
+
+.home-thumb-placeholder::before,
+.home-thumb-placeholder::after {
+  content: none;
+}
+
+@media (max-width: 720px) {
+  .post-title {
+    font-size: 24px;
+    line-height: 1.45;
+  }
+
+  .post-content {
+    font-size: 15.5px;
+    line-height: 1.9;
+  }
+
+  .post-content h2 {
+    font-size: 20px;
+  }
+
+  .post-content h3 {
+    font-size: 17px;
+  }
+
+  .list-page-title {
+    font-size: 24px;
+  }
+}
+
+/* =====================================================
+   动效契约 · 全站只有一套
+   1. 入场：只有页面级一次 page-enter（--dur-3）
+   2. 逐元素的阶梯入场：全部取消
+   3. 无限循环的装饰动画：全部取消
+   4. 悬浮：只改颜色/背景/边框/透明度，统一 --dur-2 + --ease
+   ===================================================== */
+
+/* 1. 唯一的入场：整页淡入上移 */
+.page-content {
+  animation: page-enter var(--dur-3) var(--ease-out) both;
+}
+
+/* 2. 取消阶梯入场（列表行、统计数字） */
+.table-container tbody tr,
+.table-container tbody tr.row-enter,
+.stats strong,
+.home-list li.card-enter {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
+}
+
+/* 3. 取消无限循环装饰（404 弹跳、标题流光、封面漂移） */
+.error-404-num,
+.error-404-zero,
+.hero-title,
+.home-thumb-placeholder,
+.home-thumb-placeholder::after {
+  animation: none !important;
+}
+
+/* 4. 悬浮过渡统一 */
+.archive-item,
+.archive-item a,
+.tag-cloud a,
+.post-toc a,
+.post-content a,
+.more-posts,
+.back-to-top,
+.copy-link-btn,
+.top-nav a,
+.table-container tbody tr {
+  transition-property: color, background-color, border-color, opacity, text-decoration-color;
+  transition-duration: var(--dur-2);
+  transition-timing-function: var(--ease);
+}
+
+/* 文章图片不做缩放缓动，只保留加载时的模糊淡入 */
+.post-content img {
+  transition-property: filter, opacity, transform;
+  transition-duration: var(--dur-3);
+  transition-timing-function: var(--ease);
+}
+
+.post-content img:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-content img.img-loading {
+  transition-duration: var(--dur-3);
+  transition-timing-function: var(--ease);
+}
+
+/* =====================================================
+   归档页：与首页同一种「行 + hover 展开摘要」
+   ===================================================== */
+
+.archive-item {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: 13px 0;
+  margin: 0;
+  /* 抹掉 global.css 里归档行的卡片外观与上浮动效 */
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.archive-item:hover {
+  background: none;
+  border-color: var(--border-light);
+  box-shadow: none;
+  transform: none;
+}
+
+.archive-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.archive-item:hover a {
+  color: var(--accent);
+}
+
+.archive-item .archive-date {
+  font: 11.5px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  min-width: 0;
+}
+
+.archive-item .archive-excerpt {
+  grid-column: 2 / 4;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out),
+    margin var(--dur-3) var(--ease-out);
+}
+
+.archive-item:hover .archive-excerpt {
+  max-height: 80px;
+  margin-top: 8px;
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .archive-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .archive-item .archive-date {
+    grid-column: 1 / -1;
+  }
+
+  .archive-item .archive-excerpt {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =====================================================
+   页面通用元素 · 全站统一
+   ===================================================== */
+
+.page-rule {
+  margin: 40px 0 24px;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.page-end {
+  display: inline-block;
+  margin: 40px 0 8px;
+  padding-bottom: 2px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-end:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-secondary);
+}
+
+/* 页头下方的一行说明（原 .stats） */
+.stats {
+  margin: 0 0 24px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.stats strong {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tag-cloud {
+  margin-bottom: 34px;
+}
+
+/* 404：与其它页面同一套页头，数字只做视觉元素 */
+.error-404 {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 56px 0 20px;
+  font-size: 88px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.error-404-num {
+  color: var(--text-secondary);
+}
+
+.error-404-zero {
+  color: var(--text-tertiary);
+}
+
+/* =====================================================
+   社交按钮：统一到单一强调色，不做位移
+   ===================================================== */
+
+.social-btn,
+.social-btn--github,
+.social-btn--blog,
+.social-btn--email {
+  color: var(--text-secondary);
+  border-color: var(--border);
+  background: transparent;
+  transform: none;
+}
+
+.social-btn--github:hover,
+.social-btn--blog:hover,
+.social-btn--email:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: none;
+  box-shadow: none;
+}
+
+/* =====================================================
+   评论区：与正文同一套版式
+   ===================================================== */
+
+.comments-section {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.comments-section .section-title {
+  margin: 0 0 20px;
+}
+
+.comments-section .giscus {
+  width: 100%;
+  min-height: 120px;
+}

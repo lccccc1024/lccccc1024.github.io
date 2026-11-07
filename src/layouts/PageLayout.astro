@@ -5,65 +5,125 @@ export interface Props {
   title?: string;
   description?: string;
   math?: boolean;
+  pageStyles?: string[];
 }
 
-const { title, description, math } = Astro.props;
+const { title, description, math, pageStyles = [] } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} math={math}>
-  <nav class="site-nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo"><span class="brand-mark" aria-hidden="true">闲</span>闲话<span class="brand-caption">生活手记</span></a>
-      <ul class="nav-links">
-        <li><a href="/">首页</a></li>
-        <li><a href="/archive/">归档</a></li>
-        <li class="nav-dropdown">
-          <a href="/readlist/" class="nav-dropdown-trigger">清单</a>
-          <ul class="nav-dropdown-menu">
-            <li><a href="/light/">电影清单</a></li>
-            <li><a href="/readlist/">阅读清单</a></li>
-            <li><a href="/want/">心愿单</a></li>
-            <li><a href="/places/">足迹地图</a></li>
-          </ul>
-        </li>
-        <li><a href="/tags/">标签</a></li>
-        <li><a href="/categories/">分类</a></li>
-        <li><a href="/about/">关于</a></li>
-        <li><a href="/stats/">统计</a></li>
-        <li><a href="/random/" id="nav-random">随便看看</a></li>
-        <li><a href="/feed.xml" id="nav-rss">RSS</a></li>
-      </ul>
+<BaseLayout title={title} description={description} math={math} pageStyles={pageStyles}>
+  <header class="top">
+    <a class="wordmark" href="/">闲话</a>
+
+    <nav class="top-nav" aria-label="站点导航">
+      <a href="/archive/">归档</a>
+      <div class="nav-drop">
+        <a href="/readlist/" class="nav-drop-trigger">清单</a>
+        <div class="nav-drop-menu">
+          <div class="nav-drop-panel">
+            <a href="/readlist/">阅读清单</a>
+            <a href="/light/">电影清单</a>
+            <a href="/want/">心愿单</a>
+            <a href="/places/">足迹地图</a>
+          </div>
+        </div>
+      </div>
+      <a href="/tags/">标签</a>
+      <a href="/categories/">分类</a>
+      <a href="/stats/">统计</a>
+      <a href="/random/">随便看看</a>
+      <a href="/about/">关于</a>
+    </nav>
+
+    <div class="top-actions">
+      <a href="/feed.xml" class="top-rss" title="RSS 订阅">RSS</a>
       <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
         <span class="theme-icon-nav"></span>
       </button>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单">
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单" type="button">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
-
-  <div class="nav-overlay" id="nav-overlay">
-    <ul class="nav-overlay-links">
-      <li><a href="/">首页</a></li>
-      <li class="overlay-section">清单</li>
-      <li class="overlay-sub"><a href="/light/">电影清单</a></li>
-      <li class="overlay-sub"><a href="/readlist/">阅读清单</a></li>
-      <li class="overlay-sub"><a href="/want/">心愿单</a></li>
-      <li class="overlay-sub"><a href="/places/">足迹地图</a></li>
-      <li><a href="/tags/">标签</a></li>
-      <li><a href="/categories/">分类</a></li>
-      <li><a href="/stats/">统计</a></li>
-      <li><a href="/random/">随便看看</a></li>
-      <li><a href="/about/">关于</a></li>
-      <li><a href="/feed.xml">RSS</a></li>
-    </ul>
-  </div>
+  </header>
 
   <main class="page-content" id="main-content" aria-label="内容">
     <div class="wrapper">
       <slot />
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Lcc</span>
+      <span class="footer-powered">把日常写成值得回看的片段 · Astro</span>
+    </div>
+  </footer>
+
+  <div class="nav-overlay" id="nav-overlay">
+    <ul class="nav-overlay-links">
+      <li><a href="/">首页</a></li>
+      <li><a href="/archive/">归档</a></li>
+      <li><a href="/tags/">标签</a></li>
+      <li><a href="/categories/">分类</a></li>
+      <li class="overlay-section">清单</li>
+      <li class="overlay-sub"><a href="/light/">电影清单</a></li>
+      <li class="overlay-sub"><a href="/readlist/">阅读清单</a></li>
+      <li class="overlay-sub"><a href="/want/">心愿单</a></li>
+      <li class="overlay-sub"><a href="/places/">足迹地图</a></li>
+      <li class="overlay-section">其他</li>
+      <li><a href="/stats/">统计</a></li>
+      <li><a href="/about/">关于</a></li>
+      <li><a href="/random/">随便看看</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
+    </ul>
+  </div>
+
+  <script>
+    // 当前页高亮
+    document.querySelectorAll<HTMLAnchorElement>('.top-nav a, .nav-overlay-links a').forEach((link) => {
+      if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
+    });
+
+    // 移动端抽屉
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const overlay = document.getElementById('nav-overlay');
+      if (hamburger && overlay) {
+        hamburger.addEventListener('click', () => {
+          overlay.classList.toggle('active');
+          hamburger.classList.toggle('active');
+        });
+        overlay.querySelectorAll('a').forEach((l) => {
+          l.addEventListener('click', () => {
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+
+    // 返回顶部
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      const ring = document.getElementById('ring-fill');
+      if (!btn) return;
+      const circumference = 119.38;
+      window.addEventListener(
+        'scroll',
+        () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+          btn.classList.toggle('visible', scrollTop > 300);
+          if (ring) ring.style.strokeDashoffset = String(circumference * (1 - progress));
+        },
+        { passive: true }
+      );
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 
   <button class="back-to-top" id="back-to-top" title="返回顶部" aria-label="返回顶部">
     <svg class="back-to-top-ring" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
@@ -74,54 +134,4 @@ const { title, description, math } = Astro.props;
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span class="footer-copy">&copy; 2026 Lcc</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-powered">把日常写成值得回看的片段 · Astro</span>
-    </div>
-  </footer>
-
-  <script>
-    document.querySelectorAll<HTMLAnchorElement>('.nav-links a, .nav-overlay-links a').forEach(link => {
-      if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
-    });
-    // Hamburger menu
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.getElementById('nav-hamburger');
-      const overlay = document.getElementById('nav-overlay');
-      if (hamburger && overlay) {
-        hamburger.addEventListener('click', function() {
-          overlay.classList.toggle('active');
-          hamburger.classList.toggle('active');
-        });
-        overlay.querySelectorAll('a').forEach((l) => {
-          l.addEventListener('click', function() {
-            overlay.classList.remove('active');
-            hamburger.classList.remove('active');
-          });
-        });
-      }
-    });
-  </script>
-  <script>
-    // Back to top
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('back-to-top');
-      const ring = document.getElementById('ring-fill');
-      if (!btn) return;
-      const circumference = 119.38;
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-        btn.classList.toggle('visible', scrollTop > 300);
-        if (ring) ring.style.strokeDashoffset = String(circumference * (1 - progress));
-      }, { passive: true });
-      btn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  </script>
 </BaseLayout>

@@ -3,111 +3,74 @@ import PageLayout from '../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts');
-const posts = allPosts
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 8);
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-function fmt(d: Date) {
-  return d.toISOString().slice(0, 10);
+const recent = sorted.slice(0, 8);
+const postCount = sorted.length;
+
+const years = sorted.map((p) => p.data.date.getFullYear());
+const firstYear = years.length ? Math.min(...years) : new Date().getFullYear();
+const lastYear = years.length ? Math.max(...years) : firstYear;
+
+const byYear: Array<{ year: number; posts: typeof recent }> = [];
+for (const post of recent) {
+  const year = post.data.date.getFullYear();
+  const last = byYear[byYear.length - 1];
+  if (last && last.year === year) last.posts.push(post);
+  else byYear.push({ year, posts: [post] });
 }
 
-function excerpt(body = '') {
-  return body.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/[#*\x60>]/g, '').slice(0, 120);
+function fmtDate(d: Date) {
+  return d.toISOString().slice(0, 10).replace(/-/g, '.');
 }
 
-// Extract first image from post body
-function firstImg(body: string = '') {
-  const m = body.match(/!\[.*?\]\((.*?)\)/);
-  return m ? m[1] : null;
-}
-
-function coverVariant(id: string) {
-  return [...id].reduce((sum, char) => sum + char.codePointAt(0)!, 0) % 4;
-}
-
-function coverLabel(title: string) {
-  return title.replace(/[\s\d._+\-—（）()]/g, '').slice(0, 4) || '随笔';
+function excerptOf(post: (typeof recent)[number]) {
+  if (post.data.description) return post.data.description;
+  const body = post.body ?? '';
+  return body
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/[#*`>\-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 72);
 }
 ---
 
-<PageLayout title="首页">
-  <section class="hero journal-hero">
-    <div class="hero-copy">
-      <span class="eyebrow">ASA’S JOURNAL · 生活与记录</span>
-      <h1 class="hero-title">闲话之间，<br />留住日常。</h1>
-      <p class="hero-description">一些生活的切片，一些折腾的笔记。<br />把值得记住的事，慢慢写下来。</p>
-      <div class="hero-actions"><a href="/archive/" class="journal-button">翻开文章 <span aria-hidden="true">↗</span></a><a href="/about/" class="quiet-link">关于这个小站 →</a></div>
-    </div>
-    <aside class="journal-note" aria-label="小站概览">
-      <span class="note-number">闲 / 话</span>
-      <p>日子很长，<br />总有些小事<br />值得一记。</p>
-      <div class="note-bottom"><span>持续记录中</span><strong>{allPosts.length}<small> 篇随笔与笔记</small></strong></div>
-    </aside>
+<PageLayout title="首页" pageStyles={['/css/home.css']}>
+  <section class="intro">
+    <p class="kicker">ASA'S JOURNAL · {firstYear} — {lastYear}</p>
+    <h1 class="hero-title">闲话之间，<br />留住日常。</h1>
+    <p class="lede">一些生活的切片，一些折腾的笔记。把值得记住的事，慢慢写下来。</p>
+    <p class="links">
+      <a href="/archive/">翻开归档 →</a>
+      <a href="/about/">关于这个小站</a>
+    </p>
   </section>
 
-  <div class="journal-section-heading"><h2 class="home-section-title">最近写下的</h2><span>文字是时间的另一种刻度</span></div>
-
-  <ul class="home-list journal-posts">
-    {posts.map((post, index) => (
-      <li>
-        <div class="home-post-inner">
-          <a href={`/posts/${post.id}/`} class="home-thumb-link">
-            {firstImg(post.body)
-              ? <img src={firstImg(post.body)} alt="" class="home-thumb" loading="lazy" />
-              : (
-                <div
-                  class="home-thumb-placeholder generated-cover"
-                  data-cover={coverVariant(post.id)}
-                  aria-hidden="true"
-                >
-                  <span class="cover-index">NO. {String(index + 1).padStart(2, '0')}</span>
-                  <span class="cover-category">{post.data.categories?.[0] || '闲话'}</span>
-                  <strong class="cover-title">{coverLabel(post.data.title)}</strong>
-                  <span class="cover-rule"></span>
-                  <span class="cover-signature">ASA · JOURNAL</span>
-                </div>
-              )
-            }
-          </a>
-          <div class="home-post-body">
-            <a href={`/posts/${post.id}/`}>{post.data.title}</a>
-            <div class="home-post-meta">
-              <span class="home-date">{fmt(post.data.date)}</span>
-              {post.data.categories?.length > 0 && (
-                <span class="post-category">{post.data.categories.join(', ')}</span>
-              )}
-              <span class="home-reading-time">{Math.ceil((post.body || '').length / 200)} min</span>
-            </div>
-            {post.data.tags?.length > 0 && (
-              <div class="home-post-tags">
-                {post.data.tags.slice(0, 4).map((tag) => (
-                  <span class="post-tag">{tag}</span>
-                ))}
-              </div>
-            )}
-            <p class="home-excerpt">{post.data.description || excerpt(post.body)}</p>
-          </div>
-        </div>
-      </li>
-    ))}
-  </ul>
-
-  <a href="/archive/" class="more-posts">查看全部文章 →</a>
-
-  <div class="search-box">
-    <div class="search-inner">
-      <span class="search-icon" aria-hidden="true"></span>
-      <input type="search" id="search-input" placeholder="搜索文章..." aria-label="搜索文章" />
+  <section class="feed">
+    <div class="feed-head">
+      <h2>最近写下的</h2>
+      <span>{postCount} POSTS</span>
     </div>
-    <ul id="search-results" class="home-list" style="display: none;"></ul>
-  </div>
 
-  <script>
-    import { initSearch } from '../scripts/search';
-    initSearch('search-input', 'search-results');
-    document.querySelectorAll<HTMLElement>('.home-list li').forEach((card, i) => {
-      card.style.animationDelay = `${i * 0.08}s`;
-      card.classList.add('card-enter');
-    });
-  </script>
+    {byYear.map((group) => (
+      <>
+        <div class="feed-year">{group.year}</div>
+        {group.posts.map((post) => (
+          <a class="feed-row" href={`/posts/${post.id}/`}>
+            <time datetime={post.data.date.toISOString().slice(0, 10)}>{fmtDate(post.data.date)}</time>
+            <div>
+              <h3>{post.data.title}</h3>
+              <p>{excerptOf(post)}</p>
+            </div>
+            <span class="cat">{post.data.categories?.[0] ?? '闲话'}</span>
+          </a>
+        ))}
+      </>
+    ))}
+  </section>
+
+  <div class="more">
+    <a href="/archive/">查看全部 {postCount} 篇</a>
+  </div>
 </PageLayout>

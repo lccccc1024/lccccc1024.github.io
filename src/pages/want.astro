@@ -19,9 +19,9 @@ wishlist.forEach(item => {
 ---
 
 <PageLayout title="心愿单" description="个人心愿单">
-  <div class="list-page-header">
-    <h1 class="list-page-title">心愿单</h1>
-    <p class="list-page-subtitle">记录想要的东西，也记录生活的期待。</p>
+  <div class="page-head">
+    <h1 class="page-title">心愿单</h1>
+    <p class="page-sub">记录想要的东西，也记录生活的期待。</p>
   </div>
 
   <div class="list-page-content">
@@ -61,7 +61,7 @@ wishlist.forEach(item => {
       未购总价：<strong>{unboughtTotal.toFixed(2)}</strong> 元
     </div>
 
-    <p><a href="/" class="more-posts">← 返回首页</a></p>
+<a href="/" class="page-end">← 返回首页</a>
   </div>
 <script is:inline src="/js/list-pages.js" defer></script>
 </PageLayout>

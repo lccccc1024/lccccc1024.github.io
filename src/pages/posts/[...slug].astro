@@ -34,7 +34,7 @@ const base = seriesBase(post.data.title);
 const seriesPosts = base.length > 1 ? sorted.filter(p => seriesBase(p.data.title) === base).reverse() : [];
 
 import pickSignature from '../../data/signature.ts';
-const fmt = (d: Date) => d.toISOString().slice(0, 10);
+const fmt = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, ".");
 
 // JSON-LD structured data
 const jsonLd = {
@@ -62,13 +62,13 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
       <div class="post-meta">
-        <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>{fmt(post.data.date)}</time>
         <span class="meta-separator">·</span>
         <span>{(post.body || '').length} 字 · 约 {Math.ceil((post.body || '').length / 200)} 分钟</span>
         {post.data.categories?.length > 0 && (
           <>
             <span class="meta-separator">·</span>
-            <span class="post-categories">{post.data.categories.join(' / ')}</span>
+            <span class="post-categories">{post.data.categories[0]}</span>
           </>
         )}
         <span class="meta-separator">·</span>
@@ -135,24 +135,41 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
     </nav>
 
     {post.data.comments !== false && (
-      <div class="comments-section">
-        <script is:inline src="https://giscus.app/client.js"
-          data-repo="lccccc1024/lccccc1024.github.io"
-          data-repo-id="R_kgDOIBXa0g"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOIBXa0s4C6Wys"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="zh-CN"
-          data-loading="lazy"
-          crossorigin="anonymous"
-          async>
+      <section class="comments-section">
+        <h2 class="section-title">评论</h2>
+        <div class="giscus" id="giscus"></div>
+        <script is:inline>
+          (() => {
+            var THEMES = {
+              light: 'https://blog.950922.xyz/giscus-theme-light.css',
+              dark: 'https://blog.950922.xyz/giscus-theme-dark.css',
+            };
+            var isDark = document.documentElement.classList.contains('dark');
+            var attrs = {
+              'data-repo': 'lccccc1024/lccccc1024.github.io',
+              'data-repo-id': 'R_kgDOIBXa0g',
+              'data-category': 'Announcements',
+              'data-category-id': 'DIC_kwDOIBXa0s4C6Wys',
+              'data-mapping': 'pathname',
+              'data-strict': '0',
+              'data-reactions-enabled': '1',
+              'data-emit-metadata': '0',
+              'data-input-position': 'top',
+              'data-theme': isDark ? THEMES.dark : THEMES.light,
+              'data-lang': 'zh-CN',
+              'data-loading': 'lazy',
+            };
+            var s = document.createElement('script');
+            s.src = 'https://giscus.app/client.js';
+            s.async = true;
+            s.crossOrigin = 'anonymous';
+            Object.keys(attrs).forEach(function (k) {
+              s.setAttribute(k, attrs[k]);
+            });
+            document.getElementById('giscus').appendChild(s);
+          })();
         </script>
-      </div>
+      </section>
     )}
 
     {related.length > 0 && (

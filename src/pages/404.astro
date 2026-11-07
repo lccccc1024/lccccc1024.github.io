@@ -3,24 +3,26 @@ import PageLayout from '../layouts/PageLayout.astro';
 ---
 
 <PageLayout title="404 - 页面未找到">
-  <article class="post-card" style="text-align: center;">
-    <div class="error-404">
-      <span class="error-404-num">4</span>
-      <span class="error-404-zero">0</span>
-      <span class="error-404-num">4</span>
-    </div>
-    <p style="font-size: 1.1rem; color: var(--text-secondary); margin: 1em 0 1.5em;">抱歉，这个页面好像迷路了……</p>
+  <div class="page-head">
+    <h1 class="page-title">页面未找到</h1>
+    <p class="page-sub">这个地址不存在，或者已经被移走了。</p>
+  </div>
 
-    <div class="search-box" style="max-width: 400px; margin: 0 auto 2em;">
-      <div class="search-inner">
-        <span class="search-icon" aria-hidden="true"></span>
-        <input type="search" id="search-input-404" placeholder="搜索文章..." aria-label="搜索文章" style="background: transparent;" />
-      </div>
-      <ul id="search-results-404" class="home-list" style="display: none;"></ul>
-    </div>
+  <div class="error-404" aria-hidden="true">
+    <span class="error-404-num">4</span>
+    <span class="error-404-zero">0</span>
+    <span class="error-404-num">4</span>
+  </div>
 
-    <p><a href="/" class="more-posts" style="display: inline-flex;">← 返回首页</a></p>
-  </article>
+  <div class="search-box">
+    <div class="search-inner">
+      <span class="search-icon" aria-hidden="true"></span>
+      <input type="search" id="search-input-404" placeholder="搜索文章…" aria-label="搜索文章" />
+    </div>
+    <ul id="search-results-404" class="home-list" style="display: none;"></ul>
+  </div>
+
+  <a href="/" class="page-end">← 返回首页</a>
 
   <script>
     import { initSearch } from '../scripts/search';

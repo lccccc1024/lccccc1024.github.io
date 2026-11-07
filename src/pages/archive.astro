@@ -12,32 +12,44 @@ posts.forEach(post => {
   yearMap[year].push(post);
 });
 const years = Object.keys(yearMap).sort((a, b) => Number(b) - Number(a));
+
+function excerptOf(post: (typeof posts)[number]) {
+  if (post.data.description) return post.data.description;
+  const body = post.body ?? '';
+  return body
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/[#*`>\-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 64);
+}
 ---
 
 <PageLayout title="文章归档">
-  <article class="post-card">
-    <h2>文章归档</h2>
-    <p class="stats" style="margin-bottom: 2em;">
-      共 <strong>{posts.length}</strong> 篇文章
-    </p>
+  <div class="page-head">
+    <h1 class="page-title">文章归档</h1>
+    <p class="page-sub">共 {posts.length} 篇，从 {years[years.length - 1]} 年写到现在。</p>
+  </div>
 
+  <div>
     {years.map(year => (
       <div>
         <h3 class="archive-year">{year} 年（{yearMap[year].length} 篇）</h3>
         <ul class="archive-list">
           {yearMap[year].map(post => (
             <li class="archive-item">
-              <span class="archive-date">{post.data.date.toISOString().slice(5, 10)}</span>
+              <span class="archive-date">{post.data.date.toISOString().slice(5, 10).replace('-', '.')}</span>
               <a href={`/posts/${post.id}/`}>{post.data.title}</a>
               {post.data.categories?.length > 0 && (
-                <span class="archive-category">{post.data.categories.join(', ')}</span>
+                <span class="archive-category">{post.data.categories[0]}</span>
               )}
+              <p class="archive-excerpt">{excerptOf(post)}</p>
             </li>
           ))}
         </ul>
       </div>
     ))}
 
-    <a href="/" class="more-posts">← 返回首页</a>
-  </article>
+    <a href="/" class="page-end">← 返回首页</a>
+  </div>
 </PageLayout>

@@ -35,12 +35,8 @@
       block.appendChild(el);
     });
 
-    // Table row entrance
-    let rows = document.querySelectorAll('.table-container tbody tr');
-    rows.forEach(function(row, i) {
-      row.style.animationDelay = (i * 0.04) + 's';
-      row.classList.add('row-enter');
-    });
+    // 表格行不再做逐行入场动画：全站入场只保留页面级 page-enter，
+    // 见 public/css/components.css 的「动效契约」
   }
 
   if (document.readyState === 'loading') {

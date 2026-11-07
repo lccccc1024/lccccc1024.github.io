@@ -17,9 +17,10 @@ test('production resources and XML routes exist', async ({ request }) => {
 test('search works after navigation and uses one command panel', async ({ page }) => {
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/about/');
-  await page.locator('.nav-logo').click();
-  await page.locator('#search-input').fill('Kindle');
-  await expect(page.locator('#search-results a').first()).toContainText('Kindle');
+  await page.locator('.wordmark').click();
+  await expect(page.locator('.hero-title')).toBeVisible();
+  // cmdk.js 是 defer 脚本，必须等 load 完再发快捷键，否则按键会打在监听器绑定之前
+  await page.waitForFunction(() => document.readyState === 'complete');
   await page.keyboard.press('Control+k');
   await page.locator('#cmdk-input').fill('Kindle');
   await expect(page.locator('.cmdk-result-item').first()).toBeVisible();
@@ -29,15 +30,6 @@ test('search works after navigation and uses one command panel', async ({ page }
   await page.locator('#search-input-404').fill('Kindle');
   await expect(page.locator('#search-results-404 a').first()).toContainText('Kindle');
   expect(errors).toEqual([]);
-});
-
-test('posts without images receive a visible generated cover', async ({ page }) => {
-  await page.goto('/');
-  const covers = page.locator('.generated-cover');
-  expect(await covers.count()).toBeGreaterThan(0);
-  await expect(covers.first()).toBeVisible();
-  await expect(covers.first().locator('.cover-title')).not.toHaveText('');
-  await expect(covers.first().locator('.cover-signature')).toHaveText('ASA · JOURNAL');
 });
 
 test('mobile menu, progress and copy survive navigation', async ({ page, context }) => {
