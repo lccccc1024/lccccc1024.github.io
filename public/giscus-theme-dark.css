@@ -1,0 +1,80 @@
+/* =====================================================
+   Giscus 暗色主题 · 对齐站点的深色 tokens
+   ===================================================== */
+
+main {
+  --color-prettylights-syntax-comment: #6f6f68;
+  --color-prettylights-syntax-constant: #8fb9a4;
+  --color-prettylights-syntax-entity: #8fb9a4;
+  --color-prettylights-syntax-string: #c8a882;
+  --color-prettylights-syntax-keyword: #d98b82;
+
+  --color-canvas-default: #141413;
+  --color-canvas-overlay: #1c1c1a;
+  --color-canvas-inset: #101010;
+  --color-canvas-subtle: #1c1c1a;
+
+  --color-fg-default: #eeede8;
+  --color-fg-muted: #a8a79f;
+  --color-fg-subtle: #6f6f68;
+  --color-fg-on-emphasis: #141413;
+
+  --color-border-default: #2b2b28;
+  --color-border-muted: #22221f;
+  --color-neutral-emphasis: #5c5c56;
+  --color-neutral-muted: rgba(143, 185, 164, 0.12);
+  --color-neutral-subtle: rgba(143, 185, 164, 0.06);
+
+  --color-accent-fg: #8fb9a4;
+  --color-accent-emphasis: #8fb9a4;
+  --color-accent-muted: rgba(143, 185, 164, 0.25);
+  --color-accent-subtle: #1e2a24;
+
+  --color-success-fg: #8fb9a4;
+  --color-attention-fg: #c8a882;
+  --color-danger-fg: #d98b82;
+  --color-danger-muted: rgba(217, 139, 130, 0.25);
+  --color-danger-subtle: #2a1c1a;
+
+  --color-btn-text: #eeede8;
+  --color-btn-bg: #1c1c1a;
+  --color-btn-border: #2b2b28;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #232320;
+  --color-btn-hover-border: #3a3a35;
+  --color-btn-active-bg: #262622;
+  --color-btn-active-border: #3a3a35;
+  --color-btn-selected-bg: #262622;
+
+  --color-btn-primary-text: #141413;
+  --color-btn-primary-bg: #8fb9a4;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #a8cbb8;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #a8cbb8;
+
+  --color-action-list-item-default-hover-bg: #232320;
+
+  font-family: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC",
+    -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
+}
+
+body {
+  font-family: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC",
+    -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.gsc-comment-box,
+.gsc-comment,
+.gsc-reply-box,
+.gsc-timeline {
+  border-radius: 10px;
+}
+
+.gsc-comment > div {
+  border-radius: 10px;
+}

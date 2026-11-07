@@ -608,3 +608,22 @@
   transform: none;
   box-shadow: none;
 }
+
+/* =====================================================
+   评论区：与正文同一套版式
+   ===================================================== */
+
+.comments-section {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.comments-section .section-title {
+  margin: 0 0 20px;
+}
+
+.comments-section .giscus {
+  width: 100%;
+  min-height: 120px;
+}

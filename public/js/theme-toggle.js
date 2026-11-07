@@ -37,8 +37,15 @@
         function updateGiscusTheme(isDark) {
             let giscus = document.querySelector('iframe.giscus-frame');
             if (giscus) {
+                // 与 src/pages/posts/[...slug].astro 里的 THEMES 保持一致
                 giscus.contentWindow.postMessage({
-                    giscus: { setConfig: { theme: isDark ? 'dark' : 'light' } }
+                    giscus: {
+                        setConfig: {
+                            theme: isDark
+                                ? 'https://blog.950922.xyz/giscus-theme-dark.css'
+                                : 'https://blog.950922.xyz/giscus-theme-light.css'
+                        }
+                    }
                 }, 'https://giscus.app');
             }
         }

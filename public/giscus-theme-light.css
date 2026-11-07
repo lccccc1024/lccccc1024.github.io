@@ -1,0 +1,82 @@
+/* =====================================================
+   Giscus 亮色主题 · 对齐站点的暖白/墨/墨绿
+   该文件由 giscus.app 的 iframe 直接拉取（GitHub Pages 带 CORS）
+   ===================================================== */
+
+main {
+  --color-prettylights-syntax-comment: #6f6f68;
+  --color-prettylights-syntax-constant: #2b5a4b;
+  --color-prettylights-syntax-entity: #2b5a4b;
+  --color-prettylights-syntax-string: #7a5a3f;
+  --color-prettylights-syntax-keyword: #a3352a;
+
+  --color-canvas-default: #faf9f6;
+  --color-canvas-overlay: #ffffff;
+  --color-canvas-inset: #f2f1ec;
+  --color-canvas-subtle: #f2f1ec;
+
+  --color-fg-default: #1a1a18;
+  --color-fg-muted: #5f5f59;
+  --color-fg-subtle: #9c9c94;
+  --color-fg-on-emphasis: #ffffff;
+
+  --color-border-default: #e6e4dd;
+  --color-border-muted: #f0eee8;
+  --color-neutral-emphasis: #8e8e86;
+  --color-neutral-muted: rgba(43, 90, 75, 0.08);
+  --color-neutral-subtle: rgba(43, 90, 75, 0.04);
+
+  --color-accent-fg: #2b5a4b;
+  --color-accent-emphasis: #2b5a4b;
+  --color-accent-muted: rgba(43, 90, 75, 0.2);
+  --color-accent-subtle: #edf1ee;
+
+  --color-success-fg: #2b5a4b;
+  --color-attention-fg: #7a5a3f;
+  --color-danger-fg: #a3352a;
+  --color-danger-muted: rgba(163, 53, 42, 0.2);
+  --color-danger-subtle: #fbeceb;
+
+  --color-btn-text: #1a1a18;
+  --color-btn-bg: #ffffff;
+  --color-btn-border: #e6e4dd;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #f4f3ee;
+  --color-btn-hover-border: #d8d5cb;
+  --color-btn-active-bg: #f0eee8;
+  --color-btn-active-border: #cfccc2;
+  --color-btn-selected-bg: #f0eee8;
+
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #2b5a4b;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #1f4539;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #1f4539;
+
+  --color-action-list-item-default-hover-bg: #f4f3ee;
+
+  font-family: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC",
+    -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
+}
+
+body {
+  font-family: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC",
+    -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+/* 圆角与边框向站点看齐 */
+.gsc-comment-box,
+.gsc-comment,
+.gsc-reply-box,
+.gsc-timeline {
+  border-radius: 10px;
+}
+
+.gsc-comment > div {
+  border-radius: 10px;
+}
