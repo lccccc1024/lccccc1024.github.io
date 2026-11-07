@@ -26,7 +26,8 @@ function fmtDate(d: Date) {
 
 function excerptOf(post: (typeof recent)[number]) {
   if (post.data.description) return post.data.description;
-  return post.body
+  const body = post.body ?? '';
+  return body
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/[#*`>\-]/g, '')
     .replace(/\s+/g, ' ')
