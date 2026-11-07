@@ -1,4 +1,4 @@
-const CACHE = 'xianhua-efe58e8f861155f8';
+const CACHE = 'xianhua-332cfafdb57cb537';
 const ASSETS = ['/', '/css/global.css', '/css/tokens.css', '/css/layout.css', '/css/components.css', '/css/home.css', '/js/theme-toggle.js', '/js/cmdk.js', '/search.json', '/lccccc1024.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
