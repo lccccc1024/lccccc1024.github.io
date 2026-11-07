@@ -17,14 +17,26 @@ const { title, description, math, pageStyles = [] } = Astro.props;
 
     <nav class="top-nav" aria-label="站点导航">
       <a href="/archive/">归档</a>
+      <div class="nav-drop">
+        <a href="/readlist/" class="nav-drop-trigger">清单</a>
+        <div class="nav-drop-menu">
+          <div class="nav-drop-panel">
+            <a href="/readlist/">阅读清单</a>
+            <a href="/light/">电影清单</a>
+            <a href="/want/">心愿单</a>
+            <a href="/places/">足迹地图</a>
+          </div>
+        </div>
+      </div>
       <a href="/tags/">标签</a>
       <a href="/categories/">分类</a>
-      <a href="/readlist/">清单</a>
       <a href="/stats/">统计</a>
+      <a href="/random/">随便看看</a>
       <a href="/about/">关于</a>
     </nav>
 
     <div class="top-actions">
+      <a href="/feed.xml" class="top-rss" title="RSS 订阅">RSS</a>
       <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
         <span class="theme-icon-nav"></span>
       </button>

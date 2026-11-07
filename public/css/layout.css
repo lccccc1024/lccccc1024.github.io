@@ -50,10 +50,81 @@
   color: var(--text-primary);
 }
 
+/* 清单：下拉收起四个清单页 */
+.nav-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-drop-trigger::after {
+  content: " ▾";
+  font-size: 0.78em;
+  opacity: 0.5;
+}
+
+.nav-drop-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 130;
+  padding-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 4px);
+  transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
+    visibility var(--dur-2) var(--ease);
+}
+
+.nav-drop-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 140px;
+  padding: 6px;
+  background: var(--bg-body);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-drop-menu a {
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.nav-drop-menu a:hover,
+.nav-drop-menu a[aria-current="page"] {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
 .top-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.top-rss {
+  font: 10.5px var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+
+.top-rss:hover {
+  color: var(--text-primary);
 }
 
 /* 主题切换：细圆圈，不用 global 的 36px 圆按钮 */
@@ -128,7 +199,6 @@
     padding: 16px 20px;
     gap: 16px;
   }
-
   .top-nav {
     display: none;
   }
@@ -196,5 +266,12 @@
 @media (min-width: 721px) {
   .nav-hamburger {
     display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .top-nav {
+    gap: 16px;
+    font-size: 13px;
   }
 }
