@@ -627,3 +627,12 @@
   width: 100%;
   min-height: 120px;
 }
+
+/* 兜底：即使 giscus 的 default.css 被 CSP 拦下，iframe 也不能退回默认的 300px */
+.giscus,
+.giscus-frame {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  display: block;
+}
