@@ -51,15 +51,15 @@
     -apple-system, BlinkMacSystemFont, "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, monospace;
 
-  /* —— 字阶 —— */
-  --fs-xs: 11px;
-  --fs-sm: 12.5px;
-  --fs-base: 14px;
-  --fs-md: 16px;
-  --fs-lg: 19px;
-  --fs-xl: 24px;
-  --fs-2xl: 30px;
-  --fs-display: clamp(38px, 5.2vw, 58px);
+  /* —— 字阶（2026 版：整体上调，正文 17px / 长文 17.5px）—— */
+  --fs-xs: 11.5px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-md: 17px;
+  --fs-lg: 21px;
+  --fs-xl: 27px;
+  --fs-2xl: 34px;
+  --fs-display: clamp(42px, 5.6vw, 72px);
 
   /* —— 动效 —— */
   --dur-1: 120ms;   /* 微交互：颜色、边框 */
@@ -68,9 +68,15 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* —— 布局 —— */
-  --content-max-width: 760px;
-  --wide-max-width: 1000px;
+  /* —— 布局 ——
+     外壳 1120 装下「正文 700 + 间隙 + 信息栏 280」，
+     正文永远不超过 700（约 40 字/行），屏幕多出来的宽度给信息栏和留白，
+     而不是把字一行拉到 60 字。 */
+  --shell: 1120px;
+  --measure: 700px;
+  --rail: 280px;
+  --content-max-width: var(--shell);
+  --wide-max-width: var(--shell);
   --nav-height: 66px;
 }
 
@@ -97,7 +103,19 @@ html.dark {
   --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.4);
 }
 
+/* 超宽屏：外壳再放宽一档 */
+@media (min-width: 1400px) {
+  :root {
+    --shell: 1240px;
+  }
+}
+
 /* ===================== 中文排版基线 ===================== */
+
+/* rem 基数 = 正文字号：global.css 里 0.7~0.9rem 的次级文字一起长 */
+html {
+  font-size: 17px;
+}
 
 body {
   font-family: var(--font-sans);

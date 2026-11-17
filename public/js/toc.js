@@ -46,7 +46,14 @@
     });
 
     toc.appendChild(list);
-    content.insertBefore(toc, content.firstChild);
+
+    // 有信息栏就放信息栏（sticky 跟随），没有就退回正文顶部
+    let slot = document.getElementById('post-toc-slot');
+    if (slot) {
+      slot.appendChild(toc);
+    } else {
+      content.insertBefore(toc, content.firstChild);
+    }
 
     // Toggle collapse
     title.addEventListener('click', function() {

@@ -11,15 +11,16 @@
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 34px;
-  padding: 22px 48px;
+  gap: 36px;
+  /* 顶栏内容与外壳左边缘对齐，宽屏下才不会飘在角落 */
+  padding: 22px max(48px, calc((100% - var(--shell)) / 2 + 40px));
   background: var(--bg-nav);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 .wordmark {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.16em;
   color: var(--text-primary);
@@ -33,9 +34,9 @@
 
 .top-nav {
   display: flex;
-  gap: 26px;
+  gap: 30px;
   margin-left: auto;
-  font-size: 13.5px;
+  font-size: 14.5px;
   color: var(--text-secondary);
 }
 
@@ -166,17 +167,17 @@
 }
 
 .wrapper {
-  max-width: var(--content-max-width);
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 48px 32px 0;
+  padding: 56px 40px 0;
 }
 
 /* ===================== 页脚 ===================== */
 
 .site-footer {
-  max-width: var(--content-max-width);
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
   border-top: 1px solid var(--border);
   background: transparent;
 }
@@ -187,7 +188,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 26px 0 68px;
-  font: 11px var(--font-mono);
+  font: 11.5px var(--font-mono);
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
 }

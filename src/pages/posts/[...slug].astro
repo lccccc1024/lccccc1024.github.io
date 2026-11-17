@@ -58,7 +58,8 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
 
 <PageLayout title={post.data.title} description={post.data.description} math={post.data.math}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-  <article class="post-card">
+  <div class="post-layout">
+  <article class="post-card post-body">
     <header class="post-header">
       <h1 class="post-title">{post.data.title}</h1>
       <div class="post-meta">
@@ -86,14 +87,6 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
     <div class="post-content">
       <Content />
     </div>
-
-    {post.data.tags?.length > 0 && (
-      <div class="post-footer-tags">
-        {post.data.tags.map(tag => (
-          <a href={`/tags/#${tag}`} class="post-tag">{tag}</a>
-        ))}
-      </div>
-    )}
 
     <!-- Series navigation -->
     {seriesPosts.length > 0 && (
@@ -134,7 +127,41 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
       </div>
     </nav>
 
-    {post.data.comments !== false && (
+  </article>
+
+  <aside class="post-rail" aria-label="文章信息">
+    <div class="rail-block" id="post-toc-slot"></div>
+
+    {post.data.tags?.length > 0 && (
+      <div class="rail-block">
+        <span class="rail-label">标签</span>
+        <div class="rail-tags">
+          {post.data.tags.map(tag => (
+            <a href={`/tags/#${tag}`}>{tag}</a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {related.length > 0 && (
+      <div class="rail-block">
+        <span class="rail-label">相关文章</span>
+        <ul class="rail-list">
+          {related.map(rp => (
+            <li>
+              <a href={`/posts/${rp.id}/`}>
+                {rp.data.title}
+                <span class="rail-date">{fmt(rp.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </aside>
+
+  {post.data.comments !== false && (
+    <div class="post-tail">
       <section class="comments-section">
         <h2 class="section-title">评论</h2>
         <div class="giscus" id="giscus"></div>
@@ -170,24 +197,9 @@ const postAge = Math.floor((now.getTime() - post.data.date.getTime()) / (365.25 
           })();
         </script>
       </section>
-    )}
-
-    {related.length > 0 && (
-      <div class="related-posts">
-        <h3 class="related-title">相关文章</h3>
-        <ul class="related-list">
-          {related.map(rp => (
-            <li>
-              <a href={`/posts/${rp.id}/`}>
-                <span class="related-post-title">{rp.data.title}</span>
-                <span class="related-post-date">{fmt(rp.data.date)}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </article>
+    </div>
+  )}
+  </div>
 
   <script is:inline src="/js/toc.js" defer></script>
   <script>
