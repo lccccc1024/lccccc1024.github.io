@@ -36,6 +36,11 @@ npm run build:all # 构建生产版本、搜索索引和版本化离线缓存
 npm run verify   # 类型检查、生产构建、浏览器回归测试
 ```
 
+> **Windows 说明**：Vite 8 的 SSR module runner 会把 node_modules 里的 CJS 依赖
+> 当 ESM 内联执行，导致 `npm run build` 报 `require is not defined`（Linux CI 不受影响）。
+> `postinstall` 会自动运行 `scripts/patch-vite-cjs.mjs` 打补丁，重装依赖后无需手动处理；
+> 需要还原时执行 `node scripts/patch-vite-cjs.mjs --revert`。
+
 ## 功能特性
 
 - ⌘K 命令面板（Ctrl+K 搜索）

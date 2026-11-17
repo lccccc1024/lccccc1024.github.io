@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postinstall": "node scripts/patch-vite-cjs.mjs",
     "build:search": "pagefind --site dist",
     "build:all": "npm run build && npm run build:search && node scripts/version-sw.cjs",
     "preview": "astro preview",
