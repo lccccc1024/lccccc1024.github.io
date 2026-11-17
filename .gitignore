@@ -28,3 +28,6 @@ playwright-report/
 
 # 桌面工具生成的缓存（会话元数据、skill 定义），与站点无关
 .reasonix/
+
+# 本地记忆目录（memsearch），与站点无关
+.memsearch/

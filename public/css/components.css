@@ -670,6 +670,7 @@
 
 .archive-item .archive-excerpt {
   grid-column: 2 / 4;
+  max-width: 46em;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
