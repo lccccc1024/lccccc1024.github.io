@@ -20,15 +20,15 @@
 }
 
 .post-title {
-  margin-bottom: 16px;
-  font-size: clamp(26px, 4vw, 34px);
+  margin-bottom: 18px;
+  font-size: clamp(30px, 3.6vw, 42px);
   font-weight: 500;
-  line-height: 1.42;
+  line-height: 1.35;
   letter-spacing: 0.012em;
 }
 
 .post-meta {
-  font: 11.5px var(--font-mono);
+  font: 12.5px var(--font-mono);
   letter-spacing: 0.06em;
   color: var(--text-tertiary);
 }
@@ -48,7 +48,7 @@
 }
 
 .post-content {
-  font-size: var(--fs-md);
+  font-size: 17.5px;
   line-height: 1.95;
   letter-spacing: 0.012em;
   color: var(--text-primary);
@@ -56,19 +56,19 @@
 
 .post-content h2 {
   margin: 2.2em 0 0.7em;
-  font-size: 23px;
+  font-size: 26px;
   font-weight: 600;
   letter-spacing: 0.012em;
 }
 
 .post-content h3 {
   margin: 1.8em 0 0.6em;
-  font-size: 18.5px;
+  font-size: 21px;
   font-weight: 600;
 }
 
 .post-content h4 {
-  font-size: 16.5px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -138,10 +138,168 @@
   border-top: 1px solid var(--border);
 }
 
+/* ============ 文章页版式：正文 + 右侧信息栏 ============
+   正文固定 700（中文约 40 字/行，再宽眼睛就回不了行），
+   屏幕多出来的宽度交给信息栏和页边距 —— 页面不再是一条窄带。 */
+
+.post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) var(--rail);
+  justify-content: space-between;
+  gap: 60px;
+  align-items: start;
+}
+
+.post-body {
+  min-width: 0;
+  max-width: var(--measure);
+}
+
+/* 评论独立成行，宽度同正文，不跟着信息栏跑 */
+.post-tail {
+  grid-column: 1 / -1;
+  max-width: var(--measure);
+}
+
+.post-rail {
+  position: sticky;
+  top: calc(var(--nav-height) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 4px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.post-rail:empty {
+  display: none;
+}
+
+.rail-block {
+  padding-top: 18px;
+  border-top: 1px solid var(--border-light);
+}
+
+.rail-block:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.rail-block:empty {
+  display: none;
+}
+
+.rail-label {
+  display: block;
+  margin-bottom: 10px;
+  font: 11px var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* 目录搬进信息栏，抹掉原来的色块卡片 */
+.post-rail .post-toc {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  font-size: 13.5px;
+}
+
+.post-rail .toc-title {
+  margin-bottom: 10px;
+  font: 11px var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.post-rail .toc-toggle {
+  font-size: 10px;
+}
+
+.post-rail .toc-list {
+  max-height: min(52vh, 440px);
+  margin: 0;
+  padding-right: 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.post-rail .toc-list a {
+  padding: 5px 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.post-rail .toc-list a.toc-active {
+  font-weight: 500;
+}
+
+.post-rail .toc-h3 a {
+  padding-left: 14px;
+  font-size: 13px;
+}
+
+.rail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
+.rail-tags a {
+  padding: 3px 9px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+
+.rail-tags a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.rail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rail-list a {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--dur-2) var(--ease);
+}
+
+.rail-list a:hover {
+  color: var(--accent);
+}
+
+.rail-date {
+  display: block;
+  margin-top: 3px;
+  font: 11.5px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
 /* ============ 归档 ============ */
 
 .archive-year {
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
@@ -173,9 +331,9 @@
 .page-title,
 .list-page-title {
   margin: 0;
-  font-size: clamp(26px, 3.6vw, 32px);
+  font-size: clamp(28px, 3.2vw, 38px);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.32;
   letter-spacing: 0.012em;
   color: var(--text-primary);
   background: none;
@@ -184,16 +342,16 @@
 
 .page-sub,
 .list-page-subtitle {
-  margin: 10px 0 0;
-  font-size: 14px;
+  margin: 12px 0 0;
+  font-size: 15px;
   line-height: 1.8;
   color: var(--text-secondary);
 }
 
 /* 页面内部的二级小节标题 */
 .section-title {
-  margin: 34px 0 12px;
-  font-size: 17px;
+  margin: 36px 0 14px;
+  font-size: 19px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -211,7 +369,7 @@
 
 .more-posts {
   color: var(--accent);
-  font-size: 13.5px;
+  font-size: 14.5px;
 }
 
 /* ============ 标签云 ============ */
@@ -221,8 +379,8 @@
 }
 
 .tag-cloud a {
-  padding: 6px 12px;
-  font-size: 13.5px;
+  padding: 7px 13px;
+  font-size: 14.5px;
   color: var(--text-secondary);
   background: transparent;
   border: 1px solid var(--border);
@@ -253,7 +411,7 @@
 .table-container th {
   background: transparent;
   color: var(--text-tertiary);
-  font: 11px var(--font-mono);
+  font: 11.5px var(--font-mono);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -261,10 +419,10 @@
 }
 
 .table-container td {
-  font-size: 13.5px;
+  font-size: 14.5px;
   border-color: var(--border-light);
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .table-container tbody tr:hover {
@@ -356,27 +514,46 @@
   content: none;
 }
 
+@media (max-width: 1100px) {
+  .post-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .post-body,
+  .post-tail {
+    max-width: none;
+  }
+
+  .post-rail {
+    position: static;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+}
+
 @media (max-width: 720px) {
   .post-title {
-    font-size: 24px;
-    line-height: 1.45;
+    font-size: 27px;
+    line-height: 1.4;
   }
 
   .post-content {
-    font-size: 15.5px;
+    font-size: 16.5px;
     line-height: 1.9;
   }
 
   .post-content h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .post-content h3 {
-    font-size: 17px;
+    font-size: 18.5px;
   }
 
   .list-page-title {
-    font-size: 24px;
+    font-size: 27px;
   }
 }
 
@@ -451,10 +628,10 @@
 
 .archive-item {
   display: grid;
-  grid-template-columns: 74px minmax(0, 1fr) auto;
-  gap: 20px;
+  grid-template-columns: 86px minmax(0, 1fr) auto;
+  gap: 24px;
   align-items: baseline;
-  padding: 13px 0;
+  padding: 15px 0;
   margin: 0;
   /* 抹掉 global.css 里归档行的卡片外观与上浮动效 */
   background: none;
@@ -476,6 +653,7 @@
 .archive-item a {
   color: var(--text-primary);
   text-decoration: none;
+  font-size: 15.5px;
   font-weight: 400;
 }
 
@@ -484,7 +662,7 @@
 }
 
 .archive-item .archive-date {
-  font: 11.5px var(--font-mono);
+  font: 12.5px var(--font-mono);
   letter-spacing: 0.06em;
   color: var(--text-tertiary);
   min-width: 0;
@@ -495,7 +673,7 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.75;
   color: var(--text-secondary);
   transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out),
