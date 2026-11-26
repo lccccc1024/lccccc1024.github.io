@@ -8,8 +8,8 @@
 }
 
 .kicker {
-  font: 12px/1 var(--font-mono);
-  letter-spacing: 0.22em;
+  font: 13.5px/1 var(--font-mono);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
@@ -33,8 +33,8 @@
 .lede {
   margin: 30px 0 0;
   max-width: 34em;
-  font-size: 17.5px;
-  line-height: 1.95;
+  font-size: 19px;
+  line-height: 1.9;
   color: var(--text-secondary);
 }
 
@@ -42,7 +42,7 @@
   display: flex;
   gap: 32px;
   margin-top: 44px;
-  font-size: 15px;
+  font-size: 16.5px;
 }
 
 .links a {
@@ -73,14 +73,14 @@
 
 .feed-head h2 {
   margin: 0;
-  font-size: 15.5px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--text-primary);
 }
 
 .feed-head span {
-  font: 11.5px var(--font-mono);
+  font: 13px var(--font-mono);
   letter-spacing: 0.14em;
   color: var(--text-tertiary);
 }
@@ -90,7 +90,7 @@
   align-items: center;
   gap: 16px;
   padding: 36px 0 8px;
-  font: 12px var(--font-mono);
+  font: 13.5px var(--font-mono);
   letter-spacing: 0.2em;
   color: var(--text-tertiary);
 }
@@ -104,7 +104,7 @@
 
 .feed-row {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) 108px;
+  grid-template-columns: 126px minmax(0, 1fr) 114px;
   gap: 32px;
   align-items: baseline;
   padding: 28px 0;
@@ -115,14 +115,14 @@
 
 .feed-row time {
   padding-top: 7px;
-  font: 12.5px var(--font-mono);
-  letter-spacing: 0.08em;
+  font: 14px var(--font-mono);
+  letter-spacing: 0.06em;
   color: var(--text-tertiary);
 }
 
 .feed-row h3 {
   margin: 0;
-  font-size: 21px;
+  font-size: 22.5px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.012em;
@@ -135,7 +135,7 @@
   margin-top: 0;
   overflow: hidden;
   opacity: 0;
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.8;
   color: var(--text-secondary);
   transition: max-height var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out), margin var(--dur-3) var(--ease-out);
@@ -143,7 +143,7 @@
 
 .feed-row .cat {
   padding-top: 9px;
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--text-tertiary);
   text-align: right;
   white-space: nowrap;
@@ -171,7 +171,7 @@
 
 .more a {
   padding-bottom: 4px;
-  font-size: 15px;
+  font-size: 16.5px;
   color: var(--text-secondary);
   text-decoration: none;
   border-bottom: 1px solid var(--border);
@@ -191,13 +191,13 @@
 
   .hero-title {
     margin-top: 26px;
-    font-size: 36px;
+    font-size: 38px;
     line-height: 1.36;
   }
 
   .lede {
-    font-size: 16.5px;
-    line-height: 1.9;
+    font-size: 17.5px;
+    line-height: 1.88;
   }
 
   .links {
@@ -217,7 +217,7 @@
   }
 
   .feed-row h3 {
-    font-size: 19px;
+    font-size: 20px;
   }
 
   .more {
