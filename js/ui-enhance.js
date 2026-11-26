@@ -35,6 +35,16 @@
       block.appendChild(el);
     });
 
+    // Wrap markdown tables inside post content for horizontal scrolling on narrow screens
+    let tables = document.querySelectorAll('.post-content > table');
+    tables.forEach(function(table) {
+      if (table.parentElement && table.parentElement.classList.contains('post-table-wrap')) return;
+      let wrap = document.createElement('div');
+      wrap.className = 'post-table-wrap';
+      table.parentNode.insertBefore(wrap, table);
+      wrap.appendChild(table);
+    });
+
     // 表格行不再做逐行入场动画：全站入场只保留页面级 page-enter，
     // 见 public/css/components.css 的「动效契约」
   }

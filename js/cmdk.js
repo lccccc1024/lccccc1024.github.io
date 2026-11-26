@@ -3,7 +3,7 @@
 
   let overlay, input, results, selectedIndex = -1;
   let pagefind, searchTimeout;
-  let boundKeydown;
+  let boundKeydown, boundClick;
   let searchGeneration = 0;
 
   function escapeHtml(str) {
@@ -15,7 +15,9 @@
     if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     overlay = null; input = null; results = null;
     if (boundKeydown) document.removeEventListener('keydown', boundKeydown);
+    if (boundClick) document.removeEventListener('click', boundClick);
     boundKeydown = null;
+    boundClick = null;
   }
 
   function init() {
@@ -92,11 +94,23 @@
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) close();
     });
+
+    // Trigger buttons (top bar / mobile drawer)
+    boundClick = function(e) {
+      if (e.target && e.target.closest && e.target.closest('[data-cmdk-trigger]')) {
+        e.preventDefault();
+        open();
+      }
+    };
+    document.addEventListener('click', boundClick);
   }
 
   async function open() {
     overlay.classList.add('active');
     input.focus();
+    requestAnimationFrame(function() {
+      if (overlay && overlay.classList.contains('active') && input) input.focus();
+    });
     if (!pagefind) {
       try { pagefind = await import('/pagefind/pagefind.js'); if (input.value.trim()) doSearch(input.value.trim()); }
       catch { results.textContent = '搜索暂不可用，请稍后重试'; }

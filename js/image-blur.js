@@ -21,6 +21,13 @@
       });
       img.addEventListener('error', function onError() {
         img.classList.remove('img-loading');
+        img.classList.add('img-error');
+        if (!img.nextElementSibling || !img.nextElementSibling.classList.contains('img-error-tip')) {
+          let tip = document.createElement('span');
+          tip.className = 'img-error-tip';
+          tip.textContent = img.alt ? ('图片加载失败：' + img.alt) : '图片加载失败（外链可能已失效）';
+          img.insertAdjacentElement('afterend', tip);
+        }
         img.removeEventListener('error', onError);
       });
     });

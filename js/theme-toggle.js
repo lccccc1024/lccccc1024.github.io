@@ -17,14 +17,17 @@
 
         let icon = btn.querySelector('.theme-icon-nav');
 
+        function syncThemeColor(isDark) {
+            let meta = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', isDark ? '#141413' : '#faf9f6');
+        }
+
         // Apply saved theme on navigation (FOUC only runs on first load)
         let saved = localStorage.getItem('theme');
         let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefersDark)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        let initialDark = saved === 'dark' || (!saved && prefersDark);
+        document.documentElement.classList.toggle('dark', initialDark);
+        syncThemeColor(initialDark);
 
         function updateIcon() {
             let isDark = document.documentElement.classList.contains('dark');
@@ -63,6 +66,7 @@
             // Toggle theme
             let isDark = root.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            syncThemeColor(isDark);
             updateIcon();
             updateGiscusTheme(isDark);
             // Remove transition class after animation completes

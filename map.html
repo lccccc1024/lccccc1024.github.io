@@ -39,6 +39,7 @@
           Number.isFinite(p.lng) && Math.abs(p.lng) <= 180 &&
           Number.isFinite(p.lat) && Math.abs(p.lat) <= 90;
       }).slice(0, 1000);
+      var markers = [];
       places.forEach(function(p) {
         var content = document.createElement('div');
         var name = document.createElement('b');
@@ -52,9 +53,22 @@
         });
         m.on('click', function() { iw.open(map, m.getPosition()); });
         map.add(m);
+        markers.push({ marker: m, infoWindow: iw, lng: p.lng, lat: p.lat });
       });
 
       if (places.length > 0) map.setFitView(null, false, [60, 60, 60, 60]);
+
+      window.addEventListener('message', function(e) {
+        if (e.origin !== window.location.origin) return;
+        if (!e.data || e.data.type !== 'focus-place') return;
+        var item = markers[e.data.index];
+        if (!item) return;
+        if (typeof map.setZoomAndCenter === 'function') map.setZoomAndCenter(10, [item.lng, item.lat]);
+        else if (typeof map.setCenter === 'function') map.setCenter([item.lng, item.lat]);
+        if (typeof item.infoWindow.open === 'function' && typeof item.marker.getPosition === 'function') {
+          item.infoWindow.open(map, item.marker.getPosition());
+        }
+      });
 
       // Listen for theme changes from parent
       try {

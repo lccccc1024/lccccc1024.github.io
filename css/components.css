@@ -38,6 +38,17 @@
   font-weight: 400;
 }
 
+.post-categories a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-2) var(--ease);
+}
+
+.post-categories a:hover {
+  border-bottom-color: var(--accent);
+}
+
 .copy-link-btn {
   font-size: 11.5px;
   color: var(--text-tertiary);
@@ -111,6 +122,139 @@
 
 .post-content code {
   font-size: 0.9em;
+}
+
+/* Astro Shiki 代码块：浅/暗双主题与头部按钮留白 */
+.post-content pre.astro-code {
+  position: relative;
+  margin: 1.6em 0;
+  padding: 36px 20px 18px;
+  background-color: var(--bg-code) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.post-content pre.astro-code code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+html.dark .post-content pre.astro-code,
+html.dark .post-content pre.astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}
+
+html.dark .post-content pre.astro-code {
+  background-color: var(--bg-code) !important;
+}
+
+/* 文内 Markdown 表格：横向滚动与极简排版 */
+.post-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.6em 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.post-content th,
+.post-content td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+.post-content th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-code);
+  border-bottom: 1px solid var(--border);
+}
+
+.post-content tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+.post-content tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* 图片加载失败提示 */
+.post-content img.img-error {
+  opacity: 0.4;
+}
+
+.img-error-tip {
+  display: block;
+  margin: -0.8em auto 1.4em;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+}
+
+/* 列表页可排序表头默认提示 */
+.list-page-content th {
+  position: relative;
+}
+
+.list-page-content th:not(.sorted-asc):not(.sorted-desc)::after {
+  content: " ⇅";
+  font-size: 0.72em;
+  opacity: 0.35;
+}
+
+.list-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.list-filter-input {
+  width: min(320px, 100%);
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  transition: border-color var(--dur-2) var(--ease);
+}
+
+.list-filter-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.list-filter-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.list-filter-count {
+  font: 12px var(--font-mono);
+  color: var(--text-tertiary);
+  white-space: nowrap;
 }
 
 /* TOC / 系列 / 签名 / 时效提示：平面，不抢正文 */
@@ -685,6 +829,17 @@
   max-height: 80px;
   margin-top: 8px;
   opacity: 1;
+}
+
+@media (hover: none) {
+  .archive-item .archive-excerpt {
+    max-height: none;
+    margin-top: 6px;
+    opacity: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 
 @media (max-width: 720px) {
