@@ -1,14 +1,14 @@
-import { getCollection } from 'astro:content';
+import { excerptOf, getPublishedPosts } from '../utils/posts';
 
 export async function GET() {
-  const posts = await getCollection('posts');
+  const posts = await getPublishedPosts();
   const data = posts.map(post => ({
     title: post.data.title,
     url: `/posts/${post.id}/`,
     date: post.data.date.toISOString().slice(0, 10),
     categories: post.data.categories || [],
     tags: post.data.tags || [],
-    excerpt: (post.body || '').replace(/<[^>]+>/g, '').slice(0, 200),
+    excerpt: excerptOf(post, 160),
   }));
   return new Response(JSON.stringify(data), {
     headers: { 'Content-Type': 'application/json' },

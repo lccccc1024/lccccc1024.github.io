@@ -225,6 +225,17 @@
   }
 }
 
+@media (hover: none) {
+  .feed-row p {
+    max-height: none;
+    margin-top: 8px;
+    opacity: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .feed-row p {
     transition: none;

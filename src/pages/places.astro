@@ -9,7 +9,7 @@ const categoryColors: Record<string, string> = {
   '其他': '#6f6f68'
 }
 
-const sortedPlaces = [...places].reverse()
+const sortedPlaces = places.map((place, index) => ({ ...place, originIndex: index })).reverse()
 const placesHash = encodeURIComponent(JSON.stringify(places))
 ---
 
@@ -20,10 +20,10 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
   </div>
 
   <div class="list-page-content">
-    <p class="stats">共记录 <strong>{places.length}</strong> 个地点</p>
+    <p class="stats">共记录 <strong>{places.length}</strong> 个地点（点击列表行可在地图中定位）</p>
 
     <div id="map-wrap">
-      <iframe id="map-frame" src={`/map.html#${placesHash}`} loading="lazy"></iframe>
+      <iframe id="map-frame" src={`/map.html#${placesHash}`} loading="lazy" title="足迹地图"></iframe>
     </div>
 
     <div class="table-container">
@@ -39,7 +39,7 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
         </thead>
         <tbody>
           {sortedPlaces.map((place, i) => (
-            <tr>
+            <tr class="place-row" data-place-index={place.originIndex}>
               <td data-label="序号">{i + 1}</td>
               <td data-label="地点">{place.name}</td>
               <td data-label="日期">{place.date === '0000-00-00' ? '—' : place.date}</td>
@@ -57,8 +57,30 @@ const placesHash = encodeURIComponent(JSON.stringify(places))
   </div>
 
   <a href="/" class="page-end">← 返回首页</a>
+  <script is:inline src="/js/list-pages.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const frame = document.getElementById('map-frame');
+      const wrap = document.getElementById('map-wrap');
+      const rows = document.querySelectorAll<HTMLTableRowElement>('tr.place-row');
+      if (!(frame instanceof HTMLIFrameElement)) return;
+
+      rows.forEach((row) => {
+        row.addEventListener('click', () => {
+          const idx = Number(row.dataset.placeIndex);
+          if (!Number.isInteger(idx)) return;
+          rows.forEach((r) => r.classList.remove('is-selected'));
+          row.classList.add('is-selected');
+          frame.contentWindow?.postMessage({ type: 'focus-place', index: idx }, window.location.origin);
+          wrap?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      });
+    });
+  </script>
 
   <style>
+    .place-row { cursor: pointer; }
+    .place-row.is-selected { background: var(--accent-light) !important; }
     #map-wrap {
       width: 100%;
       height: 500px;

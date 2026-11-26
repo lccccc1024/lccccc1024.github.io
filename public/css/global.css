@@ -1218,7 +1218,6 @@ td .genre-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 .back-to-top.visible { opacity: 1; visibility: visible; }
 .back-to-top:hover {
@@ -1262,7 +1261,10 @@ td .genre-badge {
   font-family: var(--font-sans);
   color: var(--text-secondary);
 }
-pre:hover .code-copy-btn, .highlight:hover .code-copy-btn { opacity: 1; }
+pre:hover .code-copy-btn, .highlight:hover .code-copy-btn, .code-copy-btn:focus-visible { opacity: 1; }
+@media (hover: none) {
+  .code-copy-btn { opacity: 0.85; }
+}
 .code-copy-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 .code-copy-btn.copied { background: #34c759; color: white; border-color: #34c759; }
 
@@ -1368,15 +1370,20 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 }
 
 @media (max-width: 768px) {
-  table, thead, tbody, th, td, tr { display: block; }
-  thead tr { position: absolute; top: -9999px; left: -9999px; }
-  tr {
+  .list-page-content table,
+  .list-page-content thead,
+  .list-page-content tbody,
+  .list-page-content th,
+  .list-page-content td,
+  .list-page-content tr { display: block; }
+  .list-page-content thead tr { position: absolute; top: -9999px; left: -9999px; }
+  .list-page-content tr {
     margin-bottom: var(--space-md);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow: hidden;
   }
-  td {
+  .list-page-content td {
     position: relative;
     padding: 12px 14px 12px 90px !important;
     min-height: 44px;
@@ -1385,9 +1392,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
     width: 100% !important;
     text-align: left !important;
   }
-  td:last-child { border-bottom: none; }
-  td:first-child { text-align: left !important; width: auto !important; }
-  td::before {
+  .list-page-content td:last-child { border-bottom: none; }
+  .list-page-content td:first-child { text-align: left !important; width: auto !important; }
+  .list-page-content td::before {
     content: attr(data-label);
     position: absolute;
     left: 14px;
@@ -1535,10 +1542,13 @@ html.dark-mode-transitioning *::after {
   -webkit-backdrop-filter: blur(8px);
   display: flex; align-items: flex-start; justify-content: center;
   padding-top: 12vh;
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
 }
-.cmdk-overlay.active { opacity: 1; visibility: visible; }
+.cmdk-overlay.active {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity 0.2s ease, visibility 0s linear 0s;
+}
 
 .cmdk-modal {
   width: 100%; max-width: 600px;

@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
-const posts = await getCollection('posts');
+import { getPublishedPosts } from '../utils/posts';
+const posts = await getPublishedPosts();
 const urls = posts.map(post => `/posts/${post.id}/`);
 ---
 <PageLayout title="随便看看">

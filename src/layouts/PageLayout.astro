@@ -36,11 +36,19 @@ const { title, description, math, pageStyles = [] } = Astro.props;
     </nav>
 
     <div class="top-actions">
+      <button id="search-trigger" class="search-trigger" type="button" data-cmdk-trigger aria-label="站内搜索" title="站内搜索 (Ctrl+K 或 /)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="search-trigger-label">搜索</span>
+        <kbd class="search-trigger-kbd">⌘K</kbd>
+      </button>
       <a href="/feed.xml" class="top-rss" title="RSS 订阅">RSS</a>
       <button id="theme-toggle-nav" class="theme-toggle-nav" aria-label="切换深色/浅色主题">
         <span class="theme-icon-nav"></span>
       </button>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单" type="button">
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="菜单" aria-expanded="false" aria-controls="nav-overlay" type="button">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -59,8 +67,17 @@ const { title, description, math, pageStyles = [] } = Astro.props;
     </div>
   </footer>
 
-  <div class="nav-overlay" id="nav-overlay">
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
     <ul class="nav-overlay-links">
+      <li class="overlay-search-wrap">
+        <button type="button" class="nav-overlay-search" data-cmdk-trigger>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>搜索文章…</span>
+        </button>
+      </li>
       <li><a href="/">首页</a></li>
       <li><a href="/archive/">归档</a></li>
       <li><a href="/tags/">标签</a></li>
@@ -88,16 +105,42 @@ const { title, description, math, pageStyles = [] } = Astro.props;
     document.addEventListener('DOMContentLoaded', () => {
       const hamburger = document.getElementById('nav-hamburger');
       const overlay = document.getElementById('nav-overlay');
+      const setMenuOpen = (open: boolean) => {
+        if (!hamburger || !overlay) return;
+        overlay.classList.toggle('active', open);
+        hamburger.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+        overlay.setAttribute('aria-hidden', String(!open));
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+
       if (hamburger && overlay) {
         hamburger.addEventListener('click', () => {
-          overlay.classList.toggle('active');
-          hamburger.classList.toggle('active');
+          setMenuOpen(!overlay.classList.contains('active'));
         });
-        overlay.querySelectorAll('a').forEach((l) => {
-          l.addEventListener('click', () => {
-            overlay.classList.remove('active');
-            hamburger.classList.remove('active');
-          });
+        overlay.querySelectorAll('a, [data-cmdk-trigger]').forEach((el) => {
+          el.addEventListener('click', () => setMenuOpen(false));
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && overlay.classList.contains('active')) setMenuOpen(false);
+        });
+      }
+
+      // 触屏设备上的“清单”下拉兼容：首次点击展开，再次点击跳转
+      const drop = document.querySelector('.nav-drop');
+      const dropTrigger = document.querySelector<HTMLAnchorElement>('.nav-drop-trigger');
+      if (drop && dropTrigger) {
+        dropTrigger.addEventListener('click', (e) => {
+          const isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+          if (isTouchLike && !drop.classList.contains('open')) {
+            e.preventDefault();
+            drop.classList.add('open');
+          }
+        });
+        document.addEventListener('click', (e) => {
+          if (drop.classList.contains('open') && e.target instanceof Node && !drop.contains(e.target)) {
+            drop.classList.remove('open');
+          }
         });
       }
     });

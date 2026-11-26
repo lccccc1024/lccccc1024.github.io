@@ -1,9 +1,8 @@
-import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
+import { excerptOf, getPublishedPosts } from '../utils/posts';
 
 export async function GET() {
-  const posts = await getCollection('posts');
-  const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const sorted = await getPublishedPosts();
   
   return rss({
     title: '闲话',
@@ -12,7 +11,7 @@ export async function GET() {
     items: sorted.map(post => ({
       title: post.data.title,
       pubDate: post.data.date,
-      description: post.data.description || '',
+      description: excerptOf(post, 140),
       link: `/posts/${post.id}/`,
     })),
     customData: '<language>zh-CN</language>',

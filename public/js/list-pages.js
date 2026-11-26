@@ -96,8 +96,47 @@ function updateRowNumbers(tbody) {
     });
 }
 
-// 页面加载完成后初始化表格排序
-function initList() { initTableSort(); }
+// 表格关键词筛选功能
+function initTableFilter() {
+    const containers = document.querySelectorAll('.list-page-content .table-container');
+    containers.forEach(container => {
+        if (container.previousElementSibling && container.previousElementSibling.classList.contains('list-filter-bar')) return;
+        const tbody = container.querySelector('tbody');
+        if (!tbody) return;
+
+        const bar = document.createElement('div');
+        bar.className = 'list-filter-bar';
+
+        const input = document.createElement('input');
+        input.type = 'search';
+        input.className = 'list-filter-input';
+        input.placeholder = '输入关键词筛选当前列表…';
+        input.setAttribute('aria-label', '筛选列表内容');
+
+        const countEl = document.createElement('span');
+        countEl.className = 'list-filter-count';
+
+        const updateFilter = () => {
+            const q = input.value.trim().toLowerCase();
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            let visible = 0;
+            rows.forEach(row => {
+                const match = !q || (row.textContent || '').toLowerCase().includes(q);
+                row.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            countEl.textContent = q ? ('匹配 ' + visible + ' / ' + rows.length + ' 项') : '';
+        };
+
+        input.addEventListener('input', updateFilter);
+        bar.appendChild(input);
+        bar.appendChild(countEl);
+        container.parentNode.insertBefore(bar, container);
+    });
+}
+
+// 页面加载完成后初始化表格排序与筛选
+function initList() { initTableSort(); initTableFilter(); }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initList); else initList();
 
 })();

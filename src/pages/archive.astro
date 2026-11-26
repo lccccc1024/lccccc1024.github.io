@@ -1,9 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
+import { excerptOf, getPublishedPosts } from '../utils/posts';
 
-const allPosts = await getCollection('posts');
-const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getPublishedPosts();
 
 const yearMap: Record<string, typeof posts> = Object.create(null);
 posts.forEach(post => {
@@ -12,17 +11,6 @@ posts.forEach(post => {
   yearMap[year].push(post);
 });
 const years = Object.keys(yearMap).sort((a, b) => Number(b) - Number(a));
-
-function excerptOf(post: (typeof posts)[number]) {
-  if (post.data.description) return post.data.description;
-  const body = post.body ?? '';
-  return body
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-    .replace(/[#*`>\-]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 64);
-}
 ---
 
 <PageLayout title="文章归档">
@@ -43,7 +31,7 @@ function excerptOf(post: (typeof posts)[number]) {
               {post.data.categories?.length > 0 && (
                 <span class="archive-category">{post.data.categories[0]}</span>
               )}
-              <p class="archive-excerpt">{excerptOf(post)}</p>
+              <p class="archive-excerpt">{excerptOf(post, 64)}</p>
             </li>
           ))}
         </ul>

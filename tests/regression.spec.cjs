@@ -21,6 +21,9 @@ test('search works after navigation and uses one command panel', async ({ page }
   await expect(page.locator('.hero-title')).toBeVisible();
   // cmdk.js 是 defer 脚本，必须等 load 完再发快捷键，否则按键会打在监听器绑定之前
   await page.waitForFunction(() => document.readyState === 'complete');
+  await page.locator('#search-trigger').click();
+  await expect(page.locator('#cmdk-input')).toBeFocused();
+  await page.keyboard.press('Escape');
   await page.keyboard.press('Control+k');
   await page.locator('#cmdk-input').fill('Kindle');
   await expect(page.locator('.cmdk-result-item').first()).toBeVisible();
@@ -38,12 +41,23 @@ test('mobile menu, progress and copy survive navigation', async ({ page, context
   await page.goto('/');
   await page.locator('#nav-hamburger').click();
   await expect(page.locator('#nav-overlay')).toHaveClass(/active/);
+  // 验证展开菜单后仍可再次点击汉堡按钮关闭（不被遮罩遮挡）
+  await page.locator('#nav-hamburger').click();
+  await expect(page.locator('#nav-overlay')).not.toHaveClass(/active/);
+  await page.locator('#nav-hamburger').click();
+  await expect(page.locator('#nav-overlay')).toHaveClass(/active/);
   await page.locator('#nav-overlay a[href="/about/"]').click();
   await page.locator('#nav-hamburger').click();
   await expect(page.locator('#nav-overlay')).toHaveClass(/active/);
   const posts = await (await page.request.get('/search.json')).json();
+  expect(posts.some(p => p.url.includes('test-post'))).toBeFalsy();
   const post = posts.find(p => p.title.includes('Kindle'));
   await page.goto(post.url);
+  await expect(page.locator('.post-series')).toHaveCount(0);
+  await expect(page.locator('.post-content table thead').first()).toBeVisible();
+  await expect(page.locator('.post-table-wrap').first()).toBeVisible();
+  const bttPos = await page.locator('#back-to-top').evaluate(el => getComputedStyle(el).position);
+  expect(bttPos).toBe('fixed');
   await page.locator('#copy-link-btn').click();
   await expect(page.locator('#copy-link-btn')).toHaveText('已复制');
   await expect(page.locator('.code-copy-btn').first()).toBeAttached();
@@ -121,6 +135,9 @@ test('heatmap aligns weekdays and does not overflow mobile page', async ({ page 
   const firstDay = page.locator('.heatmap-cell[title]').first();
   const weekday = new Date((await firstDay.getAttribute('title')).slice(0, 10)).getUTCDay();
   expect(await page.locator('.heatmap-cell[style]').count()).toBe(weekday);
+  await firstDay.click();
+  await expect(page.locator('#heatmap-detail')).toContainText('篇');
+  await expect(page.locator('.bar-value').first()).toBeVisible();
 });
 
 test('service worker installs, refreshes online content and serves cached pages offline', async ({ page, context }) => {
